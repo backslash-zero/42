@@ -6,13 +6,14 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 14:53:50 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/10/16 18:33:19 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/10/24 15:37:47 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 int		ft_isalpha(int c)
 {
-	if ((c >= 'A' && c <= 'z') && !(c >= '[' && c <= '`'))
-		return (1);
-	return (0);
+	return ((c >= 'a' && c <= 'z')
+		|| (c >= 'A' && c <= 'Z'));
 }

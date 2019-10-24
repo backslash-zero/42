@@ -6,17 +6,13 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 14:53:50 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/10/21 18:35:27 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/10/24 15:35:28 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 int		ft_isalnum(int c)
 {
-	if ((c >= '0' && c <= 'z')
-		&& !(c >= '[' && c <= '`')
-		&& !(c >= ':' && c <= '@'))
-	{
-		return (1);
-	}
-	return (0);
+	return (ft_isdigit(c) || ft_isalpha(c));
 }

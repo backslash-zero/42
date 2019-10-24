@@ -6,13 +6,13 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 10:14:56 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/10/09 09:38:22 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/10/24 16:58:57 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 int		ft_tolower(int c)
 {
-	if (c >= 'A' && c <= 'Z')
-		c = c + 32;
-	return (c);
+	return (c >= 65 && c <= 90 ? c + 32 : c);
 }

@@ -6,13 +6,13 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 10:14:56 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/10/15 17:38:34 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/10/24 17:11:55 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 int		ft_toupper(int c)
 {
-	if (c >= 'a' && c <= 'z')
-		c = c - 32;
-	return (c);
+	return (c >= 97 && c <= 122 ? c - 32 : c);
 }

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 14:11:33 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/10/10 16:25:47 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/10/24 16:26:44 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 
 size_t	ft_strlen(const char *s)
 {
-	size_t count;
+	int l;
 
-	count = 0;
-	while (*s != '\0')
-	{
-		s++;
-		count++;
-	}
-	return (count);
+	l = 0;
+	while (s[l])
+		l++;
+	return (l);
 }

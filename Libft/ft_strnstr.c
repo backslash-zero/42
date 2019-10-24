@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 17:22:56 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/10/22 17:06:50 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/10/24 16:27:56 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,28 @@
 
 char	*ft_strnstr(const char *h, const char *nd, size_t len)
 {
-	int		i;
-	int		j;
-	char	*ptr;
+	size_t	i;
+	size_t	l;
 
 	i = 0;
-	j = 0;
-	ptr = 0;
-	if (!nd[0])
-		return (char*)h;
-	while (h[i] && nd[j] && len-- > 0)
+	l = 0;
+	if (*nd == '\0')
+		return ((char *)h);
+	if (h == NULL && len == 0)
+		return (0);
+	while (*h != '\0' && l < len)
 	{
-		if (h[i] == nd[j])
+		if (*h == nd[i])
 		{
-			if (j == 0)
-				ptr = (char*)(h + i);
-			j++;
+			while (h[i] == nd[i] && h[i] && i + l < len)
+				i++;
+			if (nd[i] == '\0')
+				return ((char *)h);
+			else
+				i = 0;
 		}
-		else
-			j = 0;
-		i++;
+		h++;
+		l++;
 	}
-	if (!nd[j])
-		return (ptr);
-	return (NULL);
+	return (0);
 }

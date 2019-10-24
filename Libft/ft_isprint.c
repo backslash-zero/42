@@ -6,13 +6,13 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 17:48:33 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/10/09 09:38:03 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/10/24 15:39:33 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 int		ft_isprint(int c)
 {
-	if (c >= ' ' && c <= '~')
-		return (1);
-	return (0);
+	return (c >= 32 && c <= 126);
 }

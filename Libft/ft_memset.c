@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 18:16:52 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/10/10 16:34:23 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/10/24 16:13:06 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	*ft_memset(void *b, int c, size_t len)
 {
 	unsigned char *ptr;
 
-	ptr = (unsigned char *)b;
+	ptr = b;
 	while (len-- > 0)
-		*ptr++ = c;
+		*ptr++ = (unsigned char)c;
 	return (b);
 }

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 12:22:15 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/10/10 16:04:01 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/10/24 16:13:39 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	char	*ptr;
+	char *str;
 
-	ptr = (char *)s;
-	if (c == '\0')
-		return (&ptr[ft_strlen(s)]);
-	while (*ptr != c && *ptr)
-		ptr++;
-	if (!*ptr)
-		return (NULL);
-	return (ptr);
+	str = (char*)s;
+	while (*str != c)
+	{
+		if (*str == '\0')
+			return (0);
+		str++;
+	}
+	return (str);
 }
