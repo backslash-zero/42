@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 19:09:17 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/11/04 00:33:10 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/11/07 19:28:11 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_substr(char const *s, unsigned int start, int len)
 	if (start >= (unsigned int)ft_strlen(s))
 	{
 		if (!(str = malloc(sizeof(char))))
-		return (NULL);
+			return (NULL);
 		str[0] = '\0';
 		return (str);
 	}
@@ -56,6 +56,8 @@ int		get_line_break(char *str)
 	int i;
 
 	i = -1;
+	if (str == NULL)
+		return (-1);
 	while (str[++i])
 		if (str[i] == '\n')
 			return (i);
@@ -112,60 +114,60 @@ char	*ft_strdup(const char *s1)
 	return (ft_memcpy_bis(cpy, s1, ft_strlen(s1)));
 }
 
+int		new_line(char **tmp, char **line, int ifend)
+{
+	int len;
+	if (ifend)
+	{
+		if (*tmp)
+		{
+			*line = ft_substr(*tmp, 0, ft_strlen(*tmp));
+			*tmp = NULL;
+			return (1);
+		}
+	}
+	else
+	{
+		if ((len = get_line_break(*tmp)) >= 0)
+		{
+			*line = ft_substr(*tmp, 0, len);
+			if (len < ft_strlen(*tmp))
+				*tmp = ft_substr(*tmp, len + 1, ft_strlen(*tmp));
+			else
+				*tmp = NULL;
+			return (1);
+		}
+	}
+	return (0);
+}
+
 int		get_next_line(int fd, char **line)
 {
 	char		*buffer;
 	static char	*tmp;
 	int			ret;
-	int			len;
 
 	if (!fd || BUFFER_SIZE == 0 || !line
 		|| !(buffer = malloc((sizeof(char) * (BUFFER_SIZE + 1)))))
 		return (-1);
 	buffer[BUFFER_SIZE] = '\0';
-	if (tmp)
+	if (new_line(&tmp, line, 0))
+		return (1);
+	while ((ret = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
-		if ((len = get_line_break(tmp)) >= 0)
-		{
-			*line = ft_substr(tmp, 0, len);
-			if (len < ft_strlen(tmp))
-				tmp = ft_substr(tmp, len + 1, ft_strlen(tmp));
-			else
-				tmp = NULL;
-			return (1);
-		}
-	}
-	while ((ret = read(fd, buffer, BUFFER_SIZE)) >  0)
-	{
-	//	printf("RET > 0\n");
 		if (tmp == NULL)
 			tmp = ft_strdup(buffer);
 		else
 			tmp = ft_strjoin(tmp, buffer);
-		if ((len = get_line_break(tmp)) >= 0)
-		{
-			*line = ft_substr(tmp, 0, len);
-			if (len < ft_strlen(tmp))
-				tmp = ft_substr(tmp, len + 1, ft_strlen(tmp));
-			else
-				tmp = NULL;
+		if (new_line(&tmp, line, 0))
 			return (1);
-		}
 	}
-	//printf("!(RET > 0)\n");
 	if (ret < 0)
 	{
 		free(buffer);
 		return (-1);
 	}
-	if (tmp)
-	{
-		*line = ft_substr(tmp, 0, ft_strlen(tmp));
-		tmp = NULL;
-		return (1);
-	}
-	else
-		return (0);
+	return (new_line(&tmp, line, 1));
 }
 
 int		main(int argc, char **argv)
@@ -181,7 +183,7 @@ int		main(int argc, char **argv)
 	while ((retour = get_next_line(fd, &line)) > 0)
 	{
 		printf("GNL:%d %s\n", i, line);
- 		printf("RETOUR:	%d\n\n\n", retour);
+		printf("RETOUR:	%d\n\n\n", retour);
 		i++;
 	}
 }
