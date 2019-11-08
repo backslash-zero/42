@@ -2,7 +2,7 @@
 
 __Visual representation:__
 
-draw.io [here][https://drive.google.com/open?id=1eHQ9cjbArg3vZhWuy42zMX3kynZsKIGr]
+draw.io [here](https://drive.google.com/open?id=1eHQ9cjbArg3vZhWuy42zMX3kynZsKIGr)
 
 **Usage:**
 * `get next line is a function that reads a file line by line`
