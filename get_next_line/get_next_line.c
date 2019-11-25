@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 19:09:17 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/11/23 16:05:00 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/11/25 17:31:42 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ int		get_next_line(int fd, char **line)
 	static char	*save;
 	int			ret;
 
-	*line = NULL;
-	if (fd < 0 || BUFFER_SIZE < 0 || !line)
+	if (fd < 0 || BUFFER_SIZE < 1 || !line)
 		return (-1);
+	*line = NULL;
 	if (save && save[get_line_break(save)])
 		return (ft_finish_line(&save, line, save, BUFFER_SIZE));
 	*line = save;
