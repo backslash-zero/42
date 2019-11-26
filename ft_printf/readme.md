@@ -9,8 +9,6 @@ Recode `printf` with identical behaviour as the original.
 `malloc`, `free`, `write`, `va_start`, `va_arg`, `va_copy`, `va_end`
 
 All other functions must be self programmed.
-
-```
   
 The project is complicated as the number of parameters is indefinite. We use variadic arguments in this case.  
   
