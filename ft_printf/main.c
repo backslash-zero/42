@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 11:37:06 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/11/29 15:37:15 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/11/29 17:42:33 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,24 @@ int		main(void)
 	printf("\n\n");
 	printf("Return printf:		%d\nReturn ft_printf:	%d\n", printf("Hello %d\n", 666666666), ft_printf("Hello %d\n", 666666666));
 	printf("\n\n");
+	printf("---- Test 1 d with FLAG: %%0d ----\n");
+	printf("Return printf:		%d\nReturn ft_printf:	%d\n", printf("Hello %0d\n", a), ft_printf("Hello %0d\n", a));
+	printf("\n\n");
+	printf("---- Test 1 d with FLAG: %%00d to %%010d ----\n");
+	printf("Return: %d\n",printf("Hello: %00d\n", 55));
+	printf("Return: %d\n",printf("Hello: %01d\n", 55));
+	printf("Return: %d\n",printf("Hello: %02d\n", 55));
+	printf("Return: %d\n",printf("Hello: %03d\n", 55));
+	printf("Return: %d\n",printf("Hello: %04d\n", 55));
+	printf("Return: %d\n",printf("Hello: %05d\n", 55));
+	printf("Return: %d\n",printf("Hello: %06d\n", 55));
+	printf("Return: %d\n",printf("Hello: %07d\n", 55));
+	printf("Return: %d\n",printf("Hello: %08d\n", 55));
+	printf("Return: %d\n",printf("Hello: %09d\n", 55));
+	printf("Return: %d\n",printf("Hello: %010d\n", 55));
+	printf("Return: %d\n",printf("Hello: %05d\n", 55));
+	printf("Return: %d\n",printf("Hello: %06d\n", 55));
+	printf("\n\n");
 	printf("\n\n");
 	printf("\n\n");
 	printf("\n\n");
@@ -112,6 +130,9 @@ int		main(void)
 	printf("\n\n");
 	printf("Return printf:		%d\nReturn ft_printf:	%d\n", printf("Hello %i\n", 0x42), ft_printf("Hello %i\n", 0x42));
 	printf("\n\n");
+	printf("---- Test 1 d with FLAG: %%0i ----\n");
+	printf("Return printf:		%d\nReturn ft_printf:	%d\n", printf("Hello %0i\n", a), ft_printf("Hello %0i\n", a));
+	printf("\n\n");
 	printf("\n\n");
 	printf("\n\n");
 	printf("\n\n");
@@ -133,6 +154,9 @@ int		main(void)
 	printf("\n\n");
 	printf("Return printf:		%d\nReturn ft_printf:	%d\n", printf("Hello %u\n", 666666666), ft_printf("Hello %u\n", 666666666));
 	printf("\n\n");
+	printf("---- Test 1 d with FLAG: %%0u ----\n");
+	printf("Return printf:		%d\nReturn ft_printf:	%d\n", printf("Hello %0u\n", a), ft_printf("Hello %0u\n", a));
+	printf("\n\n");
 	printf("\n\n");
 	printf("\n\n");
 	printf("\n\n");
@@ -153,6 +177,9 @@ int		main(void)
 	printf("\n\n");
 	printf("Return printf:		%d\nReturn ft_printf:	%d\n", printf("Hello %x\n", 666666666), ft_printf("Hello %x\n", 666666666));
 	printf("\n\n");
+	printf("---- Test 1 d with FLAG: %%0x ----\n");
+	printf("Return printf:		%d\nReturn ft_printf:	%d\n", printf("Hello %0x\n", a), ft_printf("Hello %0x\n", a));
+	printf("\n\n");
 	printf("\n\n");
 	printf("\n\n");
 	printf("\n\n");
@@ -172,6 +199,9 @@ int		main(void)
 	printf("Return printf:		%d\nReturn ft_printf:	%d\n", printf("Hello %X\n", -120000), ft_printf("Hello %X\n", -120000));
 	printf("\n\n");
 	printf("Return printf:		%d\nReturn ft_printf:	%d\n", printf("Hello %X\n", 666666666), ft_printf("Hello %X\n", 666666666));
+	printf("\n\n");
+	printf("---- Test 1 d with FLAG: %%0X ----\n");
+	printf("Return printf:		%d\nReturn ft_printf:	%d\n", printf("Hello %0X\n", a), ft_printf("Hello %0X\n", a));
 	printf("\n\n");
 	printf("\n\n");
 	printf("\n\n");

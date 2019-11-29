@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 11:37:30 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/11/29 14:00:41 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/11/29 18:44:28 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,22 @@
 
 void	ft_key(t_ftprint *p)
 {
+	ft_test_zero(p);
+	ft_test_field_width(p);
+	ft_tests_checks(p);
 	if (p->str[p->i] == 's')
 		print_s(p);
-	if (p->str[p->i] == 'c' || p->str[p->i] == '%')
+	else if (p->str[p->i] == 'c' || p->str[p->i] == '%')
 		print_c(p);
-	if (p->str[p->i] == 'p')
+	else if (p->str[p->i] == 'p')
 		print_p(p);
-	if (p->str[p->i] == 'd' || p->str[p->i] == 'i')
+	else if (p->str[p->i] == 'd' || p->str[p->i] == 'i')
 		print_d(p);
-	if (p->str[p->i] == 'u')
+	else if (p->str[p->i] == 'u')
 		print_u(p);
-	if (p->str[p->i] == 'x')
+	else if (p->str[p->i] == 'x')
 		print_x_low(p);
-	if (p->str[p->i] == 'X')
+	else if (p->str[p->i] == 'X')
 		print_x_up(p);
 }
 
