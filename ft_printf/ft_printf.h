@@ -23,8 +23,11 @@ void		print_s(t_ftprint *p);
 void		print_c(t_ftprint *p);
 void		print_p(t_ftprint *p);
 void		print_d(t_ftprint *p);
-void		ft_putnbr_hex(size_t nb);
-int			ft_putnbr_len(int nb);
 void		print_u(t_ftprint *p);
+void		print_x_low(t_ftprint *p);
+void		print_x_up(t_ftprint *p);
+int			ft_putnbr_hex_len(size_t nb, char *base);
+int			ft_putnbr_len(int nb);
+int			ft_u_putnbr_len(unsigned int nb);
 
 #endif

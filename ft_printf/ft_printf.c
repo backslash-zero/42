@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 11:37:30 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/11/28 17:53:51 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/11/29 14:00:41 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ void	ft_key(t_ftprint *p)
 		print_d(p);
 	if (p->str[p->i] == 'u')
 		print_u(p);
+	if (p->str[p->i] == 'x')
+		print_x_low(p);
+	if (p->str[p->i] == 'X')
+		print_x_up(p);
 }
 
 int		ft_printf(const char *format, ...)
