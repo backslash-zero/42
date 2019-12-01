@@ -6,11 +6,19 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 18:29:51 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/11/29 18:47:08 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/01 19:17:38 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void		ft_reset_struct(t_ftprint *p)
+{
+	p->flag_zero = 0;
+	p->field_width = 0;
+	p->arg_len = 0;
+	p->nb_len = 0;
+}
 
 void		ft_tests_checks(t_ftprint *p)
 {
@@ -26,8 +34,7 @@ void		ft_tests_checks(t_ftprint *p)
 		if (p->flag_zero == 1)
 			padding_char = '0';
 	}
-	p->flag_zero = 0;
-	while (p->field_width > 0)
+	while (p->field_width - p->arg_len > 0)
 	{
 		ft_putchar(padding_char);
 		p->count++;

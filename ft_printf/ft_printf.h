@@ -14,6 +14,8 @@ typedef struct	s_ftprint
 	char		*str;
 	int			flag_zero;
 	int			field_width;
+	int			arg_len;
+	int			nb_len;
 }				t_ftprint;
 
 //void			ft_printf(const char *format, ...);
@@ -34,5 +36,6 @@ int			ft_u_putnbr_len(unsigned int nb);
 void		ft_test_zero(t_ftprint *p);
 void		ft_test_field_width(t_ftprint *p);
 void		ft_tests_checks(t_ftprint *p);
+void		ft_reset_struct(t_ftprint *p);
 
 #endif

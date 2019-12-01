@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 12:57:32 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/11/29 15:31:12 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/01 19:12:21 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ void	print_p(t_ftprint *p)
 	void	*str;
 	size_t	address;
 
-	ft_putstr("0x");
 	str = va_arg(p->list, void *);
 	address = (size_t)str;
+	p->arg_len = 14;
+	ft_tests_checks(p);
+	ft_putstr("0x");
 	ft_putnbr_hex_len(address, "0123456789abcdef");
 	p->count += 14;
 }

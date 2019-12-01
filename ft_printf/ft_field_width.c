@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 18:15:16 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/11/29 18:45:21 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/01 17:45:20 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_test_field_width(t_ftprint *p)
 	while (p->str[p->i] >= '0' && p->str[p->i] <= '9')
 	{
 		value *= 10;
-		value += 48 - p->str[p->i];
+		value += p->str[p->i] - 48;
 		p->i++;
 	}
 	p->field_width = value;
