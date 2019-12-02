@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 11:37:30 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/01 19:18:15 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/02 18:03:27 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	ft_key(t_ftprint *p)
 {
-	ft_test_zero(p);
+	ft_test_flags(p);
 	ft_test_field_width(p);
 	if (p->str[p->i] == 's')
 		print_s(p);

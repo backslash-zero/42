@@ -13,12 +13,13 @@ typedef struct	s_ftprint
 	int			count;
 	char		*str;
 	int			flag_zero;
+	int			flag_minus;
+	int			flag_plus;
 	int			field_width;
 	int			arg_len;
 	int			nb_len;
 }				t_ftprint;
 
-//void			ft_printf(const char *format, ...);
 int			ft_printf(const char *format, ...);
 size_t		ft_strlen(const char *s);
 void		ft_putchar(char c);
@@ -31,11 +32,18 @@ void		print_u(t_ftprint *p);
 void		print_x_low(t_ftprint *p);
 void		print_x_up(t_ftprint *p);
 int			ft_putnbr_hex_len(size_t nb, char *base);
-int			ft_putnbr_len(int nb);
 int			ft_u_putnbr_len(unsigned int nb);
+void		ft_test_flags(t_ftprint *p);
 void		ft_test_zero(t_ftprint *p);
+void		ft_test_minus(t_ftprint *p);
+void		ft_test_plus(t_ftprint *p);
 void		ft_test_field_width(t_ftprint *p);
 void		ft_tests_checks(t_ftprint *p);
 void		ft_reset_struct(t_ftprint *p);
+char		*ft_number_str(int nb, t_ftprint *p);
+void		ft_get_number_len(t_ftprint *p, int nb, int base_len);
+void		ft_get_number_len_u(t_ftprint *p, unsigned int nb, int base_len);
+char		*ft_number_str_u(unsigned int nb, t_ftprint *p, int base_l, char *base);
+char		*ft_number_str(int nb, t_ftprint *p);
 
 #endif

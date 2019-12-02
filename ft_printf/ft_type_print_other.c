@@ -6,12 +6,37 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 12:57:32 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/01 19:12:21 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/02 17:14:58 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdarg.h>
+
+void	print_d(t_ftprint *p)
+{
+	int		nb;
+	char	*str;
+
+	nb = va_arg(p->list, int);
+	ft_get_number_len(p, nb, 10);
+	if (nb < 0)
+		p->nb_len += 1;
+	if (nb != -2147483648)
+	{
+		str = ft_number_str(nb, p);
+		p->arg_len = p->nb_len;
+		ft_tests_checks(p);
+		ft_putstr(str);
+		p->count += p->arg_len;
+		free(str);
+	}
+	else
+	{
+		ft_putstr("-2147483648");
+		p->count += 11;
+	}
+}
 
 void	print_p(t_ftprint *p)
 {
@@ -27,44 +52,47 @@ void	print_p(t_ftprint *p)
 	p->count += 14;
 }
 
-void	print_d(t_ftprint *p)
-{
-	int d;
-
-	d = va_arg(p->list, int);
-	if (d != -2147483648)
-		p->count += ft_putnbr_len(d);
-	else
-	{
-		ft_putstr("-2147483648");
-		p->count += 11;
-	}
-}
-
 void	print_u(t_ftprint *p)
 {
-	unsigned int u;
+	unsigned int	nb;
+	char			*str;
 
-	u = va_arg(p->list, unsigned int);
-	p->count += ft_u_putnbr_len(u);
+	nb = va_arg(p->list, unsigned int);
+	ft_get_number_len_u(p, nb, 10);
+	str = ft_number_str_u(nb, p, 10, "0123456789");
+	p->arg_len = p->nb_len;
+	ft_tests_checks(p);
+	ft_putstr(str);
+	p->count += p->arg_len;
+	free(str);
 }
 
 void	print_x_low(t_ftprint *p)
 {
-	void	*str;
-	size_t	address;
+	unsigned int	nb;
+	char			*str;
 
-	str = va_arg(p->list, void *);
-	address = (size_t)str;
-	p->count += ft_putnbr_hex_len(address, "0123456789abcdef");
+	nb = va_arg(p->list, unsigned int);
+	ft_get_number_len_u(p, nb, 16);
+	str = ft_number_str_u(nb, p, 16, "0123456789abcdef");
+	p->arg_len = p->nb_len;
+	ft_tests_checks(p);
+	ft_putstr(str);
+	p->count += p->arg_len;
+	free(str);
 }
 
 void	print_x_up(t_ftprint *p)
 {
-	void	*str;
-	size_t	address;
+	unsigned int	nb;
+	char			*str;
 
-	str = va_arg(p->list, void *);
-	address = (size_t)str;
-	p->count += ft_putnbr_hex_len(address, "0123456789ABCDEF");
+	nb = va_arg(p->list, unsigned int);
+	ft_get_number_len_u(p, nb, 16);
+	str = ft_number_str_u(nb, p, 16, "0123456789ABCDEF");
+	p->arg_len = p->nb_len;
+	ft_tests_checks(p);
+	ft_putstr(str);
+	p->count += p->arg_len;
+	free(str);
 }
