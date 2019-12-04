@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 12:57:32 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/02 17:14:58 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/05 00:07:12 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,18 @@ void	print_d(t_ftprint *p)
 
 	nb = va_arg(p->list, int);
 	ft_get_number_len(p, nb, 10);
-	if (nb < 0)
-		p->nb_len += 1;
+	if (nb < 0 && nb != -2147483648)
+	{
+		if (p->flag_precision)
+		{
+			ft_putchar('-');
+			p->count += 1;
+			p->nb_neg = 1;
+			nb = -nb;
+		}
+		else
+			p->nb_len += 1;
+	}
 	if (nb != -2147483648)
 	{
 		str = ft_number_str(nb, p);
@@ -33,7 +43,10 @@ void	print_d(t_ftprint *p)
 	}
 	else
 	{
-		ft_putstr("-2147483648");
+		ft_putchar('-');
+		p->arg_len = 10;
+		ft_tests_checks(p);
+		ft_putstr("2147483648");
 		p->count += 11;
 	}
 }
