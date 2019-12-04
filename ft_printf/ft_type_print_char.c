@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 12:57:32 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/01 19:12:31 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/04 16:27:35 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,15 @@ void	print_s(t_ftprint *p)
 	s = va_arg(p->list, char *);
 	p->arg_len = ft_strlen(s);
 	ft_tests_checks(p);
-	ft_putstr(s);
+	if (p->flag_precision && (p->field_width < (int)ft_strlen(s)))
+	{
+		s = ft_substr(s, 0, p->field_width);
+		p->arg_len = p->field_width;
+		ft_putstr(s);
+		free(s);
+	}
+	else
+		ft_putstr(s);
 	p->count += p->arg_len;
 }
 
