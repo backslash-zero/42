@@ -6,12 +6,48 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 12:57:32 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/05 00:07:12 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/05 14:10:01 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdarg.h>
+
+void	print_d_intmin(t_ftprint *p)
+{
+	if (p->flag_precision || p->flag_zero)
+	{
+		ft_putchar('-');
+		if (p->flag_precision)
+			p->arg_len = 10;
+		else
+			p->arg_len = 11;
+
+		ft_tests_checks(p);
+		ft_putstr("2147483648");
+		p->count += 11;
+	}
+	else
+	{
+		p->arg_len = 11;
+		ft_tests_checks(p);
+		ft_putstr("-2147483648");
+		p->count += 11;
+	}
+}
+
+void	print_d_negative(t_ftprint *p, int *nb)
+{
+	if (p->flag_precision)
+	{
+		ft_putchar('-');
+		p->count += 1;
+		p->nb_neg = 1;
+		*nb = -*nb;
+	}
+	else
+		p->nb_len += 1;
+}
 
 void	print_d(t_ftprint *p)
 {
@@ -21,17 +57,7 @@ void	print_d(t_ftprint *p)
 	nb = va_arg(p->list, int);
 	ft_get_number_len(p, nb, 10);
 	if (nb < 0 && nb != -2147483648)
-	{
-		if (p->flag_precision)
-		{
-			ft_putchar('-');
-			p->count += 1;
-			p->nb_neg = 1;
-			nb = -nb;
-		}
-		else
-			p->nb_len += 1;
-	}
+		print_d_negative(p, &nb);
 	if (nb != -2147483648)
 	{
 		str = ft_number_str(nb, p);
@@ -42,13 +68,7 @@ void	print_d(t_ftprint *p)
 		free(str);
 	}
 	else
-	{
-		ft_putchar('-');
-		p->arg_len = 10;
-		ft_tests_checks(p);
-		ft_putstr("2147483648");
-		p->count += 11;
-	}
+		print_d_intmin(p);
 }
 
 void	print_p(t_ftprint *p)
