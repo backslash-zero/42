@@ -6,12 +6,26 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 18:15:16 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/07 00:51:59 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/07 19:58:46 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdarg.h>
+
+void	ft_test_size(t_ftprint *p)
+{
+	int value;
+
+	value = 0;
+	while (p->str[p->i] >= '0' && p->str[p->i] <= '9')
+	{
+		value *= 10;
+		value += p->str[p->i] - 48;
+		p->i++;
+	}
+	p->field_width = value;
+}
 
 void	ft_size_flagstar(t_ftprint *p)
 {
@@ -21,21 +35,12 @@ void	ft_size_flagstar(t_ftprint *p)
 	value = va_arg(p->list, int);
 	if (value < 0)
 	{
-		if (p->flag_precision)
-			p->field_precision = -value;
-		else
-			p->field_width = -value;
+		p->field_width = -value;
 		p->flag_minus = 1;
 	}
 	else
-	{
-		if (p->flag_precision)
-			p->field_precision = value;
-		else
-			p->field_width = value;
-	}
+		p->field_width = value;
 	p->i++;
-	p->flag_star = 0;
 }
 
 void	ft_size_default(t_ftprint *p)
@@ -81,4 +86,3 @@ void	ft_print_field_width(t_ftprint *p)
 		p->field_width--;
 	}
 }
-

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 12:57:32 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/07 00:55:56 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/07 20:09:00 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ void	print_s(t_ftprint *p)
 	else
 		ft_putstr(s);
 	if (p->flag_minus)
-	{
 		ft_print_field_width(p);
-		p->arg_len += p->field_width;
-	}
 	p->count += p->arg_len;
 }
 

@@ -6,18 +6,38 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 23:54:49 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/07 00:25:14 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/07 19:23:40 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdarg.h>
 
+void	ft_test_precision(t_ftprint *p)
+{
+	if (p->str[p->i] == '.')
+	{
+		p->flag_precision = 1;
+		p->i++;
+		ft_getprecision(p);
+	}
+}
+
 void	ft_getprecision(t_ftprint *p)
 {
+	int value;
+
+	value = 0;
 	if (p->str[p->i] == '*')
 	{
-		p->field_precision = va_arg(p->list, int);
+		value = va_arg(p->list, int);
+		if (value < 0)
+		{
+			p->field_precision = -value;
+			p->flag_minus = 1;
+		}
+		else
+			p->field_precision = value;
 		p->i++;
 	}
 	else
