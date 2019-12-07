@@ -6,13 +6,39 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 18:15:16 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/04 16:57:43 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/07 00:51:59 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdarg.h>
 
-void	ft_test_field_width(t_ftprint *p)
+void	ft_size_flagstar(t_ftprint *p)
+{
+	int value;
+
+	value = 0;
+	value = va_arg(p->list, int);
+	if (value < 0)
+	{
+		if (p->flag_precision)
+			p->field_precision = -value;
+		else
+			p->field_width = -value;
+		p->flag_minus = 1;
+	}
+	else
+	{
+		if (p->flag_precision)
+			p->field_precision = value;
+		else
+			p->field_width = value;
+	}
+	p->i++;
+	p->flag_star = 0;
+}
+
+void	ft_size_default(t_ftprint *p)
 {
 	int value;
 
@@ -56,19 +82,3 @@ void	ft_print_field_width(t_ftprint *p)
 	}
 }
 
-void	ft_print_precision(t_ftprint *p)
-{
-	if (p->str[p->i] == 'd' ||
-			p->str[p->i] == 'i' ||
-			p->str[p->i] == 'u' ||
-			p->str[p->i] == 'x' ||
-			p->str[p->i] == 'X')
-	{
-		while (p->field_width - p->arg_len > 0)
-		{
-			ft_putchar('0');
-			p->count++;
-			p->field_width--;
-		}
-	}
-}
