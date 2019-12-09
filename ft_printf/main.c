@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 11:37:06 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/09 15:19:48 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/09 16:14:01 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,6 +231,9 @@ static void	test_c(void)
 	printf("\n\n");
 	printf("Return printf: %%c010	%d\nReturn ft_printf:	%d\n",printf("Hello: %10c\n", c), ft_printf("Hello: %10c\n", c));
 	printf("\n\n");
+	printf("Return printf: %%c010	%d\nReturn ft_printf:	%d\n",printf("Hello: %-10c\n", c), ft_printf("Hello: %-10c\n", c));
+	printf("\n\n");
+	printf("Return printf: %%c010	%d\nReturn ft_printf:	%d\n",printf("Hello: %*c\n", 6, c), ft_printf("Hello: %*c\n", 6, c));
 	printf("\n\n");
 	printf("\n\n");
 	printf("\n\n");
@@ -934,6 +937,10 @@ static void	test_p(void)
 	printf("Return printf: %%p.19	%d\nReturn ft_printf:	%d\n ",printf("Hello: %.19p\n", b), ft_printf("Hello: %.19p\n", b));
 	printf("\n\n");
 	printf("Return printf: %%p.20	%d\nReturn ft_printf:	%d\n",printf("Hello: %.20p\n", b), ft_printf("Hello: %.20p\n", b)); */
+	printf("Return printf: %%p20	%d\nReturn ft_printf:	%d\n",printf("Hello: %20p\n", b), ft_printf("Hello: %20p\n", b));
+	printf("\n\n");
+	printf("Return printf: %%p20	%d\nReturn ft_printf:	%d\n",printf("Hello: %-2p\n", b), ft_printf("Hello: %-2p\n", b));
+	printf("\n\n");
 	printf("\n\n");
 	printf("\n\n");
 	printf("\n\n");
