@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 23:54:49 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/07 19:23:40 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/09 15:20:51 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	ft_getprecision(t_ftprint *p)
 		value = va_arg(p->list, int);
 		if (value < 0)
 		{
-			p->field_precision = -value;
-			p->flag_minus = 1;
+			p->field_precision = 0;
+			p->flag_precision = 0;
 		}
 		else
 			p->field_precision = value;

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 11:37:06 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/07 20:08:37 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/09 15:19:48 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,15 +129,7 @@ static void	test_s(void)
 	printf("\n\n");
 	printf("Return printf: %%5.*s	%d\nReturn ft_printf:	%d\n",printf("Hello: %5.*s|end\n", 5, str), ft_printf("Hello: %5.*s|end\n", 5, str));
 	printf("\n\n");
-	printf("Return printf: %%-*.*s	%d\nReturn ft_printf:	%d\n",printf("Hello: %-*.*s|end\n", 10, 5, str), ft_printf("Hello: %-*.*s|end\n", 10, 5, str));
-	printf("\n\n");
-	printf("Return printf: %%*.*s	%d\nReturn ft_printf:	%d\n",printf("Hello: %*.*s|end\n", 10, 5, str), ft_printf("Hello: %-*.*s|end\n", 10, 5, str));
-	printf("\n\n");
-	printf("Return printf: %%*.*s	%d\nReturn ft_printf:	%d\n",printf("Hello: %*.*s|end\n", -10, -5, str), ft_printf("Hello: %-*.*s|end\n", 10, -5, str));
-	printf("\n\n");
-	printf("Return printf: %%*.*s	%d\nReturn ft_printf:	%d\n",printf("Hello: %*.*s|end\n", 10, -5, str), ft_printf("Hello: %-*.*s|end\n", 10, -5, str));
-	printf("\n\n");
-	printf("Return printf: %%*.*s	%d\nReturn ft_printf:	%d\n",printf("Hello: %*.*s|end\n", -10, 5, str), ft_printf("Hello: %-*.*s|end\n", -10, 5, str));
+	printf("Return printf: %%*.*s	%d\nReturn ft_printf:	%d\n",printf("Hello: %-*.*s|end\n", -10, 5, str), ft_printf("Hello: %-*.*s|end\n", -10, 5, str));
 	printf("\n\n");
 	printf("Return printf: %%*s	%d\nReturn ft_printf:	%d\n",printf("Hello: %*s|end\n", 27, str), ft_printf("Hello: %*s|end\n", 27, str));
 	printf("\n\n");
@@ -146,6 +138,32 @@ static void	test_s(void)
 	printf("Return printf: %%*.5s	%d\nReturn ft_printf:	%d\n", printf("Hello: %*.5s|end\n", 15, str), ft_printf("Hello: %*.5s|end\n", 15, str));
 	printf("\n\n");
 	printf("Return printf: %%15.5s	%d\nReturn ft_printf:	%d\n", printf("Hello: %15.5s|end\n", str), ft_printf("Hello: %15.5s|end\n", str));
+	printf("\n\n");
+	printf("Return printf: %%3.3s	%d\nReturn ft_printf:	%d\n", printf("Hello: %3.3s|end\n", str), ft_printf("Hello: %3.3s|end\n", str));
+	printf("\n\n");
+	printf("Return printf: %%8.8s	%d\nReturn ft_printf:	%d\n", printf("Hello: %8.8s|end\n", str), ft_printf("Hello: %8.8s|end\n", str));
+	printf("\n\n");
+	printf("Return printf: %%9.9s	%d\nReturn ft_printf:	%d\n", printf("Hello: %9.9s|end\n", str), ft_printf("Hello: %9.9s|end\n", str));
+	printf("\n\n");
+	printf("Return printf: %%10.10s	%d\nReturn ft_printf:	%d\n", printf("Hello: %10.10s|end\n", str), ft_printf("Hello: %10.10s|end\n", str));
+	printf("\n\n");
+	printf("Return printf: %%15s	%d\nReturn ft_printf:	%d\n", printf("Hello: %15s|end\n", str), ft_printf("Hello: %15s|end\n", str));
+	printf("\n\n");
+	printf("Return printf: %%*.*s	%d\nReturn ft_printf:	%d\n",printf("Hello: %*.*s|end\n", 10, 5, str), ft_printf("Hello: %*.*s|end\n", 10, 5, str));
+	printf("\n\n");
+	printf("Return printf: %%*.*s	%d\nReturn ft_printf:	%d\n",printf("Hello: %*.*s|end\n", 10, 5, str), ft_printf("Hello: %*.*s|end\n", 10, 5, str));
+	printf("\n\n");
+	printf("Return printf: %%*.*s	%d\nReturn ft_printf:	%d\n",printf("Hello: %10.*s|end\n", 5, str), ft_printf("Hello: %10.*s|end\n", 5, str));
+	printf("\n\n");
+	printf("Return printf: %%*.*s	%d\nReturn ft_printf:	%d\n",printf("Hello: %10.*s|end\n", 5, str), ft_printf("Hello: %10.*s|end\n", 5, str));
+	printf("\n\n");
+	printf("!eturn printf: %%*.*s	%d\nReturn ft_printf:	%d\n",printf("Hello: %*.*s|end\n", -10, -5, str), ft_printf("Hello: %*.*s|end\n", -10, -5, str));
+	printf("\n\n");
+	printf("!eturn printf: %%-*.*s	%d\nReturn ft_printf:	%d\n",printf("Hello: %-*.*s|end\n", 10, -5, str), ft_printf("Hello: %-*.*s|end\n", 10, -5, str));
+	printf("\n\n");
+	printf("!eturn printf: %%*.*s	%d\nReturn ft_printf:	%d\n",printf("Hello: %-10.*s|end\n", -5, str), ft_printf("Hello: %-10.*s|end\n", -5, str));
+	printf("\n\n");
+	printf("!eturn printf: %%-*.*s	%d\nReturn ft_printf:	%d\n",printf("Hello: %10.*s|end\n", -5, str), ft_printf("Hello: %10.*s|end\n", -5, str));
 	printf("\n\n");
 	printf("\n\n");
 	printf("\n\n");
@@ -419,6 +437,7 @@ static void	test_d(void)
 	printf("Return printf: %%-*s	%d\nReturn ft_printf: %%-*s	%d\n",printf("Example: %-*s|End\n", 16, "hello"), ft_printf("Example: %-*s|End\n", 16, "hello"));
 	printf("Return printf: %%*.s	%d\nReturn ft_printf: %%*.s	%d\n",printf("Example: %16.s|End\n", "hello"), ft_printf("Example: %16.s|End\n", "hello"));
 	printf("Return printf: %%*.s	%d\nReturn ft_printf: %%*.s	%d\n",printf("Example: %*.s|End\n", 16, "hello"), ft_printf("Example: %*.s|End\n", 16, "hello"));
+
 	printf("\n\n");
 	printf("\n\n");
 	printf("\n\n");
