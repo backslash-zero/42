@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 17:42:35 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/06 18:25:24 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/09 20:19:28 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ void	ft_get_number_len(t_ftprint *p, int nb, int base_len)
 		p->nb_len = 1;
 	else
 	{
-		if (nb < 0)
-			p->nb_len = 1;
 		while (nb != 0)
 		{
 			len++;

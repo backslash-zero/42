@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 11:37:06 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/09 16:14:01 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/09 22:54:47 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -435,11 +435,11 @@ static void	test_d(void)
 	printf("Return printf: %%-*.d	%d\nReturn ft_printf: %%-*.d	%d\n",printf("Example: %-*.d|End\n", 8, 666), ft_printf("%%*-.d %-*.d|End\n", 8, 666));
 	printf("Return printf: %%0*d	%d\nReturn ft_printf: %%0*d	%d\n",printf("Example: %0*d|End\n", 12, 666), ft_printf("Example: %0*d|End\n", 12, 666));
 	printf("Return printf: %%-*d	%d\nReturn ft_printf: %%-*d	%d\n",printf("Example: %-*d|End\n", 8, 666), ft_printf("Example: %-*d|End\n", 8, 666));
-	printf("Return printf: %%0*d	%d\nReturn ft_printf: %%0*d	%d\n",printf("Example: %0*d|End\n", 0, 666), ft_printf("Example: %0*d|End\n", 0, 666));
-	printf("Return printf: %%*s	%d\nReturn ft_printf: %%*s	%d\n",printf("Example: %*s|End\n", 16, "hello"), ft_printf("Example: %*s|End\n", 16, "hello"));
-	printf("Return printf: %%-*s	%d\nReturn ft_printf: %%-*s	%d\n",printf("Example: %-*s|End\n", 16, "hello"), ft_printf("Example: %-*s|End\n", 16, "hello"));
-	printf("Return printf: %%*.s	%d\nReturn ft_printf: %%*.s	%d\n",printf("Example: %16.s|End\n", "hello"), ft_printf("Example: %16.s|End\n", "hello"));
-	printf("Return printf: %%*.s	%d\nReturn ft_printf: %%*.s	%d\n",printf("Example: %*.s|End\n", 16, "hello"), ft_printf("Example: %*.s|End\n", 16, "hello"));
+	
+	printf("Return printf: %d\nReturn ft_printf: %d\n",printf("Example: %025.*d|End\n", 0, 12), ft_printf("Example: %025.*d|End\n", 0, 12));
+	printf("Return printf: %d\nReturn ft_printf: %d\n",printf("Example: %-25.*d|End\n", 0, 12), ft_printf("Example: %025.*d|End\n", 0, 12));
+	printf("Return printf: %d\nReturn ft_printf: %d\n",printf("Example: %-25.*d|End\n", 0, 12), ft_printf("Example: %025.*d|End\n", 0, 12));
+	printf("Return printf: %d\nReturn ft_printf: %d\n",printf("TXF6tL%-*c%0*i0z8hmVc NsB63FDc%04d\n", 8, 'Q', 1, INT_MIN, 0), ft_printf("TXF6tL%-*c%0*i0z8hmVc NsB63FDc%04d\n", 8, 'Q', 1, INT_MIN, 0));
 
 	printf("\n\n");
 	printf("\n\n");

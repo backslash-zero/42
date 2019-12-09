@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 16:50:40 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/07 19:58:19 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/09 23:02:13 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_test_flags(t_ftprint *p)
 {
 	ft_test_zero(p);
 	ft_test_minus(p);
-	ft_test_plus(p);
+	//ft_test_plus(p);
 	ft_test_size(p);
 	ft_test_star(p);
 	ft_test_precision(p);
