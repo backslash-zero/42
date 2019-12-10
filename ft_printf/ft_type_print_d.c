@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 16:32:58 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/10 16:28:57 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/10 19:53:15 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	print_d_precision(t_ftprint *p)
 	while (p->field_precision > p->nb_len)
 	{
 		ft_putchar('0');
-		p->count += 1;
+		//p->count += 1;
 		p->field_precision--;
 	}
 }
