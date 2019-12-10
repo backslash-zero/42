@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 12:57:32 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/09 16:13:31 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/09 23:12:42 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	print_s(t_ftprint *p)
 {
 	char *s;
 
+	//protect for NULL string;
 	s = va_arg(p->list, char *);
 	p->arg_len = ft_strlen(s);
 	if (p->field_precision < (int)ft_strlen(s) && p->flag_precision)

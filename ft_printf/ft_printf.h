@@ -37,6 +37,7 @@ void		print_d(t_ftprint *p);
 void		print_d_precision(t_ftprint *p);
 void		print_d_intmin(t_ftprint *p);
 void		print_d_negative(t_ftprint *p, int nb);
+void		print_d_handle_flags(t_ftprint *p);
 void		print_u(t_ftprint *p);
 void		print_x_low(t_ftprint *p);
 void		print_x_up(t_ftprint *p);
