@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 16:32:58 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/10 19:53:15 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/11 17:38:27 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	print_d_precision(t_ftprint *p)
 	while (p->field_precision > p->nb_len)
 	{
 		ft_putchar('0');
-		//p->count += 1;
 		p->field_precision--;
 	}
 }
@@ -69,6 +68,19 @@ void	print_d_intmin(t_ftprint *p)
 		ft_print_field_width(p);
 }
 
+void	print_d_zeroprec_zero(t_ftprint *p)
+{
+	p->nb_len = 0;
+	p->arg_len = p->nb_len;
+	if (!p->flag_minus)
+		ft_print_field_width(p);
+	if (!p->field_width)
+		p->field_precision++;
+	p->count += 0;
+	if (p->flag_minus)
+		ft_print_field_width(p);
+}
+
 void	print_d(t_ftprint *p)
 {
 	int		nb;
@@ -81,6 +93,8 @@ void	print_d(t_ftprint *p)
 		print_d_intmin(p);
 	else if (nb < 0)
 		print_d_negative(p, nb);
+	else if (nb == 0 && p->flag_precision && p->field_precision == 0)
+		print_d_zeroprec_zero(p);
 	else
 	{
 		ft_get_number_len(p, nb, 10);

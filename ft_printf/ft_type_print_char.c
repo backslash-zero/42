@@ -6,19 +6,24 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 12:57:32 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/09 23:12:42 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/11 19:05:27 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdarg.h>
 
-void	print_s(t_ftprint *p)
+void	ft_printstring(t_ftprint *p, char *str)
+{
+	if (!(p->field_precision == 0 && p->flag_precision))
+		ft_putstr(str);
+}
+
+void	print_s_null(t_ftprint *p)
 {
 	char *s;
 
-	//protect for NULL string;
-	s = va_arg(p->list, char *);
+	s = "(null)";
 	p->arg_len = ft_strlen(s);
 	if (p->field_precision < (int)ft_strlen(s) && p->flag_precision)
 		p->arg_len = p->field_precision;
@@ -27,11 +32,36 @@ void	print_s(t_ftprint *p)
 	if (p->field_precision < (int)ft_strlen(s) && p->flag_precision)
 	{
 		s = ft_substr(s, 0, p->field_precision);
-		ft_putstr(s);
+		ft_printstring(p, s);
 		free(s);
 	}
 	else
-		ft_putstr(s);
+		ft_printstring(p, s);
+}
+
+void	print_s(t_ftprint *p)
+{
+	char *s;
+
+	s = va_arg(p->list, char *);
+	if (!s)
+		print_s_null(p);
+	else
+	{
+		p->arg_len = ft_strlen(s);
+		if (p->field_precision < (int)ft_strlen(s) && p->flag_precision)
+			p->arg_len = p->field_precision;
+		if (!p->flag_minus)
+			ft_print_field_width(p);
+		if (p->field_precision < (int)ft_strlen(s) && p->flag_precision)
+		{
+			s = ft_substr(s, 0, p->field_precision);
+			ft_printstring(p, s);
+			free(s);
+		}
+		else
+			ft_printstring(p, s);
+	}
 	if (p->flag_minus)
 		ft_print_field_width(p);
 	p->count += p->arg_len;
@@ -63,12 +93,15 @@ void	print_p(t_ftprint *p)
 
 	str = va_arg(p->list, void *);
 	address = (size_t)str;
-	p->arg_len = 14;
+	ft_get_number_len_u(p, address, 16);
+ 	printf("!!address: %u\n", address);
+	printf("!!nb->len: %u\n", address);
+	p->arg_len = p->nb_len + 2;
 	if (!p->flag_minus)
 		ft_print_field_width(p);
 	ft_putstr("0x");
 	ft_putnbr_hex_len(address, "0123456789abcdef");
 	if (p->flag_minus)
 		ft_print_field_width(p);
-	p->count += 14;
+	p->count += p->arg_len;
 }

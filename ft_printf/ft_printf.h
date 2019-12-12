@@ -65,5 +65,7 @@ void		ft_get_number_len(t_ftprint *p, int nb, int base_len);
 void		ft_get_number_len_u(t_ftprint *p, unsigned int nb, int base_len);
 char		*ft_number_str_u(unsigned int nb, t_ftprint *p, int base_l, char *base);
 char		*ft_number_str(int nb, t_ftprint *p);
+void		ft_printstring(t_ftprint *p, char *str);
+void		print_d_zeroprec_zero(t_ftprint *p);
 
 #endif
