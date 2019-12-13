@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 18:29:51 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/06 22:49:54 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/13 15:53:01 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_reset_struct(t_ftprint *p)
 	p->flag_plus = 0;
 	p->flag_precision = 0;
 	p->flag_star = 0;
+	p->nb_neg = 0;
 }
 
 int		ft_is_special(t_ftprint *p)

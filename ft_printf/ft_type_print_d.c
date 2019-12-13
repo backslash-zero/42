@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 16:32:58 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/11 17:38:27 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/13 16:19:27 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	print_d_handle_flags(t_ftprint *p)
 		ft_print_field_width(p);
 	if (p->nb_neg && !(p->flag_zero))
 		ft_putchar('-');
-	if (!p->field_width)
-		p->field_precision++;
 	if (p->field_precision > p->nb_len && p->flag_precision)
 		print_d_precision(p);
 }
@@ -32,17 +30,24 @@ void	print_d_handle_flags(t_ftprint *p)
 void	print_d_negative(t_ftprint *p, int nb)
 {
 	char	*str;
+	int		precision_copy;
 
+	precision_copy = p->field_precision;
 	p->nb_neg = 1;
 	nb = -nb;
 	ft_get_number_len(p, nb, 10);
 	str = ft_number_str(nb, p);
-	p->nb_len += 1;
-	p->arg_len = p->nb_len;
+	p->arg_len = p->nb_len + 1;
+	if (p->field_width > 0
+		&& p->flag_precision && p->field_precision > p->nb_len)
+		p->field_width--;
 	print_d_handle_flags(p);
 	ft_putstr(str);
 	free(str);
-	p->count += p->arg_len;
+	if (p->flag_precision && precision_copy > p->nb_len)
+		p->count += p->arg_len + 1;
+	else
+		p->count += p->arg_len;
 	if (p->flag_minus)
 		ft_print_field_width(p);
 }
@@ -58,12 +63,21 @@ void	print_d_precision(t_ftprint *p)
 
 void	print_d_intmin(t_ftprint *p)
 {
+	int		precision_copy;
+
+	precision_copy = p->field_precision;
 	p->nb_neg = 1;
-	p->nb_len = 11;
-	p->arg_len = p->nb_len;
+	p->nb_len = 10;
+	p->arg_len = p->nb_len + 1;
+	if (p->field_width > 0
+		&& p->flag_precision && p->field_precision > p->nb_len)
+		p->field_width--;
 	print_d_handle_flags(p);
 	ft_putstr("2147483648");
-	p->count += 11;
+	if (p->flag_precision && precision_copy > p->nb_len)
+		p->count += p->arg_len + 1;
+	else
+		p->count += p->arg_len;
 	if (p->flag_minus)
 		ft_print_field_width(p);
 }
@@ -81,10 +95,24 @@ void	print_d_zeroprec_zero(t_ftprint *p)
 		ft_print_field_width(p);
 }
 
+void	print_d_default(t_ftprint *p, int nb)
+{
+	char	*str;
+
+	ft_get_number_len(p, nb, 10);
+	str = ft_number_str(nb, p);
+	p->arg_len = p->nb_len;
+	print_d_handle_flags(p);
+	ft_putstr(str);
+	free(str);
+	p->count += p->arg_len;
+	if (p->flag_minus)
+		ft_print_field_width(p);
+}
+
 void	print_d(t_ftprint *p)
 {
 	int		nb;
-	char	*str;
 
 	nb = va_arg(p->list, int);
 	if (p->flag_precision)
@@ -96,15 +124,5 @@ void	print_d(t_ftprint *p)
 	else if (nb == 0 && p->flag_precision && p->field_precision == 0)
 		print_d_zeroprec_zero(p);
 	else
-	{
-		ft_get_number_len(p, nb, 10);
-		str = ft_number_str(nb, p);
-		p->arg_len = p->nb_len;
-		print_d_handle_flags(p);
-		ft_putstr(str);
-		free(str);
-		p->count += p->arg_len;
-		if (p->flag_minus)
-			ft_print_field_width(p);
-	}
+		print_d_default(p, nb);
 }

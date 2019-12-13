@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 12:57:32 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/11 19:05:27 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/13 15:09:54 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,23 @@ void	print_p(t_ftprint *p)
 {
 	void	*str;
 	size_t	address;
+	size_t	copy;
 
 	str = va_arg(p->list, void *);
 	address = (size_t)str;
-	ft_get_number_len_u(p, address, 16);
- 	printf("!!address: %u\n", address);
-	printf("!!nb->len: %u\n", address);
-	p->arg_len = p->nb_len + 2;
+	copy = address;
+	if (copy == 0)
+		p->nb_len++;
+	while (copy != 0)
+	{
+		p->nb_len++;
+		copy /= 16;
+	}
+	//ft_get_number_len_u(p, address, 16);
+ 	//printf("!!address as address: %p\n", address);
+	// printf("!!nb->len: %d\n", p->nb_len); 
+	p->nb_len += 2;
+	p->arg_len = p->nb_len;
 	if (!p->flag_minus)
 		ft_print_field_width(p);
 	ft_putstr("0x");

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 12:57:32 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/11 17:41:56 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/12 16:07:30 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	print_u(t_ftprint *p)
 	char			*str;
 
 	nb = va_arg(p->list, unsigned int);
+	if (p->flag_precision)
+		p->flag_zero = 0;
 	if (nb == 0 && p->flag_precision && p->field_precision == 0)
 		print_d_zeroprec_zero(p);
 	else
 	{
-		if (p->flag_precision)
-			p->flag_zero = 0;
 		ft_get_number_len_u(p, nb, 10);
 		str = ft_number_str_u(nb, p, 10, "0123456789");
 		p->arg_len = p->nb_len;
@@ -48,12 +48,12 @@ void	print_x_low(t_ftprint *p)
 	char			*str;
 
 	nb = va_arg(p->list, unsigned int);
+	if (p->flag_precision)
+		p->flag_zero = 0;
 	if (nb == 0 && p->flag_precision && p->field_precision == 0)
 		print_d_zeroprec_zero(p);
 	else
 	{
-		if (p->flag_precision)
-			p->flag_zero = 0;
 		ft_get_number_len_u(p, nb, 16);
 		str = ft_number_str_u(nb, p, 16, "0123456789abcdef");
 		p->arg_len = p->nb_len;
@@ -77,12 +77,12 @@ void	print_x_up(t_ftprint *p)
 	char			*str;
 
 	nb = va_arg(p->list, unsigned int);
+	if (p->flag_precision)
+		p->flag_zero = 0;
 	if (nb == 0 && p->flag_precision && p->field_precision == 0)
 		print_d_zeroprec_zero(p);
 	else
 	{
-		if (p->flag_precision)
-			p->flag_zero = 0;
 		ft_get_number_len_u(p, nb, 16);
 		str = ft_number_str_u(nb, p, 16, "0123456789ABCDEF");
 		p->arg_len = p->nb_len;

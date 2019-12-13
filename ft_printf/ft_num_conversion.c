@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 17:42:35 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/09 20:19:28 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/13 15:08:49 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		ft_putnbr_hex_len(size_t nb, char *base)
 	int		len;
 
 	len = 1;
-	if (nb <= 16 && nb > 0)
+	if (nb < 16 && nb > 0)
 		ft_putchar(base[nb]);
 	else if (nb > 0)
 	{

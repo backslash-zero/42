@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 18:15:16 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/07 19:58:46 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/13 15:24:23 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	ft_size_flagstar(t_ftprint *p)
 	{
 		p->field_width = -value;
 		p->flag_minus = 1;
+		if (p->flag_zero)
+			p->flag_zero = 0;
 	}
 	else
 		p->field_width = value;
