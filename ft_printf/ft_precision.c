@@ -6,12 +6,21 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/06 23:54:49 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/11 15:11:30 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/13 17:18:06 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdarg.h>
+
+void	print_d_precision(t_ftprint *p)
+{
+	while (p->field_precision > p->nb_len)
+	{
+		ft_putchar('0');
+		p->field_precision--;
+	}
+}
 
 void	ft_test_precision(t_ftprint *p)
 {

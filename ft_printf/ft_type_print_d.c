@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/09 16:32:58 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/13 16:19:27 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/13 18:45:10 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	print_d_negative(t_ftprint *p, int nb)
 	precision_copy = p->field_precision;
 	p->nb_neg = 1;
 	nb = -nb;
-	ft_get_number_len(p, nb, 10);
-	str = ft_number_str(nb, p);
+	ft_get_nb_len(p, nb, 10);
+	str = ft_nb_str(nb, p);
 	p->arg_len = p->nb_len + 1;
 	if (p->field_width > 0
 		&& p->flag_precision && p->field_precision > p->nb_len)
@@ -50,15 +50,6 @@ void	print_d_negative(t_ftprint *p, int nb)
 		p->count += p->arg_len;
 	if (p->flag_minus)
 		ft_print_field_width(p);
-}
-
-void	print_d_precision(t_ftprint *p)
-{
-	while (p->field_precision > p->nb_len)
-	{
-		ft_putchar('0');
-		p->field_precision--;
-	}
 }
 
 void	print_d_intmin(t_ftprint *p)
@@ -99,8 +90,8 @@ void	print_d_default(t_ftprint *p, int nb)
 {
 	char	*str;
 
-	ft_get_number_len(p, nb, 10);
-	str = ft_number_str(nb, p);
+	ft_get_nb_len(p, nb, 10);
+	str = ft_nb_str(nb, p);
 	p->arg_len = p->nb_len;
 	print_d_handle_flags(p);
 	ft_putstr(str);
@@ -108,21 +99,4 @@ void	print_d_default(t_ftprint *p, int nb)
 	p->count += p->arg_len;
 	if (p->flag_minus)
 		ft_print_field_width(p);
-}
-
-void	print_d(t_ftprint *p)
-{
-	int		nb;
-
-	nb = va_arg(p->list, int);
-	if (p->flag_precision)
-		p->flag_zero = 0;
-	if (nb == -2147483648)
-		print_d_intmin(p);
-	else if (nb < 0)
-		print_d_negative(p, nb);
-	else if (nb == 0 && p->flag_precision && p->field_precision == 0)
-		print_d_zeroprec_zero(p);
-	else
-		print_d_default(p, nb);
 }

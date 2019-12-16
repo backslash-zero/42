@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 12:57:32 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/13 15:09:54 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/13 17:16:27 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,6 @@ void	print_p(t_ftprint *p)
 		p->nb_len++;
 		copy /= 16;
 	}
-	//ft_get_number_len_u(p, address, 16);
- 	//printf("!!address as address: %p\n", address);
-	// printf("!!nb->len: %d\n", p->nb_len); 
 	p->nb_len += 2;
 	p->arg_len = p->nb_len;
 	if (!p->flag_minus)

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 17:42:35 by cmeunier          #+#    #+#             */
-/*   Updated: 2019/12/13 15:08:49 by cmeunier         ###   ########.fr       */
+/*   Updated: 2019/12/13 17:33:01 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		ft_putnbr_hex_len(size_t nb, char *base)
 	return (len);
 }
 
-char	*ft_number_str(int nb, t_ftprint *p)
+char	*ft_nb_str(int nb, t_ftprint *p)
 {
 	char	*str;
 	int		i;
@@ -55,7 +55,7 @@ char	*ft_number_str(int nb, t_ftprint *p)
 	return (str);
 }
 
-char	*ft_number_str_u(unsigned int nb, t_ftprint *p, int base_l, char *base)
+char	*ft_nb_str_u(unsigned int nb, t_ftprint *p, int b_l, char *b)
 {
 	char	*str;
 	int		i;
@@ -69,13 +69,13 @@ char	*ft_number_str_u(unsigned int nb, t_ftprint *p, int base_l, char *base)
 	while (nb > 0)
 	{
 		i--;
-		str[i] = base[nb % base_l];
-		nb /= base_l;
+		str[i] = b[nb % b_l];
+		nb /= b_l;
 	}
 	return (str);
 }
 
-void	ft_get_number_len(t_ftprint *p, int nb, int base_len)
+void	ft_get_nb_len(t_ftprint *p, int nb, int base_len)
 {
 	int len;
 
@@ -93,7 +93,7 @@ void	ft_get_number_len(t_ftprint *p, int nb, int base_len)
 	}
 }
 
-void	ft_get_number_len_u(t_ftprint *p, unsigned int nb, int base_len)
+void	ft_get_nb_len_u(t_ftprint *p, unsigned int nb, int base_len)
 {
 	int len;
 

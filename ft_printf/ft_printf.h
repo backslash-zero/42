@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/12/13 17:05:20 by cmeunier          #+#    #+#             */
+/*   Updated: 2019/12/13 18:46:49 by cmeunier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
@@ -25,47 +37,49 @@ typedef struct	s_ftprint
 	int			nb_neg;
 }				t_ftprint;
 
-int			ft_printf(const char *format, ...);
-size_t		ft_strlen(const char *s);
-void		ft_putchar(char c);
-void		ft_putstr(char *s);
-char		*ft_substr(char const *s, unsigned int start, int len);
-void		print_s(t_ftprint *p);
-void		print_c(t_ftprint *p);
-void		print_p(t_ftprint *p);
-void		print_d(t_ftprint *p);
-void		print_d_precision(t_ftprint *p);
-void		print_d_intmin(t_ftprint *p);
-void		print_d_negative(t_ftprint *p, int nb);
-void		print_d_handle_flags(t_ftprint *p);
-void		print_u(t_ftprint *p);
-void		print_x_low(t_ftprint *p);
-void		print_x_up(t_ftprint *p);
-void		ft_getprecision(t_ftprint *p);
-void		ft_precision_default(t_ftprint *p);
-void		ft_print_precision(t_ftprint *p);
-int			ft_putnbr_hex_len(size_t nb, char *base);
-int			ft_u_putnbr_len(unsigned int nb);
-int			ft_is_special(t_ftprint *p);
-void		ft_size_flagstar(t_ftprint *p);
-void		ft_size_default(t_ftprint *p);
-void		ft_test_flags(t_ftprint *p);
-void		ft_test_zero(t_ftprint *p);
-void		ft_test_minus(t_ftprint *p);
-void		ft_test_plus(t_ftprint *p);
-void		ft_test_star(t_ftprint *p);
-void		ft_test_precision(t_ftprint *p);
-void		ft_print_precision(t_ftprint *p);
-void		ft_test_size(t_ftprint *p);
-void		ft_print_field_width(t_ftprint *p);
-void		ft_tests_checks(t_ftprint *p);
-void		ft_reset_struct(t_ftprint *p);
-char		*ft_number_str(int nb, t_ftprint *p);
-void		ft_get_number_len(t_ftprint *p, int nb, int base_len);
-void		ft_get_number_len_u(t_ftprint *p, unsigned int nb, int base_len);
-char		*ft_number_str_u(unsigned int nb, t_ftprint *p, int base_l, char *base);
-char		*ft_number_str(int nb, t_ftprint *p);
-void		ft_printstring(t_ftprint *p, char *str);
-void		print_d_zeroprec_zero(t_ftprint *p);
+int				ft_printf(const char *format, ...);
+size_t			ft_strlen(const char *s);
+void			ft_putchar(char c);
+void			ft_putstr(char *s);
+char			*ft_substr(char const *s, unsigned int start, int len);
+void			print_s(t_ftprint *p);
+void			print_c(t_ftprint *p);
+void			print_p(t_ftprint *p);
+void			print_d(t_ftprint *p);
+void			print_d_precision(t_ftprint *p);
+void			print_d_intmin(t_ftprint *p);
+void			print_d_negative(t_ftprint *p, int nb);
+void			print_d_handle_flags(t_ftprint *p);
+void			print_d_default(t_ftprint *p, int nb);
+void			print_d_zeroprec_zero(t_ftprint *p);
+void			print_u(t_ftprint *p);
+void			print_x_low(t_ftprint *p);
+void			print_x_up(t_ftprint *p);
+void			ft_getprecision(t_ftprint *p);
+void			ft_precision_default(t_ftprint *p);
+void			ft_print_precision(t_ftprint *p);
+int				ft_putnbr_hex_len(size_t nb, char *base);
+int				ft_u_putnbr_len(unsigned int nb);
+int				ft_is_special(t_ftprint *p);
+void			ft_size_flagstar(t_ftprint *p);
+void			ft_size_default(t_ftprint *p);
+void			ft_test_flags(t_ftprint *p);
+void			ft_test_zero(t_ftprint *p);
+void			ft_test_minus(t_ftprint *p);
+void			ft_test_plus(t_ftprint *p);
+void			ft_test_star(t_ftprint *p);
+void			ft_test_precision(t_ftprint *p);
+void			ft_print_precision(t_ftprint *p);
+void			ft_test_size(t_ftprint *p);
+void			ft_print_field_width(t_ftprint *p);
+void			ft_tests_checks(t_ftprint *p);
+void			ft_reset_struct(t_ftprint *p);
+char			*ft_nb_str(int nb, t_ftprint *p);
+void			ft_get_nb_len(t_ftprint *p, int nb, int base_len);
+void			ft_get_nb_len_u(t_ftprint *p, unsigned int nb, int base_len);
+char			*ft_nb_str_u(unsigned int nb, t_ftprint *p, int b_l, char *b);
+char			*ft_nb_str(int nb, t_ftprint *p);
+void			ft_printstring(t_ftprint *p, char *str);
+void			print_d_zeroprec_zero(t_ftprint *p);
 
 #endif

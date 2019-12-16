@@ -6,18 +6,19 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/06 14:57:55 by cmeunier          #+#    #+#              #
-#    Updated: 2019/12/07 00:51:41 by cmeunier         ###   ########.fr        #
+#    Updated: 2019/12/09 16:32:33 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		=	gcc
 
-CFLAGS	+=	-Wall -Wextra -Werror -I . -c -o
+CFLAGS	+=	-Wall -Wextra -Werror -I . -c -o -g -fsanitize=address
 
 SRC 	=		ft_printf.c						\
 				ft_field_width.c				\
-				ft_precision.c						\
+				ft_precision.c					\
 				ft_type_print_char.c			\
+				ft_type_print_d.c				\
 				ft_type_print_other.c			\
 				ft_num_conversion.c				\
 				ft_test_flags.c					\
