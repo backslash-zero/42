@@ -2,7 +2,7 @@
 
 ### Goal
   
-Recode `printf` with identical behaviour as the original.  
+Recode `printf` with [identical behaviour as the original](https://docs.microsoft.com/en-us/cpp/c-runtime-library/format-specification-syntax-printf-and-wprintf-functions?view=vs-2019).  
 
 ### External allowed functions
 
@@ -14,13 +14,13 @@ The project is complicated as the number of parameters is indefinite. We use var
   
 ft_printf must achieve the following mandatory requirements:  
   
-* Manage the following conversions: `s`, `S`, `p`, `d`, `D`, `i`, `o`, `O`, `u`, `U`, `x`, `X`, `c` & `C`
+* Manage the following conversions: `s`, `p`, `d`, `i`, `u`, `x`, `X`& `c`
 * Manage `%%`
-* Manage the flags `#`, `0`, `-`, `+` & `space`
+* Manage the flags `#`, `0`, `-`, `+`
 * Manage the minimum field-width
-* Manage the precision
+* Manage the precision `.`
   
-The function must conform to 42's norm.  
+The function must conform to [42's norm](https://cdn.intra.42.fr/pdf/pdf/960/norme.en.pdf).  
 The function cannot leak. All errors must be handled carefully. In no way can the function quit in an unexpected manner (Segmentation fault, bus error, double free, etc).  
 
 ***
