@@ -6,15 +6,19 @@ ft_server is a project that asks you to run a server on Debian Buster through Do
 
 ## Introduction
 
+### Dockerfile
+Docker needs to be launche (use the init_docker.sh to launch at 42).
+The RUN command open a terminal inside the debian virtual machine.
+We use MariaDB as a replacement for MySQL
 
 
 ## Steps
 
 
 ```shell
-# Build image
+# 1 - Build image 'ft_server'
 docker build -t ft_server .
 
-# Run image
+# 2 - Run image 'ft_server'
 docker run -it -p 80:80 -p 443:443 ft_server
 ```
