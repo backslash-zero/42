@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/13 16:00:45 by cmeunier          #+#    #+#              #
-#    Updated: 2020/01/16 15:41:01 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/01/16 17:15:22 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ LABEL maintainer="Célestin (cmeunier@42.fr)"
 # Initialize variables
 ARG DATABASE_MS=mariadb-server
 ARG VER_PHP_MYADMIN=4.9.2
+ARG AUTOINDDEX=on
 
 # Update and upgrade apt, also installs wget tool, which downloads from a URL
 RUN	apt-get update				&& \
@@ -44,14 +45,40 @@ RUN cd /tmp																						&& \
 	mysql < /usr/share/phpmyadmin/sql/create_tables.sql
 
 # Install Wordpress: Download from link, decompress and move to the right place
-RUN	cd /tmp																						&& \
-	wget https://wordpress.org/latest.tar.gz													&& \
-	tar -xzvf latest.tar.gz																		&& \
-	mv wordpress /var/www/html/wordpress														&& \
+RUN	cd /tmp										&& \
+	wget https://wordpress.org/latest.tar.gz	&& \
+	tar -xzvf latest.tar.gz						&& \
+	mv wordpress /var/www/html/wordpress		&& \
 	rm latest.tar.gz
 
-# Setup nginx: copy the configuration file and 
+# Configure nginx: copy the configuration file and enables autoindex. Enablng site in the sites-enabled folder.
 COPY srcs/localhost.conf /etc/nginx/sites-available/localhost
+RUN sed -i "s/autoindex off/autoindex ${AUTOINDEX}/" /etc/nginx/sites-available/localhost		&& \
+	ln -s /etc/nginx/sites-available/localhost /etc/nginx/sites-enabled/localhost
 
-# ENTRYPOINT [ "executable" ]
+# Configure phpmyadmin: copy the configuration file
+COPY srcs/phpmyadmin-config.php /usr/share/phpmyadmin/config.inc.php
+
+# Configure wordpress
+COPY srcs/wp-config.php /var/www/html/wordpress
+COPY srcs/wordpress_db.sql /tmp
+
+# Wordpress auth handle
+RUN service mysql start																																&& \
+	mysql -u root -e "CREATE DATABASE wordpress_db" 																								&& \
+	mysql -u root -e "GRANT ALL ON wordpress_db.* TO 'wordpress_user'@'localhost' IDENTIFIED BY 'moncorpsestenpleinecroissance' WITH GRANT OPTION"	&& \
+	mysql -u root -e "GRANT ALL ON phpmyadmin.* TO 'pma'@'localhost' IDENTIFIED BY 'ilmefautdeleau'"												&& \
+	mysql -u root -e "GRANT ALL ON *.* TO 'bob'@'localhost' IDENTIFIED BY '123'"																	&& \
+	mysql wordpress_db < /tmp/wordpress_db.sql
+
+# SSL
+COPY srcs/ssl-cert.key /etc/ssl/private/nginx-cert.key
+COPY srcs/ssl-cert.crt /etc/ssl/certs/nginx-cert.crt
+
+# Final Commands
+CMD service nginx start			&& \
+	service mysql start 		&& \
+	service php7.3-fpm start	&& \
+	tail -f /dev/null
+
 EXPOSE 80 443
