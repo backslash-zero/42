@@ -12,6 +12,7 @@ The RUN command open a terminal inside the debian virtual machine.
 We use MariaDB as a replacement for MySQL
 
 ### Linux file system structure
+We run our project on Debian 10 which uses the Linux kernel.
 [Goog article Here](https://www.howtogeek.com/117435/htg-explains-the-linux-directory-structure-explained/)
 
 ##### /etc
@@ -25,7 +26,6 @@ The /usr directory contains applications and files used by users, as opposed to 
 
 ##### /var
 The /var directory is the writable counterpart to the /usr directory, which must be read-only in normal operation.
-
 
 ### Nginx
 Autoindex enables

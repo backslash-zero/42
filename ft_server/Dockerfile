@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/13 16:00:45 by cmeunier          #+#    #+#              #
-#    Updated: 2020/01/16 17:15:22 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/01/17 14:53:37 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ RUN	cd /tmp										&& \
 	mv wordpress /var/www/html/wordpress		&& \
 	rm latest.tar.gz
 
-# Configure nginx: copy the configuration file and enables autoindex. Enablng site in the sites-enabled folder.
+# Configure nginx: copy the configuration file and enables autoindex. Enabling site in the sites-enabled folder.
 COPY srcs/localhost.conf /etc/nginx/sites-available/localhost
 RUN sed -i "s/autoindex off/autoindex ${AUTOINDEX}/" /etc/nginx/sites-available/localhost		&& \
 	ln -s /etc/nginx/sites-available/localhost /etc/nginx/sites-enabled/localhost
