@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/13 16:00:45 by cmeunier          #+#    #+#              #
-#    Updated: 2020/01/17 15:32:10 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/01/17 16:10:31 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,14 +34,14 @@ RUN apt-get -y install ${DATABASE_MS}
 RUN apt-get install -y php php-fpm php-mysqli php-pear php-mbstring php-gettext php-common php-phpseclib php-mysql
 
 # Install PHPmyAdmin: Download from link, decompress and move to the right place
-RUN cd /tmp																						&& \
+RUN cd /tmp																												&& \
 	wget https://files.phpmyadmin.net/phpMyAdmin/${VER_PHP_MYADMIN}/phpMyAdmin-${VER_PHP_MYADMIN}-all-languages.tar.gz	&& \
-	tar xvf phpMyAdmin-${VER_PHP_MYADMIN}-all-languages.tar.gz										&& \
-	rm phpMyAdmin-${VER_PHP_MYADMIN}-all-languages.tar.gz												&& \
-	mv phpMyAdmin* /usr/share/phpmyadmin														&& \
-	mkdir -p /var/lib/phpmyadmin/tmp															&& \
-	ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin										&& \
-	service mysql start																			&& \
+	tar xvf phpMyAdmin-${VER_PHP_MYADMIN}-all-languages.tar.gz															&& \
+	rm phpMyAdmin-${VER_PHP_MYADMIN}-all-languages.tar.gz																&& \
+	mv phpMyAdmin* /usr/share/phpmyadmin																				&& \
+	mkdir -p /var/lib/phpmyadmin/tmp																					&& \
+	ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin																&& \
+	service mysql start																									&& \
 	mysql < /usr/share/phpmyadmin/sql/create_tables.sql
 
 # Install Wordpress: Download from link, decompress and move to the right place
@@ -52,9 +52,9 @@ RUN	cd /tmp										&& \
 	rm latest.tar.gz
 
 # Configure nginx: copy the configuration file and enables autoindex. Enabling site in the sites-enabled folder.
-## COPY srcs/localhost.conf /etc/nginx/sites-available/localhost
-## RUN sed -i "s/autoindex off/autoindex ${AUTOINDEX}/" /etc/nginx/sites-available/localhost		&& \
-##	ln -s /etc/nginx/sites-available/localhost /etc/nginx/sites-enabled/localhost
+COPY srcs/localhost.conf /etc/nginx/sites-available/localhost
+RUN sed -i "s/autoindex off/autoindex ${AUTOINDEX}/" /etc/nginx/sites-available/localhost	&& \
+	ln -s /etc/nginx/sites-available/localhost /etc/nginx/sites-enabled/localhost
 
 # Configure phpmyadmin: copy the configuration file
 ##COPY srcs/phpmyadmin-config.php /usr/share/phpmyadmin/config.inc.php
