@@ -13,7 +13,7 @@ We use MariaDB as a replacement for MySQL
 
 ### Linux file system structure
 We run our project on Debian 10 which uses the Linux kernel.
-[Goog article Here](https://www.howtogeek.com/117435/htg-explains-the-linux-directory-structure-explained/)
+[More details here](https://www.howtogeek.com/117435/htg-explains-the-linux-directory-structure-explained/)
 
 ##### /etc
 The /etc directory contains configuration files
@@ -28,16 +28,16 @@ The /usr directory contains applications and files used by users, as opposed to 
 The /var directory is the writable counterpart to the /usr directory, which must be read-only in normal operation.
 
 ### Nginx
-Autoindex enables
+Autoindex enables automated directory interface.
 ```
 The sites-available folder is for storing all of your vhost configurations, whether or not they're currently enabled.
 
 The sites-enabled folder contains symlinks to files in the sites-available folder. This allows you to selectively disable vhosts by removing the symlink.
 ```
-### Localhost Configuration
+##### Nginx: Localhost Configuration
+The /var directory is the writable counterpart to the /usr directory, which must be read-only in normal operation.
 
-
-## Steps
+## Steps to get a Docker project running
 
 ```shell
 # 1 - Build image 'ft_server'
