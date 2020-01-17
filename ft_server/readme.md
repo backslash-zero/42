@@ -53,6 +53,11 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout srcs/nginx-cert.key 
 ```
 [More info here](https://www.humankode.com/ssl/create-a-selfsigned-certificate-for-nginx-in-5-minutes)
 
+## Wordpress
+
+### wp-config file 
+The `wp-config.php` file contains your website’s base configuration details, such as database connection information. We just edited the default template for user1 access to the database.
+
 ## Steps to get a Docker project running
 
 ```shell

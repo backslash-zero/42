@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/13 16:00:45 by cmeunier          #+#    #+#              #
-#    Updated: 2020/01/17 16:10:31 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/01/17 17:55:19 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,7 @@ RUN sed -i "s/autoindex off/autoindex ${AUTOINDEX}/" /etc/nginx/sites-available/
 ##COPY srcs/phpmyadmin-config.php /usr/share/phpmyadmin/config.inc.php
 
 # Configure wordpress
-##COPY srcs/wp-config.php /var/www/html/wordpress
+COPY srcs/wp-config.php /var/www/html/wordpress
 ##COPY srcs/wordpress_db.sql /tmp
 
 # Wordpress auth handle
