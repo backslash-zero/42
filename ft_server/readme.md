@@ -11,6 +11,9 @@ Docker needs to be launche (use the init_docker.sh to launch at 42).
 The RUN command open a terminal inside the debian virtual machine.
 We use MariaDB as a replacement for MySQL
 
+### Linux file system structure
+[Goog article Here](https://www.howtogeek.com/117435/htg-explains-the-linux-directory-structure-explained/)
+
 ### Nginx
 Autoindex enables
 ```
@@ -19,6 +22,7 @@ The sites-available folder is for storing all of your vhost configurations, whet
 The sites-enabled folder contains symlinks to files in the sites-available folder. This allows you to selectively disable vhosts by removing the symlink.
 ```
 ### Localhost Configuration
+
 
 ## Steps
 
