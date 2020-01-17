@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/13 16:00:45 by cmeunier          #+#    #+#              #
-#    Updated: 2020/01/17 15:27:34 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/01/17 15:32:10 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,9 +35,9 @@ RUN apt-get install -y php php-fpm php-mysqli php-pear php-mbstring php-gettext 
 
 # Install PHPmyAdmin: Download from link, decompress and move to the right place
 RUN cd /tmp																						&& \
-	wget https://files.phpmyadmin.net/phpMyAdmin/${VER_PHPMA}/phpMyAdmin-${VER_PHPMA}-all-languages.tar.gz	&& \
-	tar xvf phpMyAdmin-${VER_PHPMA}-all-languages.tar.gz										&& \
-	rm phpMyAdmin-${VER_PHPMA}-all-languages.tar.gz												&& \
+	wget https://files.phpmyadmin.net/phpMyAdmin/${VER_PHP_MYADMIN}/phpMyAdmin-${VER_PHP_MYADMIN}-all-languages.tar.gz	&& \
+	tar xvf phpMyAdmin-${VER_PHP_MYADMIN}-all-languages.tar.gz										&& \
+	rm phpMyAdmin-${VER_PHP_MYADMIN}-all-languages.tar.gz												&& \
 	mv phpMyAdmin* /usr/share/phpmyadmin														&& \
 	mkdir -p /var/lib/phpmyadmin/tmp															&& \
 	ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin										&& \
