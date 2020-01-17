@@ -14,6 +14,19 @@ We use MariaDB as a replacement for MySQL
 ### Linux file system structure
 [Goog article Here](https://www.howtogeek.com/117435/htg-explains-the-linux-directory-structure-explained/)
 
+##### /etc
+The /etc directory contains configuration files
+
+##### /tmp
+Applications store temporary files in the /tmp directory. These files are generally deleted whenever your system is restarted.
+
+##### /usr
+The /usr directory contains applications and files used by users, as opposed to applications and files used by the system.
+
+##### /var
+The /var directory is the writable counterpart to the /usr directory, which must be read-only in normal operation.
+
+
 ### Nginx
 Autoindex enables
 ```
