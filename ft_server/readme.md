@@ -66,6 +66,7 @@ PhpMyAdmin use the [Blowfish cipher](https://en.wikipedia.org/wiki/Blowfish_(cip
 
 
 ## Wordpress
+WordPress (WordPress.org) is a content management system (CMS) based on PHP and MySQL that is usually used with the MySQL or MariaDB database
 
 ### wp-config file 
 The `wp-config.php` file contains your website’s base configuration details, such as database connection information. We just edited the default template for user1 access to the database.
