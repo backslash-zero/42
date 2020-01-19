@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Dockerfile                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
+#    By: celestin <celestin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/13 16:00:45 by cmeunier          #+#    #+#              #
-#    Updated: 2020/01/17 17:55:19 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/01/19 21:47:00 by celestin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,9 +71,9 @@ COPY srcs/wp-config.php /var/www/html/wordpress
 ##	mysql -u root -e "GRANT ALL ON *.* TO 'bob'@'localhost' IDENTIFIED BY '123'"																	&& \
 ##	mysql wordpress_db < /tmp/wordpress_db.sql
 
-# SSL
-##COPY srcs/ssl-cert.key /etc/ssl/private/nginx-cert.key
-##COPY srcs/ssl-cert.crt /etc/ssl/certs/nginx-cert.crt
+# SSL, we copy our certificate and key into the ssl folders
+COPY srcs/nginx-cert.key /etc/ssl/private/nginx-cert.key
+COPY srcs/nginx-cert.crt /etc/ssl/certs/nginx-cert.crt
 
 # Final Commands
 ##CMD service nginx start			&& \
