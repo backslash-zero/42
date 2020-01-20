@@ -80,3 +80,6 @@ docker build -t ft_server .
 # 2 - Run image 'ft_server'
 docker run -it -p 80:80 -p 443:443 ft_server
 ```
+
+### Useful cmd
+`service --status-all`

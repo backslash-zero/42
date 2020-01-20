@@ -152,6 +152,6 @@ $cfg['SaveDir'] = '';
  * You can find more configuration options in the documentation
  * in the doc/ folder or at <https://docs.phpmyadmin.net/>.
  */
-root@20d4068be09a:/usr/share/phpmyadmin# pwd
+/*root@20d4068be09a:/usr/share/phpmyadmin# pwd
 /usr/share/phpmyadmin
-root@20d4068be09a:/usr/share/phpmyadmin# cat config.sample.inc.php 
+root@20d4068be09a:/usr/share/phpmyadmin# cat config.sample.inc.php */
