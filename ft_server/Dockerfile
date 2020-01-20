@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/13 16:00:45 by cmeunier          #+#    #+#              #
-#    Updated: 2020/01/20 13:56:36 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/01/20 14:46:39 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ RUN ln -s /etc/nginx/sites-available/localhost /etc/nginx/sites-enabled/localhos
 
 # Configure phpmyadmin: copy the configuration file
 COPY srcs/phpmyadmin-config.php /usr/share/phpmyadmin/config.inc.php
+RUN  mkdir /usr/share/phpmyadmin/tmp && chmod 777 /usr/share/phpmyadmin/tmp
 
 # Configure wordpress
 COPY srcs/wp-config.php /var/www/html/wordpress
@@ -75,7 +76,7 @@ RUN service mysql start																								&& \
 COPY srcs/nginx-cert.key /etc/ssl/private/nginx-cert.key
 COPY srcs/nginx-cert.crt /etc/ssl/certs/nginx-cert.crt
 
-# Final Commands
+# Final Commands to get service running + last task to get stuck in a loop so the server keeps running until we exit the terminal
 CMD service nginx start					&& \
 	service mysql start 				&& \
 	service php7.3-fpm start			&& \

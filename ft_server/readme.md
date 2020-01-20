@@ -54,16 +54,13 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout srcs/nginx-cert.key 
 [More info here](https://www.humankode.com/ssl/create-a-selfsigned-certificate-for-nginx-in-5-minutes)
 
 ## PHP MyAdmin
-
 PhpMyAdmin is a free software tool written in PHP, intended to handle the administration of MySQL over the Web.
 It will help to link our databases with the rest ouf our services.
 
 #### Config File
-
 Inside the virtual machine in the /usr/share/phpmyadmin folder we can find the `config.sample.inc.php` that gives us plenty of information on how to configure.
 
 PhpMyAdmin use the [Blowfish cipher](https://en.wikipedia.org/wiki/Blowfish_(cipher)) for encryption. We therefore need to generate a random 32 characters encryption key at the line containing `$cfg['blowfish_secret']`;
-
 
 ## Wordpress
 WordPress (WordPress.org) is a content management system (CMS) based on PHP and MySQL that is usually used with the MySQL or MariaDB database
