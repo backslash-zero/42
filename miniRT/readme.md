@@ -20,7 +20,7 @@ The program should be able to apply transformations to all objects in the scene,
 * 42's [MinilibX]() functions.
 _Any other functions are forbidden and must be self-programmed_
 
---
+-------------
 
 # How to do raytracing
 
