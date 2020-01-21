@@ -17,7 +17,7 @@ The program should be able to apply transformations to all objects in the scene,
 
 * open, read, write, malloc, free, perror, strerror, exit
 * [math lib](https://linux.die.net/man/3/math) functions
-* 42's [MinilibX]() functions.
+* 42's [MinilibX](https://github.com/pbondoer/MinilibX/blob/master/README.md) functions.
 _Any other functions are forbidden and must be self-programmed_
 
 -------------
