@@ -25,3 +25,4 @@ _Any other functions are forbidden and must be self-programmed_
 
 # How to do raytracing
 
+I used this [ressource](https://raytracing.github.io/books/RayTracingInOneWeekend.html) to get started.
