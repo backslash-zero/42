@@ -1,4 +1,4 @@
-#include "include/miniRT.h"
+#include "incs/miniRT.h"
 
 int		main(int ac, char **av)
 {
