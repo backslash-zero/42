@@ -32,8 +32,8 @@ I used this [ressource](https://raytracing.github.io/books/RayTracingInOneWeeken
 
 # Development flow
 
-- [] Find some similar project and study the code structure.
-- [] Structure files & directories according to step 1:
+- [ ] Find some similar project and study the code structure.
+- [ ] Structure files & directories according to step 1:
 	* Makefiles
 	* Headers
 	* Libraries:
@@ -41,5 +41,5 @@ I used this [ressource](https://raytracing.github.io/books/RayTracingInOneWeeken
 		* [Libft](https://github.com/backslash-zero/42/tree/master/Libft)
 		* [Get Next Line](https://github.com/backslash-zero/42/commit/2950a77a9cbf4cefd31b1b14fec3e820db11b5e5)
 	_This is allows us to get working and starting testing our code right away. It also save times reoganizing_
-- [] Setup basic parsing for our scene
-	- [] Window 
+- [ ] Setup basic parsing for our scene
+	- [ ] Window 
