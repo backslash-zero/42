@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/22 21:01:03 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/01/22 21:14:52 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		main()
 {
 	// Initialize mlx
 	int size = 800;
-	int color = 65536;
+	int color = 0xff5d6c;
 	void *win_ptr;
 	void *mlx_ptr;
 
@@ -31,7 +31,7 @@ int		main()
 	{
 		while(y < size)
 		{
-			mlx_pixel_put(mlx_ptr, win_ptr, x, y, color);
+			mlx_pixel_put(mlx_ptr, win_ptr, x, y, color * 4);
 			y++;
 		}
 		y = 0;
