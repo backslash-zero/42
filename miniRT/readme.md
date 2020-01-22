@@ -19,10 +19,27 @@ The program should be able to apply transformations to all objects in the scene,
 * [math lib](https://linux.die.net/man/3/math) functions
 * 42's [MinilibX](https://github.com/pbondoer/MinilibX/blob/master/README.md) functions.
 
-_Any other functions are forbidden and must be self-programmed_
+_Any other functions are forbidden and must be self-programmed._
 
 -------------
 
 # How to do raytracing
 
 I used this [ressource](https://raytracing.github.io/books/RayTracingInOneWeekend.html) to get started.
+
+
+--------------
+
+# Development flow
+
+- [] Find some similar project and study the code structure.
+- [] Structure files & directories according to step 1:
+	* Makefiles
+	* Headers
+	* Libraries:
+		* [Minilibx](https://github.com/pbondoer/MinilibX)
+		* [Libft](https://github.com/backslash-zero/42/tree/master/Libft)
+		* [Get Next Line](https://github.com/backslash-zero/42/commit/2950a77a9cbf4cefd31b1b14fec3e820db11b5e5)
+	_This is allows us to get working and starting testing our code right away. It also save times reoganizing_
+- [] Setup basic parsing for our scene
+	- [] Window 

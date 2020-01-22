@@ -6,51 +6,78 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/01/21 17:36:24 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/01/21 18:18:03 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-LIB_DIR = libs
-INC_DIR = incs
-SRC_DIR = srcs
-OBJ_DIR = objs
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lmartin <lmartin@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/10/27 02:42:41 by lmartin           #+#    #+#              #
+#    Updated: 2019/12/04 17:28:05 by lmartin          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-CC =		gcc
-CFLAGS =	-Wall -Werror -Wextra
-OFLAGS =	$(LIB_DIR)/$(LIBFT_DIR)/$(LIBFT) $(MLX) 
-NAME =		miniRT
+CC =			gcc
 
-SRCS = 		main.c \
+FLAGS =			-Wall -Wextra -Werror
 
-OBJS =		$(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
-MLX_DIR = mlx
-LIBFT_DIR = libft
-MLX = libmlx.dylib
-LIBFT = libft.a
+RM =			rm -rf
 
-$(NAME):	$(OBJS)
-			$(MAKE) -C $(LIB_DIR)/$(MLX_DIR)
-			$(MAKE) -C $(LIB_DIR)/$(LIBFT_DIR)
-			cp $(LIB_DIR)/$(MLX_DIR)/$(MLX)  .
-			$(CC) $(OFLAGS) $(OBJS) -o $(NAME)
+DIR_HEADERS =	./incs/
 
-$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c $(INC_DIR)/* Makefile
-			mkdir -p $(OBJ_DIR)/
-			$(CC) $(CFLAGS) -c $< -o $@
+DIR_SRCS =		./srcs/
 
+DIR_OBJS =		./obj/
 
-all :	${NAME}
+LIBMLX =		libmlx.dylib \
+				libmlx.a
 
-clean :
-			rm -rf $(OBJS) $(LIB_DIR)/$(LIBFT_DIR)/*/*.o $(LIB_DIR)/$(MLX_DIR)/*.o
+SAVE =			-fsanitize=address
 
-fclean :clean
-			rm -rf $(NAME) $(LIB_DIR)/$(MLX_DIR)/$(MLX) $(LIB_DIR)/$(LIBFT_DIR)/$(LIBFT) $(LIB_DIR)/$(LIBFT_DIR)/libc/libc.a $(MLX)
+SRC =			main.c \
 
-re :	fclean all
+SRCS =			$(addprefix $(DIR_SRCS), $(SRC))
 
-clean2 : 
-	rm -rf $(NAME)
+COMPIL =		$(FLAGS) $(SAVE)
 
-c : clean2 all
-	./$(NAME) file.rt
+OBJS =			$(SRCS:.c=.o)
+
+NAME =			miniRT
+
+all:			$(NAME)
+
+$(NAME) :		$(OBJS)
+				@make -C ./minilibx_mms
+				@make -C ./minilibx_opengl
+				@cp ./minilibx_mms/libmlx.dylib libmlx.dylib
+				@cp ./minilibx_opengl/libmlx.a libmlx.a
+				$(CC) $(COMPIL) -I $(DIR_HEADERS) $(LIBMLX) $(OBJS) -o $(NAME)
+
+%.o: %.c
+				@gcc $(FLAGS) -I $(DIR_HEADERS) -c $< -o $@
+				@echo "Compiled "$<" successfully!"
+
+bonus:
+
+norme:
+				norminette $(DIR_SRCS)
+				norminette $(DIR_HEADERS)
+
+clean:
+				$(RM) $(OBJS)
+
+fclean:			clean
+				@make clean -C ./minilibx_mms
+				@make clean -C ./minilibx_opengl
+				$(RM) libmlx.dylib
+				$(RM) libmlx.a
+				$(RM) $(NAME)
+
+re:				fclean all
+
+.PHONY:			all, clean, fclean, re, bonus
