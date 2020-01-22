@@ -27,7 +27,6 @@ _Any other functions are forbidden and must be self-programmed._
 
 I used this [ressource](https://raytracing.github.io/books/RayTracingInOneWeekend.html) to get started.
 
-
 --------------
 
 # Development flow
@@ -37,9 +36,41 @@ I used this [ressource](https://raytracing.github.io/books/RayTracingInOneWeeken
 	* Makefiles
 	* Headers
 	* Libraries:
-		* [Minilibx](https://github.com/pbondoer/MinilibX)
+		* [Minilibx](https://github.com/pbondoer/MinilibX) + cmd: _man mlx_
 		* [Libft](https://github.com/backslash-zero/42/tree/master/Libft)
 		* [Get Next Line](https://github.com/backslash-zero/42/commit/2950a77a9cbf4cefd31b1b14fec3e820db11b5e5)
 	_This is allows us to get working and starting testing our code right away. It also save times reoganizing_
 - [ ] Setup basic parsing for our scene
 	- [ ] Window 
+
+--------------
+
+# MinilibX
+
+## Initialise MinilibX
+`man mlx`
+
+MiniLibX - Simple Graphical Interface Library for students
+```
+#include <mlx.h>
+# mlx_init returns a non-null pointer returned as a connection identifier
+mlx_init ();
+```
+
+## Manage windows
+`man mlx_new_window`
+
+#### mlx_new_window
+*mlx_new_window ( void *mlx_ptr, int size_x, int size_y, char *title );*
+Creates a new window
+
+## draw inside window
+`man mlx_pixel_put`
+
+
+## manipulate images
+`man mlx_new_image`
+
+
+## handle keyboard or mouse events
+`man mlx_loop`
