@@ -6,14 +6,39 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/22 19:01:57 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/01/22 21:01:03 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/miniRT.h"
+// #include "../incs/miniRT.h"
+#include <mlx.h>
+#include <unistd.h>
 
-int		main(int ac, char **av)
+int		main()
 {
 	// Initialize mlx
+	int size = 800;
+	int color = 65536;
+	void *win_ptr;
+	void *mlx_ptr;
+
+	mlx_ptr = mlx_init();
+	win_ptr = mlx_new_window(mlx_ptr, size, size, "MiniRT");
+
+	int x = 0;
+	int y = 0;
+	while(x < size)
+	{
+		while(y < size)
+		{
+			mlx_pixel_put(mlx_ptr, win_ptr, x, y, color);
+			y++;
+		}
+		y = 0;
+		x++;
+	}
+	mlx_loop(mlx_ptr);
+
+
 	return(0);
 }

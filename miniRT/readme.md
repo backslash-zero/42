@@ -61,12 +61,28 @@ mlx_init ();
 `man mlx_new_window`
 
 #### mlx_new_window
-*mlx_new_window ( void *mlx_ptr, int size_x, int size_y, char *title );*
+*void *mlx_new_window ( void *mlx_ptr, int size_x, int size_y, char *title );*
 Creates a new window
+
+#### mlx_clear_window
+*int mlx_clear_window ( void *mlx_ptr, void *win_ptr )*
+Clear a window
+
+#### mlx_destroy_window
+*int mlx_destroy_window ( void *mlx_ptr, void *win_ptr );*
+Destroys a window
 
 ## draw inside window
 `man mlx_pixel_put`
 
+#### mlx_pixel_put
+*int mlx_pixel_put ( void *mlx_ptr, void *win_ptr, int x, int y, int color );*
+Draws a defined pixel in the window win_ptr using the ( x , y );
+
+```
+               | 0 | R | G | B |   color integer
+               +---+---+---+---+
+```
 
 ## manipulate images
 `man mlx_new_image`
@@ -74,3 +90,11 @@ Creates a new window
 
 ## handle keyboard or mouse events
 `man mlx_loop`
+
+
+## Compilation 
+
+@42 the MinilibX is already installed and you can run you program with the command below:
+```
+gcc -Wall -Wextra -Werror -fsanitize=address -I ./incs/ /usr/local/lib/libmlx.a  -framework OpenGL -framework AppKit ./srcs/main.o -o miniRT
+```
