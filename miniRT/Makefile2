@@ -23,7 +23,7 @@ DIR_SRCS =		./srcs/
 DIR_OBJS =		./obj/
 
 LIBMLX =		libmlx.dylib \
-				libmlx.a
+				/usr/locallibmlx.a
 
 SAVE =			-fsanitize=address
 

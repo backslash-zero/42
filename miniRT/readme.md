@@ -79,11 +79,8 @@ Destroys a window
 *int mlx_pixel_put ( void *mlx_ptr, void *win_ptr, int x, int y, int color );*
 Draws a defined pixel in the window win_ptr using the ( x , y );
 
-The color should be written in this format `0xff5d6c`
-```
-               | 0 | R | G | B |   color integer
-               +---+---+---+---+
-```
+The color should be written in this format `0xff5d6c` but is given in an RGB format. 
+[This article](https://timseverien.github.io/binary-cheatsheet/) helps with conversion.
 
 ## manipulate images
 `man mlx_new_image`
