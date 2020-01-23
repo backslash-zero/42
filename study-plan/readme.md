@@ -13,6 +13,8 @@
 
 - [ ] [A Neural Algorithm of Artistic Style](https://arxiv.org/pdf/1508.06576.pdf)
 
+
+- [ ] [2D to 3D with Ken Burns](http://sniklaus.com/papers/kenburns)
 ### Deep-learning
 - [ ] [How-to-learn-Deep-Learning by Emil Wallner](https://github.com/emilwallner/How-to-learn-Deep-Learning)
 - [ ] The [Deep Learning](https://www.deeplearningbook.org/) bible
