@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/01/23 16:28:50 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/01/23 16:43:00 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,9 @@ DIR_SRCS =		./srcs/
 
 DIR_OBJS =		./obj/
 
-SRC =			main.c \
-				parsing/scene.c \
+SRC =			main.c							\
+				parsing/scene.c					\
+				utils/get_next_line.c			\
 				
 
 SRCS =			$(addprefix $(DIR_SRCS), $(SRC))
