@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/01/23 16:43:00 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/01/24 18:34:14 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,11 @@ DIR_OBJS =		./obj/
 
 SRC =			main.c							\
 				parsing/scene.c					\
+				utils/ft_bzero.c				\
+				utils/ft_strjoin_free.c			\
+				utils/ft_susbtr.c				\
+				utils/get_line_break.c			\
 				utils/get_next_line.c			\
-				
 
 SRCS =			$(addprefix $(DIR_SRCS), $(SRC))
 

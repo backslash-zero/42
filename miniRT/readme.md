@@ -25,7 +25,33 @@ _Any other functions are forbidden and must be self-programmed._
 
 # How to do raytracing
 
-I used this [ressource](https://raytracing.github.io/books/RayTracingInOneWeekend.html) to get started.
+I used [this ressource](https://raytracing.github.io/books/RayTracingInOneWeekend.html) & [this great book](https://www.gabrielgambetta.com/computer-graphics-from-scratch/introduction.html) to get started.
+
+### Camera Position
+Our camera will be set at the origin (0, 0, 0).
+```
+camera_pos_x = 0
+camera_pos_y = 0
+camera_pos_z = 0
+```
+### The Viewport
+Our viewport is the frame through which are rays are being casted, from the camera(at the origin) and the objects. The viewport is what we are rendering inside of our window. There fore
+```
+# x and y are being parsed with our scene.rt
+VIEWPORT_SIZE_X = x
+VIEWPORT_SIZE_Y
+```
+
+### Centering things on the canvas
+We need to center stuff because we want to use a more "human-friendly" matrix with point 0,0 is in the center of the canvas.
+```
+x = (WINDOW_SIZE_X / 2) + x;
+y = (WINDOW_SIZE_Y / 2) - y;
+```
+
+
+### Colors
+We are using [bitwise operators](https://www.tutorialspoint.com/cprogramming/c_bitwise_operators.htm) to translate ar RGB colors in an `int` format.
 
 --------------
 

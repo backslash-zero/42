@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   scene.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/24 20:47:46 by cmeunier         ###   ########.fr       */
+/*   Created: 2020/01/23 17:34:23 by cmeunier          #+#    #+#             */
+/*   Updated: 2020/01/24 18:19:53 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_RT_H
-# define MINI_RT_H
+#ifndef SCENE_H
+# define SCENE_H
 
-# include <math.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-
-// MinilibX
-# include <mlx.h>
-
-#define VIEWPORT_SIZE_X 800
-#define VIEWPORT_SIZE_Y 800	
-
-
-// Personal Headers
-# include "RT_parsing.h"
-# include "error.h"
-# include "get_next_line.h"
-# include "utils.h"
-# include "scene.h"
+typedef	struct	s_scene
+{
+	window
+}				t_scene;
 
 #endif
