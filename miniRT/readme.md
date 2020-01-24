@@ -30,17 +30,26 @@ I used [this ressource](https://raytracing.github.io/books/RayTracingInOneWeeken
 ### Camera Position
 Our camera will be set at the origin (0, 0, 0).
 ```
-camera_pos_x = 0
-camera_pos_y = 0
-camera_pos_z = 0
+camera_pos_x = 0;
+camera_pos_y = 0;
+camera_pos_z = 0;
 ```
+With a fixed orientation
+
+```
+camera_rot_x = 0;
+camera_rot_y = 0;
+camera_rot_z = 0;
+```
+
 ### The Viewport
-Our viewport is the frame through which are rays are being casted, from the camera(at the origin) and the objects. The viewport is what we are rendering inside of our window. There fore
+Our viewport is the frame through which are rays are being casted, from the camera(at the origin) and the objects. The viewport is what we are rendering inside of our window. Therefore:
 ```
-# x and y are being parsed with our scene.rt
-VIEWPORT_SIZE_X = x
-VIEWPORT_SIZE_Y
+#w and y are being parsed with our scene.rt
+VIEWPORT_SIZE_WIDTH = w;
+VIEWPORT_SIZE_HEIGHT = h;
 ```
+
 
 ### Centering things on the canvas
 We need to center stuff because we want to use a more "human-friendly" matrix with point 0,0 is in the center of the canvas.
