@@ -50,14 +50,12 @@ VIEWPORT_SIZE_WIDTH = w;
 VIEWPORT_SIZE_HEIGHT = h;
 ```
 
-
 ### Centering things on the canvas
 We need to center stuff because we want to use a more "human-friendly" matrix with point 0,0 is in the center of the canvas.
 ```
 x = (WINDOW_SIZE_X / 2) + x;
 y = (WINDOW_SIZE_Y / 2) - y;
 ```
-
 
 ### Colors
 We are using [bitwise operators](https://www.tutorialspoint.com/cprogramming/c_bitwise_operators.htm) to translate ar RGB colors in an `int` format.
