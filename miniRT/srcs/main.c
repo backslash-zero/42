@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/25 18:37:20 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/01/25 21:27:03 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,44 +60,84 @@ double get_vp_y(int y)
 	return(vp_y);
 }
 
-double get_vp_z(int z)
+int intersect_ray_sphere(t_camera *camera, t_viewport_point *viewport_point, t_sphere *sphere)
 {
-	double vp_z;
+	;
+}
 
-	vp_z = VIEWPORT_HEIGHT;
-	return(vp_z);
+int		trace_ray(t_camera *camera, t_viewport_point *viewport_point, int min_z, int max_z){
+	int			color;
+	double		closest_t;
+	t_sphere	*closest_sphere;
+	t_sphere 	sphere_0;
+	t_ray		ray;
+
+	sphere_0.pos_x = 75;
+	sphere_0.pos_y = 60;
+	sphere_0.pos_z = 50;
+	sphere_0.r = 8;
+	sphere_0.color = get_color_integer(217, 3, 104);;
+	closest_t = max_z;
+	closest_sphere = NULL;
+	ray.t1 = intersect_ray_sphere(&camera, &viewport_point, &sphere_0);
+	ray.t2 = intersect_ray_sphere(&camera, &viewport_point, &sphere_0);
+	if(ray.t1 > min_z && ray.t1 < max_z && ray.t1 < closest_t)
+	{
+		closest_t = ray.t1;
+		closest_sphere = &sphere_0;
+	}
+	if(ray.t2 > min_z && ray.t2 < max_z && ray.t2 < closest_t)
+	{
+		closest_t = ray.t2;
+		closest_sphere = &sphere_0;
+	}
+	// put white if no sphere interesection was found.
+	if(closest_sphere = NULL)
+		color = BACKGROUND_COLOR;
+	color = closest_sphere->color;
+	return(color);
 }
 
 int		main(int ac, char **av)
 {
 	(void)av;
+	t_camera 			camera;
+	t_viewport_point	viewport_point;
+	int 				color;
+	camera.pos_x = 0;
+	camera.pos_y = 0;
+	camera.pos_z = 0;
 	if(ac == 2)
 	{
 		//parsing_scene(av[1]);
-		int color = get_color_integer(217, 3, 104);
 		void *win_ptr;
 		void *mlx_ptr;
 
 		mlx_ptr = mlx_init();
 		win_ptr = mlx_new_window(mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "MiniRT");
 
-		int x = 0;
-		int y = 0;
-		while(x < VIEWPORT_WIDTH)
+		int x = - WINDOW_WIDTH / 2;
+		int y = - WINDOW_HEIGHT / 2;
+		while(x < WINDOW_WIDTH / 2)
 		{
-			while(y < VIEWPORT_HEIGHT)
+			while(y < WINDOW_HEIGHT / 2)
 			{
-				mlx_pixel_put(mlx_ptr, win_ptr, x, y, color);
+				// translate canvas x and y to viewport
+				viewport_point.pos_x = get_vp_x(x);
+				viewport_point.pos_y = get_vp_y(y);
+				viewport_point.pos_z = VIEWPORT_D;
+				color = trace_ray(&camera, &viewport_point, VIEWPORT_D, SCENE_MAX);
+				mlx_pixel_put(mlx_ptr, win_ptr, center_x(x), center_y(y), color);
 				y++;
 			}
-			y = 0;
+			y = - WINDOW_HEIGHT / 2;
 			x++;
 		}
 		mlx_loop(mlx_ptr);
 	}
 	else
 	{
-		// error number of arguments
+		// error number of arguments parsed
 	}
 	return(0);
 }

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/25 18:19:43 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/01/25 21:23:49 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,37 @@
 // MinilibX
 # include <mlx.h>
 
-#define	CAMERA_X		0
-#define	CAMERA_Y		0
-#define	CAMERA_Z		0
+#define	SCENE_MAX	2147483647
+#define BACKGROUND_COLOR	16777216
+
+typedef	struct	s_camera
+{
+	int pos_x;
+	int pos_y;
+	int pos_z;
+}				t_camera;
+
+typedef	struct	s_viewport_point
+{
+	int pos_x;
+	int pos_y;
+	int pos_z;
+}				t_viewport_point;
+
+typedef	struct	s_ray
+{
+	double t1;
+	double t2;
+}				t_ray;
+
+typedef	struct	s_sphere
+{
+	int pos_x;
+	int pos_y;
+	int pos_z;
+	int r;
+	int color;
+}				t_sphere;
 
 #define VIEWPORT_WIDTH	1
 #define VIEWPORT_HEIGHT 1
