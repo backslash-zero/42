@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/25 21:27:03 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/01/25 21:33:37 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,20 @@ double get_vp_y(int y)
 	return(vp_y);
 }
 
-int intersect_ray_sphere(t_camera *camera, t_viewport_point *viewport_point, t_sphere *sphere)
+int intersect_ray_sphere(t_ray *ray, t_camera *camera, t_viewport_point *viewport_point, t_sphere *sphere)
 {
-	;
+	oc = O - C
+	k1 = dot(D, D)
+    k2 = 2*dot(OC, D)
+    k3 = dot(OC, OC) - sphere->r * sphere->r;
+
+    discriminant = k2*k2 - 4*k1*k3
+    if discriminant < 0:
+        return inf, inf
+
+    t1 = (-k2 + sqrt(discriminant)) / (2*k1)
+    t2 = (-k2 - sqrt(discriminant)) / (2*k1)
+    return t1, t2
 }
 
 int		trace_ray(t_camera *camera, t_viewport_point *viewport_point, int min_z, int max_z){
@@ -72,15 +83,15 @@ int		trace_ray(t_camera *camera, t_viewport_point *viewport_point, int min_z, in
 	t_sphere 	sphere_0;
 	t_ray		ray;
 
-	sphere_0.pos_x = 75;
-	sphere_0.pos_y = 60;
-	sphere_0.pos_z = 50;
-	sphere_0.r = 8;
+	// this should be included in a loop to enable every sphere
+	sphere_0.pos_x = 0;
+	sphere_0.pos_y = -1;
+	sphere_0.pos_z = 3;
+	sphere_0.r = 1;
 	sphere_0.color = get_color_integer(217, 3, 104);;
 	closest_t = max_z;
 	closest_sphere = NULL;
-	ray.t1 = intersect_ray_sphere(&camera, &viewport_point, &sphere_0);
-	ray.t2 = intersect_ray_sphere(&camera, &viewport_point, &sphere_0);
+	intersect_ray_sphere(&ray, &camera, &viewport_point, &sphere_0);
 	if(ray.t1 > min_z && ray.t1 < max_z && ray.t1 < closest_t)
 	{
 		closest_t = ray.t1;
