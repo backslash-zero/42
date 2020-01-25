@@ -52,7 +52,7 @@ Our viewport is aligned to the x and y axis, but at a certain distance `d` from 
 ```
 VIEWPORT_WIDTH = VIEWPORT_HEIGHT = d
 ```
-[image](https://www.gabrielgambetta.com/computer-graphics-from-scratch/images/03-basic-raytracer.png)
+![image](https://www.gabrielgambetta.com/computer-graphics-from-scratch/images/03-basic-raytracer.png)
 
 ### Centering things on the canvas
 We need to center stuff because we want to use a more "human-friendly" matrix with point 0,0 is in the center of the canvas.
