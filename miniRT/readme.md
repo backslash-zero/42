@@ -34,8 +34,7 @@ camera_pos_x = 0;
 camera_pos_y = 0;
 camera_pos_z = 0;
 ```
-With a fixed orientation
-
+With a fixed orientation:
 ```
 camera_rot_x = 0;
 camera_rot_y = 0;
@@ -45,16 +44,21 @@ camera_rot_z = 0;
 ### The Viewport
 Our viewport is the frame through which are rays are being casted, from the camera(at the origin) and the objects. The viewport is what we are rendering inside of our window. Therefore:
 ```
-#w and y are being parsed with our scene.rt
-VIEWPORT_SIZE_WIDTH = w;
-VIEWPORT_SIZE_HEIGHT = h;
+# Rx and Ry are being parsed with our scene.rt
+VIEWPORT_WIDTH = Rx;
+VIEWPORT_HEIGHT = Ry;
 ```
+Our viewport is aligned to the x and y axis, but at a certain distance `d` from the camera. The size of the viewport and this distance create and angle called `FOV`(Field of View) which should generally be set around 60°.
+```
+VIEWPORT_WIDTH = VIEWPORT_HEIGHT = d
+```
+[image](https://www.gabrielgambetta.com/computer-graphics-from-scratch/images/03-basic-raytracer.png)
 
 ### Centering things on the canvas
 We need to center stuff because we want to use a more "human-friendly" matrix with point 0,0 is in the center of the canvas.
 ```
-x = (WINDOW_SIZE_X / 2) + x;
-y = (WINDOW_SIZE_Y / 2) - y;
+x = (WINDOW_WIDTH / 2) + x;
+y = (WINDOW_HEIGHT / 2) - y;
 ```
 
 ### Colors

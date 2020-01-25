@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/24 20:47:46 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/01/25 18:19:43 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,17 @@
 // MinilibX
 # include <mlx.h>
 
-#define VIEWPORT_SIZE_X 800
-#define VIEWPORT_SIZE_Y 800	
+#define	CAMERA_X		0
+#define	CAMERA_Y		0
+#define	CAMERA_Z		0
+
+#define VIEWPORT_WIDTH	1
+#define VIEWPORT_HEIGHT 1
+
+#define VIEWPORT_D		1
+
+#define WINDOW_WIDTH	800
+#define WINDOW_HEIGHT 	800
 
 
 // Personal Headers

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/24 21:57:13 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/01/25 18:37:20 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int		center_x(int x)
 {
-	x = x + (VIEWPORT_SIZE_X / 2);
+	x = (WINDOW_WIDTH / 2) + x;
 	return(x);
 }
 
 int		center_y(int y)
 {
-	y = y + (VIEWPORT_SIZE_Y / 2);
+	y = (WINDOW_HEIGHT / 2) - y;
 	return(y);
 }
 
@@ -44,6 +44,30 @@ int get_color_integer(int r, int g, int b)
 	return (rt);
 }
 
+double get_vp_x(int x)
+{
+	double vp_x;
+
+	vp_x = x * VIEWPORT_WIDTH / WINDOW_WIDTH;
+	return(vp_x);
+}
+
+double get_vp_y(int y)
+{
+	double vp_y;
+
+	vp_y = y * VIEWPORT_HEIGHT / WINDOW_HEIGHT;
+	return(vp_y);
+}
+
+double get_vp_z(int z)
+{
+	double vp_z;
+
+	vp_z = VIEWPORT_HEIGHT;
+	return(vp_z);
+}
+
 int		main(int ac, char **av)
 {
 	(void)av;
@@ -55,13 +79,13 @@ int		main(int ac, char **av)
 		void *mlx_ptr;
 
 		mlx_ptr = mlx_init();
-		win_ptr = mlx_new_window(mlx_ptr, VIEWPORT_SIZE_X, VIEWPORT_SIZE_Y, "MiniRT");
+		win_ptr = mlx_new_window(mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "MiniRT");
 
 		int x = 0;
 		int y = 0;
-		while(x < VIEWPORT_SIZE_X)
+		while(x < VIEWPORT_WIDTH)
 		{
-			while(y < VIEWPORT_SIZE_Y)
+			while(y < VIEWPORT_HEIGHT)
 			{
 				mlx_pixel_put(mlx_ptr, win_ptr, x, y, color);
 				y++;
