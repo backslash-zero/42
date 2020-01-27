@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/25 21:33:37 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/01/27 20:01:04 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,23 +60,29 @@ double get_vp_y(int y)
 	return(vp_y);
 }
 
-int intersect_ray_sphere(t_ray *ray, t_camera *camera, t_viewport_point *viewport_point, t_sphere *sphere)
+void intersect_ray_sphere(t_ray *ray, t_camera *camera, t_point *viewport_point, t_sphere *sphere)
 {
-	oc = O - C
-	k1 = dot(D, D)
-    k2 = 2*dot(OC, D)
-    k3 = dot(OC, OC) - sphere->r * sphere->r;
+	t_point oc;
+	
+	oc = sub_vec(camera, sphere);
+	double k1 = prod_scal(viewport_point, viewport_point);
+    double k2 = 2 * prod_scal(oc, viewport_point);
+    double k3 = sub_vec_d(prod_scal(oc, oc), (sphere->r * sphere->r));
 
-    discriminant = k2*k2 - 4*k1*k3
-    if discriminant < 0:
-        return inf, inf
-
-    t1 = (-k2 + sqrt(discriminant)) / (2*k1)
-    t2 = (-k2 - sqrt(discriminant)) / (2*k1)
-    return t1, t2
+    double discriminant = k2*k2 - 4*k1*k3;
+    if(discriminant < 0)
+	{
+		ray->t1 = INFINITY;
+		ray->t2 = INFINITY;
+	}
+	else
+	{
+    	ray->t1 = (-k2 + sqrt(discriminant)) / (2 * k1);
+    	ray->t2 = (-k2 - sqrt(discriminant)) / (2 * k1);
+	}
 }
 
-int		trace_ray(t_camera *camera, t_viewport_point *viewport_point, int min_z, int max_z){
+int		trace_ray(t_camera *camera, t_point *viewport_point, int min_z, int max_z){
 	int			color;
 	double		closest_t;
 	t_sphere	*closest_sphere;
@@ -113,7 +119,7 @@ int		main(int ac, char **av)
 {
 	(void)av;
 	t_camera 			camera;
-	t_viewport_point	viewport_point;
+	t_point				viewport_point;
 	int 				color;
 	camera.pos_x = 0;
 	camera.pos_y = 0;
@@ -137,7 +143,7 @@ int		main(int ac, char **av)
 				viewport_point.pos_x = get_vp_x(x);
 				viewport_point.pos_y = get_vp_y(y);
 				viewport_point.pos_z = VIEWPORT_D;
-				color = trace_ray(&camera, &viewport_point, VIEWPORT_D, SCENE_MAX);
+				color = trace_ray(&camera, &viewport_point, VIEWPORT_D, INFINITY);
 				mlx_pixel_put(mlx_ptr, win_ptr, center_x(x), center_y(y), color);
 				y++;
 			}

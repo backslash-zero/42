@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/25 21:23:49 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/01/27 20:00:23 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,24 @@
 // MinilibX
 # include <mlx.h>
 
-#define	SCENE_MAX	2147483647
+// Self-made headers
+# include "vectors.h"
+
 #define BACKGROUND_COLOR	16777216
 
 typedef	struct	s_camera
 {
-	int pos_x;
-	int pos_y;
-	int pos_z;
+	double pos_x;
+	double pos_y;
+	double pos_z;
 }				t_camera;
 
-typedef	struct	s_viewport_point
+typedef	struct	s_point
 {
-	int pos_x;
-	int pos_y;
-	int pos_z;
-}				t_viewport_point;
+	double pos_x;
+	double pos_y;
+	double pos_z;
+}				t_point;
 
 typedef	struct	s_ray
 {
@@ -46,10 +48,10 @@ typedef	struct	s_ray
 
 typedef	struct	s_sphere
 {
-	int pos_x;
-	int pos_y;
-	int pos_z;
-	int r;
+	double pos_x;
+	double pos_y;
+	double pos_z;
+	double r;
 	int color;
 }				t_sphere;
 

@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/01/24 18:34:14 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/01/27 19:10:19 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,9 @@ SRC =			main.c							\
 				utils/ft_susbtr.c				\
 				utils/get_line_break.c			\
 				utils/get_next_line.c			\
+				maths/vector_op_1.c				\
+				maths/vector_op_2.c				\
+				maths/vector_op_3.c				\
 
 SRCS =			$(addprefix $(DIR_SRCS), $(SRC))
 
