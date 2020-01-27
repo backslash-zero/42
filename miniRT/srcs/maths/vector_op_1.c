@@ -14,32 +14,32 @@
 
 t_point	add_vec(t_point vec1, t_point vec2)
 {
-	vec1.pos_x += vec2.pos_x;
-	vec1.pos_y += vec2.pos_y;
-	vec1.pos_z += vec2.pos_z;
+	vec1.x += vec2.x;
+	vec1.y += vec2.y;
+	vec1.z += vec2.z;
 	return (vec1);
 }
 
 t_point	sub_vec(t_point vec1, t_point vec2)
 {
-	vec1.pos_x -= vec2.pos_x;
-	vec1.pos_y -= vec2.pos_y;
-	vec1.pos_z -= vec2.pos_z;
+	vec1.x -= vec2.x;
+	vec1.y -= vec2.y;
+	vec1.z -= vec2.z;
 	return (vec1);
 }
 
 t_point	mult_point(t_point vec1, t_point vec2)
 {
-	vec1.pos_x *= vec2.pos_x;
-	vec1.pos_y *= vec2.pos_y;
-	vec1.pos_z *= vec2.pos_z;
+	vec1.x *= vec2.x;
+	vec1.y *= vec2.y;
+	vec1.z *= vec2.z;
 	return (vec1);
 }
 
 t_point	div_vec(t_point vec1, t_point vec2)
 {
-	vec1.pos_x /= vec2.pos_x;
-	vec1.pos_y /= vec2.pos_y;
-	vec1.pos_z /= vec2.pos_z;
+	vec1.x /= vec2.x;
+	vec1.y /= vec2.y;
+	vec1.z /= vec2.z;
 	return (vec1);
 }
