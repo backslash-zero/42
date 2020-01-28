@@ -31,3 +31,8 @@
 
 - [ ] Résumé [in this style](https://github.com/emilwallner/Emil-Wallner-LinkedIn-Resume)
 - [ ] [Cracking the code interview](http://www.crackingthecodinginterview.com/)
+
+# Code
+
+## Architecture
+- [ ] [SOLID design principles](https://www.youtube.com/watch?v=rtmFCcjEgEw)
