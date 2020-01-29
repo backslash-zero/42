@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/29 17:15:46 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/01/29 17:43:36 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ typedef	struct	s_scene
 # include "RT_parsing.h"
 # include "error.h"
 # include "get_next_line.h"
-# include "utils.h"
+# include "RT_utils.h"
 
 #endif

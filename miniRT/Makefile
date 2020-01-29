@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/01/28 18:47:55 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/01/29 17:51:22 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC =			main.c							\
 				utils/ft_susbtr.c				\
 				utils/get_line_break.c			\
 				utils/get_next_line.c			\
+				utils/ft_rad.c						\
 				maths/vector_op_1.c				\
 				maths/vector_op_2.c				\
 				maths/vector_op_3.c				\

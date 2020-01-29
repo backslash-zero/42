@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/29 17:09:36 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/01/29 18:02:09 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,11 +123,22 @@ int		main(int ac, char **av)
 	t_point				viewport_point;
 	t_scene				scene;
 	int 				color;
+	int					stop = 1;
 	camera.pos.x = 0;
 	camera.pos.y = 0;
 	camera.pos.z = 0;
 	camera.fov = 60;
 	scene_parsing(&scene, &camera);
+	if(stop)
+	{
+		stop = 0;
+		printf("\nscene.window_width: 				%f\n", scene.window_width);
+		printf("\nscene.window_height: 				%f\n", scene.window_height);
+		printf("\nscene.viewport_d: 			%f\n", scene.viewport_d);
+		printf("\nscene.viewport_height: 			%f\n", scene.viewport_height);
+		printf("\nscene.viewport_width: 			%f\n", scene.viewport_width);
+		printf("\ncamera.fov: 				%f\n", camera.fov);
+	}
 	if(ac == 2)
 	{
 		//parsing_scene(av[1]);
@@ -141,7 +152,7 @@ int		main(int ac, char **av)
 		int y = - scene.window_height / 2;
 		while(x < scene.window_width / 2)
 		{
-			while(y < scene.window_height / 2)
+			while(y <= scene.window_height / 2)
 			{
 				// translate canvas x and y to viewport
 				viewport_point.x = get_vp_x(x, &scene);
