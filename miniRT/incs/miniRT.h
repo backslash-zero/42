@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/27 21:20:24 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/01/29 15:25:31 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef	struct	s_camera
 {
 	t_point pos;
 	t_point rot;
+	double	fov;
 }				t_camera;
 
 typedef	struct	s_ray
@@ -44,17 +45,27 @@ typedef	struct	s_ray
 
 typedef	struct	s_sphere
 {
-	t_point pos;
-	double r;
-	int color;
+	t_point	pos;
+	double	r;
+	int 	color;
 }				t_sphere;
+
+typedef	struct	s_scene
+{
+	double	window_width;
+	double	window_height;
+	double	viewport_width;
+	double	viewport_height;
+	double	viewport_d;
+}				t_scene;
+
 
 #define VIEWPORT_WIDTH	1
 #define VIEWPORT_HEIGHT 1
 
 #define VIEWPORT_D		1
 
-#define WINDOW_WIDTH	800
+#define WINDOW_WIDTH	1200
 #define WINDOW_HEIGHT 	800
 
 

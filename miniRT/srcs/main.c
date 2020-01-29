@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/28 19:01:03 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/01/29 15:25:53 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ int		trace_ray(t_camera *camera, t_point *viewport_point, double min_z, double m
 	t_ray		ray;
 
 	// this should be included in a loop to enable every sphere
-	sphere_0.pos.x = 0;
-	sphere_0.pos.y = 0;
+	sphere_0.pos.x = 1;
+	sphere_0.pos.y = 1;
 	sphere_0.pos.z = 10;
 	sphere_0.r = 2;
 	sphere_0.color = get_color_integer(0, 3, 104);
@@ -125,6 +125,7 @@ int		main(int ac, char **av)
 	camera.pos.x = 0;
 	camera.pos.y = 0;
 	camera.pos.z = 0;
+	camera.fov = 60;
 	if(ac == 2)
 	{
 		//parsing_scene(av[1]);
@@ -148,9 +149,6 @@ int		main(int ac, char **av)
 				//color = get_color_integer(255, 255, 255);
 				mlx_pixel_put(mlx_ptr, win_ptr, center_x(x), center_y(y), color);
 				y++;
-				printf("viewport.x: %f\n", viewport_point.x);
-				printf("viewport.y: %f\n", viewport_point.y);
-				printf("viewport.z: %f\n", viewport_point.z);
 			}
 			y = - WINDOW_HEIGHT / 2;
 			x++;
