@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/29 17:43:36 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/01/29 18:18:46 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef	struct	s_scene
 #define WINDOW_WIDTH	800
 #define WINDOW_HEIGHT 	600
 #define VIEWPORT_D		1
+#define FOV				60
 
 // Self-made headers
 # include "RT_scene.h"

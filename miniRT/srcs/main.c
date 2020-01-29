@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/29 18:02:09 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/01/29 18:19:31 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,7 @@ int		main(int ac, char **av)
 	t_scene				scene;
 	int 				color;
 	int					stop = 1;
-	camera.pos.x = 0;
-	camera.pos.y = 0;
-	camera.pos.z = 0;
-	camera.fov = 60;
+
 	scene_parsing(&scene, &camera);
 	if(stop)
 	{
@@ -138,6 +135,9 @@ int		main(int ac, char **av)
 		printf("\nscene.viewport_height: 			%f\n", scene.viewport_height);
 		printf("\nscene.viewport_width: 			%f\n", scene.viewport_width);
 		printf("\ncamera.fov: 				%f\n", camera.fov);
+		printf("\ncamera.fov: 				%f\n", camera.pos.x);
+		printf("\ncamera.fov: 				%f\n", camera.pos.y);
+		printf("\ncamera.fov: 				%f\n", camera.pos.z);
 	}
 	if(ac == 2)
 	{
