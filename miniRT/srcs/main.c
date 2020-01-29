@@ -6,21 +6,21 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/29 15:25:53 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/01/29 17:09:36 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int		center_x(int x)
+int		center_x(int x, t_scene *scene)
 {
-	x = (WINDOW_WIDTH / 2) + x;
+	x = (scene->window_width / 2) + x;
 	return(x);
 }
 
-int		center_y(int y)
+int		center_y(int y, t_scene *scene)
 {
-	y = (WINDOW_HEIGHT / 2) - y;
+	y = (scene->window_height / 2) - y;
 	return(y);
 }
 
@@ -44,19 +44,19 @@ int get_color_integer(int r, int g, int b)
 	return (rt);
 }
 
-double get_vp_x(int x)
+double get_vp_x(int x, t_scene *scene)
 {
 	double vp_x;
 
-	vp_x = (double)x * VIEWPORT_WIDTH / WINDOW_WIDTH;
+	vp_x = (double)x * scene->viewport_width / scene->window_width;
 	return(vp_x);
 }
 
-double get_vp_y(int y)
+double get_vp_y(int y, t_scene *scene)
 {
 	double vp_y;
 
-	vp_y = (double)y * VIEWPORT_HEIGHT / WINDOW_HEIGHT;
+	vp_y = (double)y * scene->viewport_height / scene->window_height;
 	return(vp_y);
 }
 
@@ -121,11 +121,13 @@ int		main(int ac, char **av)
 	(void)av;
 	t_camera 			camera;
 	t_point				viewport_point;
+	t_scene				scene;
 	int 				color;
 	camera.pos.x = 0;
 	camera.pos.y = 0;
 	camera.pos.z = 0;
 	camera.fov = 60;
+	scene_parsing(&scene, &camera);
 	if(ac == 2)
 	{
 		//parsing_scene(av[1]);
@@ -133,24 +135,24 @@ int		main(int ac, char **av)
 		void *mlx_ptr;
 
 		mlx_ptr = mlx_init();
-		win_ptr = mlx_new_window(mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "MiniRT");
+		win_ptr = mlx_new_window(mlx_ptr, scene.window_width, scene.window_height, "MiniRT");
 
-		int x = - WINDOW_WIDTH / 2;
-		int y = - WINDOW_HEIGHT / 2;
-		while(x < WINDOW_WIDTH / 2)
+		int x = - scene.window_width / 2;
+		int y = - scene.window_height / 2;
+		while(x < scene.window_width / 2)
 		{
-			while(y < WINDOW_HEIGHT / 2)
+			while(y < scene.window_height / 2)
 			{
 				// translate canvas x and y to viewport
-				viewport_point.x = get_vp_x(x);
-				viewport_point.y = get_vp_y(y);
-				viewport_point.z = VIEWPORT_D;
+				viewport_point.x = get_vp_x(x, &scene);
+				viewport_point.y = get_vp_y(y, &scene);
+				viewport_point.z = scene.viewport_d;
 				color = trace_ray(&camera, &viewport_point, VIEWPORT_D, __DBL_MAX__);
 				//color = get_color_integer(255, 255, 255);
-				mlx_pixel_put(mlx_ptr, win_ptr, center_x(x), center_y(y), color);
+				mlx_pixel_put(mlx_ptr, win_ptr, center_x(x, &scene), center_y(y, &scene), color);
 				y++;
 			}
-			y = - WINDOW_HEIGHT / 2;
+			y = - scene.window_height / 2;
 			x++;
 		}
 		mlx_loop(mlx_ptr);

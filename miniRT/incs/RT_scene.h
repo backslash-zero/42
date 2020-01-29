@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.h                                            :+:      :+:    :+:   */
+/*   RT_scene.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:34:23 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/24 18:19:53 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/01/29 17:14:20 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCENE_H
-# define SCENE_H
+#ifndef RT_SCENE_H
+# define RT_SCENE_H
 
-typedef	struct	s_scene
-{
-	window
-}				t_scene;
+void	scene_parsing(t_scene *scene, t_camera *camera);
+void	window_parsing(t_scene *scene);
+void	viewport_parsing(t_scene *scene, t_camera *camera);
 
 #endif

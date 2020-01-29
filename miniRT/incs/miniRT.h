@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/29 15:25:31 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/01/29 17:15:46 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@
 
 // MinilibX
 # include <mlx.h>
-
-#define BACKGROUND_COLOR	16777216
 
 typedef	struct	s_point
 {
@@ -59,22 +57,17 @@ typedef	struct	s_scene
 	double	viewport_d;
 }				t_scene;
 
-
-#define VIEWPORT_WIDTH	1
-#define VIEWPORT_HEIGHT 1
-
+#define BACKGROUND_COLOR	16777216
+#define WINDOW_WIDTH	800
+#define WINDOW_HEIGHT 	600
 #define VIEWPORT_D		1
 
-#define WINDOW_WIDTH	1200
-#define WINDOW_HEIGHT 	800
-
-
 // Self-made headers
+# include "RT_scene.h"
 # include "vectors.h"
 # include "RT_parsing.h"
 # include "error.h"
 # include "get_next_line.h"
 # include "utils.h"
-# include "scene.h"
 
 #endif
