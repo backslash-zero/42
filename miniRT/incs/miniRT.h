@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/29 18:18:46 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/03 17:54:24 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,13 @@ typedef	struct	s_sphere
 	double	r;
 	int 	color;
 }				t_sphere;
+
+typedef	struct	s_objects
+{
+	int					id;
+	void				*obj;
+	struct s_objects	*next;
+}				t_objects;
 
 typedef	struct	s_scene
 {
