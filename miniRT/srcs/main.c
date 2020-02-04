@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/04 15:17:31 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/04 17:26:41 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,19 +96,26 @@ int		trace_ray(t_camera *camera, t_point *viewport_point, double min_z, double m
 	return(color);
 }
 
+void	ft_init_mlx(t_mlx *mlx, t_scene *scene)
+{
+	mlx->mlx_ptr = mlx_init();
+	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, scene->window_width, scene->window_height, "MiniRT");
+}
+
 int		main(int ac, char **av)
 {
 	(void)av;
 	t_camera 			camera;
 	t_point				viewport_point;
 	t_scene				scene;
+	t_mlx				mlx;
 	int 				color;
 	int					stop = 1;
 
 	if(ac == 2)
 	{
 		scene_parsing(&scene, &camera);
-
+		ft_init_mlx(&mlx, &scene);
 	// PARSING TESTS;
 
 		if(stop)
@@ -125,13 +132,6 @@ int		main(int ac, char **av)
 			printf("\ncamera.fov: 				%f\n", camera.pos.z);
 		}
 
-		//parsing_scene(av[1]);
-		void *win_ptr;
-		void *mlx_ptr;
-
-		mlx_ptr = mlx_init();
-		win_ptr = mlx_new_window(mlx_ptr, scene.window_width, scene.window_height, "MiniRT");
-
 		int x = - scene.window_width / 2;
 		int y = - scene.window_height / 2;
 		while(x < scene.window_width / 2)
@@ -144,13 +144,15 @@ int		main(int ac, char **av)
 				viewport_point.z = scene.viewport_d;
 				color = trace_ray(&camera, &viewport_point, VIEWPORT_D, __DBL_MAX__);
 				//color = get_color_integer(255, 255, 255);
-				mlx_pixel_put(mlx_ptr, win_ptr, center_x(x, &scene), center_y(y, &scene), color);
+				mlx_pixel_put(mlx.mlx_ptr, mlx.win_ptr, center_x(x, &scene), center_y(y, &scene), color);
 				y++;
 			}
 			y = - scene.window_height / 2;
 			x++;
 		}
-		mlx_loop(mlx_ptr);
+		// mlx_hook && mlx_hook_loop?
+		mlx_loop(mlx.mlx_ptr);
+		// we need to FREE objects and 
 	}
 	else
 	{

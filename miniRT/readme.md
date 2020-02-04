@@ -122,10 +122,15 @@ The color should be written in this format `0xff5d6c` but is given in an RGB for
 ## manipulate images
 `man mlx_new_image`
 
+#### mlx_new_image 
+*void *mlx_new_image ( void *mlx_ptr, int width, int height );*
+creates a new image in memory.
+
+#### mlx_put_image_to_window()
+*int mlx_put_image_to_window ( void *mlx_ptr, void *win_ptr, void *img_ptr,  int  x, int y );*
 
 ## handle keyboard or mouse events
 `man mlx_loop`
-
 
 ## Compilation 
 

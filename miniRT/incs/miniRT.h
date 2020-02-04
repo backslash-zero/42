@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/04 15:16:36 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/04 16:44:50 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef	struct	s_scene
 #define FOV				60
 
 // Self-made headers
+# include "RT_mlx.h"
 # include "RT_scene.h"
 # include "vectors.h"
 # include "RT_parsing.h"
