@@ -6,11 +6,11 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:48:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/23 16:48:46 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/04 12:29:47 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../../incs/miniRT.h"
 
 int		get_line_break(const char *str)
 {

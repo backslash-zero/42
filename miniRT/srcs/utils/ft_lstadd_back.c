@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RT_parsing.h                                       :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/23 16:17:44 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/04 14:11:03 by cmeunier         ###   ########.fr       */
+/*   Created: 2019/10/18 17:47:48 by cmeunier          #+#    #+#             */
+/*   Updated: 2020/02/04 12:29:10 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RT_PARSING_H
-# define RT_PARSING_H
+#include "../../incs/miniRT.h"
 
-void	object_parsing(t_objects **objects);
-void	add_back_obj(t_objects **start, void *obj, int id);
+void	ft_lstadd_back(t_list **alst, t_list *new)
+{
+	t_list *ptr;
 
-#endif
+	if (!alst || !new)
+		return ;
+	if (!*alst)
+	{
+		*alst = new;
+		return ;
+	}
+	ptr = *alst;
+	while (ptr->next)
+		ptr = ptr->next;
+	ptr->next = new;
+}

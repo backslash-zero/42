@@ -6,11 +6,11 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:45:22 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/23 16:45:33 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/04 12:29:48 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../../incs/miniRT.h"
 
 char	*ft_substr(char const *s, unsigned int start, int len)
 {

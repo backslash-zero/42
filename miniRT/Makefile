@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/01/29 17:51:22 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/02/04 12:52:35 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,12 +30,14 @@ DIR_OBJS =		./obj/
 
 SRC =			main.c							\
 				parsing/scene.c					\
+				parsing/objects.c				\
 				utils/ft_bzero.c				\
 				utils/ft_strjoin_free.c			\
 				utils/ft_susbtr.c				\
 				utils/get_line_break.c			\
 				utils/get_next_line.c			\
-				utils/ft_rad.c						\
+				utils/ft_rad.c					\
+				utils/colors.c					\
 				maths/vector_op_1.c				\
 				maths/vector_op_2.c				\
 				maths/vector_op_3.c				\

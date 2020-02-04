@@ -6,11 +6,11 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/29 18:19:31 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/04 14:54:50 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../incs/miniRT.h"
 
 int		center_x(int x, t_scene *scene)
 {
@@ -22,26 +22,6 @@ int		center_y(int y, t_scene *scene)
 {
 	y = (scene->window_height / 2) - y;
 	return(y);
-}
-
-int		min_max_color(int value)
-{
-	if(value < 0)
-		return(0);
-	if(value > 255)
-		return(255);
-	return(value);
-}
-
-int get_color_integer(int r, int g, int b)
-{
-	int rt;
-
-	rt = 0;
-	rt |= min_max_color(r) << 16;
-	rt |= min_max_color(g) << 8;
-	rt |= min_max_color(b);
-	return (rt);
 }
 
 double get_vp_x(int x, t_scene *scene)
@@ -122,25 +102,32 @@ int		main(int ac, char **av)
 	t_camera 			camera;
 	t_point				viewport_point;
 	t_scene				scene;
+	t_objects			*objects;
 	int 				color;
 	int					stop = 1;
 
-	scene_parsing(&scene, &camera);
-	if(stop)
-	{
-		stop = 0;
-		printf("\nscene.window_width: 				%f\n", scene.window_width);
-		printf("\nscene.window_height: 				%f\n", scene.window_height);
-		printf("\nscene.viewport_d: 			%f\n", scene.viewport_d);
-		printf("\nscene.viewport_height: 			%f\n", scene.viewport_height);
-		printf("\nscene.viewport_width: 			%f\n", scene.viewport_width);
-		printf("\ncamera.fov: 				%f\n", camera.fov);
-		printf("\ncamera.fov: 				%f\n", camera.pos.x);
-		printf("\ncamera.fov: 				%f\n", camera.pos.y);
-		printf("\ncamera.fov: 				%f\n", camera.pos.z);
-	}
 	if(ac == 2)
 	{
+		objects = NULL;
+		object_parsing(&objects);
+		scene_parsing(&scene, &camera);
+
+	// PARSING TESTS;
+
+		if(stop)
+		{
+			stop = 0;
+			printf("\nscene.window_width: 				%f\n", scene.window_width);
+			printf("\nscene.window_height: 				%f\n", scene.window_height);
+			printf("\nscene.viewport_d: 			%f\n", scene.viewport_d);
+			printf("\nscene.viewport_height: 			%f\n", scene.viewport_height);
+			printf("\nscene.viewport_width: 			%f\n", scene.viewport_width);
+			printf("\ncamera.fov: 				%f\n", camera.fov);
+			printf("\ncamera.fov: 				%f\n", camera.pos.x);
+			printf("\ncamera.fov: 				%f\n", camera.pos.y);
+			printf("\ncamera.fov: 				%f\n", camera.pos.z);
+		}
+
 		//parsing_scene(av[1]);
 		void *win_ptr;
 		void *mlx_ptr;

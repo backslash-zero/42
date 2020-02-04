@@ -6,11 +6,11 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 19:09:17 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/23 17:32:15 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/04 12:29:44 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../../incs/miniRT.h"
 
 int		ft_error_gnl(char **line, char **buffer)
 {

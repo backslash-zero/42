@@ -1,19 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RT_parsing.h                                       :+:      :+:    :+:   */
+/*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/23 16:17:44 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/04 14:11:03 by cmeunier         ###   ########.fr       */
+/*   Created: 2020/02/04 12:50:57 by cmeunier          #+#    #+#             */
+/*   Updated: 2020/02/04 14:12:15 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RT_PARSING_H
-# define RT_PARSING_H
+#include "../../incs/miniRT.h"
 
-void	object_parsing(t_objects **objects);
-void	add_back_obj(t_objects **start, void *obj, int id);
+int		min_max_color(int value)
+{
+	if(value < 0)
+		return(0);
+	if(value > 255)
+		return(255);
+	return(value);
+}
 
-#endif
+int get_color_integer(int r, int g, int b)
+{
+	int rt;
+
+	rt = 0;
+	rt |= min_max_color(r) << 16;
+	rt |= min_max_color(g) << 8;
+	rt |= min_max_color(b);
+	return (rt);
+}
