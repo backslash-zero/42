@@ -6,17 +6,19 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:31:08 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/29 18:19:46 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/04 15:18:15 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../../incs/miniRT.h"
 
 void	scene_parsing(t_scene *scene, t_camera *camera)
 {
 	window_parsing(scene);
 	camera_parsing(camera);
 	viewport_parsing(scene, camera);
+	scene->objects = NULL;
+		object_parsing(&scene->objects);
 }
 
 void	window_parsing(t_scene *scene)

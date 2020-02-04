@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/04 14:54:50 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/04 15:17:31 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,14 +102,11 @@ int		main(int ac, char **av)
 	t_camera 			camera;
 	t_point				viewport_point;
 	t_scene				scene;
-	t_objects			*objects;
 	int 				color;
 	int					stop = 1;
 
 	if(ac == 2)
 	{
-		objects = NULL;
-		object_parsing(&objects);
 		scene_parsing(&scene, &camera);
 
 	// PARSING TESTS;

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/03 17:54:24 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/04 15:16:36 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,12 @@ typedef	struct	s_objects
 
 typedef	struct	s_scene
 {
-	double	window_width;
-	double	window_height;
-	double	viewport_width;
-	double	viewport_height;
-	double	viewport_d;
+	double		window_width;
+	double		window_height;
+	double		viewport_width;
+	double		viewport_height;
+	double		viewport_d;
+	t_objects	*objects;
 }				t_scene;
 
 #define BACKGROUND_COLOR	16777216
