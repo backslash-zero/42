@@ -36,3 +36,4 @@
 
 ## Architecture
 - [ ] [SOLID design principles](https://www.youtube.com/watch?v=rtmFCcjEgEw)
+* [ ] [Regex](https://regexr.com/)
