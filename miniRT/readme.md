@@ -82,6 +82,12 @@ We are using [bitwise operators](https://www.tutorialspoint.com/cprogramming/c_b
 
 --------------
 
+# Exit
+`void exit(int status);`
+In the C Programming Language, the exit function calls all functions registered with atexit and terminates the program. File buffers are flushed, streams are closed, and temporary files are deleted.
+
+_0 -> Successful termination_
+
 # MinilibX
 
 ## Initialise MinilibX
@@ -128,6 +134,7 @@ creates a new image in memory.
 
 #### mlx_put_image_to_window()
 *int mlx_put_image_to_window ( void *mlx_ptr, void *win_ptr, void *img_ptr,  int  x, int y );*
+
 
 ## handle keyboard or mouse events
 `man mlx_loop`

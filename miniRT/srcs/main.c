@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/04 17:26:41 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/05 16:15:43 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int		trace_ray(t_camera *camera, t_point *viewport_point, double min_z, double m
 	t_ray		ray;
 
 	// this should be included in a loop to enable every sphere
+	printf("\noh hey\n\n");
 	sphere_0.pos.x = 1;
 	sphere_0.pos.y = 1;
 	sphere_0.pos.z = 10;
@@ -100,16 +101,63 @@ void	ft_init_mlx(t_mlx *mlx, t_scene *scene)
 {
 	mlx->mlx_ptr = mlx_init();
 	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, scene->window_width, scene->window_height, "MiniRT");
+	mlx->img_ptr = mlx_new_image(mlx->mlx_ptr, scene->window_width, scene->window_height);
+	mlx->img_data = (int*)mlx_get_data_addr(mlx->img_ptr, &mlx->bpp, &mlx->size_line, &mlx->endian);
+}
+
+void	fill_img(t_scene *scene, t_mlx *mlx, t_camera *camera)
+{
+	int 	x;
+	int 	y;
+	int 	color;
+	t_point	viewport_point;
+	
+	
+	x = - scene->window_width / 2;
+	y = - scene->window_height / 2;
+	while(x < scene->window_width / 2)
+	{
+		while(y <= scene->window_height / 2)
+		{
+			// translate canvas x and y to viewport
+			viewport_point.x = get_vp_x(x, scene);
+			viewport_point.y = get_vp_y(y, scene);
+			viewport_point.z = scene->viewport_d;
+			color = trace_ray(camera, &viewport_point, VIEWPORT_D, __DBL_MAX__);
+			//color = get_color_integer(255, 255, 255);
+			mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, center_x(x, scene), center_y(y, scene), color);
+			y++;
+		}
+		y = - scene->window_height / 2;
+		x++;
+	}
+}
+
+int		ft_quit(t_mlx *mlx)
+{
+		(void)mlx;
+		exit(0);
+}
+
+void	start_window(t_mlx *mlx)
+{
+	mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
+	/*
+			OR MAYBE instead of 0,0 in mlx_put_image_to_window
+			int x = - scene.window_width / 2;
+			int y = - scene.window_height / 2;
+	*/
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
+	mlx_key_hook(mlx->win_ptr, &ft_quit, mlx);
+	mlx_loop(mlx->mlx_ptr);
 }
 
 int		main(int ac, char **av)
 {
 	(void)av;
 	t_camera 			camera;
-	t_point				viewport_point;
 	t_scene				scene;
 	t_mlx				mlx;
-	int 				color;
 	int					stop = 1;
 
 	if(ac == 2)
@@ -131,28 +179,10 @@ int		main(int ac, char **av)
 			printf("\ncamera.fov: 				%f\n", camera.pos.y);
 			printf("\ncamera.fov: 				%f\n", camera.pos.z);
 		}
-
-		int x = - scene.window_width / 2;
-		int y = - scene.window_height / 2;
-		while(x < scene.window_width / 2)
-		{
-			while(y <= scene.window_height / 2)
-			{
-				// translate canvas x and y to viewport
-				viewport_point.x = get_vp_x(x, &scene);
-				viewport_point.y = get_vp_y(y, &scene);
-				viewport_point.z = scene.viewport_d;
-				color = trace_ray(&camera, &viewport_point, VIEWPORT_D, __DBL_MAX__);
-				//color = get_color_integer(255, 255, 255);
-				mlx_pixel_put(mlx.mlx_ptr, mlx.win_ptr, center_x(x, &scene), center_y(y, &scene), color);
-				y++;
-			}
-			y = - scene.window_height / 2;
-			x++;
-		}
+		fill_img(&scene, &mlx, &camera);
 		// mlx_hook && mlx_hook_loop?
-		mlx_loop(mlx.mlx_ptr);
-		// we need to FREE objects and 
+		start_window(&mlx);
+		// we need to FREE objects when exiting program
 	}
 	else
 	{
