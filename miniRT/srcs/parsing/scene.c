@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:31:08 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/04 15:18:15 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/05 19:26:55 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	viewport_parsing(t_scene *scene, t_camera *camera)
 void	camera_parsing(t_camera *camera)
 {
 	camera->pos.x = 0;
-	camera->pos.y = 2;
-	camera->pos.z = 4;
+	camera->pos.y = 0;
+	camera->pos.z = 0;
 	camera->fov = FOV;
 
 }

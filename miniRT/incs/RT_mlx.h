@@ -15,6 +15,6 @@ typedef	struct	s_mlx
 
 void	ft_init_mlx(t_mlx *mlx, t_scene *scene);
 void	start_window(t_mlx *mlx);
-int		ft_quit(t_mlx *mlx);
+int		ft_key(int key, t_mlx *mlx);
 
 #endif
