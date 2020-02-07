@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/07 18:13:36 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/07 18:59:13 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,29 +79,33 @@ int		trace_ray(t_camera *camera, t_vec *viewport_point, t_scene *scene){
 	sphere_0.pos.z = 10;
 	sphere_0.r = 2;
 	sphere_0.color = get_color_integer(0, 3, 104); */
+	t_objects	*tmp;
+	tmp = scene->objects;
 
-
-	while(scene->objects)
+	//int count = 1;
+	closest_sphere = NULL;
+	closest_t = max_z;
+	while(tmp)
 	{
-		closest_t = max_z;
-		closest_sphere = NULL;
-		intersect_ray_sphere(&ray, camera, viewport_point, scene->objects->obj);
+		//printf("count: %d\n", count);
+		//count++;
+		intersect_ray_sphere(&ray, camera, viewport_point, (t_sphere*)tmp->obj);
 		if(ray.t1 > min_z && ray.t1 < max_z && ray.t1 < closest_t)
 		{
 			closest_t = ray.t1;
-			closest_sphere = scene->objects->obj;
+			closest_sphere = (t_sphere*)tmp->obj;
 		}
 		if(ray.t2 > min_z && ray.t2 < max_z && ray.t2 < closest_t)
 		{
 			closest_t = ray.t2;
-			closest_sphere = scene->objects->obj;
+			closest_sphere = (t_sphere*)tmp->obj;
 		}
 		// put white if no sphere interesection was found.
 		if(closest_sphere == NULL)
 			color = get_color_integer(255, 255, 255);
 		else
 			color = closest_sphere->color;
-		scene->objects = scene->objects->next;
+		tmp = tmp->next;
 	}
 	return(color);
 }

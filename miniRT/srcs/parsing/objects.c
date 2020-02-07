@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:03:19 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/07 18:23:09 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/07 19:09:12 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	object_parsing(t_objects **objects)
 	t_sphere *sphere_0;
 	t_sphere *sphere_1;
 	t_sphere *sphere_2;
+	t_sphere *sphere_3;
+	t_sphere *sphere_4;
 	
 	if(!(sphere_0 = (malloc(sizeof(t_sphere)))))
 		return ;
@@ -32,29 +34,47 @@ void	object_parsing(t_objects **objects)
 		return ;
 	if(!(sphere_2 = (malloc(sizeof(t_sphere)))))
 		return ;
+	if(!(sphere_3 = (malloc(sizeof(t_sphere)))))
+		return ;
+	if(!(sphere_4 = (malloc(sizeof(t_sphere)))))
+		return ;
 	//exit if sphere was not allocated?
 
 	// add sphere to objects
 	sphere_0->pos.x = 0;
 	sphere_0->pos.y = -1;
-	sphere_0->pos.z = 10;
+	sphere_0->pos.z = 12;
 	sphere_0->r = 2;
-	sphere_0->color = get_color_integer(0, 3, 104);
+	sphere_0->color = get_color_integer(76, 44, 114);
 	add_back_obj(objects, sphere_0, (int)'s');
 
-	sphere_1->pos.x = 2;
+	sphere_1->pos.x = 3;
 	sphere_1->pos.y = 0;
-	sphere_1->pos.z = 10;
+	sphere_1->pos.z = 15;
 	sphere_1->r = 2;
-	sphere_1->color = get_color_integer(224, 5, 11);
+	sphere_1->color = get_color_integer(156, 227, 125);
 	add_back_obj(objects, sphere_1, (int)'s');
 	
 	sphere_2->pos.x = -2;
 	sphere_2->pos.y = 0;
 	sphere_2->pos.z = 10;
 	sphere_2->r = 2;
-	sphere_2->color = get_color_integer(33, 255, 2);
+	sphere_2->color = get_color_integer(116, 139, 117);
 	add_back_obj(objects, sphere_2, (int)'s');
+
+	sphere_3->pos.x = 3;
+	sphere_3->pos.y = 3;
+	sphere_3->pos.z = 8;
+	sphere_3->r = 1;
+	sphere_3->color = get_color_integer(233, 210, 192);
+	add_back_obj(objects, sphere_3, (int)'s');
+
+	sphere_4->pos.x = -5;
+	sphere_4->pos.y = 5;
+	sphere_4->pos.z = 20;
+	sphere_4->r = 10;
+	sphere_4->color = get_color_integer(245, 251, 239);
+	add_back_obj(objects, sphere_4, (int)'s');
 
 	/* ************************************************************************** */
 	/*	End Custom obects														  */	
