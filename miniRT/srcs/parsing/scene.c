@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:31:08 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/05 19:26:55 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/07 18:14:09 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	scene_parsing(t_scene *scene, t_camera *camera)
 	camera_parsing(camera);
 	viewport_parsing(scene, camera);
 	scene->objects = NULL;
-		object_parsing(&scene->objects);
+	object_parsing(&scene->objects);
 }
 
 void	window_parsing(t_scene *scene)

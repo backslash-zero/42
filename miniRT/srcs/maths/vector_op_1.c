@@ -12,7 +12,7 @@
 
 #include "miniRT.h"
 
-t_point	add_vec(t_point vec1, t_point vec2)
+t_vec	add_vec(t_vec vec1, t_vec vec2)
 {
 	vec1.x += vec2.x;
 	vec1.y += vec2.y;
@@ -20,7 +20,7 @@ t_point	add_vec(t_point vec1, t_point vec2)
 	return (vec1);
 }
 
-t_point	sub_vec(t_point vec1, t_point vec2)
+t_vec	sub_vec(t_vec vec1, t_vec vec2)
 {
 	vec1.x -= vec2.x;
 	vec1.y -= vec2.y;
@@ -28,7 +28,7 @@ t_point	sub_vec(t_point vec1, t_point vec2)
 	return (vec1);
 }
 
-t_point	mult_point(t_point vec1, t_point vec2)
+t_vec	mult_point(t_vec vec1, t_vec vec2)
 {
 	vec1.x *= vec2.x;
 	vec1.y *= vec2.y;
@@ -36,7 +36,7 @@ t_point	mult_point(t_point vec1, t_point vec2)
 	return (vec1);
 }
 
-t_point	div_vec(t_point vec1, t_point vec2)
+t_vec	div_vec(t_vec vec1, t_vec vec2)
 {
 	vec1.x /= vec2.x;
 	vec1.y /= vec2.y;

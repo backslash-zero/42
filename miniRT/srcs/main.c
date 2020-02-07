@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/05 19:47:11 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/07 18:13:36 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		center_x(int x, t_scene *scene)
 {
-	x = (scene->window_width / 2) + x;
+	x = - (scene->window_width / 2) + x;
 	return(x);
 }
 
@@ -40,9 +40,9 @@ double get_vp_y(int y, t_scene *scene)
 	return(vp_y);
 }
 
-void intersect_ray_sphere(t_ray *ray, t_camera *camera, t_point *viewport_point, t_sphere *sphere)
+void intersect_ray_sphere(t_ray *ray, t_camera *camera, t_vec *viewport_point, t_sphere *sphere)
 {
-	t_point oc;
+	t_vec oc;
 	
 	oc = sub_vec(camera->pos, sphere->pos);
 	double k1 = prod_scal(*viewport_point, *viewport_point);
@@ -62,37 +62,47 @@ void intersect_ray_sphere(t_ray *ray, t_camera *camera, t_point *viewport_point,
 	}
 }
 
-int		trace_ray(t_camera *camera, t_point *viewport_point, double min_z, double max_z){
+int		trace_ray(t_camera *camera, t_vec *viewport_point, t_scene *scene){
 	int			color;
 	double		closest_t;
+	double		min_z;
+	double		max_z;
 	t_sphere	*closest_sphere;
-	t_sphere 	sphere_0;
+	//t_sphere 	sphere_0;
 	t_ray		ray;
 
+	min_z = scene->viewport_d;
+	max_z = __DBL_MAX__;
 	// this should be included in a loop to enable every sphere
-	sphere_0.pos.x = 0;
+	/* sphere_0.pos.x = 0;
 	sphere_0.pos.y = 0;
 	sphere_0.pos.z = 10;
 	sphere_0.r = 2;
-	sphere_0.color = get_color_integer(0, 3, 104);
-	closest_t = max_z;
-	closest_sphere = NULL;
-	intersect_ray_sphere(&ray, camera, viewport_point, &sphere_0);
-	if(ray.t1 > min_z && ray.t1 < max_z && ray.t1 < closest_t)
+	sphere_0.color = get_color_integer(0, 3, 104); */
+
+
+	while(scene->objects)
 	{
-		closest_t = ray.t1;
-		closest_sphere = &sphere_0;
+		closest_t = max_z;
+		closest_sphere = NULL;
+		intersect_ray_sphere(&ray, camera, viewport_point, scene->objects->obj);
+		if(ray.t1 > min_z && ray.t1 < max_z && ray.t1 < closest_t)
+		{
+			closest_t = ray.t1;
+			closest_sphere = scene->objects->obj;
+		}
+		if(ray.t2 > min_z && ray.t2 < max_z && ray.t2 < closest_t)
+		{
+			closest_t = ray.t2;
+			closest_sphere = scene->objects->obj;
+		}
+		// put white if no sphere interesection was found.
+		if(closest_sphere == NULL)
+			color = get_color_integer(255, 255, 255);
+		else
+			color = closest_sphere->color;
+		scene->objects = scene->objects->next;
 	}
-	if(ray.t2 > min_z && ray.t2 < max_z && ray.t2 < closest_t)
-	{
-		closest_t = ray.t2;
-		closest_sphere = &sphere_0;
-	}
-	// put white if no sphere interesection was found.
-	if(closest_sphere == NULL)
-		color = get_color_integer(255, 255, 255);
-	else
-		color = closest_sphere->color;
 	return(color);
 }
 
@@ -110,22 +120,22 @@ void	fill_img(t_scene *scene, t_mlx *mlx, t_camera *camera)
 	int 	y;
 	int 	color;
 	int		len;
-	t_point	viewport_point;
+	t_vec	viewport_point;
 	
 	(void)color;
 
 	len = mlx->size_line / 4;
 	y = -1;
-	while(++y <= scene->window_height)
+	while(++y < scene->window_height)
 	{
 		x = -1;
-		while(++x < scene->window_width - 32)
+		while(++x < scene->window_width)
 		{
 			//printf("\n x: %d	y: %d\n", x, y);
-			viewport_point.x = get_vp_x(x, scene);
-			viewport_point.y = get_vp_y(y, scene);
+			viewport_point.x = get_vp_x(center_x(x, scene), scene);
+			viewport_point.y = get_vp_y(center_y(y, scene), scene);
 			viewport_point.z = scene->viewport_d;
-			mlx->img_data[y * len + x] = trace_ray(camera, &viewport_point, VIEWPORT_D, __DBL_MAX__);
+			mlx->img_data[y * len + x] = trace_ray(camera, &viewport_point, scene);
 		}
 	} 
 	/* 
@@ -195,9 +205,9 @@ int		main(int ac, char **av)
 			printf("\nscene.viewport_height: 			%f\n", scene.viewport_height);
 			printf("\nscene.viewport_width: 			%f\n", scene.viewport_width);
 			printf("\ncamera.fov: 				%f\n", camera.fov);
-			printf("\ncamera.fov: 				%f\n", camera.pos.x);
-			printf("\ncamera.fov: 				%f\n", camera.pos.y);
-			printf("\ncamera.fov: 				%f\n", camera.pos.z);
+			printf("\ncamera.pos.x: 				%f\n", camera.pos.x);
+			printf("\ncamera.pos.y: 				%f\n", camera.pos.y);
+			printf("\ncamera.pos.z: 				%f\n", camera.pos.z);
 		}
 		fill_img(&scene, &mlx, &camera);
 		// mlx_hook && mlx_hook_loop?

@@ -6,13 +6,13 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 19:23:34 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/27 21:22:12 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/07 17:35:08 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_point	add_vec_d(t_point vec1, double val)
+t_vec	add_vec_d(t_vec vec1, double val)
 {
 	vec1.x += val;
 	vec1.y += val;
@@ -20,7 +20,7 @@ t_point	add_vec_d(t_point vec1, double val)
 	return (vec1);
 }
 
-t_point	sub_vec_d(t_point vec1, double val)
+t_vec	sub_vec_d(t_vec vec1, double val)
 {
 	vec1.x -= val;
 	vec1.y -= val;
@@ -28,7 +28,7 @@ t_point	sub_vec_d(t_point vec1, double val)
 	return (vec1);
 }
 
-t_point	mult_point_d(t_point vec1, double val)
+t_vec	mult_point_d(t_vec vec1, double val)
 {
 	vec1.x *= val;
 	vec1.y *= val;
@@ -36,7 +36,7 @@ t_point	mult_point_d(t_point vec1, double val)
 	return (vec1);
 }
 
-t_point	div_vec_d(t_point vec1, double val)
+t_vec	div_vec_d(t_vec vec1, double val)
 {
 	vec1.x /= val;
 	vec1.y /= val;

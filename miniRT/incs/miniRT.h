@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/05 19:48:00 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/07 17:35:04 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@
 // MinilibX
 # include <mlx.h>
 
-typedef	struct	s_point
+typedef	struct	s_vec
 {
 	double x;
 	double y;
 	double z;
-}				t_point;
+}				t_vec;
 
 typedef	struct	s_camera
 {
-	t_point pos;
-	t_point rot;
+	t_vec pos;
+	t_vec rot;
 	double	fov;
 }				t_camera;
 
@@ -43,7 +43,7 @@ typedef	struct	s_ray
 
 typedef	struct	s_sphere
 {
-	t_point	pos;
+	t_vec	pos;
 	double	r;
 	int 	color;
 }				t_sphere;
