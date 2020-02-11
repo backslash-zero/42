@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/07 18:59:13 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/11 19:58:39 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,49 +62,67 @@ void intersect_ray_sphere(t_ray *ray, t_camera *camera, t_vec *viewport_point, t
 	}
 }
 
+void	intersect_object(t_ray *ray, t_camera *camera, t_vec *viewport_point, t_objects *tmp)
+{
+	if(tmp->id == (int)'s')
+		intersect_ray_sphere(ray, camera, viewport_point, tmp->obj);
+	/*
+	if(tmp->id == (int)'c')
+	if(tmp->id == (int)'t')
+	if(tmp->id == (int)'p')
+	if(tmp->id == (int)'s')
+	if(tmp->id == (int)'s')
+	*/
+}
+
+int		color_by_type_cast(t_objects *object)
+{
+	t_sphere *tmp;
+
+	if(object->id == (int)'s')
+	{
+		tmp = (t_sphere *)object->obj;
+		return(tmp->color);
+	}
+	return(0);
+}
+
 int		trace_ray(t_camera *camera, t_vec *viewport_point, t_scene *scene){
 	int			color;
 	double		closest_t;
 	double		min_z;
 	double		max_z;
-	t_sphere	*closest_sphere;
-	//t_sphere 	sphere_0;
+	t_objects	*tmp;
+	t_objects	*closest_object;
 	t_ray		ray;
 
 	min_z = scene->viewport_d;
 	max_z = __DBL_MAX__;
-	// this should be included in a loop to enable every sphere
-	/* sphere_0.pos.x = 0;
-	sphere_0.pos.y = 0;
-	sphere_0.pos.z = 10;
-	sphere_0.r = 2;
-	sphere_0.color = get_color_integer(0, 3, 104); */
-	t_objects	*tmp;
 	tmp = scene->objects;
 
 	//int count = 1;
-	closest_sphere = NULL;
+	closest_object = NULL;
 	closest_t = max_z;
 	while(tmp)
 	{
 		//printf("count: %d\n", count);
 		//count++;
-		intersect_ray_sphere(&ray, camera, viewport_point, (t_sphere*)tmp->obj);
+		intersect_object(&ray, camera, viewport_point, tmp);
 		if(ray.t1 > min_z && ray.t1 < max_z && ray.t1 < closest_t)
 		{
 			closest_t = ray.t1;
-			closest_sphere = (t_sphere*)tmp->obj;
+			closest_object = tmp;
 		}
 		if(ray.t2 > min_z && ray.t2 < max_z && ray.t2 < closest_t)
 		{
 			closest_t = ray.t2;
-			closest_sphere = (t_sphere*)tmp->obj;
+			closest_object = tmp;
 		}
 		// put white if no sphere interesection was found.
-		if(closest_sphere == NULL)
+		if(closest_object == NULL)
 			color = get_color_integer(255, 255, 255);
 		else
-			color = closest_sphere->color;
+			color = color_by_type_cast(closest_object);
 		tmp = tmp->next;
 	}
 	return(color);
