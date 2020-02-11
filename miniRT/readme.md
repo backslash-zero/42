@@ -25,7 +25,7 @@ _Any other functions are forbidden and must be self-programmed._
 
 # How to do raytracing
 
-I used [this ressource](https://raytracing.github.io/books/RayTracingInOneWeekend.html) & [this great book](https://www.gabrielgambetta.com/computer-graphics-from-scratch/introduction.html) to get started.
+I used [this ressource](https://raytracing.github.io/books/RayTracingInOneWeekend.html), [this one](https://www.scratchapixel.com/lessons/3d-basic-rendering/ray-tracing-generating-camera-rays/definition-ray) & [this great book](https://www.gabrielgambetta.com/computer-graphics-from-scratch/introduction.html) to get started.
 
 ### Camera Position
 Our camera will be set at the origin (0, 0, 0).
