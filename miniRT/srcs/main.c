@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/11 19:58:39 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/12 13:21:36 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,15 +136,35 @@ void	ft_init_mlx(t_mlx *mlx, t_scene *scene)
 	mlx->img_data = (int*)mlx_get_data_addr(mlx->img_ptr, &mlx->bpp, &mlx->size_line, &mlx->endian);
 }
 
+int		trace_ray_2()
+{
+
+}
+
+void	fill_img_2(t_scene *scene, t_mlx *mlx, t_camera *camera)
+{
+	int 	x;
+	int 	y;
+	int		len;
+
+	len = mlx->size_line / 4;
+	y = -1;
+	while(++y < scene->window_height)
+	{
+		x = -1;
+		while(++x < scene->window_width)
+		{
+			mlx->img_data[y * len + x] = trace_ray_2();/*color*/ ;
+		}
+	}
+}
+
 void	fill_img(t_scene *scene, t_mlx *mlx, t_camera *camera)
 {
 	int 	x;
 	int 	y;
-	int 	color;
 	int		len;
 	t_vec	viewport_point;
-	
-	(void)color;
 
 	len = mlx->size_line / 4;
 	y = -1;
@@ -159,27 +179,7 @@ void	fill_img(t_scene *scene, t_mlx *mlx, t_camera *camera)
 			viewport_point.z = scene->viewport_d;
 			mlx->img_data[y * len + x] = trace_ray(camera, &viewport_point, scene);
 		}
-	} 
-	/* 
-	x = - scene->window_width / 2;
-	y = - scene->window_height / 2;
-	while(x < scene->window_width / 2)
-	{
-		while(y <= scene->window_height / 2)
-		{
-			// translate canvas x and y to viewport
-			viewport_point.x = get_vp_x(x, scene);
-			viewport_point.y = get_vp_y(y, scene);
-			viewport_point.z = scene->viewport_d;
-			//color = trace_ray(camera, &viewport_point, VIEWPORT_D, __DBL_MAX__);
-			mlx->img_data[center_x(x,scene) + (center_y(y, scene) * mlx->size_line / 4)] = get_color_integer(255, 0, 255);
-			//mlx_pixel_put(mlx->mlx_ptr, mlx->win_ptr, center_x(x, scene), center_y(y, scene), color);
-			y++;
-		}
-		y = - scene->window_height / 2;
-		x++;
-	} 
-	*/
+	}
 }
 
 int		ft_key(int key,t_mlx *mlx)

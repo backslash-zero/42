@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:31:08 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/11 17:11:13 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/13 14:58:15 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,41 @@ void	viewport_parsing(t_scene *scene, t_camera *camera)
 	scene->viewport_width = aspect_ratio * scene->viewport_height;
 }
 
+double	rot_to_deg(double rotation)
+{
+	rotation /= 360;
+}
+
+void	x_rotation(t_vec dir,double angle)
+{
+
+}
+
+void	calc_camera_dir(t_camera *camera)
+{
+	camera->dir_x.x = 1;
+	camera->dir_x.y = 0;
+	camera->dir_x.z = 0;
+	camera->dir_y.x = 0;
+	camera->dir_y.y = 1;
+	camera->dir_y.z = 0;
+	camera->dir_z.x = 0;
+	camera->dir_z.y = 0;
+	camera->dir_z.z = 1;
+}
 void	camera_parsing(t_camera *camera)
 {
+	// get position vector from parsing
 	camera->pos.x = 0;
 	camera->pos.y = 0;
 	camera->pos.z = 0;
+
+	// get position direction vector from parsing
 	camera->rot.x = 0;
 	camera->rot.y = 0;
 	camera->rot.z = 0;
+
+	// calculate direction vector from rotation vectors
+	calc_camera_dir(camera);
 	camera->fov = FOV;
 }

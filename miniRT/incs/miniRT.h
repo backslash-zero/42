@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/07 17:35:04 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/12 13:46:57 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,11 @@ typedef	struct	s_vec
 
 typedef	struct	s_camera
 {
-	t_vec pos;
-	t_vec rot;
+	t_vec	pos;
+	t_vec	rot;
+	t_vec	dir_x;
+	t_vec	dir_y;
+	t_vec	dir_z;
 	double	fov;
 }				t_camera;
 

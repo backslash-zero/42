@@ -6,18 +6,11 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 19:23:51 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/07 17:35:09 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/12 13:07:22 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
-
-/* double	abs(double nb)
-{
-	if(nb < 0)
-		return(-nb);
-	return(nb);
-} */
+#include "../../incs/miniRT.h"
 
 double	prod_scal(t_vec vec1, t_vec vec2)
 {
@@ -38,3 +31,9 @@ double norm_vec(t_vec vec)
 {
 	return (sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z));
 }
+
+t_vec	normalized(t_vec vec)
+{
+	return(div_vec_d(vec, norm_vec(vec)));
+}
+
