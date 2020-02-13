@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/12 13:21:36 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/13 20:45:04 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,9 +136,18 @@ void	ft_init_mlx(t_mlx *mlx, t_scene *scene)
 	mlx->img_data = (int*)mlx_get_data_addr(mlx->img_ptr, &mlx->bpp, &mlx->size_line, &mlx->endian);
 }
 
-int		trace_ray_2()
+void	rotate_vp(t_vec *viewport_point, t_scene *scene, t_camera *camera, double x, double y)
 {
+	*viewport_point = add_vec(*viewport_point, camera->dir_z);
+	*viewport_point = add_vec(*viewport_point, mult_point_d(camera->dir_x, (x - (scene->window_width / 2)) / scene->window_width));
+	*viewport_point = add_vec(*viewport_point, mult_point_d(camera->dir_y, (- y + (scene->window_height / 2)) / scene->window_height));
+}
 
+void	init_vec(t_vec *vec)
+{
+	vec->x = 0;
+	vec->y = 0;
+	vec->z = 0;
 }
 
 void	fill_img_2(t_scene *scene, t_mlx *mlx, t_camera *camera)
@@ -146,6 +155,7 @@ void	fill_img_2(t_scene *scene, t_mlx *mlx, t_camera *camera)
 	int 	x;
 	int 	y;
 	int		len;
+	t_vec	viewport_point;
 
 	len = mlx->size_line / 4;
 	y = -1;
@@ -153,8 +163,10 @@ void	fill_img_2(t_scene *scene, t_mlx *mlx, t_camera *camera)
 	{
 		x = -1;
 		while(++x < scene->window_width)
-		{
-			mlx->img_data[y * len + x] = trace_ray_2();/*color*/ ;
+		{	
+			init_vec(&viewport_point);
+			rotate_vp(&viewport_point, scene, camera, x, y);
+			mlx->img_data[y * len + x] = trace_ray(camera, &viewport_point, scene);
 		}
 	}
 }
@@ -230,8 +242,17 @@ int		main(int ac, char **av)
 			printf("\ncamera.pos.x: 				%f\n", camera.pos.x);
 			printf("\ncamera.pos.y: 				%f\n", camera.pos.y);
 			printf("\ncamera.pos.z: 				%f\n", camera.pos.z);
+			printf("\ncamera.dir_x.x: 				%f\n", camera.dir_x.x);
+			printf("\ncamera.dir_y.x: 				%f\n", camera.dir_y.x);
+			printf("\ncamera.dir_z.x: 				%f\n", camera.dir_z.x);
+			printf("\ncamera.dir_x.y: 				%f\n", camera.dir_x.y);
+			printf("\ncamera.dir_y.y: 				%f\n", camera.dir_y.y);
+			printf("\ncamera.dir_z.y: 				%f\n", camera.dir_z.y);
+			printf("\ncamera.dir_x.z: 				%f\n", camera.dir_x.z);
+			printf("\ncamera.dir_y.z: 				%f\n", camera.dir_y.z);
+			printf("\ncamera.dir_z.z: 				%f\n", camera.dir_z.z);
 		}
-		fill_img(&scene, &mlx, &camera);
+		fill_img_2(&scene, &mlx, &camera);
 		// mlx_hook && mlx_hook_loop?
 		start_window(&mlx);
 		// we need to FREE objects when exiting program
