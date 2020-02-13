@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/13 20:45:04 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/13 22:14:39 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,8 @@ void	ft_init_mlx(t_mlx *mlx, t_scene *scene)
 void	rotate_vp(t_vec *viewport_point, t_scene *scene, t_camera *camera, double x, double y)
 {
 	*viewport_point = add_vec(*viewport_point, camera->dir_z);
-	*viewport_point = add_vec(*viewport_point, mult_point_d(camera->dir_x, (x - (scene->window_width / 2)) / scene->window_width));
-	*viewport_point = add_vec(*viewport_point, mult_point_d(camera->dir_y, (- y + (scene->window_height / 2)) / scene->window_height));
+	*viewport_point = add_vec(*viewport_point, div_vec_d(mult_point_d(mult_point_d(camera->dir_x, (x - (scene->window_width / 2)) / scene->viewport_width), scene->viewport_width), scene->window_width));
+	*viewport_point = add_vec(*viewport_point, div_vec_d(mult_point_d(mult_point_d(camera->dir_y, (- y + (scene->window_height / 2)) / scene->viewport_height), scene->viewport_height), scene->window_height));
 }
 
 void	init_vec(t_vec *vec)

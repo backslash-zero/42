@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:31:08 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/13 20:07:32 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/13 21:45:58 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	camera_parsing(t_camera *camera)
 	// get position vector from parsing
 	camera->pos.x = 0;
 	camera->pos.y = 0;
-	camera->pos.z = 0;
+	camera->pos.z = -10;
 
 	// get position direction vector from parsing
 	camera->rot.x = 0;
