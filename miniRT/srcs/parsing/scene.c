@@ -6,16 +6,18 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:31:08 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/14 22:09:02 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/14 22:34:26 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/miniRT.h"
 
+
+
 void	ambient_light_parsing(t_scene *scene)
 {
 	scene->ambient_light.color = assign_colors(255, 255, 255);
-	scene->ambient_light.lum = 0.5;
+	scene->ambient_light.lum = 1;
 }
 
 void	window_parsing(t_scene *scene)

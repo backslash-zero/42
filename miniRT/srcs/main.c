@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/14 22:01:57 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/14 22:29:21 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,18 @@ t_color		color_by_type_cast(t_objects *object)
 	return(assign_colors(255, 255, 255));
 }
 
+void	ambient_lighting(t_color *color, t_scene *scene)
+{
+	color->r = scene->ambient_light.lum * color->r * (scene->ambient_light.color.r / 255);
+	color->g = scene->ambient_light.lum * color->g * (scene->ambient_light.color.g / 255);
+	color->b = scene->ambient_light.lum * color->b * (scene->ambient_light.color.b / 255);
+}
+
+void	shade(t_color *color, t_scene *scene)
+{
+	ambient_lighting(color, scene);
+}
+
 int		trace_ray(t_camera *camera, t_vec *ray, t_scene *scene){
 	t_color		color;
 	double		closest_t;
@@ -119,12 +131,13 @@ int		trace_ray(t_camera *camera, t_vec *ray, t_scene *scene){
 			closest_object = tmp;
 		}
 		// put white if no sphere interesection was found.
-		if(closest_object == NULL)
-			color = assign_colors(255, 255, 255);
-		else
+		if(closest_object != NULL)
 			color = color_by_type_cast(closest_object);
 		tmp = tmp->next;
 	}
+	if(closest_object == NULL)
+		return(get_color_integer(255, 255, 255));
+	shade(&color, scene);
 	return(get_color_integer(color.r, color.g, color.b));
 }
 
