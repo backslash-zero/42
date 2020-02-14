@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/14 22:29:52 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/15 00:00:05 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,20 @@ typedef	struct	s_sphere
 	t_color	color;
 }				t_sphere;
 
-typedef	struct	s_objects
+typedef	struct			s_objects
 {
 	int					id;
 	void				*obj;
 	struct s_objects	*next;
-}				t_objects;
+}						t_objects;
 
-typedef	struct	s_scene
+typedef	struct	s_lights
+{
+	t_point_light	*point_light;
+	struct s_lights	*next;
+}					t_lights;
+
+typedef	struct		s_scene
 {
 	double			window_width;
 	double			window_height;
@@ -86,10 +92,10 @@ typedef	struct	s_scene
 	double			viewport_height;
 	double			viewport_d;
 	t_objects		*objects;
+	t_lights		*lights;
 	t_ambient_light	ambient_light;
-}				t_scene;
+}					t_scene;
 
-#define BACKGROUND_COLOR	16777216
 #define WINDOW_WIDTH	800
 #define WINDOW_HEIGHT 	600
 #define VIEWPORT_D		1
@@ -98,11 +104,11 @@ typedef	struct	s_scene
 // Self-made headers
 # include "RT_mlx.h"
 # include "RT_scene.h"
+# include "RT_colors.h"
 # include "RT_maths.h"
-# include "RT_parsing.h"
+# include "RT_utils.h"
 # include "error.h"
 # include "get_next_line.h"
-# include "RT_utils.h"
-# include "RT_colors.h"
+# include "RT_parsing.h"
 
 #endif

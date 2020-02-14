@@ -6,19 +6,11 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:31:08 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/14 22:34:26 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/14 23:57:46 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/miniRT.h"
-
-
-
-void	ambient_light_parsing(t_scene *scene)
-{
-	scene->ambient_light.color = assign_colors(255, 255, 255);
-	scene->ambient_light.lum = 1;
-}
 
 void	window_parsing(t_scene *scene)
 {
@@ -47,16 +39,12 @@ void	calc_camera_dir(t_camera *camera)
 	camera->dir_z.x = 0;
 	camera->dir_z.y = 0;
 	camera->dir_z.z = 1;
-
-	//x_rotation(&camera->dir_x, rot_to_deg(camera->rot.x));
 	x_rotation(&camera->dir_y, rad(rot_to_deg(camera->rot.x)));
 	x_rotation(&camera->dir_z, rad(rot_to_deg(camera->rot.x)));
 	y_rotation(&camera->dir_x, rad(rot_to_deg(camera->rot.y)));
-	// //y_rotation(&camera->dir_y, rot_to_deg(camera->rot.y));
 	y_rotation(&camera->dir_z, rad(rot_to_deg(camera->rot.y)));
 	z_rotation(&camera->dir_x, rad(rot_to_deg(camera->rot.z)));
 	z_rotation(&camera->dir_y, rad(rot_to_deg(camera->rot.z)));
-	//z_rotation(&camera->dir_z, rot_to_deg(camera->rot.z));
 }
 
 void	camera_parsing(t_camera *camera)
@@ -64,7 +52,7 @@ void	camera_parsing(t_camera *camera)
 	// get position vector from parsing
 	camera->pos.x = 0;
 	camera->pos.y = 0;
-	camera->pos.z = 0;
+	camera->pos.z = -50;
 
 	// get position direction vector from parsing
 	camera->rot.x = 0;
@@ -84,4 +72,5 @@ void	scene_parsing(t_scene *scene, t_camera *camera)
 	scene->objects = NULL;
 	object_parsing(&scene->objects);
 	ambient_light_parsing(scene);
+	point_light_parsing(&scene->lights);
 }

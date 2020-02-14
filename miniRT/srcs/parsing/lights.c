@@ -1,0 +1,78 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lights.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/14 23:44:00 by cmeunier          #+#    #+#             */
+/*   Updated: 2020/02/15 00:00:39 by cmeunier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../incs/miniRT.h"
+
+void	ambient_light_parsing(t_scene *scene)
+{
+	scene->ambient_light.color = assign_colors(255, 255, 255);
+	scene->ambient_light.lum = 1;
+}
+
+void	point_light_parsing(t_lights **lights)
+{
+	// open fd and use get next line until return value is 0
+	// use main from GNL
+
+	/* ************************************************************************** */
+	/*	Custom obects															  */	
+	/* ************************************************************************** */
+	
+	*lights = NULL;
+	t_point_light *point_light_0;
+	t_point_light *point_light_1;
+	
+	if(!(point_light_0 = (malloc(sizeof(t_point_light)))))
+		return ;
+	if(!(point_light_1 = (malloc(sizeof(t_point_light)))))
+		return ;
+	//exit if point_light was not allocated?
+
+	// add point_light to lights
+	point_light_0->pos.x = -15;
+	point_light_0->pos.y = 15;
+	point_light_0->pos.z = 10;
+	point_light_0->lum = 1;
+	point_light_0->color = assign_colors(255, 0, 255);
+	add_back_light(lights, point_light_0);
+
+	point_light_1->pos.x = 15;
+	point_light_1->pos.y = 15;
+	point_light_1->pos.z = 10;
+	point_light_1->lum = 1;
+	point_light_1->color = assign_colors(255, 255, 0);
+	add_back_light(lights, point_light_1);
+}
+
+void	add_back_light(t_lights **start, void *point_light)
+{
+	t_lights *ptr;
+	t_lights *new;
+	
+	new = NULL;
+
+	//initialise light
+	if(!(new = (malloc(sizeof(t_lights)))))
+		return ;
+	new->point_light = point_light;
+	new->next = NULL;
+	//adding light to the linked list
+	if(!*start)
+	{	
+		*start = new;
+		return ;
+	}
+	ptr = *start;
+	while (ptr->next)
+		ptr = ptr->next;
+	ptr->next = new;
+}
