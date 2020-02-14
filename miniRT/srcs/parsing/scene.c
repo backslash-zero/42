@@ -6,19 +6,16 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:31:08 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/14 15:38:41 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/14 22:09:02 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/miniRT.h"
 
-void	scene_parsing(t_scene *scene, t_camera *camera)
+void	ambient_light_parsing(t_scene *scene)
 {
-	window_parsing(scene);
-	camera_parsing(camera);
-	viewport_parsing(scene, camera);
-	scene->objects = NULL;
-	object_parsing(&scene->objects);
+	scene->ambient_light.color = assign_colors(255, 255, 255);
+	scene->ambient_light.lum = 0.5;
 }
 
 void	window_parsing(t_scene *scene)
@@ -35,37 +32,6 @@ void	viewport_parsing(t_scene *scene, t_camera *camera)
 	scene->viewport_d = VIEWPORT_D;
 	scene->viewport_height = tan(rad(camera->fov / 2)) * scene->viewport_d * 2;
 	scene->viewport_width = aspect_ratio * scene->viewport_height;
-}
-
-double	rot_to_deg(double rotation)
-{
-	return(rotation * 180);
-}
-
-void	x_rotation(t_vec *dir, double angle)
-{
-	t_vec tmp;
-	tmp.x = (1 * dir->x) + (0 * dir->y) + (0 * dir->z);
-	tmp.y = (0 * dir->x) + (cos(angle) * dir->y) + (-sin(angle) * dir->z);
-	tmp.z = (0 * dir->x) + (sin(angle) * dir->y) + (cos(angle) * dir->z);
-	*dir = tmp;
-}
-
-void	y_rotation(t_vec *dir, double angle)
-{
-	t_vec tmp;
-	tmp.x = (cos(angle) * dir->x) + (0 * dir->y) + (sin(angle) * dir->z);
-	tmp.y = (0 * dir->x) + (1 * dir->y) + (0 * dir->z);
-	tmp.z = (-sin(angle) * dir->x) + (0 * dir->y) + (cos(angle) * dir->z);
-	*dir = tmp;
-}
-void	z_rotation(t_vec *dir, double angle)
-{
-	t_vec tmp;
-	tmp.x = (cos(angle) * dir->x) + (-sin(angle) * dir->y) + (0 * dir->z);
-	tmp.y = (sin(angle) * dir->x) + (cos(angle) * dir->y) + (0 * dir->z);
-	tmp.z = (0 * dir->x) + (0 * dir->y) + (1 * dir->z);
-	*dir = tmp;
 }
 
 void	calc_camera_dir(t_camera *camera)
@@ -94,16 +60,26 @@ void	calc_camera_dir(t_camera *camera)
 void	camera_parsing(t_camera *camera)
 {
 	// get position vector from parsing
-	camera->pos.x = 40;
+	camera->pos.x = 0;
 	camera->pos.y = 0;
-	camera->pos.z = 10;
+	camera->pos.z = 0;
 
 	// get position direction vector from parsing
 	camera->rot.x = 0;
-	camera->rot.y = -0.5;
+	camera->rot.y = 0;
 	camera->rot.z = 0;
 
 	// calculate direction vector from rotation vectors
 	calc_camera_dir(camera);
 	camera->fov = FOV;
+}
+
+void	scene_parsing(t_scene *scene, t_camera *camera)
+{
+	window_parsing(scene);
+	camera_parsing(camera);
+	viewport_parsing(scene, camera);
+	scene->objects = NULL;
+	object_parsing(&scene->objects);
+	ambient_light_parsing(scene);
 }

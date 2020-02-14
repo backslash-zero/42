@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/14 15:16:11 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/14 22:01:57 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ double get_vp_y(int y, t_scene *scene)
 	return(vp_y);
 }
 
-void intersect_inter_sphere(t_inter *inter, t_camera *camera, t_vec *ray, t_sphere *sphere)
+void intersect_ray_sphere(t_inter *inter, t_camera *camera, t_vec *ray, t_sphere *sphere)
 {
 	t_vec oc;
 	
@@ -65,7 +65,7 @@ void intersect_inter_sphere(t_inter *inter, t_camera *camera, t_vec *ray, t_sphe
 void	intersect_object(t_inter *inter, t_camera *camera, t_vec *ray, t_objects *tmp)
 {
 	if(tmp->id == (int)'s')
-		intersect_inter_sphere(inter, camera, ray, tmp->obj);
+		intersect_ray_sphere(inter, camera, ray, tmp->obj);
 	/*
 	if(tmp->id == (int)'c')
 	if(tmp->id == (int)'t')
@@ -75,7 +75,7 @@ void	intersect_object(t_inter *inter, t_camera *camera, t_vec *ray, t_objects *t
 	*/
 }
 
-int		color_by_type_cast(t_objects *object)
+t_color		color_by_type_cast(t_objects *object)
 {
 	t_sphere *tmp;
 
@@ -84,11 +84,11 @@ int		color_by_type_cast(t_objects *object)
 		tmp = (t_sphere *)object->obj;
 		return(tmp->color);
 	}
-	return(0);
+	return(assign_colors(255, 255, 255));
 }
 
-int		trace_inter(t_camera *camera, t_vec *ray, t_scene *scene){
-	int			color;
+int		trace_ray(t_camera *camera, t_vec *ray, t_scene *scene){
+	t_color		color;
 	double		closest_t;
 	double		min_z;
 	double		max_z;
@@ -120,12 +120,12 @@ int		trace_inter(t_camera *camera, t_vec *ray, t_scene *scene){
 		}
 		// put white if no sphere interesection was found.
 		if(closest_object == NULL)
-			color = get_color_integer(255, 255, 255);
+			color = assign_colors(255, 255, 255);
 		else
 			color = color_by_type_cast(closest_object);
 		tmp = tmp->next;
 	}
-	return(color);
+	return(get_color_integer(color.r, color.g, color.b));
 }
 
 void	ft_init_mlx(t_mlx *mlx, t_scene *scene)
@@ -136,13 +136,6 @@ void	ft_init_mlx(t_mlx *mlx, t_scene *scene)
 	mlx->img_data = (int*)mlx_get_data_addr(mlx->img_ptr, &mlx->bpp, &mlx->size_line, &mlx->endian);
 }
 
-void	rotate_vp(t_vec *ray, t_scene *scene, t_camera *camera, double x, double y)
-{
-	*ray = add_vec(*ray, camera->dir_z);
-	*ray = add_vec(*ray, div_vec_d(mult_point_d(mult_point_d(camera->dir_x, (x - (scene->window_width / 2)) / scene->viewport_width), scene->viewport_width), scene->window_width));
-	*ray = add_vec(*ray, div_vec_d(mult_point_d(mult_point_d(camera->dir_y, (- y + (scene->window_height / 2)) / scene->viewport_height), scene->viewport_height), scene->window_height));
-}
-
 void	init_vec(t_vec *vec)
 {
 	vec->x = 0;
@@ -150,28 +143,7 @@ void	init_vec(t_vec *vec)
 	vec->z = 0;
 }
 
-void	fill_img_2(t_scene *scene, t_mlx *mlx, t_camera *camera)
-{
-	int 	x;
-	int 	y;
-	int		len;
-	t_vec	ray;
-
-	len = mlx->size_line / 4;
-	y = -1;
-	while(++y < scene->window_height)
-	{
-		x = -1;
-		while(++x < scene->window_width)
-		{	
-			init_vec(&ray);
-			rotate_vp(&ray, scene, camera, x, y);
-			mlx->img_data[y * len + x] = trace_inter(camera, &ray, scene);
-		}
-	}
-}
-
-void	fill_img_3(t_scene *scene, t_mlx *mlx, t_camera *camera)
+void	fill_img(t_scene *scene, t_mlx *mlx, t_camera *camera)
 {
 	int 	x;
 	int 	y;
@@ -189,30 +161,7 @@ void	fill_img_3(t_scene *scene, t_mlx *mlx, t_camera *camera)
 			ray = add_vec(ray, camera->dir_z);
 			ray = add_vec(ray, mult_point_d(camera->dir_x, get_vp_x(center_x(x, scene), scene)));
 			ray = add_vec(ray, mult_point_d(camera->dir_y, get_vp_y(center_y(y, scene), scene)));
-			mlx->img_data[y * len + x] = trace_inter(camera, &ray, scene);
-		}
-	}
-}
-
-void	fill_img(t_scene *scene, t_mlx *mlx, t_camera *camera)
-{
-	int 	x;
-	int 	y;
-	int		len;
-	t_vec	ray;
-
-	len = mlx->size_line / 4;
-	y = -1;
-	while(++y < scene->window_height)
-	{
-		x = -1;
-		while(++x < scene->window_width)
-		{
-			//printf("\n x: %d	y: %d\n", x, y);
-			ray.x = get_vp_x(center_x(x, scene), scene);
-			ray.y = get_vp_y(center_y(y, scene), scene);
-			ray.z = scene->viewport_d;
-			mlx->img_data[y * len + x] = trace_inter(camera, &ray, scene);
+			mlx->img_data[y * len + x] = trace_ray(camera, &ray, scene);
 		}
 	}
 }
@@ -228,12 +177,6 @@ int		ft_key(int key,t_mlx *mlx)
 
 void	start_window(t_mlx *mlx)
 {
-	//mlx_clear_window(mlx->mlx_ptr, mlx->win_ptr);
-	/*
-			OR MAYBE instead of 0,0 in mlx_put_image_to_window
-			int x = - scene.window_width / 2;
-			int y = - scene.window_height / 2;
-	*/
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
 	mlx_key_hook(mlx->win_ptr, ft_key, mlx);
 	mlx_loop(mlx->mlx_ptr);
@@ -249,10 +192,13 @@ int		main(int ac, char **av)
 
 	if(ac == 2)
 	{
+		if(stop)
+		{
+			camera.rot.y = 0;
+		}
 		scene_parsing(&scene, &camera);
 		ft_init_mlx(&mlx, &scene);
-	// PARSING TESTS;
-
+		
 		if(stop)
 		{
 			stop = 0;
@@ -275,8 +221,7 @@ int		main(int ac, char **av)
 			printf("\ncamera.dir_y.z: 				%f\n", camera.dir_y.z);
 			printf("\ncamera.dir_z.z: 				%f\n", camera.dir_z.z);
 		}
-		fill_img_3(&scene, &mlx, &camera);
-		// mlx_hook && mlx_hook_loop?
+		fill_img(&scene, &mlx, &camera);
 		start_window(&mlx);
 		// we need to FREE objects when exiting program
 	}

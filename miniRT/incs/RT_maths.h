@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vectors.h                                          :+:      :+:    :+:   */
+/*   RT_maths.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:53:20 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/12 12:52:09 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/14 22:10:02 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	VECTORS_H
-# define VECTORS_H
+#ifndef	RT_MATHS_H
+# define RT_MATHS_H
 
 //double		abs(double nb);
 
@@ -27,5 +27,10 @@ t_vec	create_vec(double x, double y, double z);
 double	prod_scal(t_vec vec1, t_vec vec2);
 double	norm_vec(t_vec vec);
 t_vec	normalized(t_vec vec);
+double	rad(double nb);
+void	x_rotation(t_vec *dir, double angle);
+void	y_rotation(t_vec *dir, double angle);
+void	z_rotation(t_vec *dir, double angle);
+double	rot_to_deg(double rotation);
 
 #endif

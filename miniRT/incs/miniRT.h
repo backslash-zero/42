@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/14 12:55:42 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/14 21:57:10 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 
 // MinilibX
 # include <mlx.h>
+
+typedef	struct	s_color
+{
+	double r;
+	double g;
+	double b;
+}				t_color;
 
 typedef	struct	s_vec
 {
@@ -44,11 +51,24 @@ typedef	struct	s_inter
 	double t2;
 }				t_inter;
 
+typedef	struct	s_ambient_light
+{
+	double	lum;
+	t_color	color;
+}				t_ambient_light;
+
+typedef	struct	s_point_light
+{
+	t_vec	pos;
+	double	lum;
+	t_color	color;
+}				t_point_light;
+
 typedef	struct	s_sphere
 {
 	t_vec	pos;
 	double	r;
-	int 	color;
+	t_color	color;
 }				t_sphere;
 
 typedef	struct	s_objects
@@ -60,12 +80,13 @@ typedef	struct	s_objects
 
 typedef	struct	s_scene
 {
-	double		window_width;
-	double		window_height;
-	double		viewport_width;
-	double		viewport_height;
-	double		viewport_d;
-	t_objects	*objects;
+	double			window_width;
+	double			window_height;
+	double			viewport_width;
+	double			viewport_height;
+	double			viewport_d;
+	t_objects		*objects;
+	t_ambient_light	ambient_light;
 }				t_scene;
 
 #define BACKGROUND_COLOR	16777216
@@ -77,10 +98,11 @@ typedef	struct	s_scene
 // Self-made headers
 # include "RT_mlx.h"
 # include "RT_scene.h"
-# include "vectors.h"
+# include "RT_maths.h"
 # include "RT_parsing.h"
 # include "error.h"
 # include "get_next_line.h"
 # include "RT_utils.h"
+# include "RT_colors.h"
 
 #endif

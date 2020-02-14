@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 12:50:57 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/04 14:12:15 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/14 21:56:33 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,17 @@ int		min_max_color(int value)
 	return(value);
 }
 
-int get_color_integer(int r, int g, int b)
+t_color	assign_colors(int r, int g, int b)
+{
+	t_color color;
+	color.r = r;
+	color.g = g;
+	color.b = b;
+
+	return(color);
+}
+
+int		get_color_integer(int r, int g, int b)
 {
 	int rt;
 
