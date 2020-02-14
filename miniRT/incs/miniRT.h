@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/13 22:13:52 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/14 12:55:42 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ typedef	struct	s_camera
 	double	fov;
 }				t_camera;
 
-typedef	struct	s_ray
+typedef	struct	s_inter
 {
 	double t1;
 	double t2;
-}				t_ray;
+}				t_inter;
 
 typedef	struct	s_sphere
 {

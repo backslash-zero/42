@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:03:19 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/07 19:09:12 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/14 14:07:36 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	object_parsing(t_objects **objects)
 	t_sphere *sphere_2;
 	t_sphere *sphere_3;
 	t_sphere *sphere_4;
+	t_sphere *sphere_5;
+	t_sphere *sphere_6;
 	
 	if(!(sphere_0 = (malloc(sizeof(t_sphere)))))
 		return ;
@@ -37,6 +39,10 @@ void	object_parsing(t_objects **objects)
 	if(!(sphere_3 = (malloc(sizeof(t_sphere)))))
 		return ;
 	if(!(sphere_4 = (malloc(sizeof(t_sphere)))))
+		return ;
+	if(!(sphere_5 = (malloc(sizeof(t_sphere)))))
+		return ;
+	if(!(sphere_6 = (malloc(sizeof(t_sphere)))))
 		return ;
 	//exit if sphere was not allocated?
 
@@ -75,6 +81,20 @@ void	object_parsing(t_objects **objects)
 	sphere_4->r = 10;
 	sphere_4->color = get_color_integer(245, 251, 239);
 	add_back_obj(objects, sphere_4, (int)'s');
+
+	sphere_5->pos.x = 15;
+	sphere_5->pos.y = 0;
+	sphere_5->pos.z = 0;
+	sphere_5->r = 3;
+	sphere_5->color = get_color_integer(255, 0, 0);
+	add_back_obj(objects, sphere_5, (int)'s');
+
+	sphere_6->pos.x = -15;
+	sphere_6->pos.y = 0;
+	sphere_6->pos.z = 0;
+	sphere_6->r = 3;
+	sphere_6->color = get_color_integer(0, 0, 239);
+	add_back_obj(objects, sphere_6, (int)'s');
 
 	/* ************************************************************************** */
 	/*	End Custom obects														  */	

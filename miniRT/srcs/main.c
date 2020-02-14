@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/13 22:14:39 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/14 15:16:11 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,32 +40,32 @@ double get_vp_y(int y, t_scene *scene)
 	return(vp_y);
 }
 
-void intersect_ray_sphere(t_ray *ray, t_camera *camera, t_vec *viewport_point, t_sphere *sphere)
+void intersect_inter_sphere(t_inter *inter, t_camera *camera, t_vec *ray, t_sphere *sphere)
 {
 	t_vec oc;
 	
 	oc = sub_vec(camera->pos, sphere->pos);
-	double k1 = prod_scal(*viewport_point, *viewport_point);
-    double k2 = 2 * prod_scal(oc, *viewport_point);
+	double k1 = prod_scal(*ray, *ray);
+    double k2 = 2 * prod_scal(oc, *ray);
     double k3 = prod_scal(oc, oc) - (sphere->r * sphere->r);
 
     double discriminant = (k2 * k2) - (4 * k1 * k3);
     if(discriminant < 0)
 	{
-		ray->t1 = __DBL_MAX__;
-		ray->t2 = __DBL_MAX__;
+		inter->t1 = __DBL_MAX__;
+		inter->t2 = __DBL_MAX__;
 	}
 	else
 	{
-    	ray->t1 = (-k2 + sqrt(discriminant)) / (2 * k1);
-    	ray->t2 = (-k2 - sqrt(discriminant)) / (2 * k1);
+    	inter->t1 = (-k2 + sqrt(discriminant)) / (2 * k1);
+    	inter->t2 = (-k2 - sqrt(discriminant)) / (2 * k1);
 	}
 }
 
-void	intersect_object(t_ray *ray, t_camera *camera, t_vec *viewport_point, t_objects *tmp)
+void	intersect_object(t_inter *inter, t_camera *camera, t_vec *ray, t_objects *tmp)
 {
 	if(tmp->id == (int)'s')
-		intersect_ray_sphere(ray, camera, viewport_point, tmp->obj);
+		intersect_inter_sphere(inter, camera, ray, tmp->obj);
 	/*
 	if(tmp->id == (int)'c')
 	if(tmp->id == (int)'t')
@@ -87,14 +87,14 @@ int		color_by_type_cast(t_objects *object)
 	return(0);
 }
 
-int		trace_ray(t_camera *camera, t_vec *viewport_point, t_scene *scene){
+int		trace_inter(t_camera *camera, t_vec *ray, t_scene *scene){
 	int			color;
 	double		closest_t;
 	double		min_z;
 	double		max_z;
 	t_objects	*tmp;
 	t_objects	*closest_object;
-	t_ray		ray;
+	t_inter		inter;
 
 	min_z = scene->viewport_d;
 	max_z = __DBL_MAX__;
@@ -107,15 +107,15 @@ int		trace_ray(t_camera *camera, t_vec *viewport_point, t_scene *scene){
 	{
 		//printf("count: %d\n", count);
 		//count++;
-		intersect_object(&ray, camera, viewport_point, tmp);
-		if(ray.t1 > min_z && ray.t1 < max_z && ray.t1 < closest_t)
+		intersect_object(&inter, camera, ray, tmp);
+		if(inter.t1 > min_z && inter.t1 < max_z && inter.t1 < closest_t)
 		{
-			closest_t = ray.t1;
+			closest_t = inter.t1;
 			closest_object = tmp;
 		}
-		if(ray.t2 > min_z && ray.t2 < max_z && ray.t2 < closest_t)
+		if(inter.t2 > min_z && inter.t2 < max_z && inter.t2 < closest_t)
 		{
-			closest_t = ray.t2;
+			closest_t = inter.t2;
 			closest_object = tmp;
 		}
 		// put white if no sphere interesection was found.
@@ -136,11 +136,11 @@ void	ft_init_mlx(t_mlx *mlx, t_scene *scene)
 	mlx->img_data = (int*)mlx_get_data_addr(mlx->img_ptr, &mlx->bpp, &mlx->size_line, &mlx->endian);
 }
 
-void	rotate_vp(t_vec *viewport_point, t_scene *scene, t_camera *camera, double x, double y)
+void	rotate_vp(t_vec *ray, t_scene *scene, t_camera *camera, double x, double y)
 {
-	*viewport_point = add_vec(*viewport_point, camera->dir_z);
-	*viewport_point = add_vec(*viewport_point, div_vec_d(mult_point_d(mult_point_d(camera->dir_x, (x - (scene->window_width / 2)) / scene->viewport_width), scene->viewport_width), scene->window_width));
-	*viewport_point = add_vec(*viewport_point, div_vec_d(mult_point_d(mult_point_d(camera->dir_y, (- y + (scene->window_height / 2)) / scene->viewport_height), scene->viewport_height), scene->window_height));
+	*ray = add_vec(*ray, camera->dir_z);
+	*ray = add_vec(*ray, div_vec_d(mult_point_d(mult_point_d(camera->dir_x, (x - (scene->window_width / 2)) / scene->viewport_width), scene->viewport_width), scene->window_width));
+	*ray = add_vec(*ray, div_vec_d(mult_point_d(mult_point_d(camera->dir_y, (- y + (scene->window_height / 2)) / scene->viewport_height), scene->viewport_height), scene->window_height));
 }
 
 void	init_vec(t_vec *vec)
@@ -155,7 +155,7 @@ void	fill_img_2(t_scene *scene, t_mlx *mlx, t_camera *camera)
 	int 	x;
 	int 	y;
 	int		len;
-	t_vec	viewport_point;
+	t_vec	ray;
 
 	len = mlx->size_line / 4;
 	y = -1;
@@ -164,9 +164,32 @@ void	fill_img_2(t_scene *scene, t_mlx *mlx, t_camera *camera)
 		x = -1;
 		while(++x < scene->window_width)
 		{	
-			init_vec(&viewport_point);
-			rotate_vp(&viewport_point, scene, camera, x, y);
-			mlx->img_data[y * len + x] = trace_ray(camera, &viewport_point, scene);
+			init_vec(&ray);
+			rotate_vp(&ray, scene, camera, x, y);
+			mlx->img_data[y * len + x] = trace_inter(camera, &ray, scene);
+		}
+	}
+}
+
+void	fill_img_3(t_scene *scene, t_mlx *mlx, t_camera *camera)
+{
+	int 	x;
+	int 	y;
+	int		len;
+	t_vec	ray;
+
+	len = mlx->size_line / 4;
+	y = -1;
+	while(++y < scene->window_height)
+	{
+		x = -1;
+		while(++x < scene->window_width)
+		{	
+			init_vec(&ray);
+			ray = add_vec(ray, camera->dir_z);
+			ray = add_vec(ray, mult_point_d(camera->dir_x, get_vp_x(center_x(x, scene), scene)));
+			ray = add_vec(ray, mult_point_d(camera->dir_y, get_vp_y(center_y(y, scene), scene)));
+			mlx->img_data[y * len + x] = trace_inter(camera, &ray, scene);
 		}
 	}
 }
@@ -176,7 +199,7 @@ void	fill_img(t_scene *scene, t_mlx *mlx, t_camera *camera)
 	int 	x;
 	int 	y;
 	int		len;
-	t_vec	viewport_point;
+	t_vec	ray;
 
 	len = mlx->size_line / 4;
 	y = -1;
@@ -186,10 +209,10 @@ void	fill_img(t_scene *scene, t_mlx *mlx, t_camera *camera)
 		while(++x < scene->window_width)
 		{
 			//printf("\n x: %d	y: %d\n", x, y);
-			viewport_point.x = get_vp_x(center_x(x, scene), scene);
-			viewport_point.y = get_vp_y(center_y(y, scene), scene);
-			viewport_point.z = scene->viewport_d;
-			mlx->img_data[y * len + x] = trace_ray(camera, &viewport_point, scene);
+			ray.x = get_vp_x(center_x(x, scene), scene);
+			ray.y = get_vp_y(center_y(y, scene), scene);
+			ray.z = scene->viewport_d;
+			mlx->img_data[y * len + x] = trace_inter(camera, &ray, scene);
 		}
 	}
 }
@@ -252,7 +275,7 @@ int		main(int ac, char **av)
 			printf("\ncamera.dir_y.z: 				%f\n", camera.dir_y.z);
 			printf("\ncamera.dir_z.z: 				%f\n", camera.dir_z.z);
 		}
-		fill_img_2(&scene, &mlx, &camera);
+		fill_img_3(&scene, &mlx, &camera);
 		// mlx_hook && mlx_hook_loop?
 		start_window(&mlx);
 		// we need to FREE objects when exiting program

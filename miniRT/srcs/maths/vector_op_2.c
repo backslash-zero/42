@@ -6,11 +6,11 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 19:23:34 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/07 17:35:08 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/14 15:16:08 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "../../incs/miniRT.h"
 
 t_vec	add_vec_d(t_vec vec1, double val)
 {
