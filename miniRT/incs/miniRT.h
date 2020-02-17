@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/17 18:27:58 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/17 19:52:08 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,17 @@ typedef	struct			s_objects
 	struct s_objects	*next;
 }						t_objects;
 
-typedef	struct	s_lights
+typedef	struct		s_lights
 {
 	t_point_light	*point_light;
 	struct s_lights	*next;
 }					t_lights;
+
+typedef	struct		s_cameras
+{
+	t_camera			*camera;
+	struct s_cameras	*next;
+}					t_cameras;
 
 typedef	struct		s_scene
 {
@@ -98,6 +104,8 @@ typedef	struct		s_scene
 	double			viewport_height;
 	double			viewport_d;
 	t_objects		*objects;
+	t_cameras		*cameras;
+	t_camera		*active_camera;
 	t_lights		*lights;
 	t_ambient_light	ambient_light;
 }					t_scene;

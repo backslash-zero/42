@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/02/14 23:51:37 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/02/17 19:03:31 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,26 +28,27 @@ DIR_SRCS =		./srcs/
 
 DIR_OBJS =		./obj/
 
-SRC =			main.c							\
-				parsing/scene.c					\
-				parsing/objects.c				\
-				parsing/lights.c				\
-				utils/ft_bzero.c				\
-				utils/ft_strjoin_free.c			\
-				utils/ft_susbtr.c				\
-				utils/get_line_break.c			\
-				utils/get_next_line.c			\
-				utils/colors.c					\
-				maths/vector_op_1.c				\
-				maths/vector_op_2.c				\
-				maths/vector_op_3.c				\
-				maths/rotations.c				\
+SRC =			main.c								\
+				parsing/scene.c						\
+				parsing/objects.c					\
+				parsing/lights.c					\
+				parsing/cameras.c					\
+				utils/ft_bzero.c					\
+				utils/ft_strjoin_free.c				\
+				utils/ft_susbtr.c					\
+				utils/get_line_break.c				\
+				utils/get_next_line.c				\
+				utils/colors.c						\
+				maths/vector_op_1.c					\
+				maths/vector_op_2.c					\
+				maths/vector_op_3.c					\
+				maths/rotations.c					\
 
 SRCS =			$(addprefix $(DIR_SRCS), $(SRC))
 
 OBJS =			$(SRCS:.c=.o)
 
-LIBMLX =		/usr/local/lib/libmlx.a \
+LIBMLX =		/usr/local/lib/libmlx.a				\
 
 NAME =			miniRT
 

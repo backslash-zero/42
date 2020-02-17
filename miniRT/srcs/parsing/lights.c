@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 23:44:00 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/15 00:00:39 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/17 19:44:43 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,6 @@ void	point_light_parsing(t_lights **lights)
 	
 	if(!(point_light_0 = (malloc(sizeof(t_point_light)))))
 		return ;
-	if(!(point_light_1 = (malloc(sizeof(t_point_light)))))
-		return ;
-	//exit if point_light was not allocated?
-
-	// add point_light to lights
 	point_light_0->pos.x = -15;
 	point_light_0->pos.y = 15;
 	point_light_0->pos.z = 10;
@@ -45,6 +40,8 @@ void	point_light_parsing(t_lights **lights)
 	point_light_0->color = assign_colors(255, 0, 255);
 	add_back_light(lights, point_light_0);
 
+	if(!(point_light_1 = (malloc(sizeof(t_point_light)))))
+		return ;
 	point_light_1->pos.x = 15;
 	point_light_1->pos.y = 15;
 	point_light_1->pos.z = 10;

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/17 18:28:48 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/17 20:00:19 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ void intersect_ray_sphere(t_camera *camera, t_ray *ray, t_sphere *sphere)
 	}
 }
 
-void	intersect_object(t_camera *camera, t_ray *ray, t_objects *tmp)
+void	intersect_object(t_scene *scene, t_ray *ray, t_objects *tmp)
 {
 	if(tmp->id == (int)'s')
-		intersect_ray_sphere(camera, ray, tmp->obj);
+		intersect_ray_sphere(scene->active_camera, ray, tmp->obj);
 	/*
 	if(tmp->id == (int)'c')
 	if(tmp->id == (int)'t')
@@ -94,7 +94,7 @@ void	ambient_lighting(t_color *color, t_scene *scene)
 	color->b = scene->ambient_light.lum * color->b * (scene->ambient_light.color.b / 255);
 }
 
-int		trace_ray(t_camera *camera, t_ray *ray, t_scene *scene){
+int		trace_ray(t_ray *ray, t_scene *scene){
 	t_color		color;
 	double		closest_t;
 	double		min_z;
@@ -113,7 +113,7 @@ int		trace_ray(t_camera *camera, t_ray *ray, t_scene *scene){
 	{
 		//printf("count: %d\n", count);
 		//count++;
-		intersect_object(camera, ray, tmp);
+		intersect_object(scene, ray, tmp);
 		if(ray->inter.t1 > min_z && ray->inter.t1 < max_z && ray->inter.t1 < closest_t)
 		{
 			closest_t = ray->inter.t1;
@@ -150,7 +150,7 @@ void	init_vec(t_vec *vec)
 	vec->z = 0;
 }
 
-void	fill_img(t_scene *scene, t_mlx *mlx, t_camera *camera)
+void	fill_img(t_scene *scene, t_mlx *mlx)
 {
 	int 	x;
 	int 	y;
@@ -165,10 +165,10 @@ void	fill_img(t_scene *scene, t_mlx *mlx, t_camera *camera)
 		while(++x < scene->window_width)
 		{	
 			init_vec(&ray.dir);
-			ray.dir = add_vec(ray.dir, camera->dir_z);
-			ray.dir = add_vec(ray.dir, mult_point_d(camera->dir_x, get_vp_x(center_x(x, scene), scene)));
-			ray.dir = add_vec(ray.dir, mult_point_d(camera->dir_y, get_vp_y(center_y(y, scene), scene)));
-			mlx->img_data[y * len + x] = trace_ray(camera, &ray, scene);
+			ray.dir = add_vec(ray.dir, scene->active_camera->dir_z);
+			ray.dir = add_vec(ray.dir, mult_point_d(scene->active_camera->dir_x, get_vp_x(center_x(x, scene), scene)));
+			ray.dir = add_vec(ray.dir, mult_point_d(scene->active_camera->dir_y, get_vp_y(center_y(y, scene), scene)));
+			mlx->img_data[y * len + x] = trace_ray(&ray, scene);
 		}
 	}
 }
@@ -192,20 +192,14 @@ void	start_window(t_mlx *mlx)
 int		main(int ac, char **av)
 {
 	(void)av;
-	t_camera 			camera;
 	t_scene				scene;
 	t_mlx				mlx;
 	int					stop = 1;
 
 	if(ac == 2)
 	{
-		if(stop)
-		{
-			camera.rot.y = 0;
-		}
-		scene_parsing(&scene, &camera);
-		ft_init_mlx(&mlx, &scene);
-		
+		scene_parsing(&scene);
+		ft_init_mlx(&mlx, &scene);	
 		if(stop)
 		{
 			stop = 0;
@@ -214,21 +208,21 @@ int		main(int ac, char **av)
 			printf("\nscene.viewport_d: 			%f\n", scene.viewport_d);
 			printf("\nscene.viewport_height: 			%f\n", scene.viewport_height);
 			printf("\nscene.viewport_width: 			%f\n", scene.viewport_width);
-			printf("\ncamera.fov: 				%f\n", camera.fov);
-			printf("\ncamera.pos.x: 				%f\n", camera.pos.x);
-			printf("\ncamera.pos.y: 				%f\n", camera.pos.y);
-			printf("\ncamera.pos.z: 				%f\n", camera.pos.z);
-			printf("\ncamera.dir_x.x: 				%f\n", camera.dir_x.x);
-			printf("\ncamera.dir_y.x: 				%f\n", camera.dir_y.x);
-			printf("\ncamera.dir_z.x: 				%f\n", camera.dir_z.x);
-			printf("\ncamera.dir_x.y: 				%f\n", camera.dir_x.y);
-			printf("\ncamera.dir_y.y: 				%f\n", camera.dir_y.y);
-			printf("\ncamera.dir_z.y: 				%f\n", camera.dir_z.y);
-			printf("\ncamera.dir_x.z: 				%f\n", camera.dir_x.z);
-			printf("\ncamera.dir_y.z: 				%f\n", camera.dir_y.z);
-			printf("\ncamera.dir_z.z: 				%f\n", camera.dir_z.z);
+			printf("\ncamera.fov: 					%f\n", scene.active_camera->fov);
+			printf("\ncamera.pos.x: 				%f\n", scene.active_camera->pos.x);
+			printf("\ncamera.pos.y: 				%f\n", scene.active_camera->pos.y);
+			printf("\ncamera.pos.z: 				%f\n", scene.active_camera->pos.z);
+			printf("\ncamera.dir_x.x: 				%f\n", scene.active_camera->dir_x.x);
+			printf("\ncamera.dir_y.x: 				%f\n", scene.active_camera->dir_y.x);
+			printf("\ncamera.dir_z.x: 				%f\n", scene.active_camera->dir_z.x);
+			printf("\ncamera.dir_x.y: 				%f\n", scene.active_camera->dir_x.y);
+			printf("\ncamera.dir_y.y: 				%f\n", scene.active_camera->dir_y.y);
+			printf("\ncamera.dir_z.y: 				%f\n", scene.active_camera->dir_z.y);
+			printf("\ncamera.dir_x.z: 				%f\n", scene.active_camera->dir_x.z);
+			printf("\ncamera.dir_y.z: 				%f\n", scene.active_camera->dir_y.z);
+			printf("\ncamera.dir_z.z: 				%f\n", scene.active_camera->dir_z.z);
 		}
-		fill_img(&scene, &mlx, &camera);
+		fill_img(&scene, &mlx);
 		start_window(&mlx);
 		// we need to FREE objects when exiting program
 	}

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:31:08 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/14 23:57:46 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/17 20:02:05 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,58 +18,26 @@ void	window_parsing(t_scene *scene)
 	scene->window_height = WINDOW_HEIGHT;
 }
 
-void	viewport_parsing(t_scene *scene, t_camera *camera)
+void	viewport_parsing(t_scene *scene)
 {
 	double	aspect_ratio;
 
 	aspect_ratio = scene->window_width / scene->window_height;
 	scene->viewport_d = VIEWPORT_D;
-	scene->viewport_height = tan(rad(camera->fov / 2)) * scene->viewport_d * 2;
+	scene->viewport_height = tan(rad(scene->active_camera->fov / 2)) * scene->viewport_d * 2;
 	scene->viewport_width = aspect_ratio * scene->viewport_height;
 }
 
-void	calc_camera_dir(t_camera *camera)
+void	scene_parsing(t_scene *scene)
 {
-	camera->dir_x.x = 1;
-	camera->dir_x.y = 0;
-	camera->dir_x.z = 0;
-	camera->dir_y.x = 0;
-	camera->dir_y.y = 1;
-	camera->dir_y.z = 0;
-	camera->dir_z.x = 0;
-	camera->dir_z.y = 0;
-	camera->dir_z.z = 1;
-	x_rotation(&camera->dir_y, rad(rot_to_deg(camera->rot.x)));
-	x_rotation(&camera->dir_z, rad(rot_to_deg(camera->rot.x)));
-	y_rotation(&camera->dir_x, rad(rot_to_deg(camera->rot.y)));
-	y_rotation(&camera->dir_z, rad(rot_to_deg(camera->rot.y)));
-	z_rotation(&camera->dir_x, rad(rot_to_deg(camera->rot.z)));
-	z_rotation(&camera->dir_y, rad(rot_to_deg(camera->rot.z)));
-}
-
-void	camera_parsing(t_camera *camera)
-{
-	// get position vector from parsing
-	camera->pos.x = 0;
-	camera->pos.y = 0;
-	camera->pos.z = -50;
-
-	// get position direction vector from parsing
-	camera->rot.x = 0;
-	camera->rot.y = 0;
-	camera->rot.z = 0;
-
-	// calculate direction vector from rotation vectors
-	calc_camera_dir(camera);
-	camera->fov = FOV;
-}
-
-void	scene_parsing(t_scene *scene, t_camera *camera)
-{
-	window_parsing(scene);
-	camera_parsing(camera);
-	viewport_parsing(scene, camera);
 	scene->objects = NULL;
+	scene->cameras = NULL;
+
+	window_parsing(scene);
+	camera_parsing(&scene->cameras);
+	scene->active_camera = scene->cameras->camera;
+	// edit cameras
+	viewport_parsing(scene);
 	object_parsing(&scene->objects);
 	ambient_light_parsing(scene);
 	point_light_parsing(&scene->lights);
