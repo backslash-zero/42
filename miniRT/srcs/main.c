@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/14 23:34:17 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/17 18:28:48 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,32 +40,32 @@ double get_vp_y(int y, t_scene *scene)
 	return(vp_y);
 }
 
-void intersect_ray_sphere(t_inter *inter, t_camera *camera, t_vec *ray, t_sphere *sphere)
+void intersect_ray_sphere(t_camera *camera, t_ray *ray, t_sphere *sphere)
 {
 	t_vec oc;
 	
 	oc = sub_vec(camera->pos, sphere->pos);
-	double k1 = prod_scal(*ray, *ray);
-    double k2 = 2 * prod_scal(oc, *ray);
+	double k1 = prod_scal(ray->dir, ray->dir);
+    double k2 = 2 * prod_scal(oc, ray->dir);
     double k3 = prod_scal(oc, oc) - (sphere->r * sphere->r);
 
     double discriminant = (k2 * k2) - (4 * k1 * k3);
     if(discriminant < 0)
 	{
-		inter->t1 = __DBL_MAX__;
-		inter->t2 = __DBL_MAX__;
+		ray->inter.t1 = __DBL_MAX__;
+		ray->inter.t2 = __DBL_MAX__;
 	}
 	else
 	{
-    	inter->t1 = (-k2 + sqrt(discriminant)) / (2 * k1);
-    	inter->t2 = (-k2 - sqrt(discriminant)) / (2 * k1);
+		ray->inter.t1 = (-k2 + sqrt(discriminant)) / (2 * k1);
+		ray->inter.t2 = (-k2 - sqrt(discriminant)) / (2 * k1);
 	}
 }
 
-void	intersect_object(t_inter *inter, t_camera *camera, t_vec *ray, t_objects *tmp)
+void	intersect_object(t_camera *camera, t_ray *ray, t_objects *tmp)
 {
 	if(tmp->id == (int)'s')
-		intersect_ray_sphere(inter, camera, ray, tmp->obj);
+		intersect_ray_sphere(camera, ray, tmp->obj);
 	/*
 	if(tmp->id == (int)'c')
 	if(tmp->id == (int)'t')
@@ -94,14 +94,13 @@ void	ambient_lighting(t_color *color, t_scene *scene)
 	color->b = scene->ambient_light.lum * color->b * (scene->ambient_light.color.b / 255);
 }
 
-int		trace_ray(t_camera *camera, t_vec *ray, t_scene *scene){
+int		trace_ray(t_camera *camera, t_ray *ray, t_scene *scene){
 	t_color		color;
 	double		closest_t;
 	double		min_z;
 	double		max_z;
 	t_objects	*tmp;
 	t_objects	*closest_object;
-	t_inter		inter;
 
 	min_z = scene->viewport_d;
 	max_z = __DBL_MAX__;
@@ -114,15 +113,15 @@ int		trace_ray(t_camera *camera, t_vec *ray, t_scene *scene){
 	{
 		//printf("count: %d\n", count);
 		//count++;
-		intersect_object(&inter, camera, ray, tmp);
-		if(inter.t1 > min_z && inter.t1 < max_z && inter.t1 < closest_t)
+		intersect_object(camera, ray, tmp);
+		if(ray->inter.t1 > min_z && ray->inter.t1 < max_z && ray->inter.t1 < closest_t)
 		{
-			closest_t = inter.t1;
+			closest_t = ray->inter.t1;
 			closest_object = tmp;
 		}
-		if(inter.t2 > min_z && inter.t2 < max_z && inter.t2 < closest_t)
+		if(ray->inter.t2 > min_z && ray->inter.t2 < max_z && ray->inter.t2 < closest_t)
 		{
-			closest_t = inter.t2;
+			closest_t = ray->inter.t2;
 			closest_object = tmp;
 		}
 		// put white if no sphere interesection was found.
@@ -156,7 +155,7 @@ void	fill_img(t_scene *scene, t_mlx *mlx, t_camera *camera)
 	int 	x;
 	int 	y;
 	int		len;
-	t_vec	ray;
+	t_ray	ray;
 
 	len = mlx->size_line / 4;
 	y = -1;
@@ -165,10 +164,10 @@ void	fill_img(t_scene *scene, t_mlx *mlx, t_camera *camera)
 		x = -1;
 		while(++x < scene->window_width)
 		{	
-			init_vec(&ray);
-			ray = add_vec(ray, camera->dir_z);
-			ray = add_vec(ray, mult_point_d(camera->dir_x, get_vp_x(center_x(x, scene), scene)));
-			ray = add_vec(ray, mult_point_d(camera->dir_y, get_vp_y(center_y(y, scene), scene)));
+			init_vec(&ray.dir);
+			ray.dir = add_vec(ray.dir, camera->dir_z);
+			ray.dir = add_vec(ray.dir, mult_point_d(camera->dir_x, get_vp_x(center_x(x, scene), scene)));
+			ray.dir = add_vec(ray.dir, mult_point_d(camera->dir_y, get_vp_y(center_y(y, scene), scene)));
 			mlx->img_data[y * len + x] = trace_ray(camera, &ray, scene);
 		}
 	}

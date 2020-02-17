@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/15 00:00:05 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/17 18:27:58 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ typedef	struct	s_inter
 	double t1;
 	double t2;
 }				t_inter;
+
+typedef	struct	s_ray
+{
+	t_vec	dir;
+	t_inter	inter;
+}				t_ray;
 
 typedef	struct	s_ambient_light
 {
