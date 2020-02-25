@@ -6,11 +6,18 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/25 17:09:11 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/25 21:36:47 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/miniRT.h"
+
+void	init_vec(t_vec *vec)
+{
+	vec->x = 0;
+	vec->y = 0;
+	vec->z = 0;
+}
 
 int		center_x(int x, t_scene *scene)
 {
@@ -84,6 +91,13 @@ t_color		color_by_type_cast(t_objects *object)
 		tmp = (t_sphere *)object->obj;
 		return(tmp->color);
 	}
+	/*
+	if(object->id == (int)'c')
+	if(object->id == (int)'t')
+	if(object->id == (int)'p')
+	if(object->id == (int)'s')
+	if(object->id == (int)'s')
+	*/
 	return(assign_colors(255, 255, 255));
 }
 
@@ -101,34 +115,51 @@ void	light_calc(t_color *color, double lum, t_color light_color)
 	color->b = lum * color->b * (light_color.b / 255);
 }
 
-/*
-t_color	point_light(t_scene *scene, t_vec point)
+void	point_light(t_scene *scene, t_vec point, t_vec normal, t_color *color)
 {
 	t_vec		light_vec;
 	t_lights	*tmp;
-	t_color		p_color;
+	double		n_dot_l;
 
+	n_dot_l = 0;
 	tmp = scene->lights;
 	while(tmp)
 	{
+		printf("hey\n");
 		light_vec = sub_vec(tmp->point_light->pos, point);
+		n_dot_l = prod_scal(normal, light_vec);
+		// add  color of the lamp
+		if(n_dot_l > 0)
+			light_calc(color, tmp->point_light->lum, tmp->point_light->color);
 		tmp = tmp->next;
 	}
-	return(p_color);
 }
-*/
-void	process_light(t_color *color, t_scene *scene, t_objects	*closest_object, double	closest_t, t_ray *ray)
-{
-	(void)closest_t;
-	(void)closest_object;
-	(void)ray;
-	
-	//t_vec 	point;
-	//t_color	p_color;
 
-	//point = mult_point_d(ray->dir, closest_t);
-	//p_color = point_light(scene, point);
-	
+t_vec	normal_calc(t_vec point, t_objects	*closest_object)
+{
+	t_vec		normal;
+	t_sphere	*tmp_s;
+
+	init_vec(&normal);
+	if(closest_object->id == (int)'s')
+	{
+		tmp_s = (t_sphere *)closest_object->obj;
+		normal = sub_vec(point, tmp_s->pos);
+	}
+	normal = normalized(normal);
+	return(normal);
+}
+
+void	process_light(t_color *color, t_scene *scene, t_objects	*closest_object, double	closest_t, t_ray *ray)
+{	
+	t_vec 	point;
+	t_vec	normal;
+
+	point = add_vec(scene->active_camera->pos, mult_point_d(ray->dir, closest_t));
+	normal = normal_calc(point, closest_object);
+	// point light process
+	point_light(scene, point, normal, color);
+	// whole light process
 	light_calc(color, scene->ambient_light.lum, scene->ambient_light.color);
 }
 
@@ -163,7 +194,7 @@ int		trace_ray(t_ray *ray, t_scene *scene){
 	}
 	if(closest_object == NULL)
 		return(get_color_integer(255, 255, 255));
-	ambient_lighting(&color, scene);
+	process_light(&color, scene, closest_object, closest_t, ray);
 	return(get_color_integer(color.r, color.g, color.b));
 }
 
@@ -173,13 +204,6 @@ void	ft_init_mlx(t_mlx *mlx, t_scene *scene)
 	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, scene->window_width, scene->window_height, "MiniRT");
 	mlx->img_ptr = mlx_new_image(mlx->mlx_ptr, scene->window_width, scene->window_height);
 	mlx->img_data = (int*)mlx_get_data_addr(mlx->img_ptr, &mlx->bpp, &mlx->size_line, &mlx->endian);
-}
-
-void	init_vec(t_vec *vec)
-{
-	vec->x = 0;
-	vec->y = 0;
-	vec->z = 0;
 }
 
 void	fill_img(t_scene *scene, t_mlx *mlx)
