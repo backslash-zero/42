@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/25 22:58:41 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/25 23:08:35 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,12 @@ typedef	struct			s_objects
 typedef	struct	s_ray
 {
 	t_vec		dir;
+	t_vec		point;
+	t_vec		normal;
 	t_inter		inter;
 	double		closest_t;
 	t_objects	*closest_object;
+	t_color		color;
 }				t_ray;
 
 typedef	struct	s_ambient_light

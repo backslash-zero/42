@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/25 22:59:14 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/25 23:11:14 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	add_light(t_color *color, double new_i, t_color point_light_color)
 	color->b = color->b + addedcolor.b;
 }
 
-void	point_light(t_scene *scene, t_vec point, t_vec normal, t_color *color)
+void	point_light(t_scene *scene, t_ray *ray)
 {
 	t_vec		light_vec;
 	t_lights	*tmp;
@@ -138,17 +138,17 @@ void	point_light(t_scene *scene, t_vec point, t_vec normal, t_color *color)
 	tmp = scene->lights;
 	while(tmp)
 	{
-		light_vec = sub_vec(tmp->point_light->pos, point);
-		n_dot_l = prod_scal(normal, light_vec);
-		new_i = tmp->point_light->lum * n_dot_l / (norm_vec(normal)*norm_vec(light_vec));
+		light_vec = sub_vec(tmp->point_light->pos, ray->point);
+		n_dot_l = prod_scal(ray->normal, light_vec);
+		new_i = tmp->point_light->lum * n_dot_l / (norm_vec(ray->normal)*norm_vec(light_vec));
 		// add  color of the lamp
 		if(n_dot_l > 0)
-			add_light(color, new_i, tmp->point_light->color);
+			add_light(&ray->color, new_i, tmp->point_light->color);
 		tmp = tmp->next;
 	}
 }
 
-t_vec	normal_calc(t_vec point, t_ray *ray)
+t_vec	normal_calc(t_ray *ray)
 {
 	t_vec		normal;
 	t_sphere	*tmp_s;
@@ -157,27 +157,23 @@ t_vec	normal_calc(t_vec point, t_ray *ray)
 	if(ray->closest_object->id == (int)'s')
 	{
 		tmp_s = (t_sphere *)ray->closest_object->obj;
-		normal = sub_vec(point, tmp_s->pos);
+		normal = sub_vec(ray->point, tmp_s->pos);
 	}
 	normal = normalized(normal);
 	return(normal);
 }
 
-void	process_light(t_color *color, t_scene *scene, t_ray *ray)
+void	process_light(t_scene *scene, t_ray *ray)
 {	
-	t_vec 	point;
-	t_vec	normal;
-
-	point = add_vec(scene->active_camera->pos, mult_point_d(ray->dir, ray->closest_t));
-	normal = normal_calc(point, ray);
+	ray->point = add_vec(scene->active_camera->pos, mult_point_d(ray->dir, ray->closest_t));
+	ray->normal = normal_calc(ray);
 	// point light process
-	point_light(scene, point, normal, color);
+	point_light(scene, ray);
 	// whole light process
-	light_calc(color, scene->ambient_light.lum, scene->ambient_light.color);
+	light_calc(&ray->color, scene->ambient_light.lum, scene->ambient_light.color);
 }
 
 int		trace_ray(t_ray *ray, t_scene *scene){
-	t_color		color;
 	t_objects	*tmp;
 
 	tmp = scene->objects;
@@ -200,13 +196,13 @@ int		trace_ray(t_ray *ray, t_scene *scene){
 		}
 		// put white if no sphere interesection was found.
 		if(ray->closest_object != NULL)
-			color = color_by_type_cast(ray->closest_object);
+			ray->color = color_by_type_cast(ray->closest_object);
 		tmp = tmp->next;
 	}
 	if(ray->closest_object == NULL)
 		return(get_color_integer(255, 255, 255));
-	process_light(&color, scene, ray);
-	return(get_color_integer(color.r, color.g, color.b));
+	process_light(scene, ray);
+	return(get_color_integer(ray->color.r, ray->color.g, ray->color.b));
 }
 
 void	ft_init_mlx(t_mlx *mlx, t_scene *scene)
