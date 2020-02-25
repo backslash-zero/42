@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/25 23:08:35 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/26 00:05:42 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,19 @@ typedef	struct	s_point_light
 	t_color	color;
 }				t_point_light;
 
+typedef	struct	s_light_vec
+{
+	t_vec	dir;
+	t_color	color;
+	double	lum;
+}				t_light_vec;
+
 typedef	struct	s_sphere
 {
 	t_vec	pos;
 	double	r;
 	t_color	color;
-	int		specular;
+	double	specular;
 }				t_sphere;
 
 typedef	struct		s_lights

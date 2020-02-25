@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/25 23:11:14 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/26 00:12:19 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,9 +126,52 @@ void	add_light(t_color *color, double new_i, t_color point_light_color)
 	color->b = color->b + addedcolor.b;
 }
 
+void	ambient_light(t_scene *scene, t_ray *ray)
+{
+	light_calc(&ray->color, scene->ambient_light.lum, scene->ambient_light.color);
+}
+
+void	specular_light(t_ray *ray, double specular, t_light_vec *light_vec )
+{
+	t_vec	reflect;
+	t_vec	v;
+	double	r_dot_v;
+	double	new_i;
+
+	init_vec(&reflect);
+	r_dot_v = 0;
+	new_i = 0;
+	v = mult_point_d(ray->dir, -1);
+	if(specular != -1)
+	{
+		reflect = sub_vec(mult_point_d(ray->normal, 2 * prod_scal(ray->normal, light_vec->dir)), light_vec->dir);
+		r_dot_v = prod_scal(reflect, v);
+		new_i = light_vec->lum * pow(r_dot_v / (norm_vec(reflect) * norm_vec(v)), specular);
+		if(r_dot_v > 0)
+			add_light(&ray->color, new_i, light_vec->color);
+	}
+}
+
+void	specular_light_processing(t_ray *ray, t_light_vec *light_vec)
+{
+	t_sphere *s_tmp;
+	if(ray->closest_object->id == (int)'s')
+	{
+		s_tmp = (t_sphere *)ray->closest_object->obj;
+		specular_light(ray, s_tmp->specular, light_vec);
+	}
+	/*
+	if(tmp->id == (int)'c')
+	if(tmp->id == (int)'t')
+	if(tmp->id == (int)'p')
+	if(tmp->id == (int)'s')
+	if(tmp->id == (int)'s')
+	*/
+}
+
 void	point_light(t_scene *scene, t_ray *ray)
 {
-	t_vec		light_vec;
+	t_light_vec	light_vec;
 	t_lights	*tmp;
 	double		n_dot_l;
 	double		new_i;
@@ -138,12 +181,15 @@ void	point_light(t_scene *scene, t_ray *ray)
 	tmp = scene->lights;
 	while(tmp)
 	{
-		light_vec = sub_vec(tmp->point_light->pos, ray->point);
-		n_dot_l = prod_scal(ray->normal, light_vec);
-		new_i = tmp->point_light->lum * n_dot_l / (norm_vec(ray->normal)*norm_vec(light_vec));
+		light_vec.color = tmp->point_light->color;
+		light_vec.lum = tmp->point_light->lum;
+		light_vec.dir = sub_vec(tmp->point_light->pos, ray->point);
+		n_dot_l = prod_scal(ray->normal, light_vec.dir);
+		new_i = light_vec.lum * n_dot_l / (norm_vec(ray->normal)*norm_vec(light_vec.dir));
 		// add  color of the lamp
 		if(n_dot_l > 0)
-			add_light(&ray->color, new_i, tmp->point_light->color);
+			add_light(&ray->color, new_i, light_vec.color);
+		specular_light_processing(ray, &light_vec);
 		tmp = tmp->next;
 	}
 }
@@ -167,10 +213,8 @@ void	process_light(t_scene *scene, t_ray *ray)
 {	
 	ray->point = add_vec(scene->active_camera->pos, mult_point_d(ray->dir, ray->closest_t));
 	ray->normal = normal_calc(ray);
-	// point light process
 	point_light(scene, ray);
-	// whole light process
-	light_calc(&ray->color, scene->ambient_light.lum, scene->ambient_light.color);
+	ambient_light(scene, ray);
 }
 
 int		trace_ray(t_ray *ray, t_scene *scene){
