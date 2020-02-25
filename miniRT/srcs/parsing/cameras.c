@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 19:03:20 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/17 20:06:54 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/21 15:10:16 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	camera_parsing(t_cameras **cameras)
 	camera_1->pos.y = 0;
 	camera_1->pos.z = -50;
 	camera_1->rot.x = 0;
-	camera_1->rot.y = 0;
+	camera_1->rot.y = -1;
 	camera_1->rot.z = 0;
 	calc_camera_dir(camera_1);
 	camera_1->fov = FOV;

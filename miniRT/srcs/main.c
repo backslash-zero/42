@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/17 20:00:19 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/25 17:09:11 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,32 +94,64 @@ void	ambient_lighting(t_color *color, t_scene *scene)
 	color->b = scene->ambient_light.lum * color->b * (scene->ambient_light.color.b / 255);
 }
 
+void	light_calc(t_color *color, double lum, t_color light_color)
+{
+	color->r = lum * color->r * (light_color.r / 255);
+	color->g = lum * color->g * (light_color.g / 255);
+	color->b = lum * color->b * (light_color.b / 255);
+}
+
+/*
+t_color	point_light(t_scene *scene, t_vec point)
+{
+	t_vec		light_vec;
+	t_lights	*tmp;
+	t_color		p_color;
+
+	tmp = scene->lights;
+	while(tmp)
+	{
+		light_vec = sub_vec(tmp->point_light->pos, point);
+		tmp = tmp->next;
+	}
+	return(p_color);
+}
+*/
+void	process_light(t_color *color, t_scene *scene, t_objects	*closest_object, double	closest_t, t_ray *ray)
+{
+	(void)closest_t;
+	(void)closest_object;
+	(void)ray;
+	
+	//t_vec 	point;
+	//t_color	p_color;
+
+	//point = mult_point_d(ray->dir, closest_t);
+	//p_color = point_light(scene, point);
+	
+	light_calc(color, scene->ambient_light.lum, scene->ambient_light.color);
+}
+
 int		trace_ray(t_ray *ray, t_scene *scene){
 	t_color		color;
 	double		closest_t;
-	double		min_z;
-	double		max_z;
 	t_objects	*tmp;
 	t_objects	*closest_object;
 
-	min_z = scene->viewport_d;
-	max_z = __DBL_MAX__;
 	tmp = scene->objects;
 
 	//int count = 1;
 	closest_object = NULL;
-	closest_t = max_z;
+	closest_t = __DBL_MAX__;
 	while(tmp)
 	{
-		//printf("count: %d\n", count);
-		//count++;
 		intersect_object(scene, ray, tmp);
-		if(ray->inter.t1 > min_z && ray->inter.t1 < max_z && ray->inter.t1 < closest_t)
+		if(ray->inter.t1 > 0 && ray->inter.t1 < __DBL_MAX__ && ray->inter.t1 < closest_t)
 		{
 			closest_t = ray->inter.t1;
 			closest_object = tmp;
 		}
-		if(ray->inter.t2 > min_z && ray->inter.t2 < max_z && ray->inter.t2 < closest_t)
+		if(ray->inter.t2 > 0 && ray->inter.t2 < __DBL_MAX__ && ray->inter.t2 < closest_t)
 		{
 			closest_t = ray->inter.t2;
 			closest_object = tmp;
@@ -212,15 +244,6 @@ int		main(int ac, char **av)
 			printf("\ncamera.pos.x: 				%f\n", scene.active_camera->pos.x);
 			printf("\ncamera.pos.y: 				%f\n", scene.active_camera->pos.y);
 			printf("\ncamera.pos.z: 				%f\n", scene.active_camera->pos.z);
-			printf("\ncamera.dir_x.x: 				%f\n", scene.active_camera->dir_x.x);
-			printf("\ncamera.dir_y.x: 				%f\n", scene.active_camera->dir_y.x);
-			printf("\ncamera.dir_z.x: 				%f\n", scene.active_camera->dir_z.x);
-			printf("\ncamera.dir_x.y: 				%f\n", scene.active_camera->dir_x.y);
-			printf("\ncamera.dir_y.y: 				%f\n", scene.active_camera->dir_y.y);
-			printf("\ncamera.dir_z.y: 				%f\n", scene.active_camera->dir_z.y);
-			printf("\ncamera.dir_x.z: 				%f\n", scene.active_camera->dir_x.z);
-			printf("\ncamera.dir_y.z: 				%f\n", scene.active_camera->dir_y.z);
-			printf("\ncamera.dir_z.z: 				%f\n", scene.active_camera->dir_z.z);
 		}
 		fill_img(&scene, &mlx);
 		start_window(&mlx);

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 23:44:00 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/17 19:44:43 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/25 14:43:38 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ambient_light_parsing(t_scene *scene)
 {
 	scene->ambient_light.color = assign_colors(255, 255, 255);
-	scene->ambient_light.lum = 1;
+	scene->ambient_light.lum = 0.5;
 }
 
 void	point_light_parsing(t_lights **lights)
