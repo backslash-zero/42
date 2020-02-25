@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/25 21:36:47 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/25 22:59:14 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,48 +115,61 @@ void	light_calc(t_color *color, double lum, t_color light_color)
 	color->b = lum * color->b * (light_color.b / 255);
 }
 
+void	add_light(t_color *color, double new_i, t_color point_light_color)
+{
+	t_color addedcolor;
+
+	addedcolor = *color;
+	light_calc(&addedcolor, new_i, point_light_color);
+	color->r = color->r + addedcolor.r;
+	color->g = color->g + addedcolor.g;
+	color->b = color->b + addedcolor.b;
+}
+
 void	point_light(t_scene *scene, t_vec point, t_vec normal, t_color *color)
 {
 	t_vec		light_vec;
 	t_lights	*tmp;
 	double		n_dot_l;
+	double		new_i;
 
 	n_dot_l = 0;
+	new_i = 0;
 	tmp = scene->lights;
 	while(tmp)
 	{
-		printf("hey\n");
 		light_vec = sub_vec(tmp->point_light->pos, point);
 		n_dot_l = prod_scal(normal, light_vec);
+		new_i = tmp->point_light->lum * n_dot_l / (norm_vec(normal)*norm_vec(light_vec));
 		// add  color of the lamp
 		if(n_dot_l > 0)
-			light_calc(color, tmp->point_light->lum, tmp->point_light->color);
+			add_light(color, new_i, tmp->point_light->color);
 		tmp = tmp->next;
 	}
 }
 
-t_vec	normal_calc(t_vec point, t_objects	*closest_object)
+t_vec	normal_calc(t_vec point, t_ray *ray)
 {
 	t_vec		normal;
 	t_sphere	*tmp_s;
 
 	init_vec(&normal);
-	if(closest_object->id == (int)'s')
+	if(ray->closest_object->id == (int)'s')
 	{
-		tmp_s = (t_sphere *)closest_object->obj;
+		tmp_s = (t_sphere *)ray->closest_object->obj;
 		normal = sub_vec(point, tmp_s->pos);
 	}
 	normal = normalized(normal);
 	return(normal);
 }
 
-void	process_light(t_color *color, t_scene *scene, t_objects	*closest_object, double	closest_t, t_ray *ray)
+void	process_light(t_color *color, t_scene *scene, t_ray *ray)
 {	
 	t_vec 	point;
 	t_vec	normal;
 
-	point = add_vec(scene->active_camera->pos, mult_point_d(ray->dir, closest_t));
-	normal = normal_calc(point, closest_object);
+	point = add_vec(scene->active_camera->pos, mult_point_d(ray->dir, ray->closest_t));
+	normal = normal_calc(point, ray);
 	// point light process
 	point_light(scene, point, normal, color);
 	// whole light process
@@ -165,36 +178,34 @@ void	process_light(t_color *color, t_scene *scene, t_objects	*closest_object, do
 
 int		trace_ray(t_ray *ray, t_scene *scene){
 	t_color		color;
-	double		closest_t;
 	t_objects	*tmp;
-	t_objects	*closest_object;
 
 	tmp = scene->objects;
 
 	//int count = 1;
-	closest_object = NULL;
-	closest_t = __DBL_MAX__;
+	ray->closest_object = NULL;
+	ray->closest_t = __DBL_MAX__;
 	while(tmp)
 	{
 		intersect_object(scene, ray, tmp);
-		if(ray->inter.t1 > 0 && ray->inter.t1 < __DBL_MAX__ && ray->inter.t1 < closest_t)
+		if(ray->inter.t1 > 0 && ray->inter.t1 < __DBL_MAX__ && ray->inter.t1 < ray->closest_t)
 		{
-			closest_t = ray->inter.t1;
-			closest_object = tmp;
+			ray->closest_t = ray->inter.t1;
+			ray->closest_object = tmp;
 		}
-		if(ray->inter.t2 > 0 && ray->inter.t2 < __DBL_MAX__ && ray->inter.t2 < closest_t)
+		if(ray->inter.t2 > 0 && ray->inter.t2 < __DBL_MAX__ && ray->inter.t2 < ray->closest_t)
 		{
-			closest_t = ray->inter.t2;
-			closest_object = tmp;
+			ray->closest_t = ray->inter.t2;
+			ray->closest_object = tmp;
 		}
 		// put white if no sphere interesection was found.
-		if(closest_object != NULL)
-			color = color_by_type_cast(closest_object);
+		if(ray->closest_object != NULL)
+			color = color_by_type_cast(ray->closest_object);
 		tmp = tmp->next;
 	}
-	if(closest_object == NULL)
+	if(ray->closest_object == NULL)
 		return(get_color_integer(255, 255, 255));
-	process_light(&color, scene, closest_object, closest_t, ray);
+	process_light(&color, scene, ray);
 	return(get_color_integer(color.r, color.g, color.b));
 }
 

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/17 19:52:08 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/25 22:58:41 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,19 @@ typedef	struct	s_inter
 	double t2;
 }				t_inter;
 
+typedef	struct			s_objects
+{
+	int					id;
+	void				*obj;
+	struct s_objects	*next;
+}						t_objects;
+
 typedef	struct	s_ray
 {
-	t_vec	dir;
-	t_inter	inter;
+	t_vec		dir;
+	t_inter		inter;
+	double		closest_t;
+	t_objects	*closest_object;
 }				t_ray;
 
 typedef	struct	s_ambient_light
@@ -75,14 +84,8 @@ typedef	struct	s_sphere
 	t_vec	pos;
 	double	r;
 	t_color	color;
+	int		specular;
 }				t_sphere;
-
-typedef	struct			s_objects
-{
-	int					id;
-	void				*obj;
-	struct s_objects	*next;
-}						t_objects;
 
 typedef	struct		s_lights
 {

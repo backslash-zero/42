@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:03:19 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/14 21:57:43 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/25 22:47:02 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	object_parsing(t_objects **objects)
 	sphere_0->pos.y = -1;
 	sphere_0->pos.z = 12;
 	sphere_0->r = 2;
+	sphere_0->specular = 2;
 	sphere_0->color = assign_colors(76, 44, 114);
 	add_back_obj(objects, sphere_0, (int)'s');
 
@@ -58,6 +59,7 @@ void	object_parsing(t_objects **objects)
 	sphere_1->pos.y = 0;
 	sphere_1->pos.z = 15;
 	sphere_1->r = 2;
+	sphere_1->specular = 20;
 	sphere_1->color = assign_colors(156, 227, 125);
 	add_back_obj(objects, sphere_1, (int)'s');
 	
@@ -65,6 +67,7 @@ void	object_parsing(t_objects **objects)
 	sphere_2->pos.y = 0;
 	sphere_2->pos.z = 10;
 	sphere_2->r = 2;
+	sphere_2->specular = 200;
 	sphere_2->color = assign_colors(116, 139, 117);
 	add_back_obj(objects, sphere_2, (int)'s');
 
@@ -72,6 +75,7 @@ void	object_parsing(t_objects **objects)
 	sphere_3->pos.y = 3;
 	sphere_3->pos.z = 8;
 	sphere_3->r = 1;
+	sphere_3->specular = 2000;
 	sphere_3->color = assign_colors(233, 210, 192);
 	add_back_obj(objects, sphere_3, (int)'s');
 
@@ -79,6 +83,7 @@ void	object_parsing(t_objects **objects)
 	sphere_4->pos.y = 5;
 	sphere_4->pos.z = 20;
 	sphere_4->r = 10;
+	sphere_4->specular = -1;
 	sphere_4->color = assign_colors(245, 251, 239);
 	add_back_obj(objects, sphere_4, (int)'s');
 
@@ -86,6 +91,7 @@ void	object_parsing(t_objects **objects)
 	sphere_5->pos.y = 0;
 	sphere_5->pos.z = 0;
 	sphere_5->r = 3;
+	sphere_5->specular = 3000;
 	sphere_5->color = assign_colors(255, 0, 0);
 	add_back_obj(objects, sphere_5, (int)'s');
 
@@ -93,6 +99,7 @@ void	object_parsing(t_objects **objects)
 	sphere_6->pos.y = 0;
 	sphere_6->pos.z = 0;
 	sphere_6->r = 3;
+	sphere_6->specular = 3;
 	sphere_6->color = assign_colors(0, 0, 239);
 	add_back_obj(objects, sphere_6, (int)'s');
 
