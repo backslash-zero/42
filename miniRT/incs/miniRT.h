@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/26 00:05:42 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/27 17:47:03 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef	struct			s_objects
 typedef	struct	s_ray
 {
 	t_vec		dir;
+	t_vec		origin;
 	t_vec		point;
 	t_vec		normal;
 	t_inter		inter;

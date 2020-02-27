@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/27 16:40:29 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/27 17:48:39 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ double get_vp_y(int y, t_scene *scene)
 	return(vp_y);
 }
 
-void intersect_ray_sphere(t_camera *camera, t_ray *ray, t_sphere *sphere)
+void intersect_ray_sphere(t_ray *ray, t_sphere *sphere)
 {
 	t_vec oc;
 	
-	oc = sub_vec(camera->pos, sphere->pos);
+	oc = sub_vec(ray->origin, sphere->pos);
 	double k1 = prod_scal(ray->dir, ray->dir);
     double k2 = 2 * prod_scal(oc, ray->dir);
     double k3 = prod_scal(oc, oc) - (sphere->r * sphere->r);
@@ -69,10 +69,10 @@ void intersect_ray_sphere(t_camera *camera, t_ray *ray, t_sphere *sphere)
 	}
 }
 
-void	intersect_object(t_scene *scene, t_ray *ray, t_objects *tmp)
+void	intersect_object(t_ray *ray, t_objects *tmp)
 {
 	if(tmp->id == (int)'s')
-		intersect_ray_sphere(scene->active_camera, ray, tmp->obj);
+		intersect_ray_sphere(ray, tmp->obj);
 	/*
 	if(tmp->id == (int)'c')
 	if(tmp->id == (int)'t')
@@ -162,6 +162,41 @@ void	specular_light_processing(t_ray *ray, t_light_vec *light_vec)
 	}
 }
 
+/* double	point_light_t_calc(t_lights *active_light)
+{
+	double max;
+
+	max = 0;
+	return(max);
+} */
+
+int		shadow_intersection(t_ray *light_ray, t_scene *scene, t_light_vec *light_vec)
+{
+	t_objects	*tmp;
+	double		max;
+	
+	(void)light_vec;
+	tmp = scene->objects;
+	max = norm_vec(light_ray->dir);
+	while(tmp)
+	{
+		intersect_object(light_ray, tmp);
+		// > 0 or 0.0000001
+		if(light_ray->inter.t1 > 0 && light_ray->inter.t1 < max)
+			return(1);
+		if(light_ray->inter.t2 > 0 && light_ray->inter.t2 < max)
+			return(1);
+		tmp = tmp->next;
+	}
+	return(0);
+}
+
+void convert_light_ray(t_ray *ray, t_ray *light_ray, t_light_vec *light_vec)
+{
+	light_ray->origin = ray->point;
+	light_ray->dir = mult_point_d(light_vec->dir, -1);
+}
+
 void	point_light(t_scene *scene, t_ray *ray)
 {
 	t_light_vec	light_vec;
@@ -170,7 +205,6 @@ void	point_light(t_scene *scene, t_ray *ray)
 	double		new_i;
 	t_ray		light_ray;
 	
-	(void)light_ray;
 	n_dot_l = 0;
 	new_i = 0;
 	tmp = scene->lights;
@@ -179,12 +213,17 @@ void	point_light(t_scene *scene, t_ray *ray)
 		light_vec.color = tmp->point_light->color;
 		light_vec.lum = tmp->point_light->lum;
 		light_vec.dir = sub_vec(tmp->point_light->pos, ray->point);
+		
 		n_dot_l = prod_scal(ray->normal, light_vec.dir);
 		new_i = light_vec.lum * n_dot_l / (norm_vec(ray->normal)*norm_vec(light_vec.dir));
-		// add  color of the lamp
+
+		convert_light_ray(ray, &light_ray, &light_vec);
 		if(n_dot_l > 0)
 			add_light(&ray->color, new_i, light_vec.color);
 		specular_light_processing(ray, &light_vec);
+		/* if(!shadow_intersection(&light_ray, scene, &light_vec))
+		{	
+		} */
 		tmp = tmp->next;
 	}
 }
@@ -221,7 +260,7 @@ void	intersection(t_ray *ray, t_scene *scene){
 	ray->closest_t = __DBL_MAX__;
 	while(tmp)
 	{
-		intersect_object(scene, ray, tmp);
+		intersect_object(ray, tmp);
 		if(ray->inter.t1 > 0 && ray->inter.t1 < __DBL_MAX__ && ray->inter.t1 < ray->closest_t)
 		{
 			ray->closest_t = ray->inter.t1;
@@ -271,6 +310,7 @@ void	fill_img(t_scene *scene, t_mlx *mlx)
 		while(++x < scene->window_width)
 		{	
 			init_vec(&ray.dir);
+			ray.origin = scene->active_camera->pos;
 			ray.dir = add_vec(ray.dir, scene->active_camera->dir_z);
 			ray.dir = add_vec(ray.dir, mult_point_d(scene->active_camera->dir_x, get_vp_x(center_x(x, scene), scene)));
 			ray.dir = add_vec(ray.dir, mult_point_d(scene->active_camera->dir_y, get_vp_y(center_y(y, scene), scene)));
