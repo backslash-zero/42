@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:03:19 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/25 22:47:02 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/26 00:44:45 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	object_parsing(t_objects **objects)
 	sphere_1->pos.y = 0;
 	sphere_1->pos.z = 15;
 	sphere_1->r = 2;
-	sphere_1->specular = 20;
+	sphere_1->specular = 1000;
 	sphere_1->color = assign_colors(156, 227, 125);
 	add_back_obj(objects, sphere_1, (int)'s');
 	
@@ -83,7 +83,7 @@ void	object_parsing(t_objects **objects)
 	sphere_4->pos.y = 5;
 	sphere_4->pos.z = 20;
 	sphere_4->r = 10;
-	sphere_4->specular = -1;
+	sphere_4->specular = 1;
 	sphere_4->color = assign_colors(245, 251, 239);
 	add_back_obj(objects, sphere_4, (int)'s');
 

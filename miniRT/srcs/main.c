@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/26 00:12:19 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/27 16:40:29 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,13 +160,6 @@ void	specular_light_processing(t_ray *ray, t_light_vec *light_vec)
 		s_tmp = (t_sphere *)ray->closest_object->obj;
 		specular_light(ray, s_tmp->specular, light_vec);
 	}
-	/*
-	if(tmp->id == (int)'c')
-	if(tmp->id == (int)'t')
-	if(tmp->id == (int)'p')
-	if(tmp->id == (int)'s')
-	if(tmp->id == (int)'s')
-	*/
 }
 
 void	point_light(t_scene *scene, t_ray *ray)
@@ -175,7 +168,9 @@ void	point_light(t_scene *scene, t_ray *ray)
 	t_lights	*tmp;
 	double		n_dot_l;
 	double		new_i;
-
+	t_ray		light_ray;
+	
+	(void)light_ray;
 	n_dot_l = 0;
 	new_i = 0;
 	tmp = scene->lights;
@@ -217,12 +212,11 @@ void	process_light(t_scene *scene, t_ray *ray)
 	ambient_light(scene, ray);
 }
 
-int		trace_ray(t_ray *ray, t_scene *scene){
+void	intersection(t_ray *ray, t_scene *scene){
 	t_objects	*tmp;
 
 	tmp = scene->objects;
 
-	//int count = 1;
 	ray->closest_object = NULL;
 	ray->closest_t = __DBL_MAX__;
 	while(tmp)
@@ -243,6 +237,11 @@ int		trace_ray(t_ray *ray, t_scene *scene){
 			ray->color = color_by_type_cast(ray->closest_object);
 		tmp = tmp->next;
 	}
+}
+
+int		trace_ray(t_ray *ray, t_scene *scene)
+{
+	intersection(ray, scene);
 	if(ray->closest_object == NULL)
 		return(get_color_integer(255, 255, 255));
 	process_light(scene, ray);
@@ -312,9 +311,9 @@ int		main(int ac, char **av)
 			stop = 0;
 			printf("\nscene.window_width: 				%f\n", scene.window_width);
 			printf("\nscene.window_height: 				%f\n", scene.window_height);
-			printf("\nscene.viewport_d: 			%f\n", scene.viewport_d);
-			printf("\nscene.viewport_height: 			%f\n", scene.viewport_height);
-			printf("\nscene.viewport_width: 			%f\n", scene.viewport_width);
+			printf("\nscene.viewport_d: 				%f\n", scene.viewport_d);
+			printf("\nscene.viewport_height: 				%f\n", scene.viewport_height);
+			printf("\nscene.viewport_width: 				%f\n", scene.viewport_width);
 			printf("\ncamera.fov: 					%f\n", scene.active_camera->fov);
 			printf("\ncamera.pos.x: 				%f\n", scene.active_camera->pos.x);
 			printf("\ncamera.pos.y: 				%f\n", scene.active_camera->pos.y);
