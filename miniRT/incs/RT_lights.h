@@ -3,15 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   RT_lights.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: celestin <celestin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:46:40 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/28 14:13:29 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/28 17:22:30 by celestin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_LIGHTS_H
 # define RT_LIGHTS_H
+
+typedef	struct	s_ambient_light
+{
+	double	lum;
+	t_color	color;
+}				t_ambient_light;
+
+typedef	struct	s_point_light
+{
+	t_vec	pos;
+	double	lum;
+	t_color	color;
+}				t_point_light;
+
+typedef	struct	s_light_vec
+{
+	t_vec	dir;
+	t_color	color;
+	double	lum;
+}				t_light_vec;
+
+typedef	struct		s_lights
+{
+	t_point_light	*point_light;
+	struct s_lights	*next;
+}					t_lights;
 
 void	process_light(t_scene *scene, t_ray *ray);
 void	point_light(t_scene *scene, t_ray *ray);

@@ -3,15 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   RT_scene.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: celestin <celestin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:34:23 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/28 14:08:27 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/28 17:21:58 by celestin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_SCENE_H
 # define RT_SCENE_H
+
+typedef	struct			s_objects
+{
+	int					id;
+	void				*obj;
+	struct s_objects	*next;
+}						t_objects;
+
+typedef	struct	s_camera
+{
+	t_vec	pos;
+	t_vec	rot;
+	t_vec	dir_x;
+	t_vec	dir_y;
+	t_vec	dir_z;
+	double	fov;
+}				t_camera;
+
+typedef	struct	s_sphere
+{
+	t_vec	pos;
+	double	r;
+	t_color	color;
+	double	specular;
+}				t_sphere;
+
+typedef	struct		s_cameras
+{
+	t_camera			*camera;
+	struct s_cameras	*next;
+}					t_cameras;
+
+typedef	struct		s_scene
+{
+	double			window_width;
+	double			window_height;
+	double			viewport_width;
+	double			viewport_height;
+	double			viewport_d;
+	t_objects		*objects;
+	t_cameras		*cameras;
+	t_camera		*active_camera;
+	t_lights		*lights;
+	t_ambient_light	ambient_light;
+}					t_scene;
 
 void	scene_parsing(t_scene *scene);
 void	window_parsing(t_scene *scene);
