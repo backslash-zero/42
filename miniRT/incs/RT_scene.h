@@ -6,19 +6,12 @@
 /*   By: celestin <celestin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:34:23 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/28 17:21:58 by celestin         ###   ########.fr       */
+/*   Updated: 2020/02/28 17:36:57 by celestin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_SCENE_H
 # define RT_SCENE_H
-
-typedef	struct			s_objects
-{
-	int					id;
-	void				*obj;
-	struct s_objects	*next;
-}						t_objects;
 
 typedef	struct	s_camera
 {
@@ -29,14 +22,6 @@ typedef	struct	s_camera
 	t_vec	dir_z;
 	double	fov;
 }				t_camera;
-
-typedef	struct	s_sphere
-{
-	t_vec	pos;
-	double	r;
-	t_color	color;
-	double	specular;
-}				t_sphere;
 
 typedef	struct		s_cameras
 {
@@ -57,6 +42,57 @@ typedef	struct		s_scene
 	t_lights		*lights;
 	t_ambient_light	ambient_light;
 }					t_scene;
+
+typedef	struct			s_objects
+{
+	int					id;
+	void				*obj;
+	struct s_objects	*next;
+}						t_objects;
+
+typedef	struct	s_sphere
+{
+	t_vec	pos;
+	double	r;
+	t_color	color;
+	double	specular;
+}				t_sphere;
+
+typedef	struct	s_plane
+{
+	t_vec	pos;
+	t_vec	rot;
+	t_color	color;
+	double	specular;
+}				t_plane;
+
+typedef	struct	s_square
+{
+	t_vec	pos;
+	t_vec	rot;
+	t_color	color;
+	double	height;
+	double	specular;
+}				t_square;
+
+typedef	struct	s_cylinder
+{
+	t_vec	pos;
+	t_vec	rot;
+	t_color	color;
+	double	diameter;
+	double	height;
+	double	specular;
+}				t_cylinder;
+
+typedef	struct	s_triangle
+{
+	t_vec	point_1;
+	t_vec	point_2;
+	t_vec	point_3;
+	t_color	color;
+	double	specular;
+}				s_triangle;
 
 void	scene_parsing(t_scene *scene);
 void	window_parsing(t_scene *scene);
