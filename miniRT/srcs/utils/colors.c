@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 12:50:57 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/14 21:56:33 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/28 14:22:02 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,23 @@ int		get_color_integer(int r, int g, int b)
 	rt |= min_max_color(g) << 8;
 	rt |= min_max_color(b);
 	return (rt);
+}
+
+t_color		color_by_type_cast(t_objects *object)
+{
+	t_sphere *tmp;
+
+	if(object->id == (int)'s')
+	{
+		tmp = (t_sphere *)object->obj;
+		return(tmp->color);
+	}
+	/*
+	if(object->id == (int)'c')
+	if(object->id == (int)'t')
+	if(object->id == (int)'p')
+	if(object->id == (int)'s')
+	if(object->id == (int)'s')
+	*/
+	return(assign_colors(255, 255, 255));
 }

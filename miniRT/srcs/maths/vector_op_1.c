@@ -12,6 +12,13 @@
 
 #include "../../incs/miniRT.h"
 
+void	init_vec(t_vec *vec)
+{
+	vec->x = 0;
+	vec->y = 0;
+	vec->z = 0;
+}
+
 t_vec	add_vec(t_vec vec1, t_vec vec2)
 {
 	vec1.x += vec2.x;

@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/02/17 19:03:31 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/02/28 14:58:25 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ GRAPHIC_LIBS =	-framework OpenGL -framework AppKit
 
 COMPIL =		$(FLAGS) $(LEAK_CHECK)
 
-RM =			rm -rf
+RM =			@rm -rf
 
 DIR_HEADERS =	./incs/
 
@@ -29,24 +29,30 @@ DIR_SRCS =		./srcs/
 DIR_OBJS =		./obj/
 
 SRC =			main.c								\
-				parsing/scene.c						\
-				parsing/objects.c					\
-				parsing/lights.c					\
-				parsing/cameras.c					\
+				maths/rotations.c					\
+				maths/vector_op_1.c					\
+				maths/vector_op_2.c					\
+				maths/vector_op_3.c					\
+				mlx/RT_mlx.c						\
+				parsing/parsing_cameras.c			\
+				parsing/parsing_lights.c			\
+				parsing/parsing_scene.c				\
+				parsing/parsing_objects.c			\
+				raytracing/intersections.c			\
+				raytracing/lights_1.c				\
+				raytracing/lights_2.c				\
+				raytracing/object_intersection.c	\
+				raytracing/viewport.c				\
+				utils/colors.c						\
 				utils/ft_bzero.c					\
 				utils/ft_strjoin_free.c				\
 				utils/ft_susbtr.c					\
 				utils/get_line_break.c				\
 				utils/get_next_line.c				\
-				utils/colors.c						\
-				maths/vector_op_1.c					\
-				maths/vector_op_2.c					\
-				maths/vector_op_3.c					\
-				maths/rotations.c					\
 
 SRCS =			$(addprefix $(DIR_SRCS), $(SRC))
 
-OBJS =			$(SRCS:.c=.o)
+OBJS =			$(SRCS:%.c=%.o)	
 
 LIBMLX =		/usr/local/lib/libmlx.a				\
 
@@ -59,7 +65,7 @@ $(NAME): 		$(OBJS)
 
 %.o: %.c
 				@gcc $(FLAGS) -I $(DIR_HEADERS) -c $< -o $@
-				@echo "Compiled "$<" successfully!"
+				@echo "☑️  Compiled "$<" successfully!"
 
 norme:
 				norminette $(DIR_SRCS)
@@ -67,6 +73,7 @@ norme:
 
 clean:
 				$(RM) $(OBJS)
+				@echo "🗑️  Removed .o files successfully"$<"!"
 
 fclean:			clean
 				$(RM) $(NAME)

@@ -6,13 +6,14 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/27 17:47:03 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/28 14:15:30 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINI_RT_H
 # define MINI_RT_H
 
+// Standard libraries
 # include <math.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -131,6 +132,7 @@ typedef	struct		s_scene
 
 // Self-made headers
 # include "RT_mlx.h"
+# include "RT_lights.h"
 # include "RT_scene.h"
 # include "RT_colors.h"
 # include "RT_maths.h"
@@ -138,5 +140,6 @@ typedef	struct		s_scene
 # include "error.h"
 # include "get_next_line.h"
 # include "RT_parsing.h"
+# include "RT_raytracing.h"
 
 #endif

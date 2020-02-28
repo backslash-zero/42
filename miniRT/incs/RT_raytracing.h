@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   RT_raytracing.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/18 17:47:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/04 12:29:10 by cmeunier         ###   ########.fr       */
+/*   Created: 2020/02/28 14:13:01 by cmeunier          #+#    #+#             */
+/*   Updated: 2020/02/28 14:20:41 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/miniRT.h"
+#ifndef RT_RAYTRACING_H
+# define RT_RAYTRACING_H
 
-void	ft_lstadd_back(t_list **alst, t_list *new)
-{
-	t_list *ptr;
+void	intersect_ray_sphere(t_ray *ray, t_sphere *sphere);
+void	intersection(t_ray *ray, t_scene *scene);
+void	intersect_object(t_ray *ray, t_objects *tmp);
+t_vec	normal_calc(t_ray *ray);
 
-	if (!alst || !new)
-		return ;
-	if (!*alst)
-	{
-		*alst = new;
-		return ;
-	}
-	ptr = *alst;
-	while (ptr->next)
-		ptr = ptr->next;
-	ptr->next = new;
-}
+#endif
