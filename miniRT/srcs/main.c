@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/27 17:48:39 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/27 18:02:50 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,9 +182,9 @@ int		shadow_intersection(t_ray *light_ray, t_scene *scene, t_light_vec *light_ve
 	{
 		intersect_object(light_ray, tmp);
 		// > 0 or 0.0000001
-		if(light_ray->inter.t1 > 0 && light_ray->inter.t1 < max)
+		if(light_ray->inter.t1 > 0.000001 && light_ray->inter.t1 < max)
 			return(1);
-		if(light_ray->inter.t2 > 0 && light_ray->inter.t2 < max)
+		if(light_ray->inter.t2 > 0.000001 && light_ray->inter.t2 < max)
 			return(1);
 		tmp = tmp->next;
 	}
@@ -194,7 +194,7 @@ int		shadow_intersection(t_ray *light_ray, t_scene *scene, t_light_vec *light_ve
 void convert_light_ray(t_ray *ray, t_ray *light_ray, t_light_vec *light_vec)
 {
 	light_ray->origin = ray->point;
-	light_ray->dir = mult_point_d(light_vec->dir, -1);
+	light_ray->dir =light_vec->dir;
 }
 
 void	point_light(t_scene *scene, t_ray *ray)
@@ -218,12 +218,12 @@ void	point_light(t_scene *scene, t_ray *ray)
 		new_i = light_vec.lum * n_dot_l / (norm_vec(ray->normal)*norm_vec(light_vec.dir));
 
 		convert_light_ray(ray, &light_ray, &light_vec);
-		if(n_dot_l > 0)
-			add_light(&ray->color, new_i, light_vec.color);
-		specular_light_processing(ray, &light_vec);
-		/* if(!shadow_intersection(&light_ray, scene, &light_vec))
-		{	
-		} */
+		if(!shadow_intersection(&light_ray, scene, &light_vec))
+		{
+			if(n_dot_l > 0)
+				add_light(&ray->color, new_i, light_vec.color);
+			specular_light_processing(ray, &light_vec);
+		}
 		tmp = tmp->next;
 	}
 }

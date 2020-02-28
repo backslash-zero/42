@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 19:03:20 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/27 17:32:11 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/28 12:22:53 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	camera_parsing(t_cameras **cameras)
 	if(!(camera_0 = (malloc(sizeof(t_camera)))))
 		return ;
 	camera_0->pos.x = 0;
-	camera_0->pos.y = 0;
-	camera_0->pos.z = 0;
-	camera_0->rot.x = 0;
+	camera_0->pos.y = 5;
+	camera_0->pos.z = -10;
+	camera_0->rot.x = 0.1;
 	camera_0->rot.y = 0;
 	camera_0->rot.z = 0;
 	calc_camera_dir(camera_0);

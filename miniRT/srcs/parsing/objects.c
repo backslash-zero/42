@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 18:03:19 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/26 00:44:45 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/28 13:06:25 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,50 +48,50 @@ void	object_parsing(t_objects **objects)
 
 	// add sphere to objects
 	sphere_0->pos.x = 0;
-	sphere_0->pos.y = -1;
-	sphere_0->pos.z = 12;
-	sphere_0->r = 2;
-	sphere_0->specular = 2;
+	sphere_0->pos.y = 0;
+	sphere_0->pos.z = 0;
+	sphere_0->r = 3;
+	sphere_0->specular = 100;
 	sphere_0->color = assign_colors(76, 44, 114);
 	add_back_obj(objects, sphere_0, (int)'s');
 
-	sphere_1->pos.x = 3;
+	sphere_1->pos.x = 4;
 	sphere_1->pos.y = 0;
-	sphere_1->pos.z = 15;
-	sphere_1->r = 2;
-	sphere_1->specular = 1000;
+	sphere_1->pos.z = 0;
+	sphere_1->r = 1;
+	sphere_1->specular = 100;
 	sphere_1->color = assign_colors(156, 227, 125);
 	add_back_obj(objects, sphere_1, (int)'s');
 	
-	sphere_2->pos.x = -2;
+	sphere_2->pos.x = -4;
 	sphere_2->pos.y = 0;
-	sphere_2->pos.z = 10;
-	sphere_2->r = 2;
+	sphere_2->pos.z = 0;
+	sphere_2->r = 1;
 	sphere_2->specular = 200;
 	sphere_2->color = assign_colors(116, 139, 117);
 	add_back_obj(objects, sphere_2, (int)'s');
 
-	sphere_3->pos.x = 3;
-	sphere_3->pos.y = 3;
-	sphere_3->pos.z = 8;
+	sphere_3->pos.x = 0;
+	sphere_3->pos.y = 4;
+	sphere_3->pos.z = 0;
 	sphere_3->r = 1;
-	sphere_3->specular = 2000;
+	sphere_3->specular = 20;
 	sphere_3->color = assign_colors(233, 210, 192);
 	add_back_obj(objects, sphere_3, (int)'s');
 
-	sphere_4->pos.x = -5;
-	sphere_4->pos.y = 5;
-	sphere_4->pos.z = 20;
-	sphere_4->r = 10;
+	sphere_4->pos.x = 0;
+	sphere_4->pos.y = -50;
+	sphere_4->pos.z = 0;
+	sphere_4->r = 50;
 	sphere_4->specular = 1;
-	sphere_4->color = assign_colors(245, 251, 239);
+	sphere_4->color = assign_colors(233, 210, 192);
 	add_back_obj(objects, sphere_4, (int)'s');
 
 	sphere_5->pos.x = 15;
 	sphere_5->pos.y = 0;
 	sphere_5->pos.z = 0;
 	sphere_5->r = 3;
-	sphere_5->specular = 3000;
+	sphere_5->specular = 30;
 	sphere_5->color = assign_colors(255, 0, 0);
 	add_back_obj(objects, sphere_5, (int)'s');
 
