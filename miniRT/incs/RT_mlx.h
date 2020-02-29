@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:44:50 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/29 16:37:11 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/29 19:43:23 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,14 @@ typedef	struct	s_mlx
 	int		endian;
 }				t_mlx;
 
+typedef	struct	s_rt
+{
+	t_mlx	*mlx;
+	t_scene	*scene;
+}				t_rt;
+
 void	ft_init_mlx(t_mlx *mlx, t_scene *scene);
-void	start_window(t_mlx *mlx);
-int		ft_key(int key, t_mlx *mlx);
+void	start_window(t_rt *rt);
+int		ft_key(int key, t_rt *rt);
 
 #endif

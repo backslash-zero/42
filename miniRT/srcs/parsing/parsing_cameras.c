@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cameras.c                                          :+:      :+:    :+:   */
+/*   parsing_cameras.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 19:03:20 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/28 12:22:53 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/29 19:57:07 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,22 @@ void	calc_camera_dir(t_camera *camera)
 	z_rotation(&camera->dir_y, rad(rot_to_deg(camera->rot.z)));
 }
 
+void	loopcameras(t_cameras **start)
+{
+	t_cameras *ptr;
+	ptr = *start;
+	while (ptr->next)
+		ptr = ptr->next;
+	ptr->next = *start;
+
+}
+
 void	camera_parsing(t_cameras **cameras)
 {
 	*cameras = NULL;
 	t_camera *camera_0;
 	t_camera *camera_1;
+	t_camera *camera_2;
 
 	if(!(camera_0 = (malloc(sizeof(t_camera)))))
 		return ;
@@ -53,13 +64,26 @@ void	camera_parsing(t_cameras **cameras)
 		return ;
 	camera_1->pos.x = 0;
 	camera_1->pos.y = 0;
-	camera_1->pos.z = -50;
+	camera_1->pos.z = 30;
 	camera_1->rot.x = 0;
 	camera_1->rot.y = -1;
 	camera_1->rot.z = 0;
 	calc_camera_dir(camera_1);
 	camera_1->fov = FOV;
 	add_back_cameras(cameras, camera_1);
+	
+	if(!(camera_2 = (malloc(sizeof(t_camera)))))
+		return ;
+	camera_2->pos.x = 15;
+	camera_2->pos.y = 10;
+	camera_2->pos.z = -50;
+	camera_2->rot.x = 0.1;
+	camera_2->rot.y = -0.5;
+	camera_2->rot.z = 0;
+	calc_camera_dir(camera_2);
+	camera_2->fov = FOV;
+	add_back_cameras(cameras, camera_2);
+	loopcameras(cameras);
 }
 
 void	add_back_cameras(t_cameras **start, void *camera)

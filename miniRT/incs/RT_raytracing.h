@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 14:13:01 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/29 16:51:01 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/29 19:48:46 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef	struct	s_ray
 void	intersect_ray_sphere(t_ray *ray, t_sphere *sphere);
 void	intersection(t_ray *ray, t_scene *scene);
 void	intersect_object(t_ray *ray, t_objects *tmp);
+void	fill_img(t_scene *scene, t_mlx *mlx);
+int		trace_ray(t_ray *ray, t_scene *scene);
 t_vec	normal_calc(t_ray *ray);
 
 #endif

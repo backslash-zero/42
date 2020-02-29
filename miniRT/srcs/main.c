@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/28 14:38:03 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/29 19:50:28 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	fill_img(t_scene *scene, t_mlx *mlx)
 	int		len;
 	t_ray	ray;
 
+	printf("fill img: scene->ambient_light.lum: %f\n", scene->ambient_light.lum);
 	len = mlx->size_line / 4;
 	y = -1;
 	while(++y < scene->window_height)
@@ -43,19 +44,26 @@ void	fill_img(t_scene *scene, t_mlx *mlx)
 			mlx->img_data[y * len + x] = trace_ray(&ray, scene);
 		}
 	}
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
 }
 
 int		main(int ac, char **av)
 {
 	(void)av;
+	t_rt				rt;
 	t_scene				scene;
 	t_mlx				mlx;
 	int					stop = 1;
 
+	rt.mlx = &mlx;
+	rt.scene = &scene;
+
 	if(ac == 2)
 	{
+		printf("\nHEYYY -- 1\n");
 		scene_parsing(&scene);
-		ft_init_mlx(&mlx, &scene);	
+		ft_init_mlx(&mlx, &scene);
+		printf("\nHEYYY -- 2\n");
 		if(stop)
 		{
 			stop = 0;
@@ -71,7 +79,7 @@ int		main(int ac, char **av)
 			printf("**\n** camera.pos.z: 				%f\n", scene.active_camera->pos.z);
 		}
 		fill_img(&scene, &mlx);
-		start_window(&mlx);
+		start_window(&rt);
 		// we need to FREE objects when exiting program
 	}
 	else
