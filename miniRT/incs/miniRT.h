@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: celestin <celestin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/28 17:22:46 by celestin         ###   ########.fr       */
+/*   Updated: 2020/02/29 16:51:27 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,31 @@
 #define VIEWPORT_D		1
 #define FOV				60
 
+
+typedef	struct	s_color
+{
+	double r;
+	double g;
+	double b;
+}				t_color;
+
+typedef	struct	s_vec
+{
+	double x;
+	double y;
+	double z;
+}				t_vec;
+
 // Self-made headers
-# include "RT_mlx.h"
-# include "RT_lights.h"
-# include "RT_scene.h"
-# include "RT_colors.h"
 # include "RT_maths.h"
+# include "get_next_line.h"
+# include "RT_scene.h"
+# include "RT_mlx.h"
 # include "RT_utils.h"
 # include "error.h"
-# include "get_next_line.h"
+# include "RT_colors.h"
 # include "RT_parsing.h"
 # include "RT_raytracing.h"
+# include "RT_lights.h"
 
 #endif

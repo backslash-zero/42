@@ -6,11 +6,13 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:36:40 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/14 21:50:05 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/29 16:37:31 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_UTILS_H
 # define RT_UTILS_H
+
+# include "miniRT.h"
 
 #endif

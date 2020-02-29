@@ -3,22 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   RT_maths.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: celestin <celestin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:53:20 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/28 17:12:02 by celestin         ###   ########.fr       */
+/*   Updated: 2020/02/29 16:50:34 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	RT_MATHS_H
 # define RT_MATHS_H
-
-typedef	struct	s_vec
-{
-	double x;
-	double y;
-	double z;
-}				t_vec;
 
 void	init_vec(t_vec *vec);
 t_vec	add_vec(t_vec vec1, t_vec vec2);

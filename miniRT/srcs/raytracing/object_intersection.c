@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 14:12:02 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/28 14:21:20 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/28 15:13:51 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,16 @@
 
 void intersect_ray_sphere(t_ray *ray, t_sphere *sphere)
 {
-	t_vec oc;
 	double k1;
 	double k2;
 	double k3;
+    double discriminant;
 
-	oc = sub_vec(ray->origin, sphere->pos);
 	k1 = prod_scal(ray->dir, ray->dir);
-    k2 = 2 * prod_scal(oc, ray->dir);
-    k3 = prod_scal(oc, oc) - (sphere->r * sphere->r);
+    k2 = 2 * prod_scal(sub_vec(ray->origin, sphere->pos), ray->dir);
+    k3 = prod_scal(sub_vec(ray->origin, sphere->pos), sub_vec(ray->origin, sphere->pos)) - (sphere->r * sphere->r);
 
-    double discriminant = (k2 * k2) - (4 * k1 * k3);
+    discriminant = (k2 * k2) - (4 * k1 * k3);
     if(discriminant < 0)
 	{
 		ray->inter.t1 = __DBL_MAX__;

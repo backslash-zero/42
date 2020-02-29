@@ -6,12 +6,14 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:44:50 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/28 14:03:00 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/29 16:37:11 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_MLX_H
 # define RT_MLX_H
+
+# include "miniRT.h"
 
 typedef	struct	s_mlx
 {

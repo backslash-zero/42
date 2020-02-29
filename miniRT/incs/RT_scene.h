@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RT_scene.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: celestin <celestin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:34:23 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/28 17:36:57 by celestin         ###   ########.fr       */
+/*   Updated: 2020/02/29 16:53:21 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,6 @@ typedef	struct		s_cameras
 	t_camera			*camera;
 	struct s_cameras	*next;
 }					t_cameras;
-
-typedef	struct		s_scene
-{
-	double			window_width;
-	double			window_height;
-	double			viewport_width;
-	double			viewport_height;
-	double			viewport_d;
-	t_objects		*objects;
-	t_cameras		*cameras;
-	t_camera		*active_camera;
-	t_lights		*lights;
-	t_ambient_light	ambient_light;
-}					t_scene;
 
 typedef	struct			s_objects
 {
@@ -93,6 +79,47 @@ typedef	struct	s_triangle
 	t_color	color;
 	double	specular;
 }				s_triangle;
+
+typedef	struct	s_ambient_light
+{
+	double	lum;
+	t_color	color;
+}				t_ambient_light;
+
+typedef	struct	s_point_light
+{
+	t_vec	pos;
+	double	lum;
+	t_color	color;
+}				t_point_light;
+
+typedef	struct	s_light_vec
+{
+	t_vec	dir;
+	t_color	color;
+	double	lum;
+}				t_light_vec;
+
+typedef	struct		s_lights
+{
+	t_point_light	*point_light;
+	struct s_lights	*next;
+}					t_lights;
+
+typedef	struct		s_scene
+{
+	double			window_width;
+	double			window_height;
+	double			viewport_width;
+	double			viewport_height;
+	double			viewport_d;
+	t_objects		*objects;
+	t_cameras		*cameras;
+	t_camera		*active_camera;
+	t_lights		*lights;
+	t_ambient_light	ambient_light;
+}					t_scene;
+
 
 void	scene_parsing(t_scene *scene);
 void	window_parsing(t_scene *scene);

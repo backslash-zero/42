@@ -6,14 +6,11 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:38:55 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/01/23 16:39:17 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/02/29 16:40:08 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef ERROR_H
 # define ERROR_H
-
-
 
 #endif
