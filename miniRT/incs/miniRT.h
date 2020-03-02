@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/29 16:51:27 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/02 14:34:11 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@
 // MinilibX
 # include <mlx.h>
 
-#define WINDOW_WIDTH	800
-#define WINDOW_HEIGHT 	600
-#define VIEWPORT_D		1
-#define FOV				60
+#define MAX_WINDOW_WIDTH	2560
+#define MAXWINDOW_HEIGHT 	1440
+#define WINDOW_WIDTH		800
+#define WINDOW_HEIGHT 		600
+#define VIEWPORT_D			1
+#define FOV					60
 
 
 typedef	struct	s_color

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:42:28 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/29 19:52:45 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/02 14:27:56 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,28 @@ int			rt_loop(t_mlx mlx)
 
 int		ft_key(int key, t_rt *rt)
 {
+		printf("pressed key: %d\n", key);
 		if(key == 53)
 			exit(0);
+		if(key == 78)
+		{
+			if(rt->scene->ambient_light.lum > 0.05)
+				rt->scene->ambient_light.lum -= 0.05;
+			fill_img(rt->scene, rt->mlx);
+			return(0);
+		}
+		if(key == 69)
+		{
+			rt->scene->ambient_light.lum += 0.05;
+			fill_img(rt->scene, rt->mlx);
+			return(0);
+		}
+		if(key == 82)
+		{
+			rt->scene->ambient_light.lum = 0.5;
+			fill_img(rt->scene, rt->mlx);
+			return(0);
+		}
 		if(key == 8)
 		{
 			rt->scene->cameras = rt->scene->cameras->next;
