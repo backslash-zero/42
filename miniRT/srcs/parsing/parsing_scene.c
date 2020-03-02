@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.c                                            :+:      :+:    :+:   */
+/*   parsing_scene.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:31:08 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/17 20:02:05 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/02 14:37:11 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,16 @@
 
 void	window_parsing(t_scene *scene)
 {
-	scene->window_width = WINDOW_WIDTH;
-	scene->window_height = WINDOW_HEIGHT;
+	if(WINDOW_WIDTH <= MAX_WINDOW_WIDTH)
+		scene->window_width = WINDOW_WIDTH;
+	else
+		scene->window_width = MAX_WINDOW_WIDTH;
+	if(WINDOW_HEIGHT <= MAX_WINDOW_HEIGHT)
+		scene->window_height = WINDOW_HEIGHT;
+	else
+		scene->window_height = MAX_WINDOW_HEIGHT;
+	
+	
 }
 
 void	viewport_parsing(t_scene *scene)

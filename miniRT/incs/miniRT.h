@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/02 14:34:11 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/02 14:38:11 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 # include <mlx.h>
 
 #define MAX_WINDOW_WIDTH	2560
-#define MAXWINDOW_HEIGHT 	1440
-#define WINDOW_WIDTH		800
-#define WINDOW_HEIGHT 		600
+#define MAX_WINDOW_HEIGHT 	1440
+#define WINDOW_WIDTH		1200
+#define WINDOW_HEIGHT 		800
 #define VIEWPORT_D			1
 #define FOV					60
 
