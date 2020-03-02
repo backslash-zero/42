@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/02/28 14:58:25 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/03/02 16:42:15 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRC =			main.c								\
 				maths/vector_op_2.c					\
 				maths/vector_op_3.c					\
 				mlx/RT_mlx.c						\
+				mlx/save_image.c					\
 				parsing/parsing_cameras.c			\
 				parsing/parsing_lights.c			\
 				parsing/parsing_scene.c				\
@@ -45,7 +46,9 @@ SRC =			main.c								\
 				raytracing/viewport.c				\
 				utils/colors.c						\
 				utils/ft_bzero.c					\
+				utils/ft_strlen.c				\
 				utils/ft_strjoin_free.c				\
+				utils/ft_strncmp.c					\
 				utils/ft_susbtr.c					\
 				utils/get_line_break.c				\
 				utils/get_next_line.c				\

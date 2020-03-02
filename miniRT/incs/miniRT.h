@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/02 14:38:11 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/02 22:18:14 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,17 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <fcntl.h>
 
 // MinilibX
 # include <mlx.h>
 
 #define MAX_WINDOW_WIDTH	2560
 #define MAX_WINDOW_HEIGHT 	1440
-#define WINDOW_WIDTH		1200
-#define WINDOW_HEIGHT 		800
+#define WINDOW_WIDTH		1800
+#define WINDOW_HEIGHT 		1200
 #define VIEWPORT_D			1
-#define FOV					60
+#define FOV					40
 
 
 typedef	struct	s_color
@@ -50,8 +51,9 @@ typedef	struct	s_vec
 # include "RT_scene.h"
 # include "RT_mlx.h"
 # include "RT_utils.h"
-# include "error.h"
+# include "RT_bmp.h"
 # include "RT_colors.h"
+# include "RT_error.h"
 # include "RT_parsing.h"
 # include "RT_raytracing.h"
 # include "RT_lights.h"

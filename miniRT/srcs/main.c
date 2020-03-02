@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/29 19:50:28 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/02 22:43:27 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	fill_img(t_scene *scene, t_mlx *mlx)
 	int		len;
 	t_ray	ray;
 
-	printf("fill img: scene->ambient_light.lum: %f\n", scene->ambient_light.lum);
 	len = mlx->size_line / 4;
 	y = -1;
 	while(++y < scene->window_height)
@@ -44,7 +43,6 @@ void	fill_img(t_scene *scene, t_mlx *mlx)
 			mlx->img_data[y * len + x] = trace_ray(&ray, scene);
 		}
 	}
-	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img_ptr, 0, 0);
 }
 
 int		main(int ac, char **av)
@@ -53,38 +51,41 @@ int		main(int ac, char **av)
 	t_rt				rt;
 	t_scene				scene;
 	t_mlx				mlx;
-	int					stop = 1;
 
 	rt.mlx = &mlx;
 	rt.scene = &scene;
 
-	if(ac == 2)
+	if(ac == 2 || ac == 3)
 	{
-		printf("\nHEYYY -- 1\n");
+		rt.fd = open(av[1], O_RDONLY);
 		scene_parsing(&scene);
 		ft_init_mlx(&mlx, &scene);
-		printf("\nHEYYY -- 2\n");
-		if(stop)
-		{
-			stop = 0;
-			printf("\n** INFO:\n");
-			printf("**\n** scene.window_width: 				%f\n", scene.window_width);
-			printf("**\n** scene.window_height: 			%f\n", scene.window_height);
-			printf("**\n** scene.viewport_d: 				%f\n", scene.viewport_d);
-			printf("**\n** scene.viewport_height: 			%f\n", scene.viewport_height);
-			printf("**\n** scene.viewport_width: 			%f\n", scene.viewport_width);
-			printf("**\n** camera.fov: 					%f\n", scene.active_camera->fov);
-			printf("**\n** camera.pos.x: 				%f\n", scene.active_camera->pos.x);
-			printf("**\n** camera.pos.y: 				%f\n", scene.active_camera->pos.y);
-			printf("**\n** camera.pos.z: 				%f\n", scene.active_camera->pos.z);
-		}
+/* 		printf("\n** INFO:\n");
+		printf("**\n** scene.window_width: 				%f\n", scene.window_width);
+		printf("**\n** scene.window_height: 			%f\n", scene.window_height);
+		printf("**\n** scene.viewport_d: 				%f\n", scene.viewport_d);
+		printf("**\n** scene.viewport_height: 			%f\n", scene.viewport_height);
+		printf("**\n** scene.viewport_width: 			%f\n", scene.viewport_width);
+		printf("**\n** camera.fov: 					%f\n", scene.active_camera->fov);
+		printf("**\n** camera.pos.x: 				%f\n", scene.active_camera->pos.x);
+		printf("**\n** camera.pos.y: 				%f\n", scene.active_camera->pos.y);
+		printf("**\n** camera.pos.z: 				%f\n", scene.active_camera->pos.z); */
 		fill_img(&scene, &mlx);
-		start_window(&rt);
+		if (ac == 2)
+		{
+			mlx_put_image_to_window(mlx.mlx_ptr, mlx.win_ptr, mlx.img_ptr, 0, 0);
+			start_window(&rt);
+		}
+		else if(ac == 3 && !ft_strncmp(av[2], "-save", 5))
+			save_image(&rt, "save.bmp");
+		/* else
+			error(); */
 		// we need to FREE objects when exiting program
 	}
 	else
 	{
-		// error number of arguments parsed
+		//else
+			// error number of arguments parsed
 	}
 	return(0);
 }
