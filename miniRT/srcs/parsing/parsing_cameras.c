@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 19:03:20 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/02 21:29:02 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/03 12:59:22 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,15 @@ void	calc_camera_dir(t_camera *camera)
 	camera->dir_z.x = 0;
 	camera->dir_z.y = 0;
 	camera->dir_z.z = 1;
+	x_rotation(&camera->dir_x, rad(rot_to_deg(camera->rot.x)));
 	x_rotation(&camera->dir_y, rad(rot_to_deg(camera->rot.x)));
 	x_rotation(&camera->dir_z, rad(rot_to_deg(camera->rot.x)));
 	y_rotation(&camera->dir_x, rad(rot_to_deg(camera->rot.y)));
+	y_rotation(&camera->dir_y, rad(rot_to_deg(camera->rot.y)));
 	y_rotation(&camera->dir_z, rad(rot_to_deg(camera->rot.y)));
 	z_rotation(&camera->dir_x, rad(rot_to_deg(camera->rot.z)));
 	z_rotation(&camera->dir_y, rad(rot_to_deg(camera->rot.z)));
+	z_rotation(&camera->dir_z, rad(rot_to_deg(camera->rot.z)));
 }
 
 void	loopcameras(t_cameras **start)
@@ -74,11 +77,11 @@ void	camera_parsing(t_cameras **cameras)
 	
 	if(!(camera_2 = (malloc(sizeof(t_camera)))))
 		return ;
-	camera_2->pos.x = 20;
+	camera_2->pos.x = 19;
 	camera_2->pos.y = 20;
-	camera_2->pos.z = 20;
-	camera_2->rot.x = 0.5;
-	camera_2->rot.y = -0.5;
+	camera_2->pos.z = 19;
+	camera_2->rot.x = 0.2;
+	camera_2->rot.y = -0.8;
 	camera_2->rot.z = 0;
 	calc_camera_dir(camera_2);
 	camera_2->fov = FOV;

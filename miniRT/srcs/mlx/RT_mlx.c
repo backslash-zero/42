@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:42:28 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/02 22:11:51 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/03 13:15:08 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,25 +67,25 @@ int		ft_key_pos(int key, t_rt *rt)
 	increment_pos = 1;
 	if(key == 126)
 	{
-		rt->scene->active_camera->pos.z += increment_pos;
+		rt->scene->active_camera->pos = add_vec(rt->scene->active_camera->pos, mult_point_d(rt->scene->active_camera->dir_z, increment_pos));
 		display_image(rt);
 		return(0);
 	}
 	if(key == 125)
 	{
-		rt->scene->active_camera->pos.z -= increment_pos;
-		display_image(rt);
-		return(0);
-	}
-	if(key == 123)
-	{
-		rt->scene->active_camera->pos.x -= increment_pos;
+		rt->scene->active_camera->pos = sub_vec(rt->scene->active_camera->pos, mult_point_d(rt->scene->active_camera->dir_z, increment_pos));
 		display_image(rt);
 		return(0);
 	}
 	if(key == 124)
 	{
-		rt->scene->active_camera->pos.x += increment_pos;
+		rt->scene->active_camera->pos = add_vec(rt->scene->active_camera->pos, mult_point_d(rt->scene->active_camera->dir_x, increment_pos));
+		display_image(rt);
+		return(0);
+	}
+	if(key == 123)
+	{
+		rt->scene->active_camera->pos = sub_vec(rt->scene->active_camera->pos, mult_point_d(rt->scene->active_camera->dir_x, increment_pos));
 		display_image(rt);
 		return(0);
 	}

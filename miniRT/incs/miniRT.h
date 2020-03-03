@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/02 22:18:14 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/03 12:41:08 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 
 #define MAX_WINDOW_WIDTH	2560
 #define MAX_WINDOW_HEIGHT 	1440
-#define WINDOW_WIDTH		1800
-#define WINDOW_HEIGHT 		1200
+#define WINDOW_WIDTH		400
+#define WINDOW_HEIGHT 		300
 #define VIEWPORT_D			1
-#define FOV					40
+#define FOV					60
 
 
 typedef	struct	s_color
