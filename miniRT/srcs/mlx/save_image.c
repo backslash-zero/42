@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 16:38:57 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/02 22:58:25 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/03 12:33:03 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	write_bmp_file_header(t_rt *rt, int fd)
 {
 	t_fileheader fileheader;
 
-	printf("pixel_header\n");
 	ft_bzero(&fileheader, sizeof(t_fileheader));
 	fileheader.id = 19778;
 	fileheader.size = 54 + (rt->scene->window_height * rt->scene->window_width * 3);
@@ -32,7 +31,6 @@ void	write_bmp_dib_header(t_rt *rt, int fd)
 {
 	t_dibheader dibheader;
 
-	printf("pixel_dib\n");
 	ft_bzero(&dibheader, sizeof(t_dibheader));
 	dibheader.headersize = sizeof(t_dibheader);
 	dibheader.width = rt->scene->window_width;
@@ -54,7 +52,6 @@ void	write_bmp_pixeldata(t_rt *rt, int fd)
 	int 			x;
 	int 			y;
 	
-	printf("pixel_data\n");
 	tab = malloc(rt->scene->window_height * rt->scene->window_width * 3);
 	i = 0;
 	y = rt->scene->window_height;
@@ -77,7 +74,6 @@ void	save_image(t_rt *rt, char *filename)
 {
 	int fd;
 
-	printf("hellooo\n");
 	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	write_bmp_file_header(rt, fd);
 	write_bmp_dib_header(rt, fd);
