@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 14:18:36 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/03 15:20:57 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/03 15:38:49 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ t_vec	normal_calc(t_ray *ray)
 	if(ray->closest_object->id == (int)'c')
 		normal = normal_cylinder(ray, ray->closest_object->obj);
 	if(ray->closest_object->id == (int)'t')
-		normal = normal_triangle(ray, ray->closest_object->obj);
+		normal = normal_triangle(ray->closest_object->obj);
 	if(ray->closest_object->id == (int)'p')
-		normal = normal_plane(ray, ray->closest_object->obj);
+		normal = normal_plane(ray->closest_object->obj);
 	if(ray->closest_object->id == (int)'S')
-		normal = normal_square(ray, ray->closest_object->obj);
+		normal = normal_square(ray->closest_object->obj);
 	normal = normalized(normal);
 	return(normal);
 }

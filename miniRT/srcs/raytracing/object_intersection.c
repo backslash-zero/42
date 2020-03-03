@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 14:12:02 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/03 14:51:00 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/03 19:10:57 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,46 @@ void intersect_ray_sphere(t_ray *ray, t_sphere *sphere)
 void	intersect_ray_plane(t_ray *ray, t_plane *plane)
 {
 	double denom;
-	(void)ray;
 
-	denom = prod_scal(plane->rot, plane->pos);
+	denom = prod_scal(ray->dir, plane->normal);
+	ray->inter.t2 = __DBL_MAX__;
+	if(fabs(denom) > 0.000001)
+	{
+		ray->inter.t1 = prod_scal(sub_vec(plane->pos, ray->origin), plane->normal) / denom;
+		if(ray->inter.t1 <= 0)
+			ray->inter.t1 = __DBL_MAX__;
+	}
+	else
+		ray->inter.t1 = __DBL_MAX__;
 }
 
 void	intersect_ray_square(t_ray *ray, t_square *square)
 {
-	(void)ray;
-	(void)square;
+	int		hit;
+	t_vec	inter;
+	double denom;
+
+	denom = prod_scal(ray->dir, square->normal);
+	ray->inter.t2 = __DBL_MAX__;
+	if(fabs(denom) > 0.000001)
+	{
+		ray->inter.t1 = prod_scal(sub_vec(square->pos, ray->origin), square->normal) / denom;
+		if(ray->inter.t1 <= 0)
+			ray->inter.t1 = __DBL_MAX__;
+	}
+	else
+		ray->inter.t1 = __DBL_MAX__;
+	if(ray->inter.t1 != __DBL_MAX__)
+	{
+		hit = 0;
+		inter = add_vec(ray->origin, mult_point_d(ray->dir, ray->inter.t1));
+		hit += prod_scal(cross_vec(sub_vec(square->point_1, inter), sub_vec(square->point_2, inter)), square->normal) > 0;
+		hit += prod_scal(cross_vec(sub_vec(square->point_2, inter), sub_vec(square->point_3, inter)), square->normal) > 0;
+		hit += prod_scal(cross_vec(sub_vec(square->point_3, inter), sub_vec(square->point_4, inter)), square->normal) > 0;
+		hit += prod_scal(cross_vec(sub_vec(square->point_4, inter), sub_vec(square->point_1, inter)), square->normal) > 0;
+		if (hit != 4 && hit != 0)
+			ray->inter.t1 = __DBL_MAX__;
+	}
 }
 
 void	intersect_ray_triangle(t_ray *ray, t_triangle *triangle)

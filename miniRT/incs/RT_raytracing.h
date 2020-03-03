@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 14:13:01 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/03 14:44:40 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/03 15:55:17 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	intersect_object(t_ray *ray, t_objects *tmp);
 void	fill_img(t_scene *scene, t_mlx *mlx);
 int		trace_ray(t_ray *ray, t_scene *scene);
 t_vec	normal_sphere(t_ray *ray, t_sphere *sphere);
-t_vec	normal_triangle(t_ray *ray, t_triangle *triangle);
-t_vec	normal_plane(t_ray *ray, t_plane *plane);
+t_vec	normal_triangle(t_triangle *triangle);
+t_vec	normal_plane(t_plane *plane);
 t_vec	normal_cylinder(t_ray *ray, t_cylinder *cylinder);
-t_vec	normal_square(t_ray *ray, t_square *square);
+t_vec	normal_square(t_square *square);
 t_vec	normal_calc(t_ray *ray);
 
 #endif

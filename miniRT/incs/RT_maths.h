@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:53:20 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/03 15:20:47 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/03 18:48:20 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_vec	create_vec(double x, double y, double z);
 double	prod_scal(t_vec vec1, t_vec vec2);
 double	norm_vec(t_vec vec);
 t_vec	normalized(t_vec vec);
+t_vec	cross_vec(t_vec a, t_vec b);
 double	rad(double nb);
 void	x_rotation(t_vec *dir, double angle);
 void	y_rotation(t_vec *dir, double angle);

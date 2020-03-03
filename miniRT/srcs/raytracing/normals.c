@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 14:27:46 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/03 14:46:37 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/03 15:42:15 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,6 @@ t_vec	normal_sphere(t_ray *ray, t_sphere *sphere)
 	return(normal);
 }
 
-t_vec	normal_triangle(t_ray *ray, t_triangle *triangle)
-{
-	t_vec normal;
-	
-	normal = sub_vec(ray->point, triangle->point_1);
-	return(normal);
-}
-
-t_vec	normal_plane(t_ray *ray, t_plane *plane)
-{
-	t_vec normal;
-	
-	normal = sub_vec(ray->point, plane->pos);
-	return(normal);
-}
-
 t_vec	normal_cylinder(t_ray *ray, t_cylinder *cylinder)
 {
 	t_vec normal;
@@ -44,10 +28,17 @@ t_vec	normal_cylinder(t_ray *ray, t_cylinder *cylinder)
 	return(normal);
 }
 
-t_vec	normal_square(t_ray *ray, t_square *square)
+t_vec	normal_square(t_square *square)
 {
-	t_vec normal;
-	
-	normal = sub_vec(ray->point, square->pos);
-	return(normal);
+	return(square->normal);
+}
+
+t_vec	normal_triangle(t_triangle *triangle)
+{
+	return(triangle->normal);
+}
+
+t_vec	normal_plane(t_plane *plane)
+{
+	return(plane->normal);
 }

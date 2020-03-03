@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:48:37 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/28 13:48:39 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/03 17:08:49 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,26 @@ void	object_parsing(t_objects **objects)
 	sphere_6->color = assign_colors(0, 0, 239);
 	add_back_obj(objects, sphere_6, (int)'s');
 
+	/* // MAKE SURE TO HAVE DEFAULT ORIENTATION TO PLANES
+	t_plane *plane_0;
+	if(!(plane_0 = (malloc(sizeof(t_plane)))))
+		return ;
+	init_vec(&plane_0->pos, 0, 1, 0);
+	init_vec(&plane_0->rot, 1, 1, 1);
+	plane_0->normal = plane_0->rot;
+	plane_0->color = assign_colors(233, 145, 112);
+	add_back_obj(objects, plane_0, (int)'p'); */
+
+	t_square *square_0;
+	if(!(square_0 = (malloc(sizeof(t_square)))))
+		return ;
+	init_vec(&square_0->pos, 0, 1, 0);
+	init_vec(&square_0->rot, 1, 1, 1);
+	square_0->normal = square_0->rot;
+	square_0->height = 1;
+	square_0->color = assign_colors(233, 145, 112);
+	add_back_obj(objects, square_0, (int)'S');
+	
 	/* ************************************************************************** */
 	/*	End Custom obects														  */	
 	/* ************************************************************************** */

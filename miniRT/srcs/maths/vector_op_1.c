@@ -14,9 +14,9 @@
 
 void	init_vec(t_vec *vec, double x, double y, double z)
 {
-	vec->x = 0;
-	vec->y = 0;
-	vec->z = 0;
+	vec->x = x;
+	vec->y = y;
+	vec->z = z;
 }
 
 t_vec	add_vec(t_vec vec1, t_vec vec2)
