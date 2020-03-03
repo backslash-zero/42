@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/03 13:07:31 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/03 15:20:58 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	fill_img(t_scene *scene, t_mlx *mlx)
 		x = -1;
 		while(++x < scene->window_width)
 		{	
-			init_vec(&ray.dir);
+			init_vec(&ray.dir, 0, 0, 0);
 			ray.origin = scene->active_camera->pos;
 			ray.dir = add_vec(ray.dir, scene->active_camera->dir_z);
 			ray.dir = add_vec(ray.dir, mult_point_d(scene->active_camera->dir_x, get_vp_x(center_x(x, scene), scene)));

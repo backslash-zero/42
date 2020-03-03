@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 14:18:36 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/28 14:21:26 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/03 15:20:57 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,31 @@ void	intersect_object(t_ray *ray, t_objects *tmp)
 {
 	if(tmp->id == (int)'s')
 		intersect_ray_sphere(ray, tmp->obj);
-	/*
 	if(tmp->id == (int)'c')
+		intersect_ray_cylinder(ray, tmp->obj);
 	if(tmp->id == (int)'t')
+		intersect_ray_triangle(ray, tmp->obj);
 	if(tmp->id == (int)'p')
-	if(tmp->id == (int)'s')
-	if(tmp->id == (int)'s')
-	*/
+		intersect_ray_plane(ray, tmp->obj);
+	if(tmp->id == (int)'S')
+		intersect_ray_square(ray, tmp->obj);
 }
 
 t_vec	normal_calc(t_ray *ray)
 {
 	t_vec		normal;
-	t_sphere	*tmp_s;
 
-	init_vec(&normal);
+	init_vec(&normal, 0, 0, 0);
 	if(ray->closest_object->id == (int)'s')
-	{
-		tmp_s = (t_sphere *)ray->closest_object->obj;
-		normal = sub_vec(ray->point, tmp_s->pos);
-	}
+		normal = normal_sphere(ray, ray->closest_object->obj);
+	if(ray->closest_object->id == (int)'c')
+		normal = normal_cylinder(ray, ray->closest_object->obj);
+	if(ray->closest_object->id == (int)'t')
+		normal = normal_triangle(ray, ray->closest_object->obj);
+	if(ray->closest_object->id == (int)'p')
+		normal = normal_plane(ray, ray->closest_object->obj);
+	if(ray->closest_object->id == (int)'S')
+		normal = normal_square(ray, ray->closest_object->obj);
 	normal = normalized(normal);
 	return(normal);
 }

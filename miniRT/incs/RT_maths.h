@@ -6,14 +6,14 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:53:20 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/29 16:50:34 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/03 15:20:47 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	RT_MATHS_H
 # define RT_MATHS_H
 
-void	init_vec(t_vec *vec);
+void	init_vec(t_vec *vec, double x, double y, double z);
 t_vec	add_vec(t_vec vec1, t_vec vec2);
 t_vec	sub_vec(t_vec vec1, t_vec vec2);
 t_vec	mult_point(t_vec vec1, t_vec vec2);

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:48:26 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/28 13:58:32 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/03 15:21:01 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	specular_light(t_ray *ray, double specular, t_light_vec *light_vec )
 	double	r_dot_v;
 	double	new_i;
 
-	init_vec(&reflect);
+	init_vec(&reflect, 0, 0, 0);
 	r_dot_v = 0;
 	new_i = 0;
 	v = mult_point_d(ray->dir, -1);

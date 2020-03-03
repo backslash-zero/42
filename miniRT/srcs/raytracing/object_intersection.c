@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 14:12:02 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/28 15:13:51 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/03 14:51:00 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,30 @@ void intersect_ray_sphere(t_ray *ray, t_sphere *sphere)
 		ray->inter.t1 = (-k2 + sqrt(discriminant)) / (2 * k1);
 		ray->inter.t2 = (-k2 - sqrt(discriminant)) / (2 * k1);
 	}
+}
+
+void	intersect_ray_plane(t_ray *ray, t_plane *plane)
+{
+	double denom;
+	(void)ray;
+
+	denom = prod_scal(plane->rot, plane->pos);
+}
+
+void	intersect_ray_square(t_ray *ray, t_square *square)
+{
+	(void)ray;
+	(void)square;
+}
+
+void	intersect_ray_triangle(t_ray *ray, t_triangle *triangle)
+{
+	(void)ray;
+	(void)triangle;
+}
+
+void	intersect_ray_cylinder(t_ray *ray, t_cylinder *cylinder)
+{
+	(void)ray;
+	(void)cylinder;
 }

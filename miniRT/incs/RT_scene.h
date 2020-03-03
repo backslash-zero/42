@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:34:23 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/29 16:53:21 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/03 15:12:18 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef	struct	s_plane
 {
 	t_vec	pos;
 	t_vec	rot;
+	t_vec	normal;
 	t_color	color;
 	double	specular;
 }				t_plane;
@@ -57,6 +58,7 @@ typedef	struct	s_square
 	t_vec	pos;
 	t_vec	rot;
 	t_color	color;
+	t_vec	normal;
 	double	height;
 	double	specular;
 }				t_square;
@@ -77,8 +79,9 @@ typedef	struct	s_triangle
 	t_vec	point_2;
 	t_vec	point_3;
 	t_color	color;
+	t_vec	normal;
 	double	specular;
-}				s_triangle;
+}				t_triangle;
 
 typedef	struct	s_ambient_light
 {

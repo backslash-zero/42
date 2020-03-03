@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/03/02 16:42:15 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/03/03 14:27:40 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRC =			main.c								\
 				raytracing/intersections.c			\
 				raytracing/lights_1.c				\
 				raytracing/lights_2.c				\
+				raytracing/normals.c				\
 				raytracing/object_intersection.c	\
 				raytracing/viewport.c				\
 				utils/colors.c						\

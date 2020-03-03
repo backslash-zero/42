@@ -12,7 +12,7 @@
 
 #include "../../incs/miniRT.h"
 
-void	init_vec(t_vec *vec)
+void	init_vec(t_vec *vec, double x, double y, double z)
 {
 	vec->x = 0;
 	vec->y = 0;
