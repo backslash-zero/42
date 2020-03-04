@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:42:28 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/04 18:45:20 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/04 19:24:08 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,6 @@ int			rt_loop(t_mlx mlx)
 	(void)mlx;
 	return(0);
 }
-
-// delete?
-/* int		ft_key_camera(int key, t_scene *scene)
-{
-		if(key == 8)
-		{
-			printf("hey\n");
-			//scene->cameras = scene->cameras->next;
-			scene->ambient_light.lum += 0.2; 
-			//scene->active_camera = scene->cameras->camera;
-			return(0);
-		}
-		else
-			return(0);
-} */
 
 void	display_image(t_rt *rt)
 {
@@ -158,6 +143,16 @@ int		ft_key_point_light(int key, t_rt *rt)
 		display_image(rt);
 		return(0);
 	}
+	if(key == 85)
+	{
+		while (lights)
+		{
+			lights->point_light->lum = 0.2;
+			lights = lights->next;
+		}
+		display_image(rt);
+		return(0);
+	}
 	return(0);
 }
 
@@ -201,9 +196,19 @@ int ft_key(int key, t_rt *rt)
 	return(1);
 }
 
+int		quit_window(t_rt *rt, int code)
+{
+	(void)rt;
+	(void)code;
+	printf("quitting windooooow\n");
+	exit(0);
+	return (0);
+}
+
 void	start_window(t_rt *rt)
 {
 	(void)rt;
 	mlx_key_hook(rt->mlx->win_ptr, ft_key, rt);
+	mlx_hook(rt->mlx->win_ptr, 17, 131072, quit_window, &rt);
 	mlx_loop(rt->mlx->mlx_ptr);
 }
