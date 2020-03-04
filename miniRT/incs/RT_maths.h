@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:53:20 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/03 18:48:20 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/04 13:28:15 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ void	x_rotation(t_vec *dir, double angle);
 void	y_rotation(t_vec *dir, double angle);
 void	z_rotation(t_vec *dir, double angle);
 double	rot_to_deg(double rotation);
+void	rotation_calc(t_vec *vec, t_vec rot);
 
 #endif

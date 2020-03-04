@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/03/03 14:27:40 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/03/04 13:27:28 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ DIR_SRCS =		./srcs/
 DIR_OBJS =		./obj/
 
 SRC =			main.c								\
+				maths/angles.c						\
 				maths/rotations.c					\
 				maths/vector_op_1.c					\
 				maths/vector_op_2.c					\

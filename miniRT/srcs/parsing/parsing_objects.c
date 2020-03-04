@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:48:37 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/03 17:08:49 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/04 13:33:54 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,16 +116,33 @@ void	object_parsing(t_objects **objects)
 	t_square *square_0;
 	if(!(square_0 = (malloc(sizeof(t_square)))))
 		return ;
-	init_vec(&square_0->pos, 0, 1, 0);
+	init_vec(&square_0->pos, 0, 8, 0);
 	init_vec(&square_0->rot, 1, 1, 1);
 	square_0->normal = square_0->rot;
-	square_0->height = 1;
-	square_0->color = assign_colors(233, 145, 112);
+	square_0->height = 2;
+	square_0->color = assign_colors(243, 25, 51);
+	add_square_points(square_0);
 	add_back_obj(objects, square_0, (int)'S');
 	
 	/* ************************************************************************** */
 	/*	End Custom obects														  */	
 	/* ************************************************************************** */
+}
+
+void	add_square_points(t_square *square_0)
+{
+	// rotate normal
+	t_vec	i;
+	t_vec	j;
+
+	init_vec(&i, square_0->height / 2, 0, 0);
+	init_vec(&j, 0, square_0->height / 2, 0);
+	rotation_calc(&i, square_0->rot);
+	rotation_calc(&j, square_0->rot);
+	square_0->point_1 = add_vec(square_0->pos, add_vec(j, mult_point_d(i, -1)));
+	square_0->point_2 = add_vec(square_0->pos, add_vec(j, i));
+	square_0->point_3 = add_vec(square_0->pos, add_vec(mult_point_d(j, -1), i));
+	square_0->point_4 = add_vec(square_0->pos, add_vec(mult_point_d(j, -1), mult_point_d(i, -1)));
 }
 
 void	add_back_obj(t_objects **start, void *obj, int id)

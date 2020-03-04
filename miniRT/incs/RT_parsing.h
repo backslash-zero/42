@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:17:44 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/29 19:57:35 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/04 13:31:20 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ void	loopcameras(t_cameras **start);
 void	ambient_light_parsing(t_scene *scene);
 void	point_light_parsing(t_lights **lights);
 void	add_back_light(t_lights **start, void *point_light);
+void	add_square_points(t_square *square_0);
 
 #endif

@@ -6,11 +6,18 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 22:07:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/14 22:08:53 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/04 13:26:15 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/miniRT.h"
+
+void	rotation_calc(t_vec *vec, t_vec rot)
+{
+	x_rotation(vec, rad(rot_to_deg(rot.x)));
+	y_rotation(vec, rad(rot_to_deg(rot.y)));
+	z_rotation(vec, rad(rot_to_deg(rot.z)));
+}
 
 void	x_rotation(t_vec *dir, double angle)
 {
@@ -36,15 +43,4 @@ void	z_rotation(t_vec *dir, double angle)
 	tmp.y = (sin(angle) * dir->x) + (cos(angle) * dir->y) + (0 * dir->z);
 	tmp.z = (0 * dir->x) + (0 * dir->y) + (1 * dir->z);
 	*dir = tmp;
-}
-
-double	rot_to_deg(double rotation)
-{
-	return(rotation * 180);
-}
-
-double	rad(double nb)
-{
-	nb = nb * M_PI / 180;
-	return (nb);
 }

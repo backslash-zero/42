@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:34:23 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/03 15:12:18 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/04 12:14:12 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ typedef	struct	s_square
 	t_vec	rot;
 	t_color	color;
 	t_vec	normal;
+	t_vec	point_1;
+	t_vec	point_2;
+	t_vec	point_3;
+	t_vec	point_4;
 	double	height;
 	double	specular;
 }				t_square;
