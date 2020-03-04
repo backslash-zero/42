@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:34:23 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/04 16:36:28 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/04 17:56:09 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ typedef	struct	s_cylinder
 
 typedef	struct	s_triangle
 {
-	t_vec	pos;
-	t_vec	rot;
 	t_vec	point_1;
 	t_vec	point_2;
 	t_vec	point_3;

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:48:37 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/04 16:43:27 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/04 18:26:46 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	object_parsing(t_objects **objects)
 	sphere_5->pos.z = 0;
 	sphere_5->r = 3;
 	sphere_5->specular = 30;
-	sphere_5->color = assign_colors(255, 0, 0);
+	sphere_5->color = assign_colors(202, 156, 225);
 	add_back_obj(objects, sphere_5, (int)'s');
 
 	sphere_6->pos.x = -15;
@@ -100,18 +100,19 @@ void	object_parsing(t_objects **objects)
 	sphere_6->pos.z = 0;
 	sphere_6->r = 3;
 	sphere_6->specular = 3;
-	sphere_6->color = assign_colors(0, 0, 239);
+	sphere_6->color = assign_colors(104, 95, 116);
 	add_back_obj(objects, sphere_6, (int)'s');
 
-	/* // MAKE SURE TO HAVE DEFAULT ORIENTATION TO PLANES
+	// MAKE SURE TO HAVE DEFAULT ORIENTATION TO PLANES
 	t_plane *plane_0;
 	if(!(plane_0 = (malloc(sizeof(t_plane)))))
 		return ;
-	init_vec(&plane_0->pos, 0, 1, 0);
-	init_vec(&plane_0->rot, 1, 1, 1);
+	init_vec(&plane_0->pos, 0, -2, 0);
+	init_vec(&plane_0->rot, 0, 1, 0);
 	plane_0->normal = plane_0->rot;
-	plane_0->color = assign_colors(233, 145, 112);
-	add_back_obj(objects, plane_0, (int)'p'); */
+	plane_0->specular = 114;
+	plane_0->color = assign_colors(243, 224, 236);
+	add_back_obj(objects, plane_0, (int)'p');
 
 	t_square *square_0;
 	if(!(square_0 = (malloc(sizeof(t_square)))))
@@ -121,6 +122,7 @@ void	object_parsing(t_objects **objects)
 	init_vec(&square_0->normal, 0, 0, 1);
 	rotation_calc(&square_0->normal, square_0->rot);
 	square_0->height = 1;
+	square_0->specular = 114;
 	square_0->color = assign_colors(255, 0, 0);
 	add_square_points(square_0);
 	add_back_obj(objects, square_0, (int)'S');
@@ -134,7 +136,8 @@ void	object_parsing(t_objects **objects)
 	init_vec(&triangle_0->point_1, -4, 0, 2);
 	init_vec(&triangle_0->point_2, -4, 5, 0);
 	init_vec(&triangle_0->point_3, -4, 0, -2);
-	triangle_0->color = assign_colors(243, 25, 51);
+	triangle_0->color = assign_colors(202, 156, 255);
+	triangle_0->specular = 114;
 	add_back_obj(objects, triangle_0, (int)'t');
 
 	/* ************************************************************************** */

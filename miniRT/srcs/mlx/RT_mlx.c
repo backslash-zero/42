@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:42:28 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/03 13:15:08 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/04 18:45:20 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,12 +130,42 @@ int		ft_key_rot(int key, t_rt *rt)
 		return(0);
 }
 
-int		ft_key_light(int key, t_rt *rt)
+int		ft_key_point_light(int key, t_rt *rt)
+{
+	double increment_light;
+	t_lights *lights;
+
+	lights = rt->scene->lights;
+	increment_light = 0.05;
+	if(key == 92)
+	{
+		while (lights)
+		{
+			if(lights->point_light->lum > increment_light)
+				lights->point_light->lum -= increment_light;
+			lights = lights->next;
+		}
+		display_image(rt);
+		return(0);
+	}
+	if(key == 88)
+	{
+		while (lights)
+		{
+			lights->point_light->lum += increment_light;
+			lights = lights->next;
+		}
+		display_image(rt);
+		return(0);
+	}
+	return(0);
+}
+
+int		ft_key_ambient_light(int key, t_rt *rt)
 {
 	double increment_light;
 
 	increment_light = 0.05;
-	printf("pressed key: %d\n", key);
 	if(key == 53)
 		exit(0);
 	if(key == 78)
@@ -162,7 +192,9 @@ int		ft_key_light(int key, t_rt *rt)
 
 int ft_key(int key, t_rt *rt)
 {
-	ft_key_light(key, rt);
+	printf("pressed key: %d\n", key);
+	ft_key_ambient_light(key, rt);
+	ft_key_point_light(key, rt);
 	ft_key_pos(key, rt);
 	ft_key_rot(key, rt);
 	ft_key_switch(key, rt);
