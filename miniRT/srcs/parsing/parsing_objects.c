@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:48:37 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/04 13:33:54 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/04 16:43:27 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,14 +116,27 @@ void	object_parsing(t_objects **objects)
 	t_square *square_0;
 	if(!(square_0 = (malloc(sizeof(t_square)))))
 		return ;
-	init_vec(&square_0->pos, 0, 8, 0);
-	init_vec(&square_0->rot, 1, 1, 1);
-	square_0->normal = square_0->rot;
-	square_0->height = 2;
-	square_0->color = assign_colors(243, 25, 51);
+	init_vec(&square_0->pos, 0, 6, 0);
+	init_vec(&square_0->rot, 0.5, 0.25, 0);
+	init_vec(&square_0->normal, 0, 0, 1);
+	rotation_calc(&square_0->normal, square_0->rot);
+	square_0->height = 1;
+	square_0->color = assign_colors(255, 0, 0);
 	add_square_points(square_0);
 	add_back_obj(objects, square_0, (int)'S');
 	
+	/* ************************************************************************** */
+	/* ************************************************************************** */
+
+	t_triangle *triangle_0;
+	if(!(triangle_0 = (malloc(sizeof(t_triangle)))))
+		return ;
+	init_vec(&triangle_0->point_1, -4, 0, 2);
+	init_vec(&triangle_0->point_2, -4, 5, 0);
+	init_vec(&triangle_0->point_3, -4, 0, -2);
+	triangle_0->color = assign_colors(243, 25, 51);
+	add_back_obj(objects, triangle_0, (int)'t');
+
 	/* ************************************************************************** */
 	/*	End Custom obects														  */	
 	/* ************************************************************************** */
