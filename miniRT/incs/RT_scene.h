@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:34:23 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/04 17:56:09 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/05 12:51:49 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,12 @@ typedef	struct	s_square
 typedef	struct	s_cylinder
 {
 	t_vec	pos;
+	t_vec	pos2;
+	t_vec	dir;
 	t_vec	rot;
 	t_color	color;
 	double	diameter;
+	double	r;
 	double	height;
 	double	specular;
 }				t_cylinder;

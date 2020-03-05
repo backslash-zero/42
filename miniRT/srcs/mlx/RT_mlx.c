@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:42:28 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/04 19:24:08 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/05 12:29:51 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,6 @@ int		quit_window(t_rt *rt, int code)
 {
 	(void)rt;
 	(void)code;
-	printf("quitting windooooow\n");
 	exit(0);
 	return (0);
 }

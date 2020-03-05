@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:48:37 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/04 18:26:46 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/05 14:54:29 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,22 @@ void	object_parsing(t_objects **objects)
 	add_back_obj(objects, triangle_0, (int)'t');
 
 	/* ************************************************************************** */
-	/*	End Custom obects														  */	
 	/* ************************************************************************** */
+	
+	t_cylinder *cylinder_0;
+	if(!(cylinder_0 = (malloc(sizeof(t_cylinder)))))
+		return ;
+	init_vec(&cylinder_0->pos, 0, 3, 5);
+	init_vec(&cylinder_0->dir, 0, 0, 1);
+	init_vec(&cylinder_0->rot, 0.5, 0.25, 0);
+	cylinder_0->color = assign_colors(202, 156, 255);
+	cylinder_0->specular = 114;
+	cylinder_0->diameter = 3;
+	cylinder_0->height = 2;
+	cylinder_0->r = cylinder_0->diameter /2;
+	rotation_calc(&cylinder_0->dir, cylinder_0->rot);
+	cylinder_0->pos2 = add_vec(cylinder_0->pos, mult_point_d(cylinder_0->dir, cylinder_0->height));
+	add_back_obj(objects, cylinder_0, (int)'c');
 }
 
 void	add_square_points(t_square *square_0)
