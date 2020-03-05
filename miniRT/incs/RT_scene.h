@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:34:23 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/05 12:51:49 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/05 18:01:48 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef	struct		s_lights
 
 typedef	struct		s_scene
 {
+	int				fd;
 	double			window_width;
 	double			window_height;
 	double			viewport_width;

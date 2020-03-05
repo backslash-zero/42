@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/03 15:20:58 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/05 18:11:07 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		main(int ac, char **av)
 
 	if(ac == 2 || ac == 3)
 	{
-		rt.fd = open(av[1], O_RDONLY);
+		scene.fd = open(av[1], O_RDONLY);
 		scene_parsing(&scene);
 		ft_init_mlx(&mlx, &scene);
 /* 		printf("\n** INFO:\n");

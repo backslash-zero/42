@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:31:08 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/02 14:37:11 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/05 18:38:27 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	window_parsing(t_scene *scene)
 		scene->window_height = WINDOW_HEIGHT;
 	else
 		scene->window_height = MAX_WINDOW_HEIGHT;
-	
-	
 }
 
 void	viewport_parsing(t_scene *scene)
@@ -40,6 +38,17 @@ void	scene_parsing(t_scene *scene)
 {
 	scene->objects = NULL;
 	scene->cameras = NULL;
+
+	int retour;
+	char *line;
+	while((retour = get_next_line(scene->fd, &line)) > 0)
+	{
+		main_parser(scene, line);
+		free(line);
+	}
+	main_parser(scene, line);
+	free(line);
+	close(scene->fd);
 
 	window_parsing(scene);
 	camera_parsing(&scene->cameras);
