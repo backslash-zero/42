@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 12:11:22 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/06 12:22:35 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/06 14:42:07 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,4 @@ int		check_parsing_tracker(t_scene *scene)
 	else
 		return (0);
 }
-
+`

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 23:44:00 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/06 14:40:41 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/06 14:45:26 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	ambient_light_parsing(t_scene *scene, const char *line)
 
 void	point_light_parsing(t_lights **lights, const char *line)
 {
-	*lights = NULL;
-
 	int				i;
 	t_point_light	*point_light;
 	i++;

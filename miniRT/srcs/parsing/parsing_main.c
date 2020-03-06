@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 17:57:51 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/06 14:23:34 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/06 14:43:32 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ void	scene_parsing(t_scene *scene)
 	close(scene->fd);
 	if(check_parsing_tracker(scene))
 		exit(0); // free all and exit
+	loopcameras(&scene->cameras);
 	scene->active_camera = scene->cameras->camera;
 	viewport_parsing(scene);
 }
