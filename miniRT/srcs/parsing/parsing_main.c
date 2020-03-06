@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 17:57:51 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/06 12:48:26 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/06 14:23:34 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	main_parser(t_scene *scene, const char *line)
 	else if(p_test_plane(line))
 		plane_parsing(scene, line);
 	else if(p_test_point_light(line))
-		point_light_parsing(scene, line);
+		point_light_parsing(&scene->lights, line);
 	else if(p_test_ambient_light(line))
 		ambient_light_parsing(scene, line);
 	else if(p_test_camera(line))
@@ -113,6 +113,7 @@ void	scene_parsing(t_scene *scene)
 	init_parsing_tracker(scene);
 	scene->objects = NULL;
 	scene->cameras = NULL;
+	scene->lights = NULL;
 	while((retour = get_next_line(scene->fd, &line)) > 0)
 	{
 		main_parser(scene, line);

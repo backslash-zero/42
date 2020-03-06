@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 19:03:20 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/06 11:58:19 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/06 14:33:55 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,6 @@ void	calc_camera_dir(t_camera *camera)
 	rotation_calc(&camera->dir_x, camera->rot);
 	rotation_calc(&camera->dir_y, camera->rot);
 	rotation_calc(&camera->dir_z, camera->rot);
-/* 	x_rotation(&camera->dir_x, rad(rot_to_deg(camera->rot.x)));
-	x_rotation(&camera->dir_y, rad(rot_to_deg(camera->rot.x)));
-	x_rotation(&camera->dir_z, rad(rot_to_deg(camera->rot.x)));
-	y_rotation(&camera->dir_x, rad(rot_to_deg(camera->rot.y)));
-	y_rotation(&camera->dir_y, rad(rot_to_deg(camera->rot.y)));
-	y_rotation(&camera->dir_z, rad(rot_to_deg(camera->rot.y)));
-	z_rotation(&camera->dir_x, rad(rot_to_deg(camera->rot.z)));
-	z_rotation(&camera->dir_y, rad(rot_to_deg(camera->rot.z)));
-	z_rotation(&camera->dir_z, rad(rot_to_deg(camera->rot.z))); */
 }
 
 void	loopcameras(t_cameras **start)

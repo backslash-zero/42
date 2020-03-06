@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:17:44 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/06 13:59:53 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/06 14:07:42 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	init_parsing_tracker(t_scene *scene);
 
 void	skip_spaces(int *i, char *line);
 int		skip_comma(int *i, char *line);
-t_color	get_color(int *i, char *line)
+t_color	get_color(int *i, char *line);
+t_vec		get_vec(int *i, char *line);
 
 #endif
