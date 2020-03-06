@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 17:57:51 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/05 18:37:22 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/06 12:48:26 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,22 +84,45 @@ void	main_parser(t_scene *scene, const char *line)
 {
 	//check if line empty
 	if(p_test_window(line))
-		window_parsing(scene);
-	if(p_test_sphere(line))
+		window_parsing(scene, line);
+	else if(p_test_sphere(line))
 		sphere_parsing(scene, line);
-	if(p_test_square(line))
+	else if(p_test_square(line))
 		square_parsing(scene, line);
-	if(p_test_cylinder(line))
+	else if(p_test_cylinder(line))
 		cylinder_parsing(scene, line);	
-	if(p_test_triangle(line))
+	else if(p_test_triangle(line))
 		triangle_parsing(scene, line);
-	if(p_test_plane(line))
+	else if(p_test_plane(line))
 		plane_parsing(scene, line);
-	if(p_test_point_light(line))
+	else if(p_test_point_light(line))
 		point_light_parsing(scene, line);
-	if(p_test_ambient_light(line))
+	else if(p_test_ambient_light(line))
 		ambient_light_parsing(scene, line);
-	if(p_test_camera(line))
+	else if(p_test_camera(line))
+		camera_parsing(&scene->cameras, line);
+	else
+		exit(0); // ELSE ERROR KEY ASSIGNED IS WRONG
+}
 
-	///ELSE ERROR KEY ASSIGNED IS WRONG
+void	scene_parsing(t_scene *scene)
+{
+	int retour;
+	char *line;
+
+	init_parsing_tracker(scene);
+	scene->objects = NULL;
+	scene->cameras = NULL;
+	while((retour = get_next_line(scene->fd, &line)) > 0)
+	{
+		main_parser(scene, line);
+		free(line);
+	}
+	main_parser(scene, line);
+	free(line);
+	close(scene->fd);
+	if(check_parsing_tracker(scene))
+		exit(0); // free all and exit
+	scene->active_camera = scene->cameras->camera;
+	viewport_parsing(scene);
 }

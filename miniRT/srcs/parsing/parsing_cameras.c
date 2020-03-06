@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 19:03:20 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/04 13:28:31 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/06 11:58:19 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	loopcameras(t_cameras **start)
 
 }
 
-void	camera_parsing(t_cameras **cameras)
+void	camera_parsing(t_cameras **cameras, const char *line)
 {
 	*cameras = NULL;
 	t_camera *camera_0;

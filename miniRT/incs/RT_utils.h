@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:36:40 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/02 16:27:48 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/06 12:41:59 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int		ft_error_gnl(char **line, char **buffer);
 int		ft_read_line(int fd, char **buffer, char **line);
 int		ft_finish_line(char **save, char **line, char *buffer, int ret);
 int		get_next_line(int fd, char **line);
+int		ft_atoi(const char *str);
 
 #endif

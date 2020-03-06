@@ -6,21 +6,25 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 23:44:00 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/02/28 13:47:35 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/06 13:57:41 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/miniRT.h"
 
-
-
-void	ambient_light_parsing(t_scene *scene)
+void	ambient_light_parsing(t_scene *scene, const char *line)
 {
-	scene->ambient_light.color = assign_colors(255, 255, 255);
-	scene->ambient_light.lum = 0.5;
+	int i;
+	i++;
+
+	skip_spaces(&i, line);
+	if(scene->ambient_light.lum = ft_atoi(&line[i]) < 0)
+		exit(0); // check lum negative
+	skip_spaces(&i, line);
+	scene->ambient_light.color = get_color(&i, line);
 }
 
-void	point_light_parsing(t_lights **lights)
+void	point_light_parsing(t_lights **lights, const char *line)
 {
 	// open fd and use get next line until return value is 0
 	// use main from GNL

@@ -6,11 +6,36 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:48:37 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/05 14:54:29 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/06 12:03:05 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incs/miniRT.h"
+#include "../../incs/miniRT.h"
+
+void	sphere_parsing(t_scene *scene, const char *line)
+{
+
+}
+
+void	square_parsing(t_scene *scene, const char *line)
+{
+
+}
+
+void	cylinder_parsing(t_scene *scene, const char *line)
+{
+
+}
+
+void	triangle_parsing(t_scene *scene, const char *line)
+{
+
+}
+
+void	plane_parsing(t_scene *scene, const char *line)
+{
+
+}
 
 void	object_parsing(t_objects **objects)
 {

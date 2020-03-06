@@ -6,12 +6,19 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:34:23 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/05 18:01:48 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/06 12:19:23 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_SCENE_H
 # define RT_SCENE_H
+
+typedef	struct	s_tracker
+{
+	int		window;
+	int		camera;
+	int		ambient_light;
+}				t_tracker;
 
 typedef	struct	s_camera
 {
@@ -129,12 +136,9 @@ typedef	struct		s_scene
 	t_camera		*active_camera;
 	t_lights		*lights;
 	t_ambient_light	ambient_light;
+	t_tracker		*tracker;
 }					t_scene;
 
-
-void	scene_parsing(t_scene *scene);
-void	window_parsing(t_scene *scene);
-void	viewport_parsing(t_scene *scene);
 int		center_x(int x, t_scene *scene);
 int		center_y(int y, t_scene *scene);
 double	get_vp_x(int x, t_scene *scene);
