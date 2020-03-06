@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:34:23 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/06 12:19:23 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/06 17:32:43 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ typedef	struct		s_scene
 	t_camera		*active_camera;
 	t_lights		*lights;
 	t_ambient_light	ambient_light;
-	t_tracker		*tracker;
+	t_tracker		tracker;
 }					t_scene;
 
 int		center_x(int x, t_scene *scene);

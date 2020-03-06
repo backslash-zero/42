@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/05 18:11:07 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/06 17:53:36 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int		main(int ac, char **av)
 	{
 		scene.fd = open(av[1], O_RDONLY);
 		scene_parsing(&scene);
+		printf("parsed succussfuly\n");
 		ft_init_mlx(&mlx, &scene);
 /* 		printf("\n** INFO:\n");
 		printf("**\n** scene.window_width: 				%f\n", scene.window_width);

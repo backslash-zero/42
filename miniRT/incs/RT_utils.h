@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:36:40 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/06 12:41:59 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/06 20:02:22 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,10 @@ int		ft_read_line(int fd, char **buffer, char **line);
 int		ft_finish_line(char **save, char **line, char *buffer, int ret);
 int		get_next_line(int fd, char **line);
 int		ft_atoi(const char *str);
+int		is_whitespace(char c);
+int		is_plusminus(char c);
+int		is_digit(char c);
+double	ft_atoi_decimal(char *str);
+double	ft_atoi_double(char *str);
 
 #endif

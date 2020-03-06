@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/03/04 13:27:28 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/03/06 19:37:00 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,8 +38,10 @@ SRC =			main.c								\
 				mlx/save_image.c					\
 				parsing/parsing_cameras.c			\
 				parsing/parsing_lights.c			\
+				parsing/parsing_main.c				\
 				parsing/parsing_scene.c				\
 				parsing/parsing_objects.c			\
+				parsing/parsing_tracker.c			\
 				raytracing/intersections.c			\
 				raytracing/lights_1.c				\
 				raytracing/lights_2.c				\
@@ -47,8 +49,10 @@ SRC =			main.c								\
 				raytracing/object_intersection.c	\
 				raytracing/viewport.c				\
 				utils/colors.c						\
+				utils/ft_atoi.c						\
+				utils/ft_atoi_double.c				\
 				utils/ft_bzero.c					\
-				utils/ft_strlen.c				\
+				utils/ft_strlen.c					\
 				utils/ft_strjoin_free.c				\
 				utils/ft_strncmp.c					\
 				utils/ft_susbtr.c					\

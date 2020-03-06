@@ -6,38 +6,46 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 23:44:00 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/06 14:45:26 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/06 20:55:18 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/miniRT.h"
 
-void	ambient_light_parsing(t_scene *scene, const char *line)
+void	ambient_light_parsing(t_scene *scene, char *line)
 {
 	int i;
-	i++;
 
+	i = 1;
 	skip_spaces(&i, line);
-	if(scene->ambient_light.lum = ft_atoi(&line[i]) < 0)
+	if((scene->ambient_light.lum = ft_atoi_double(&line[i])) < 0)
+	{
 		exit(0); // check lum negative
+	}
+	skip_numbers(&i, line);
 	skip_spaces(&i, line);
 	scene->ambient_light.color = get_color(&i, line);
 }
 
-void	point_light_parsing(t_lights **lights, const char *line)
+void	point_light_parsing(t_lights **lights, char *line)
 {
 	int				i;
 	t_point_light	*point_light;
-	i++;
+	
+	i = 1;
 	if(!(point_light = malloc(sizeof(t_point_light))))
 		exit(0); // MALLOC PROBLEM
 	skip_spaces(&i, line);
 	point_light->pos = get_vec(&i, line);
 	skip_spaces(&i, line);
-	if(point_light->lum = ft_atoi(&line[i]) < 0)
+	if((point_light->lum = ft_atoi_double(&line[i])) < 0)
 		exit(0); // check lum negative
+	skip_numbers(&i, line);
 	skip_spaces(&i, line);
 	point_light->color = get_color(&i, line);
+	printf("point_light->color.r: %f\n", point_light->color.r);
+	printf("point_light->color.g: %f\n", point_light->color.g);
+	printf("point_light->color.b: %f\n", point_light->color.b);
 	add_back_light(lights, point_light);
 }
 

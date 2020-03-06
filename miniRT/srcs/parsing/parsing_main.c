@@ -6,57 +6,68 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 17:57:51 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/06 14:43:32 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/06 20:46:53 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/miniRT.h"
 
-int		p_test_window(const char *line)
+int		p_test_window(t_scene *scene, char *line)
 {
 	if(line[0] == 'R')
-		return (1);
+	{	
+		if(scene->tracker.window)
+			exit(0); // Resolution assigned more than once
+		else
+		{
+			scene->tracker.window = 1;
+			return (1);
+		}
+	}
 	else
 		return (0);	
 }
 
-int		p_test_camera(const char *line)
+int		p_test_camera(t_scene *scene, char *line)
 {
 	if(line[0] == 'c' && line[1] != 'y' )
+	{
+		scene->tracker.camera = 1;
 		return (1);
+	}
 	else
 		return (0);	
 }
 
-int		p_test_sphere(const char *line)
+int		p_test_sphere(char *line)
 {
 	if((line[0] == 's' && line[1] == 'p' ))
 		return (1);
 	else
 		return (0);	
 }
-int		p_test_plane(const char *line)
+int		p_test_plane(char *line)
 {
 	if((line[0] == 'p' && line[1] == 'l' ))
 		return (1);
 	else
 		return (0);	
 }
-int		p_test_square(const char *line)
+int		p_test_square(char *line)
 {
 	if((line[0] == 's' && line[1] == 'q' ))
 		return (1);
 	else
 		return (0);	
 }
-int		p_test_cylinder(const char *line)
+int		p_test_cylinder(char *line)
 {
 	if((line[0] == 'c' && line[1] == 'y' ))
 		return (1);
 	else
 		return (0);	
 }
-int		p_test_triangle(const char *line)
+int		p_test_triangle(char *line)
 {
 	if((line[0] == 't' && line[1] == 'r' ))
 		return (1);
@@ -64,26 +75,38 @@ int		p_test_triangle(const char *line)
 		return (0);	
 }
 
-int		p_test_point_light(const char *line)
+int		p_test_point_light(char *line)
 {
 	if(line[0] == 'l')
+	{
 		return (1);
+	}
 	else
 		return (0);	
 }
 
-int		p_test_ambient_light(const char *line)
+int		p_test_ambient_light(t_scene *scene, char *line)
 {
 	if(line[0] == 'A')
-		return (1);
+	{	
+		if(scene->tracker.ambient_light)
+		{	
+			exit(0); // Ambient light assigned more than once
+		}
+		else
+		{
+			scene->tracker.ambient_light = 1;
+			return (1);
+		}
+	}
 	else
 		return (0);	
 }
 
-void	main_parser(t_scene *scene, const char *line)
+void	main_parser(t_scene *scene, char *line)
 {
 	//check if line empty
-	if(p_test_window(line))
+	if(p_test_window(scene, line))
 		window_parsing(scene, line);
 	else if(p_test_sphere(line))
 		sphere_parsing(scene, line);
@@ -97,33 +120,34 @@ void	main_parser(t_scene *scene, const char *line)
 		plane_parsing(scene, line);
 	else if(p_test_point_light(line))
 		point_light_parsing(&scene->lights, line);
-	else if(p_test_ambient_light(line))
+	else if(p_test_ambient_light(scene, line))
 		ambient_light_parsing(scene, line);
-	else if(p_test_camera(line))
+	else if(p_test_camera(scene, line))
 		camera_parsing(&scene->cameras, line);
-	else
+	else if(!(string_empty(line)))
+	{
 		exit(0); // ELSE ERROR KEY ASSIGNED IS WRONG
+	}
 }
 
 void	scene_parsing(t_scene *scene)
 {
 	int retour;
 	char *line;
+	int i = 0;
 
 	init_parsing_tracker(scene);
-	scene->objects = NULL;
-	scene->cameras = NULL;
-	scene->lights = NULL;
 	while((retour = get_next_line(scene->fd, &line)) > 0)
 	{
+		printf("i = %d\n", ++i);
 		main_parser(scene, line);
 		free(line);
 	}
 	main_parser(scene, line);
 	free(line);
 	close(scene->fd);
-	if(check_parsing_tracker(scene))
-		exit(0); // free all and exit
+	if(!(check_parsing_tracker(scene)))
+		exit(0); // Missing Resolution Camera or Ambient light elementfree all and exit
 	loopcameras(&scene->cameras);
 	scene->active_camera = scene->cameras->camera;
 	viewport_parsing(scene);
