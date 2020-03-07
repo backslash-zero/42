@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 19:03:20 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/06 20:47:29 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/07 21:00:11 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	camera_parsing(t_cameras **cameras, char *line)
 	skip_spaces(&i, line);
 	if((camera->fov = ft_atoi_double(&line[i])) < 0 ||
 		camera->fov > 180)
-	{	
+	{
 		exit(0); // wrong FOV
 	}
 	calc_camera_dir(camera);

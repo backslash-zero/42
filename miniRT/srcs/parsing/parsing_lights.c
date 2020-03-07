@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 23:44:00 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/06 20:55:18 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/07 19:56:28 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,6 @@ void	point_light_parsing(t_lights **lights, char *line)
 	skip_numbers(&i, line);
 	skip_spaces(&i, line);
 	point_light->color = get_color(&i, line);
-	printf("point_light->color.r: %f\n", point_light->color.r);
-	printf("point_light->color.g: %f\n", point_light->color.g);
-	printf("point_light->color.b: %f\n", point_light->color.b);
 	add_back_light(lights, point_light);
 }
 

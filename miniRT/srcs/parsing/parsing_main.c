@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 17:57:51 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/06 20:46:53 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/07 21:02:08 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,12 +143,13 @@ void	scene_parsing(t_scene *scene)
 		main_parser(scene, line);
 		free(line);
 	}
+	printf("main parser done_0\n");
 	main_parser(scene, line);
 	free(line);
 	close(scene->fd);
+	printf("main parser done\n");
 	if(!(check_parsing_tracker(scene)))
 		exit(0); // Missing Resolution Camera or Ambient light elementfree all and exit
 	loopcameras(&scene->cameras);
 	scene->active_camera = scene->cameras->camera;
-	viewport_parsing(scene);
 }

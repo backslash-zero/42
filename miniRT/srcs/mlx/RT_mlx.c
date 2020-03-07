@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:42:28 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/05 12:29:51 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/07 20:59:30 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,8 @@ int		ft_key_ambient_light(int key, t_rt *rt)
 int ft_key(int key, t_rt *rt)
 {
 	printf("pressed key: %d\n", key);
+	printf("current camera fov: %f\n", rt->scene->active_camera->fov);
+	printf("vp->width: %f\n", rt->scene->viewport_width);
 	ft_key_ambient_light(key, rt);
 	ft_key_point_light(key, rt);
 	ft_key_pos(key, rt);

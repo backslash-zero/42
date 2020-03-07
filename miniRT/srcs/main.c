@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/06 17:53:36 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/07 21:02:44 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	fill_img(t_scene *scene, t_mlx *mlx)
 	int		len;
 	t_ray	ray;
 
+	viewport_parsing(scene);
 	len = mlx->size_line / 4;
 	y = -1;
 	while(++y < scene->window_height)
@@ -59,7 +60,6 @@ int		main(int ac, char **av)
 	{
 		scene.fd = open(av[1], O_RDONLY);
 		scene_parsing(&scene);
-		printf("parsed succussfuly\n");
 		ft_init_mlx(&mlx, &scene);
 /* 		printf("\n** INFO:\n");
 		printf("**\n** scene.window_width: 				%f\n", scene.window_width);
