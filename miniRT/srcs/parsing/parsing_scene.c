@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:31:08 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/06 20:24:26 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/09 15:27:54 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ t_vec		get_vec(int *i, char *line)
 	skip_numbers(i, line);
 	return(vec);
 }
-
 
 int		skip_comma(int *i, char *line)
 {
@@ -56,6 +55,7 @@ t_color		get_color(int *i, char *line)
 	if((color.b = ft_atoi_double(&line[*i])) < 0)
 		exit(0); // check negative number
 	skip_numbers(i, line);
+	//if color > 255 or < 0 exit
 	return(color);
 }
 
@@ -85,11 +85,11 @@ void	window_parsing(t_scene *scene, char *line)
 	i = 1;
 	skip_spaces(&i, line);
 	if((scene->window_width = ft_atoi_double(&line[i])) < 0)
-		exit(0); // check resolution negative
+		exit_free_all(scene);; // check resolution negative
 	skip_numbers(&i, line);
 	skip_spaces(&i, line);
 	if((scene->window_height = ft_atoi_double(&line[i])) < 0)
-		exit(0); // check resolution negative
+		exit_free_all(scene);; // check resolution negative
 	if(scene->window_width >= MAX_WINDOW_WIDTH)
 		scene->window_width = MAX_WINDOW_WIDTH;
 	if(scene->window_height >= MAX_WINDOW_HEIGHT)

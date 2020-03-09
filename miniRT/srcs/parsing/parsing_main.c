@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 17:57:51 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/07 21:02:08 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/09 15:32:29 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,14 @@ int		p_test_window(t_scene *scene, char *line)
 	if(line[0] == 'R')
 	{	
 		if(scene->tracker.window)
-			exit(0); // Resolution assigned more than once
+			exit_free_all(scene); // Resolution assigned more than once
 		else
 		{
 			scene->tracker.window = 1;
 			return (1);
 		}
 	}
-	else
-		return (0);	
+	return (0);	
 }
 
 int		p_test_camera(t_scene *scene, char *line)

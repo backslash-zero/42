@@ -6,14 +6,12 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:36:40 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/06 20:02:22 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/09 15:23:07 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_UTILS_H
 # define RT_UTILS_H
-
-# include "miniRT.h"
 
 size_t	ft_strlen(const char *s);
 void	ft_bzero(void *b, size_t n);
@@ -31,5 +29,9 @@ int		is_plusminus(char c);
 int		is_digit(char c);
 double	ft_atoi_decimal(char *str);
 double	ft_atoi_double(char *str);
+void	exit_free_all(t_scene *scene);
+void	free_cameras(t_cameras *cameras);
+void	free_objects(t_objects *objects);
+void	free_lights(t_lights *lights);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 16:38:57 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/03 12:33:03 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/09 15:25:26 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,5 @@ void	save_image(t_rt *rt, char *filename)
 	write_bmp_file_header(rt, fd);
 	write_bmp_dib_header(rt, fd);
 	write_bmp_pixeldata(rt, fd);
-	exit(0);
+	exit_free_all(rt->scene);
 }

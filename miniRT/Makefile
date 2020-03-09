@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/03/06 19:37:00 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/03/09 13:05:02 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SRC =			main.c								\
 				raytracing/object_intersection.c	\
 				raytracing/viewport.c				\
 				utils/colors.c						\
+				utils/exit.c						\
 				utils/ft_atoi.c						\
 				utils/ft_atoi_double.c				\
 				utils/ft_bzero.c					\

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 14:12:02 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/05 16:35:47 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/07 23:37:32 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,33 +157,3 @@ void	intersect_ray_cylinder(t_ray *ray, t_cylinder *cylinder)
 	}
 	
 }
-/* 
-double			hit_cylinder(t_cylinder *obj, t_vec3 r, t_vec3 p)
-{
-	t_vec3 tmp;
-	t_vec3 tmp2;
-	t_vec3 tmp3;
-	t_vec3 abc;
-	t_vec3 delta;
-
-	tmp = v3sub(r, v3scale(obj->dir, v3dot(obj->dir, r)));
-	tmp2 = v3sub(p, obj->pos);
-	tmp3 = v3sub(tmp2, v3scale(obj->dir, v3dot(tmp2, obj->dir)));
-	abc.x = v3dot(tmp, tmp);
-	abc.y = 2 * v3dot(tmp, tmp3);
-	abc.z = v3dot(tmp3, tmp3) - obj->radius * obj->radius;
-	if ((delta.x = abc.y * abc.y - 4 * abc.x * abc.z) < 0)
-		return (NOHIT);
-	delta.y = (-abc.y - sqrt(delta.x)) / (2 * abc.x);
-	delta.z = (-abc.y + sqrt(delta.x)) / (2 * abc.x);
-	tmp = v3add(p, v3scale(r, delta.y));
-	p = v3add(p, v3scale(r, delta.z));
-	if (delta.y > 0.00001 && v3dot(obj->dir, v3sub(tmp, obj->pos)) > 0 &&
-		v3dot(v3minus(obj->dir), v3sub(tmp, obj->pos2)) > 0)
-		return (delta.y);
-	if (delta.z > 0.00001 && v3dot(obj->dir, v3sub(p, obj->pos)) > 0 &&
-		v3dot(v3minus(obj->dir), v3sub(p, obj->pos2)) > 0)
-		return (delta.z);
-	return (NOHIT);
-}
- */

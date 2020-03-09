@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:48:37 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/07 20:20:59 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/07 23:15:07 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ void	square_parsing(t_scene *scene, char *line)
 	skip_spaces(&i, line);
 	square->color = get_color(&i, line);
 	skip_spaces(&i, line);
-	init_vec(&square->normal, 0, 1, 0);
+	init_vec(&square->normal, 0, 0, 1);
 	rotation_calc(&square->normal, square->rot);
 	if((square->specular = ft_atoi_double(&line[i])) < 0)
 		exit(0); // specular cannot have negative value
-	add_back_obj(&scene->objects, square, (int)'S');
-	
+	add_square_points(square);
+	add_back_obj(&scene->objects, square, (int)'S');	
 }
 
 void	triangle_parsing(t_scene *scene, char *line)

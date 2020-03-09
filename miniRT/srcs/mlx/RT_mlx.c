@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:42:28 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/07 20:59:30 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/09 15:24:59 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,26 @@ int		ft_key_switch(int key, t_rt *rt)
 		return(0);
 }
 
+int		ft_key_fov(int key, t_rt *rt)
+{
+	double increment_pos;
+
+	increment_pos = 1;
+	if(key == 87)
+	{
+		rt->scene->active_camera->fov += increment_pos;
+		display_image(rt);
+		return(0);
+	}
+	if(key == 91)
+	{
+		rt->scene->active_camera->fov -= increment_pos;
+		display_image(rt);
+		return(0);
+	}
+	else
+		return(0);
+}
 int		ft_key_pos(int key, t_rt *rt)
 {
 	double increment_pos;
@@ -162,7 +182,7 @@ int		ft_key_ambient_light(int key, t_rt *rt)
 
 	increment_light = 0.05;
 	if(key == 53)
-		exit(0);
+		exit_free_all(rt->scene);
 	if(key == 78)
 	{
 		if(rt->scene->ambient_light.lum > increment_light)
@@ -195,6 +215,7 @@ int ft_key(int key, t_rt *rt)
 	ft_key_pos(key, rt);
 	ft_key_rot(key, rt);
 	ft_key_switch(key, rt);
+	ft_key_fov(key, rt);
 	return(1);
 }
 
@@ -202,7 +223,7 @@ int		quit_window(t_rt *rt, int code)
 {
 	(void)rt;
 	(void)code;
-	exit(0);
+	exit_free_all(rt->scene);
 	return (0);
 }
 

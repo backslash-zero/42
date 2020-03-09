@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/07 21:02:44 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/09 15:29:56 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,22 +55,11 @@ int		main(int ac, char **av)
 
 	rt.mlx = &mlx;
 	rt.scene = &scene;
-
 	if(ac == 2 || ac == 3)
 	{
 		scene.fd = open(av[1], O_RDONLY);
 		scene_parsing(&scene);
 		ft_init_mlx(&mlx, &scene);
-/* 		printf("\n** INFO:\n");
-		printf("**\n** scene.window_width: 				%f\n", scene.window_width);
-		printf("**\n** scene.window_height: 			%f\n", scene.window_height);
-		printf("**\n** scene.viewport_d: 				%f\n", scene.viewport_d);
-		printf("**\n** scene.viewport_height: 			%f\n", scene.viewport_height);
-		printf("**\n** scene.viewport_width: 			%f\n", scene.viewport_width);
-		printf("**\n** camera.fov: 					%f\n", scene.active_camera->fov);
-		printf("**\n** camera.pos.x: 				%f\n", scene.active_camera->pos.x);
-		printf("**\n** camera.pos.y: 				%f\n", scene.active_camera->pos.y);
-		printf("**\n** camera.pos.z: 				%f\n", scene.active_camera->pos.z); */
 		fill_img(&scene, &mlx);
 		if (ac == 2)
 		{
@@ -79,12 +68,12 @@ int		main(int ac, char **av)
 		}
 		else if(ac == 3 && !ft_strncmp(av[2], "-save", 5))
 			save_image(&rt, "save.bmp");
-		/* else
-			error(); */
-		// we need to FREE objects when exiting program
+		else
+			exit_free_all(&scene); // bad third argument
 	}
 	else
 	{
+		exit_free_all(&scene);
 		//else
 			// error number of arguments parsed
 	}
