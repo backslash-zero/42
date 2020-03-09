@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:42:28 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/09 15:24:59 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/09 16:22:39 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,22 @@ int		ft_key_fov(int key, t_rt *rt)
 	else
 		return(0);
 }
+
+int		ft_key_invert_colors(int key, t_rt *rt)
+{
+	if(key == 34)
+	{
+		if (rt->scene->invert)
+			rt->scene->invert = 0;
+		else
+			rt->scene->invert = 1;
+		display_image(rt);
+		return(0);
+	}
+	else
+		return(0);
+}
+
 int		ft_key_pos(int key, t_rt *rt)
 {
 	double increment_pos;
@@ -216,6 +232,7 @@ int ft_key(int key, t_rt *rt)
 	ft_key_rot(key, rt);
 	ft_key_switch(key, rt);
 	ft_key_fov(key, rt);
+	ft_key_invert_colors(key, rt);
 	return(1);
 }
 

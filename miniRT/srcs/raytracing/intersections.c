@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 14:18:36 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/03 15:38:49 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/09 18:43:14 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ t_vec	normal_calc(t_ray *ray)
 		normal = normal_plane(ray->closest_object->obj);
 	if(ray->closest_object->id == (int)'S')
 		normal = normal_square(ray->closest_object->obj);
+	if(prod_scal(ray->dir, normal) > 0)
+		normal = mult_point_d(normal, -1);
 	normal = normalized(normal);
 	return(normal);
 }

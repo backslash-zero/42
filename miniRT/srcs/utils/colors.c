@@ -6,11 +6,18 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 12:50:57 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/04 17:52:27 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/09 16:19:45 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/miniRT.h"
+
+void	invert_color(t_color *color)
+{
+	color->r = 255 - color->r; 
+	color->g = 255 - color->g; 
+	color->b = 255 - color->b; 
+}
 
 int		min_max_color(int value)
 {

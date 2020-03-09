@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/09 15:29:56 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/09 16:20:04 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int		trace_ray(t_ray *ray, t_scene *scene)
 	if(ray->closest_object == NULL)
 		return(get_color_integer(255, 255, 255));
 	process_light(scene, ray);
+	if(scene->invert)
+		invert_color(&ray->color);
 	return(get_color_integer(ray->color.r, ray->color.g, ray->color.b));
 }
 

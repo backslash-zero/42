@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:57:43 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/07 21:55:23 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/09 18:39:06 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,17 @@ void	point_light(t_scene *scene, t_ray *ray)
 		light_vec.color = tmp->point_light->color;
 		light_vec.lum = tmp->point_light->lum;
 		light_vec.dir = sub_vec(tmp->point_light->pos, ray->point);
-		
 		n_dot_l = prod_scal(ray->normal, light_vec.dir);
 		new_i = light_vec.lum * n_dot_l / (norm_vec(ray->normal)*norm_vec(light_vec.dir));
 
 		convert_light_ray(ray, &light_ray, &light_vec);
 		if(!shadow_intersection(&light_ray, scene, &light_vec))
 		{
-			if(n_dot_l > 0)
+			if(n_dot_l > 0 && prod_scal(ray->dir, ray->normal) < 0)
+			{	
 				add_light(&ray->color, new_i, light_vec.color);
-			specular_light_processing(ray, &light_vec);
+				specular_light_processing(ray, &light_vec);
+			}
 		}
 		tmp = tmp->next;
 	}
