@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 14:27:46 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/05 14:20:28 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/10 15:43:06 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_vec	normal_cylinder(t_ray *ray, t_cylinder *cylinder)
 {
 	t_vec normal;
 
-	normal = sub_vec(cylinder->pos, ray->point);
+	normal = sub_vec(cylinder->pos, ray->origin);
 	normal = normalized(cross_vec(normal, cylinder->dir));
 	normal = cross_vec(normal, cylinder->dir);
 	return(normal);

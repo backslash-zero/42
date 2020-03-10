@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 14:12:02 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/07 23:37:32 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/10 17:58:43 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	intersect_ray_square(t_ray *ray, t_square *square)
 
 void	intersect_ray_triangle(t_ray *ray, t_triangle *triangle)
 {
-		int		hit;
+	int		hit;
 	t_vec	inter;
 	double denom;
 
@@ -104,7 +104,7 @@ void	intersect_ray_triangle(t_ray *ray, t_triangle *triangle)
 		hit += prod_scal(cross_vec(sub_vec(triangle->point_1, inter), sub_vec(triangle->point_2, inter)), triangle->normal) > 0;
 		hit += prod_scal(cross_vec(sub_vec(triangle->point_2, inter), sub_vec(triangle->point_3, inter)), triangle->normal) > 0;
 		hit += prod_scal(cross_vec(sub_vec(triangle->point_3, inter), sub_vec(triangle->point_1, inter)), triangle->normal) > 0;
-		if (hit != 3 && hit != 0)
+		if (!(hit == 3 || hit == 0))
 			ray->inter.t1 = __DBL_MAX__;
 	}
 }
@@ -119,41 +119,36 @@ void	intersect_ray_cylinder(t_ray *ray, t_cylinder *cylinder)
 
 	ray->inter.t1 = __DBL_MAX__;
 	ray->inter.t2 = __DBL_MAX__;
+	
 	tmp1 = sub_vec(ray->dir, mult_point_d(cylinder->dir, prod_scal(cylinder->dir, ray->dir)));
 	tmp2 = sub_vec(ray->origin, cylinder->pos);
 	tmp3 = sub_vec(tmp2, mult_point_d(cylinder->dir, prod_scal(tmp2, cylinder->dir)));
+	//ok
 	abc.x = prod_scal(tmp1, tmp1);
 	abc.y = 2 * prod_scal(tmp1, tmp3);
 	abc.z = prod_scal(tmp3, tmp3) - cylinder->r * cylinder->r;
-	if((delta.x = abc.y * abc.y - 4 * abc.x * abc.z) < 0)
+	//ok
+	if((delta.x = (abc.y * abc.y) - 4 * abc.x * abc.z) < 0)
 	{	
 		ray->inter.t1 = __DBL_MAX__;
 		ray->inter.t2 = __DBL_MAX__;
 	}
 	else
 	{
-		ray->inter.t1 = (-abc.y - sqrt(delta.x)) / (2 * abc.x);
-		ray->inter.t2 = (-abc.y + sqrt(delta.x)) / (2 * abc.x);
 		delta.y = (-abc.y - sqrt(delta.x)) / (2 * abc.x);
 		delta.z = (-abc.y + sqrt(delta.x)) / (2 * abc.x);
-		tmp1 = add_vec(ray->origin, add_vec_d(ray->dir, delta.y));
-		tmp2 = add_vec(ray->origin, add_vec_d(ray->dir, delta.z));
+		tmp1 = add_vec(ray->origin, mult_point_d(ray->dir, delta.y));
+		tmp2 = add_vec(ray->origin, mult_point_d(ray->dir, delta.z));
 		if (delta.y > 0.00001 && prod_scal(cylinder->dir, sub_vec(tmp1, cylinder->pos)) > 0 &&
 			prod_scal(mult_point_d(cylinder->dir, -1), sub_vec(tmp1, cylinder->pos2)) > 0)
-			{
-				printf("heyyuoooooo1\n");
-				ray->inter.t1 = delta.y;
-			}
+			ray->inter.t1 = delta.y;
 		else
-			ray->inter.t1 = __DBL_MAX__;
-		if (delta.z > 0.00001 && prod_scal(cylinder->dir, sub_vec(tmp2, cylinder->pos)) > 0 &&
-			prod_scal(mult_point_d(cylinder->dir, -1), sub_vec(tmp2, cylinder->pos2)) > 0)
-			{
-				printf("heyyuoooooo2\n");
+		{
+			if (delta.z > 0.00001 && prod_scal(cylinder->dir, sub_vec(tmp2, cylinder->pos)) > 0 &&
+				prod_scal(mult_point_d(cylinder->dir, -1), sub_vec(tmp2, cylinder->pos2)) > 0)
 				ray->inter.t2 = delta.z;
-			}
-		else
-			ray->inter.t2 = __DBL_MAX__;
+			else
+				ray->inter.t2 = __DBL_MAX__;
+		}
 	}
-	
 }

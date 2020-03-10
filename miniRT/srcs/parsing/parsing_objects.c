@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:48:37 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/07 23:15:07 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/10 17:26:05 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ void	triangle_parsing(t_scene *scene, char *line)
 	skip_spaces(&i, line);
 	if((triangle->specular = ft_atoi_double(&line[i])) < 0)
 		exit(0); // specular cannot have negative value
+	triangle->normal = normalized(cross_vec(sub_vec(triangle->point_1, triangle->point_2),
+											sub_vec(triangle->point_1, triangle->point_3)));
 	add_back_obj(&scene->objects, triangle, (int)'t');
 }
 
@@ -115,7 +117,7 @@ void	cylinder_parsing(t_scene *scene, char *line)
 	i = 2;
 	if(!(cylinder = (malloc(sizeof(t_cylinder)))))
 		exit(0); // MALLOC PROBLEM
-	init_vec(&cylinder->dir, 0, 0, 1);
+	init_vec(&cylinder->dir, 0, 1, 0);
 	skip_spaces(&i, line);
 	cylinder->pos = get_vec(&i, line);
 	skip_spaces(&i, line);
@@ -134,6 +136,7 @@ void	cylinder_parsing(t_scene *scene, char *line)
 	if((cylinder->specular = ft_atoi_double(&line[i])) < 0)
 		exit(0); // specular cannot have negative value
 	rotation_calc(&cylinder->dir, cylinder->rot);
+	cylinder->pos2 = add_vec(cylinder->pos, mult_point_d(cylinder->dir, cylinder->height));
 	cylinder->r = cylinder->diameter / 2;
 	add_back_obj(&scene->objects, cylinder, (int)'c');
 }

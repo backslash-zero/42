@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:42:28 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/09 16:22:39 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/09 19:27:03 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,7 +240,9 @@ int		quit_window(t_rt *rt, int code)
 {
 	(void)rt;
 	(void)code;
-	exit_free_all(rt->scene);
+	//printf("code: %d\n", code);
+	//exit_free_all(rt->scene);
+	exit(0);
 	return (0);
 }
 

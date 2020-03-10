@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/03/09 13:05:02 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/03/09 19:28:29 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC =			gcc
 
 FLAGS =			-Wall -Wextra -Werror
 
-LEAK_CHECK =	-fsanitize=address
+LEAK_CHECK =	#-fsanitize=address
 
 GRAPHIC_LIBS =	-framework OpenGL -framework AppKit
 
@@ -68,7 +68,8 @@ LIBMLX =		/usr/local/lib/libmlx.a				\
 
 NAME =			miniRT
 
-all:			$(NAME)
+all:			
+				$(MAKE) -j $(NAME)
 
 $(NAME): 		$(OBJS)
 				$(CC) $(COMPIL) -I $(DIR_HEADERS) $(LIBMLX) $(GRAPHIC_LIBS) $(OBJS) -o $(NAME)

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 17:57:51 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/09 15:32:29 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/10 14:02:54 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ void	scene_parsing(t_scene *scene)
 	int i = 0;
 
 	init_parsing_tracker(scene);
+	// check if gnl problem
 	while((retour = get_next_line(scene->fd, &line)) > 0)
 	{
 		printf("i = %d\n", ++i);
