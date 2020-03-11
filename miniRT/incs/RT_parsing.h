@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:17:44 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 20:08:45 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 21:38:13 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	scene_parsing(t_rt *rt);
 void	viewport_parsing(t_scene *scene);
 int		add_back_obj(t_objects **start, void *obj, int id);
 void	calc_camera_dir(t_camera *camera);
-void	add_back_cameras(t_cameras **start, void *camera);
+int		add_back_cameras(t_cameras **start, void *camera);
 void	loopcameras(t_cameras **start);
 int		add_back_light(t_lights **start, void *point_light);
 void	add_square_points(t_square *square_0);

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 19:03:20 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/07 21:00:11 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 21:38:39 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	loopcameras(t_cameras **start)
 
 }
 
-void	camera_parsing(t_cameras **cameras, char *line)
+void	camera_parsing(t_rt *rt, char *line, int n)
 {
 	t_camera	*camera;
 	int			i;
@@ -57,22 +57,20 @@ void	camera_parsing(t_cameras **cameras, char *line)
 		exit(0); // wrong FOV
 	}
 	calc_camera_dir(camera);
-	add_back_cameras(cameras, camera);
+	if(add_back_cameras(&rt->scene->cameras, camera) == FAILURE)
+		exit_failure(rt);
 }
 
-void	add_back_cameras(t_cameras **start, void *camera)
+int		add_back_cameras(t_cameras **start, void *camera)
 {
 	t_cameras *ptr;
 	t_cameras *new;
 	
 	new = NULL;
-
-	//initialise light
 	if(!(new = (malloc(sizeof(t_cameras)))))
-		return ;
+		return(FAILURE);
 	new->camera = camera;
 	new->next = NULL;
-	//adding light to the linked list
 	if(!*start)
 	{	
 		*start = new;
@@ -82,4 +80,5 @@ void	add_back_cameras(t_cameras **start, void *camera)
 	while (ptr->next)
 		ptr = ptr->next;
 	ptr->next = new;
+	return(SUCCESS);
 }
