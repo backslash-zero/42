@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 17:57:51 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/10 14:02:54 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 12:02:22 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,23 +133,22 @@ void	scene_parsing(t_scene *scene)
 {
 	int retour;
 	char *line;
-	int i = 0;
-
+	int	i = 0;
 	init_parsing_tracker(scene);
 	// check if gnl problem
 	while((retour = get_next_line(scene->fd, &line)) > 0)
 	{
-		printf("i = %d\n", ++i);
+		printf("line: %d\n", ++i);
 		main_parser(scene, line);
 		free(line);
 	}
-	printf("main parser done_0\n");
 	main_parser(scene, line);
+	printf("parsed successfuly\n");
 	free(line);
 	close(scene->fd);
-	printf("main parser done\n");
 	if(!(check_parsing_tracker(scene)))
 		exit(0); // Missing Resolution Camera or Ambient light elementfree all and exit
 	loopcameras(&scene->cameras);
+	printf("parsed successfuly\n");
 	scene->active_camera = scene->cameras->camera;
 }

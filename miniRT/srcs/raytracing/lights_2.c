@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:48:26 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/07 23:43:07 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 11:48:34 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,35 @@ void	specular_light(t_ray *ray, double specular, t_light_vec *light_vec )
 
 void	specular_light_processing(t_ray *ray, t_light_vec *light_vec)
 {
-	t_sphere *s_tmp;
+	t_sphere *sp_tmp;
+	t_cylinder *cy_tmp;
+	t_plane *p_tmp;
+	t_square *sq_tmp;
+	t_triangle *t_tmp;
 	if(ray->closest_object->id == (int)'s')
 	{
-		s_tmp = (t_sphere *)ray->closest_object->obj;
-		specular_light(ray, s_tmp->specular, light_vec);
+		sp_tmp = (t_sphere *)ray->closest_object->obj;
+		specular_light(ray, sp_tmp->specular, light_vec);
+	}
+	if(ray->closest_object->id == (int)'c')
+	{
+		cy_tmp = (t_cylinder *)ray->closest_object->obj;
+		specular_light(ray, cy_tmp->specular, light_vec);
+	}
+	if(ray->closest_object->id == (int)'p')
+	{
+		p_tmp = (t_plane *)ray->closest_object->obj;
+		specular_light(ray, p_tmp->specular, light_vec);
+	}
+	if(ray->closest_object->id == (int)'t')
+	{
+		t_tmp = (t_triangle *)ray->closest_object->obj;
+		specular_light(ray, t_tmp->specular, light_vec);
+	}
+	if(ray->closest_object->id == (int)'S')
+	{
+		sq_tmp = (t_square *)ray->closest_object->obj;
+		specular_light(ray, sq_tmp->specular, light_vec);
 	}
 }
 

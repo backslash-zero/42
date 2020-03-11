@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/03/09 19:28:29 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/03/11 11:34:17 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC =			gcc
 
 FLAGS =			-Wall -Wextra -Werror
 
-LEAK_CHECK =	#-fsanitize=address
+LEAK_CHECK =	-fsanitize=address
 
 GRAPHIC_LIBS =	-framework OpenGL -framework AppKit
 
