@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/03/11 17:45:57 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/03/11 21:55:17 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,8 @@ LIBMLX =		/usr/local/lib/libmlx.a				\
 NAME =			miniRT
 
 all:			
-				$(MAKE) -j $(NAME)
+				$(MAKE) $(NAME)
+				#$(MAKE) -j $(NAME)
 
 $(NAME): 		$(OBJS)
 				$(CC) $(COMPIL) -I $(DIR_HEADERS) $(LIBMLX) $(GRAPHIC_LIBS) $(OBJS) -o $(NAME)

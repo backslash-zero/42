@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:36:40 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 17:49:53 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 21:55:40 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ void	exit_free_all(t_scene *scene);
 void	free_cameras(t_cameras *cameras);
 void	free_objects(t_objects *objects);
 void	free_lights(t_lights *lights);
-char	*ft_itoa(int n)
+char	*ft_itoa(int n);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 17:57:51 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 18:59:34 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 22:04:39 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,23 +105,23 @@ int		p_test_ambient_light(t_scene *scene, char *line)
 void	main_parser(t_rt *rt, char *line, int n)
 {
 	if(p_test_window(rt->scene, line))
-		window_parsing(rt->scene, line, n);
+		window_parsing(rt, line, n);
 	else if(p_test_sphere(line))
-		sphere_parsing(rt->scene, line, n);
+		sphere_parsing(rt, line, n);
 	else if(p_test_square(line))
-		square_parsing(rt->scene, line, n);
+		square_parsing(rt, line, n);
 	else if(p_test_cylinder(line))
-		cylinder_parsing(rt->scene, line, n);	
+		cylinder_parsing(rt, line, n);	
 	else if(p_test_triangle(line))
-		triangle_parsing(rt->scene, line, n);
+		triangle_parsing(rt, line, n);
 	else if(p_test_plane(line))
-		plane_parsing(rt->scene, line, n);
+		plane_parsing(rt, line, n);
 	else if(p_test_point_light(line))
-		point_light_parsing(&rt->scene->lights, line, n);
+		point_light_parsing(rt, line, n);
 	else if(p_test_ambient_light(rt->scene, line))
-		ambient_light_parsing(rt->scene, line, n);
+		ambient_light_parsing(rt, line, n);
 	else if(p_test_camera(rt->scene, line))
-		camera_parsing(&rt->scene->cameras, line, n);
+		camera_parsing(rt, line, n);
 	else if(!(string_empty(line)))
 		parsing_err(rt, "Key not assigned", n);
 }
@@ -137,13 +137,13 @@ void	scene_parsing(t_rt *rt)
 	// check if gnl problem
 	while((retour = get_next_line(rt->scene->fd, &line)) > 0)
 	{
-		main_parser(rt->scene, line, n);
+		main_parser(rt, line, n);
 		free(line);
 		n++;
 	}
 	if(retour == -1)
-		arsing_err(rt, "Incorrect file format", n);;
-	main_parser(rt->scene, line, n);
+		parsing_err(rt, "Incorrect file format", n);;
+	main_parser(rt, line, n);
 	free(line);
 	close(rt->scene->fd);
 	if(!(check_parsing_tracker(rt->scene)))

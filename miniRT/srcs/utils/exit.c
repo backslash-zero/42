@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 13:04:12 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 21:46:31 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 22:05:52 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void	free_cameras(t_cameras *cameras)
 	}
 }
 
-void	exit_success(t_scene *scene)
+void	exit_success(t_rt *rt)
 {
-	free_all(scene);
+	free_all(rt);
 	write(1, "\e[1;32mExiting, everything went well.\n\e[0m", 42);
 	exit(SUCCESS);
 }
@@ -67,6 +67,7 @@ void	parsing_err(t_rt *rt, char *msg, int n)
 {
 	char *line_n;
 
+	free_all(rt);
 	write(1, "Error\n", 6);
 	write(1, "\e[1;31m", 7);
 	write(1, msg, ft_strlen(msg));

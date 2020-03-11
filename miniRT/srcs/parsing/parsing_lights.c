@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 23:44:00 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 20:07:30 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 21:59:40 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,8 @@ int		add_back_light(t_lights **start, void *point_light)
 		return (FAILURE);
 	new->point_light = point_light;
 	new->next = NULL;
-	//adding light to the linked list
 	if(!*start)
-	{	
 		*start = new;
-		return ;
-	}
 	ptr = *start;
 	while (ptr->next)
 		ptr = ptr->next;
