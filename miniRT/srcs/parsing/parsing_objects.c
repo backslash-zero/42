@@ -6,19 +6,11 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:48:37 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 19:37:58 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 20:08:10 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/miniRT.h"
-
-int		zero_to_one(double nb)
-{
-	if(nb < 0 || nb > 1)
-		return (0);
-	else
-		return (1);
-}
 
 void	sphere_parsing(t_rt *rt, char *line, int n)
 {

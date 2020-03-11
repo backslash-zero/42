@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:31:08 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 18:58:12 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 20:05:52 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ t_color		get_color(t_rt *rt, int *i, char *line, int n)
 		parsing_err(rt, "RGB color value invalid", n);
 	skip_numbers(i, line);
 	if(!skip_comma(i, line))
-		parsing_err(rt, "Bad formatting, missing comma", n);
+		parsing_err(rt, "Bad formatting, missing comma.", n);
 	if((color.b = ft_atoi_double(&line[*i])) < 0 || color.b > 255)
-		parsing_err(rt, "RGB color value invalid", n);
+		parsing_err(rt, "RGB color value invalid.", n);
 	skip_numbers(i, line);
 	//if color > 255 or < 0 exit
 	return(color);
@@ -78,22 +78,22 @@ void	skip_spaces(int *i, char *line)
 		*i += 1;
 }
 
-void	window_parsing(t_scene *scene, char *line)
+void	window_parsing(t_rt *rt, char *line, int n)
 {
 	int i;
 	
 	i = 1;
 	skip_spaces(&i, line);
-	if((scene->window_width = ft_atoi_double(&line[i])) < 0)
-		exit_free_all(scene);; // check resolution negative
+	if((rt->scene->window_width = ft_atoi_double(&line[i])) < 0)
+		parsing_err(rt, "Window width cannot be negative.", n);
 	skip_numbers(&i, line);
 	skip_spaces(&i, line);
-	if((scene->window_height = ft_atoi_double(&line[i])) < 0)
-		exit_free_all(scene);; // check resolution negative
-	if(scene->window_width >= MAX_WINDOW_WIDTH)
-		scene->window_width = MAX_WINDOW_WIDTH;
-	if(scene->window_height >= MAX_WINDOW_HEIGHT)
-		scene->window_height = MAX_WINDOW_HEIGHT;
+	if((rt->scene->window_height = ft_atoi_double(&line[i])) < 0)
+		parsing_err(rt, "Window height cannot be negative.", n);
+	if(rt->scene->window_width >= MAX_WINDOW_WIDTH)
+		rt->scene->window_width = MAX_WINDOW_WIDTH;
+	if(rt->scene->window_height >= MAX_WINDOW_HEIGHT)
+		rt->scene->window_height = MAX_WINDOW_HEIGHT;
 }
 
 void	viewport_parsing(t_scene *scene)

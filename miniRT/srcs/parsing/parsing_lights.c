@@ -6,56 +6,54 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 23:44:00 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 19:00:15 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 20:07:30 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/miniRT.h"
 
-void	ambient_light_parsing(t_scene *scene, char *line)
+void	ambient_light_parsing(t_rt *rt, char *line, int n)
 {
 	int i;
 
 	i = 1;
 	skip_spaces(&i, line);
-	if((scene->ambient_light.lum = ft_atoi_double(&line[i])) < 0)
-	{
-		exit(0); // check lum negative
-	}
+	if((rt->scene->ambient_light.lum = ft_atoi_double(&line[i])) < 0)
+		parsing_err(rt, "Luminosity cannot be negative.", n);
 	skip_numbers(&i, line);
 	skip_spaces(&i, line);
-	scene->ambient_light.color = get_color(rt, &i, line, n);
+	rt->scene->ambient_light.color = get_color(rt, &i, line, n);
 }
 
-void	point_light_parsing(t_lights **lights, char *line)
+void	point_light_parsing(t_rt *rt, char *line, int n)
 {
 	int				i;
 	t_point_light	*point_light;
 	
 	i = 1;
 	if(!(point_light = malloc(sizeof(t_point_light))))
-		exit(0); // MALLOC PROBLEM
+		exit_failure(rt);
 	skip_spaces(&i, line);
 	point_light->pos = get_vec(&i, line);
 	skip_spaces(&i, line);
 	if((point_light->lum = ft_atoi_double(&line[i])) < 0)
-		exit(0); // check lum negative
+		parsing_err(rt, "Luminosity cannot be negative.", n);
 	skip_numbers(&i, line);
 	skip_spaces(&i, line);
 	point_light->color = get_color(rt, &i, line, n);
-	add_back_light(lights, point_light);
+	if(add_back_light(&rt->scene->lights, point_light) == FAILURE)
+		exit_failure(rt);;
 }
 
-void	add_back_light(t_lights **start, void *point_light)
+int		add_back_light(t_lights **start, void *point_light)
 {
 	t_lights *ptr;
 	t_lights *new;
 	
 	new = NULL;
 
-	//initialise light
 	if(!(new = (malloc(sizeof(t_lights)))))
-		return ;
+		return (FAILURE);
 	new->point_light = point_light;
 	new->next = NULL;
 	//adding light to the linked list
@@ -68,4 +66,5 @@ void	add_back_light(t_lights **start, void *point_light)
 	while (ptr->next)
 		ptr = ptr->next;
 	ptr->next = new;
+	return(SUCCESS);
 }

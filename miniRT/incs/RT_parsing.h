@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:17:44 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 18:55:49 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 20:08:45 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 
 void	scene_parsing(t_rt *rt);
 void	viewport_parsing(t_scene *scene);
-void	add_back_obj(t_objects **start, void *obj, int id);
+int		add_back_obj(t_objects **start, void *obj, int id);
 void	calc_camera_dir(t_camera *camera);
 void	add_back_cameras(t_cameras **start, void *camera);
 void	loopcameras(t_cameras **start);
-void	add_back_light(t_lights **start, void *point_light);
+int		add_back_light(t_lights **start, void *point_light);
 void	add_square_points(t_square *square_0);
 
 void	main_parser(t_rt *rt, char *line, int n);
-void	window_parsing(t_scene *scene, char *line);
-void	ambient_light_parsing(t_scene *scene, char *line);
-void	point_light_parsing(t_lights **lights, char *line);
-void	camera_parsing(t_cameras **cameras, char *line);
+void	window_parsing(t_rt *rt, char *line, int n);
+void	ambient_light_parsing(t_rt *rt, char *line, int n);
+void	point_light_parsing(t_rt *rt, char *line, int n);
+void	camera_parsing(t_rt *rt, char *line, int n);
 
 void	object_parsing(t_objects **objects);
 void	sphere_parsing(t_rt *rt, char *line, int n);
