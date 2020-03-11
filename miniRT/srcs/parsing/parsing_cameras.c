@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 19:03:20 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 21:38:39 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 21:48:02 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	camera_parsing(t_rt *rt, char *line, int n)
 
 	i = 1;
 	if(!(camera = (malloc(sizeof(t_camera)))))
-		exit(0); // MALLOC PROBLEM
+		exit_failure(rt);
 	skip_spaces(&i, line);
 	camera->pos = get_vec(&i, line);
 	skip_spaces(&i, line);
@@ -53,9 +53,7 @@ void	camera_parsing(t_rt *rt, char *line, int n)
 	skip_spaces(&i, line);
 	if((camera->fov = ft_atoi_double(&line[i])) < 0 ||
 		camera->fov > 180)
-	{
-		exit(0); // wrong FOV
-	}
+		parsing_err(rt, "FOV cannot be negative.", n);
 	calc_camera_dir(camera);
 	if(add_back_cameras(&rt->scene->cameras, camera) == FAILURE)
 		exit_failure(rt);

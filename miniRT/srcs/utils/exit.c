@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 13:04:12 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 18:09:11 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 21:46:31 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,13 @@ void	free_all(t_rt *rt)
 	free_cameras(rt->scene->cameras);
 	free_objects(rt->scene->objects);
 	free_lights(rt->scene->lights);
-	// free and clear window
+	if (rt->mlx->mlx_ptr)
+	{
+		if (rt->mlx->img_ptr)
+			mlx_destroy_image(rt->mlx->mlx_ptr, rt->mlx->img_ptr);
+		free(rt->mlx->img_ptr);
+		mlx_destroy_window(rt->mlx->mlx_ptr, rt->mlx->win_ptr);
+	}
 }
 
 void	exit_free_all(t_scene *scene)
