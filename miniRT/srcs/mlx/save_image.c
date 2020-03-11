@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 16:38:57 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/09 15:25:26 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 18:30:23 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ void	write_bmp_pixeldata(t_rt *rt, int fd)
 	int 			x;
 	int 			y;
 	
-	tab = malloc(rt->scene->window_height * rt->scene->window_width * 3);
+	if(!(tab = malloc(rt->scene->window_height * rt->scene->window_width * 3)))
+		exit_failure(rt);
 	i = 0;
 	y = rt->scene->window_height;
 	while(--y > 0)

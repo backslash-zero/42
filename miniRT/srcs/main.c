@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 11:35:14 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 17:57:25 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		main(int ac, char **av)
 	{
 		if((scene.fd = open(av[1], O_RDONLY)) == -1)
 			exit(0); // couldnt open given file
-		scene_parsing(&scene);
+		scene_parsing(&rt);
 		ft_init_mlx(&mlx, &scene);
 		fill_img(&scene, &mlx);
 		if (ac == 2)

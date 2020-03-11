@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:31:08 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/09 15:27:54 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 18:58:12 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,22 @@ int		skip_comma(int *i, char *line)
 	return (1);
 }
 
-t_color		get_color(int *i, char *line)
+t_color		get_color(t_rt *rt, int *i, char *line, int n)
 {
 	t_color color;
 	
-	if((color.r = ft_atoi_double(&line[*i])) < 0)
-		exit(0); // check negative number
+	if((color.r = ft_atoi_double(&line[*i])) < 0 || color.r > 255)
+		parsing_err(rt, "RGB color value invalid", n);
 	skip_numbers(i, line);
 	if(!skip_comma(i, line))
-		exit(0); // bad formatting : missing comma
-	if((color.g = ft_atoi_double(&line[*i])) < 0)
-		exit(0); // check negative number
+		parsing_err(rt, "Bad formatting, missing comma", n);
+	if((color.g = ft_atoi_double(&line[*i])) < 0 || color.g > 255)
+		parsing_err(rt, "RGB color value invalid", n);
 	skip_numbers(i, line);
 	if(!skip_comma(i, line))
-		exit(0); // bad formatting : missing comma
-	if((color.b = ft_atoi_double(&line[*i])) < 0)
-		exit(0); // check negative number
+		parsing_err(rt, "Bad formatting, missing comma", n);
+	if((color.b = ft_atoi_double(&line[*i])) < 0 || color.b > 255)
+		parsing_err(rt, "RGB color value invalid", n);
 	skip_numbers(i, line);
 	//if color > 255 or < 0 exit
 	return(color);

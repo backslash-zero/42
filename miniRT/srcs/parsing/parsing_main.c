@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 17:57:51 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 12:02:22 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 18:59:34 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,53 +102,52 @@ int		p_test_ambient_light(t_scene *scene, char *line)
 		return (0);	
 }
 
-void	main_parser(t_scene *scene, char *line)
+void	main_parser(t_rt *rt, char *line, int n)
 {
-	//check if line empty
-	if(p_test_window(scene, line))
-		window_parsing(scene, line);
+	if(p_test_window(rt->scene, line))
+		window_parsing(rt->scene, line, n);
 	else if(p_test_sphere(line))
-		sphere_parsing(scene, line);
+		sphere_parsing(rt->scene, line, n);
 	else if(p_test_square(line))
-		square_parsing(scene, line);
+		square_parsing(rt->scene, line, n);
 	else if(p_test_cylinder(line))
-		cylinder_parsing(scene, line);	
+		cylinder_parsing(rt->scene, line, n);	
 	else if(p_test_triangle(line))
-		triangle_parsing(scene, line);
+		triangle_parsing(rt->scene, line, n);
 	else if(p_test_plane(line))
-		plane_parsing(scene, line);
+		plane_parsing(rt->scene, line, n);
 	else if(p_test_point_light(line))
-		point_light_parsing(&scene->lights, line);
-	else if(p_test_ambient_light(scene, line))
-		ambient_light_parsing(scene, line);
-	else if(p_test_camera(scene, line))
-		camera_parsing(&scene->cameras, line);
+		point_light_parsing(&rt->scene->lights, line, n);
+	else if(p_test_ambient_light(rt->scene, line))
+		ambient_light_parsing(rt->scene, line, n);
+	else if(p_test_camera(rt->scene, line))
+		camera_parsing(&rt->scene->cameras, line, n);
 	else if(!(string_empty(line)))
-	{
-		exit(0); // ELSE ERROR KEY ASSIGNED IS WRONG
-	}
+		parsing_err(rt, "Key not assigned", n);
 }
 
-void	scene_parsing(t_scene *scene)
+void	scene_parsing(t_rt *rt)
 {
 	int retour;
 	char *line;
-	int	i = 0;
-	init_parsing_tracker(scene);
+	int	n;
+
+	n = 0;
+	init_parsing_tracker(rt->scene);
 	// check if gnl problem
-	while((retour = get_next_line(scene->fd, &line)) > 0)
+	while((retour = get_next_line(rt->scene->fd, &line)) > 0)
 	{
-		printf("line: %d\n", ++i);
-		main_parser(scene, line);
+		main_parser(rt->scene, line, n);
 		free(line);
+		n++;
 	}
-	main_parser(scene, line);
-	printf("parsed successfuly\n");
+	if(retour == -1)
+		arsing_err(rt, "Incorrect file format", n);;
+	main_parser(rt->scene, line, n);
 	free(line);
-	close(scene->fd);
-	if(!(check_parsing_tracker(scene)))
-		exit(0); // Missing Resolution Camera or Ambient light elementfree all and exit
-	loopcameras(&scene->cameras);
-	printf("parsed successfuly\n");
-	scene->active_camera = scene->cameras->camera;
+	close(rt->scene->fd);
+	if(!(check_parsing_tracker(rt->scene)))
+		parsing_err(rt, "Missing Resolution, Camera or Ambient light", -1);
+	loopcameras(&rt->scene->cameras);
+	rt->scene->active_camera = rt->scene->cameras->camera;
 }

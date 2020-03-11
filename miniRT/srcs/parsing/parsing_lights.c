@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 23:44:00 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/07 19:56:28 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 19:00:15 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ambient_light_parsing(t_scene *scene, char *line)
 	}
 	skip_numbers(&i, line);
 	skip_spaces(&i, line);
-	scene->ambient_light.color = get_color(&i, line);
+	scene->ambient_light.color = get_color(rt, &i, line, n);
 }
 
 void	point_light_parsing(t_lights **lights, char *line)
@@ -42,7 +42,7 @@ void	point_light_parsing(t_lights **lights, char *line)
 		exit(0); // check lum negative
 	skip_numbers(&i, line);
 	skip_spaces(&i, line);
-	point_light->color = get_color(&i, line);
+	point_light->color = get_color(rt, &i, line, n);
 	add_back_light(lights, point_light);
 }
 

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 13:04:12 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 17:54:30 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 18:09:11 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,15 @@ void	parsing_err(t_rt *rt, char *msg, int n)
 {
 	char *line_n;
 
-	line_n = ft_itoa(n);
-	write(1, "Error", 5);
+	write(1, "Error\n", 6);
 	write(1, "\e[1;31m", 7);
 	write(1, msg, ft_strlen(msg));
-	write(1, "\n at line ", 10);
-	write(1, line_n, ft_strlen(line_n));
+	if (n != -1)
+	{	
+		line_n = ft_itoa(n);
+		write(1, "\n at line ", 10);
+		write(1, line_n, ft_strlen(line_n));
+	}
 	write(1, "\n\e[0m", 5);
 	exit(FAILURE);
 }
