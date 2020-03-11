@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:48:37 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 21:58:43 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 22:17:26 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,10 @@ int		add_back_obj(t_objects **start, void *obj, int id)
 	new->obj = obj;
 	new->next = NULL;
 	if(!*start)
+	{
 		*start = new;
+		return(SUCCESS);
+	}
 	ptr = *start;
 	while (ptr->next)
 		ptr = ptr->next;

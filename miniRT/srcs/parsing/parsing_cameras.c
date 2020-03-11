@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 19:03:20 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 21:59:28 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 22:17:44 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ int		add_back_cameras(t_cameras **start, void *camera)
 	new->camera = camera;
 	new->next = NULL;
 	if(!*start)
+	{
 		*start = new;
+		return(SUCCESS);
+	}
 	ptr = *start;
 	while (ptr->next)
 		ptr = ptr->next;
