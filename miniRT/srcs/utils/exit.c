@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 13:04:12 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 22:05:52 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 22:19:54 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	free_all(t_rt *rt)
 	{
 		if (rt->mlx->img_ptr)
 			mlx_destroy_image(rt->mlx->mlx_ptr, rt->mlx->img_ptr);
-		free(rt->mlx->img_ptr);
+		//free(rt->mlx->img_ptr);
 		mlx_destroy_window(rt->mlx->mlx_ptr, rt->mlx->win_ptr);
 	}
 }
