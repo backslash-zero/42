@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:42:28 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 11:36:52 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/11 17:27:46 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,7 @@ int		ft_key_ambient_light(int key, t_rt *rt)
 
 	increment_light = 0.05;
 	if(key == 53)
-		exit_free_all(rt->scene);
+		exit_success(rt);
 	if(key == 78)
 	{
 		if(rt->scene->ambient_light.lum > increment_light)
@@ -238,7 +238,7 @@ int		quit_window(t_rt *rt, int code)
 	(void)rt;
 	(void)code;
 	//exit_free_all(rt->scene);
-	exit(0);
+	exit_success(rt);
 	return (0);
 }
 

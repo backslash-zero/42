@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/03/11 11:34:17 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/03/11 17:45:57 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRC =			main.c								\
 				utils/ft_atoi.c						\
 				utils/ft_atoi_double.c				\
 				utils/ft_bzero.c					\
+				utils/ft_itoa.c						\
 				utils/ft_strlen.c					\
 				utils/ft_strjoin_free.c				\
 				utils/ft_strncmp.c					\
