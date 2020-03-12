@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 23:44:00 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 14:00:48 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 18:15:36 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ void	point_light_parsing(t_rt *rt, char *line, int n)
 {
 	int				i;
 	t_point_light	*point_light;
-	
+
 	i = 1;
 	if (!(point_light = malloc(sizeof(t_point_light))))
 		exit_failure(rt);
 	skip_spaces(&i, line);
-	point_light->pos = get_vec(&i, line);
+	point_light->pos = get_vec(rt, &i, line, n);
 	skip_spaces(&i, line);
 	if ((point_light->lum = ft_atoi_double(&line[i])) < 0)
 		parsing_err(rt, "Luminosity cannot be negative.", n);
@@ -42,22 +42,21 @@ void	point_light_parsing(t_rt *rt, char *line, int n)
 	skip_spaces(&i, line);
 	point_light->color = get_color(rt, &i, line, n);
 	if (add_back_light(&rt->scene->lights, point_light) == FAILURE)
-		exit_failure(rt);;
+		exit_failure(rt);
 }
 
 int		add_back_light(t_lights **start, void *point_light)
 {
 	t_lights *ptr;
 	t_lights *new;
-	
-	new = NULL;
 
+	new = NULL;
 	if (!(new = (malloc(sizeof(t_lights)))))
 		return (FAILURE);
 	new->point_light = point_light;
 	new->next = NULL;
 	if (!*start)
-	{	
+	{
 		*start = new;
 		return (SUCCESS);
 	}

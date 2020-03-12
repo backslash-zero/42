@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 19:03:20 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 14:00:48 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 18:16:30 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	calc_camera_dir(t_camera *camera)
 void	loopcameras(t_cameras **start)
 {
 	t_cameras *ptr;
+
 	ptr = *start;
 	while (ptr->next)
 		ptr = ptr->next;
 	ptr->next = *start;
-
 }
 
 void	camera_parsing(t_rt *rt, char *line, int n)
@@ -47,9 +47,9 @@ void	camera_parsing(t_rt *rt, char *line, int n)
 	if (!(camera = (malloc(sizeof(t_camera)))))
 		exit_failure(rt);
 	skip_spaces(&i, line);
-	camera->pos = get_vec(&i, line);
+	camera->pos = get_vec(rt, &i, line, n);
 	skip_spaces(&i, line);
-	camera->rot = get_vec(&i, line);
+	camera->rot = get_vec(rt, &i, line, n);
 	skip_spaces(&i, line);
 	if ((camera->fov = ft_atoi_double(&line[i])) < 0 ||
 		camera->fov > 180)
@@ -63,7 +63,7 @@ int		add_back_cameras(t_cameras **start, void *camera)
 {
 	t_cameras *ptr;
 	t_cameras *new;
-	
+
 	new = NULL;
 	if (!(new = (malloc(sizeof(t_cameras)))))
 		return (FAILURE);

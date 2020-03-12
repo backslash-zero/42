@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:57:43 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 14:00:48 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 19:30:01 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ void	add_light(t_color *color, double new_i, t_color point_light_color)
 void	convert_light_ray(t_ray *ray, t_ray *light_ray, t_light_vec *light_vec)
 {
 	light_ray->origin = ray->point;
-	light_ray->dir =light_vec->dir;
+	light_ray->dir = light_vec->dir;
 }
 
 void	process_light(t_scene *scene, t_ray *ray)
-{	
-	ray->point = add_vec(scene->active_camera->pos, mult_point_d(ray->dir, ray->closest_t));
+{
+	ray->point = add_vec(scene->active_camera->pos,
+		mult_point_d(ray->dir, ray->closest_t));
 	ray->normal = normal_calc(ray);
 	point_light(scene, ray);
 	ambient_light(scene, ray);
@@ -51,7 +52,7 @@ void	point_light(t_scene *scene, t_ray *ray)
 	double		n_dot_l;
 	double		new_i;
 	t_ray		light_ray;
-	
+
 	n_dot_l = 0;
 	new_i = 0;
 	tmp = scene->lights;
@@ -61,16 +62,13 @@ void	point_light(t_scene *scene, t_ray *ray)
 		light_vec.lum = tmp->point_light->lum;
 		light_vec.dir = sub_vec(tmp->point_light->pos, ray->point);
 		n_dot_l = prod_scal(ray->normal, light_vec.dir);
-		new_i = light_vec.lum * n_dot_l / (norm_vec(ray->normal)*norm_vec(light_vec.dir));
-
+		new_i = light_vec.lum * n_dot_l / (norm_vec(ray->normal) *
+				norm_vec(light_vec.dir));
 		convert_light_ray(ray, &light_ray, &light_vec);
 		if (!shadow_intersection(&light_ray, scene, &light_vec))
 		{
 			if (n_dot_l > 0 && prod_scal(ray->dir, ray->normal) < 0)
-			{	
-				add_light(&ray->color, new_i, light_vec.color);
-				specular_light_processing(ray, &light_vec);
-			}
+				light_if_shadow(ray, new_i, light_vec);
 		}
 		tmp = tmp->next;
 	}

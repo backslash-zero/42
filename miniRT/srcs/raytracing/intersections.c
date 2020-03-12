@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 14:18:36 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 14:00:48 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 18:41:45 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,23 @@ void	intersection(t_ray *ray, t_scene *scene)
 	t_objects	*tmp;
 
 	tmp = scene->objects;
-
 	ray->closest_object = NULL;
 	ray->closest_t = __DBL_MAX__;
 	while (tmp)
 	{
 		intersect_object(ray, tmp);
-		if (ray->inter.t1 > 0 && ray->inter.t1 < __DBL_MAX__ && ray->inter.t1 < ray->closest_t)
+		if (ray->inter.t1 > 0 && ray->inter.t1 < __DBL_MAX__ &&
+			ray->inter.t1 < ray->closest_t)
 		{
 			ray->closest_t = ray->inter.t1;
 			ray->closest_object = tmp;
 		}
-		if (ray->inter.t2 > 0 && ray->inter.t2 < __DBL_MAX__ && ray->inter.t2 < ray->closest_t)
+		if (ray->inter.t2 > 0 && ray->inter.t2 < __DBL_MAX__ &&
+			ray->inter.t2 < ray->closest_t)
 		{
 			ray->closest_t = ray->inter.t2;
 			ray->closest_object = tmp;
 		}
-		// put white if no sphere interesection was found.
 		if (ray->closest_object != NULL)
 			ray->color = color_by_type_cast(ray->closest_object);
 		tmp = tmp->next;

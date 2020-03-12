@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/03/12 17:13:31 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/03/12 19:29:34 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,13 +43,19 @@ SRC =			main.c								\
 				parsing/parsing_lights.c			\
 				parsing/parsing_main.c				\
 				parsing/parsing_scene.c				\
+				parsing/parsing_skip.c				\
 				parsing/parsing_objects.c			\
+				parsing/parsing_test_objects.c 		\
+				parsing/parsing_test_others.c 		\
+				parsing/parsing_objects_utils.c		\
 				parsing/parsing_tracker.c			\
 				raytracing/intersections.c			\
 				raytracing/lights_1.c				\
 				raytracing/lights_2.c				\
+				raytracing/lights_3.c				\
 				raytracing/normals.c				\
-				raytracing/object_intersection.c	\
+				raytracing/object_intersection_1.c	\
+				raytracing/object_intersection_2.c	\
 				raytracing/viewport.c				\
 				utils/colors.c						\
 				utils/exit_1.c						\

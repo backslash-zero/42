@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 14:13:01 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 14:16:31 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 19:01:44 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ t_vec			normal_sphere(t_ray *ray, t_sphere *s);
 void			intersect_ray_sphere(t_ray *ray, t_sphere *sphere);
 void			intersect_ray_plane(t_ray *ray, t_plane *plane);
 void			intersect_ray_square(t_ray *ray, t_square *square);
+void			intersect_ray_square_2(t_ray *ray, t_square *square);
 void			intersect_ray_triangle(t_ray *ray, t_triangle *triangle);
+void			intersect_ray_triangle_2(t_ray *ray, t_triangle *triangle);
+void			intersect_ray_cylinder_2(t_ray *r, t_cylinder *cy, t_vec d, t_vec a);
 void			intersect_ray_cylinder(t_ray *ray, t_cylinder *cylinder);
 void			intersection(t_ray *ray, t_scene *scene);
 void			intersect_object(t_ray *ray, t_objects *tmp);

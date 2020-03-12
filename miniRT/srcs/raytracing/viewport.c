@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 14:06:14 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 14:00:48 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 18:26:21 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		center_x(int x, t_scene *scene)
 {
-	x = - (scene->window_width / 2) + x;
+	x = -(scene->window_width / 2) + x;
 	return (x);
 }
 
@@ -24,7 +24,7 @@ int		center_y(int y, t_scene *scene)
 	return (y);
 }
 
-double get_vp_x(int x, t_scene *scene)
+double	get_vp_x(int x, t_scene *scene)
 {
 	double vp_x;
 
@@ -32,7 +32,7 @@ double get_vp_x(int x, t_scene *scene)
 	return (vp_x);
 }
 
-double get_vp_y(int y, t_scene *scene)
+double	get_vp_y(int y, t_scene *scene)
 {
 	double vp_y;
 

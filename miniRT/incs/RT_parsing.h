@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RT_parsing.h                                       :+:      :+:    :+:   */
+/*   rt_parsing.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:17:44 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 13:51:11 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 18:08:56 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	sphere_parsing(t_rt *rt, char *line, int n);
 void	plane_parsing(t_rt *rt, char *line, int n);
 void	square_parsing(t_rt *rt, char *line, int n);
 void	triangle_parsing(t_rt *rt, char *line, int n);
-void	cylinder_parsing(t_rt *rt, char *line, int n);
+void	cylinder_parsing(t_rt *rt, char *line, int n, int i);
 
-int		p_test_window(t_scene *scene, char *line);
-int		p_test_ambient_light(t_scene *scene, char *line);
+int		p_test_window(t_rt *rt, char *line, int n);
+int		p_test_ambient_light(t_rt *rt, char *line, int n);
 int		p_test_point_light(char *line);
 int		p_test_triangle(char *line);
 int		p_test_cylinder(char *line);
@@ -50,9 +50,10 @@ void	init_parsing_tracker(t_scene *scene);
 
 void	skip_spaces(int *i, char *line);
 void	skip_numbers(int *i, char *line);
+void	skip_nb_spaces(int *i, char *line);
 int		string_empty(char *line);
 int		skip_comma(int *i, char *line);
 t_color	get_color(t_rt *rt, int *i, char *line, int n);
-t_vec	get_vec(int *i, char *line);
+t_vec	get_vec(t_rt *rt, int *i, char *line, int n);
 
 #endif

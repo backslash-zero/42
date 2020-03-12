@@ -6,119 +6,29 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 17:57:51 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 14:00:48 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 18:10:23 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/minirt.h"
 
-int		p_test_window(t_scene *scene, char *line)
-{
-	if (line[0] == 'R')
-	{	
-		if (scene->tracker.window)
-			exit_free_all(scene); // Resolution assigned more than once
-		else
-		{
-			scene->tracker.window = 1;
-			return (1);
-		}
-	}
-	return (0);	
-}
-
-int		p_test_camera(t_scene *scene, char *line)
-{
-	if (line[0] == 'c' && line[1] != 'y' )
-	{
-		scene->tracker.camera = 1;
-		return (1);
-	}
-	else
-		return (0);	
-}
-
-int		p_test_sphere(char *line)
-{
-	if ((line[0] == 's' && line[1] == 'p' ))
-		return (1);
-	else
-		return (0);	
-}
-int		p_test_plane(char *line)
-{
-	if ((line[0] == 'p' && line[1] == 'l' ))
-		return (1);
-	else
-		return (0);	
-}
-int		p_test_square(char *line)
-{
-	if ((line[0] == 's' && line[1] == 'q' ))
-		return (1);
-	else
-		return (0);	
-}
-int		p_test_cylinder(char *line)
-{
-	if ((line[0] == 'c' && line[1] == 'y' ))
-		return (1);
-	else
-		return (0);	
-}
-int		p_test_triangle(char *line)
-{
-	if ((line[0] == 't' && line[1] == 'r' ))
-		return (1);
-	else
-		return (0);	
-}
-
-int		p_test_point_light(char *line)
-{
-	if (line[0] == 'l')
-	{
-		return (1);
-	}
-	else
-		return (0);	
-}
-
-int		p_test_ambient_light(t_scene *scene, char *line)
-{
-	if (line[0] == 'A')
-	{	
-		if (scene->tracker.ambient_light)
-		{	
-			exit(0); // Ambient light assigned more than once
-		}
-		else
-		{
-			scene->tracker.ambient_light = 1;
-			return (1);
-		}
-	}
-	else
-		return (0);	
-}
-
 void	main_parser(t_rt *rt, char *line, int n)
 {
-	if (p_test_window(rt->scene, line))
+	if (p_test_window(rt, line, n))
 		window_parsing(rt, line, n);
 	else if (p_test_sphere(line))
 		sphere_parsing(rt, line, n);
 	else if (p_test_square(line))
 		square_parsing(rt, line, n);
 	else if (p_test_cylinder(line))
-		cylinder_parsing(rt, line, n);	
+		cylinder_parsing(rt, line, n, 2);
 	else if (p_test_triangle(line))
 		triangle_parsing(rt, line, n);
 	else if (p_test_plane(line))
 		plane_parsing(rt, line, n);
 	else if (p_test_point_light(line))
 		point_light_parsing(rt, line, n);
-	else if (p_test_ambient_light(rt->scene, line))
+	else if (p_test_ambient_light(rt, line, n))
 		ambient_light_parsing(rt, line, n);
 	else if (p_test_camera(rt->scene, line))
 		camera_parsing(rt, line, n);
@@ -128,13 +38,12 @@ void	main_parser(t_rt *rt, char *line, int n)
 
 void	scene_parsing(t_rt *rt)
 {
-	int retour;
-	char *line;
-	int	n;
+	int		retour;
+	char	*line;
+	int		n;
 
 	n = 0;
 	init_parsing_tracker(rt->scene);
-	// check if gnl problem
 	while ((retour = get_next_line(rt->scene->fd, &line)) > 0)
 	{
 		main_parser(rt, line, n);
@@ -142,7 +51,7 @@ void	scene_parsing(t_rt *rt)
 		n++;
 	}
 	if (retour == -1)
-		parsing_err(rt, "Incorrect file format", n);;
+		parsing_err(rt, "Incorrect file format", n);
 	main_parser(rt, line, n);
 	free(line);
 	close(rt->scene->fd);
