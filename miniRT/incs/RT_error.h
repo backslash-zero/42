@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:38:55 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 14:22:24 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 17:12:39 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define SUCCESS 0
 # define FAILURE -1
 
+int		quit_window(t_rt *rt, int code);
 void	free_lights(t_lights *lights);
 void	free_objects(t_objects *objects);
 void	free_cameras(t_cameras *cameras);

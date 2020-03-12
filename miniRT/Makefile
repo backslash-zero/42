@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/03/11 21:55:17 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/03/12 17:13:31 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,10 @@ SRC =			main.c								\
 				maths/vector_op_1.c					\
 				maths/vector_op_2.c					\
 				maths/vector_op_3.c					\
-				mlx/RT_mlx.c						\
+				mlx/key_bindings_1.c				\
+				mlx/key_bindings_2.c				\
+				mlx/rt_mlx_1.c						\
+				mlx/rt_mlx_2.c						\
 				mlx/save_image.c					\
 				parsing/parsing_cameras.c			\
 				parsing/parsing_lights.c			\
@@ -49,7 +52,8 @@ SRC =			main.c								\
 				raytracing/object_intersection.c	\
 				raytracing/viewport.c				\
 				utils/colors.c						\
-				utils/exit.c						\
+				utils/exit_1.c						\
+				utils/exit_2.c						\
 				utils/ft_atoi.c						\
 				utils/ft_atoi_double.c				\
 				utils/ft_bzero.c					\

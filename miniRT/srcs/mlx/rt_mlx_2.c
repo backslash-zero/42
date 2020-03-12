@@ -1,45 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_op_2.c                                      :+:      :+:    :+:   */
+/*   rt_mlx_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/27 19:23:34 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 17:16:17 by cmeunier         ###   ########.fr       */
+/*   Created: 2020/03/12 16:47:57 by cmeunier          #+#    #+#             */
+/*   Updated: 2020/03/12 16:49:41 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/minirt.h"
 
-t_vec	add_vec_d(t_vec vec1, double val)
+void	ft_init_mlx(t_mlx *mlx, t_scene *scene)
 {
-	vec1.x += val;
-	vec1.y += val;
-	vec1.z += val;
-	return (vec1);
+	mlx->mlx_ptr = mlx_init();
+	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr,
+					scene->window_width, scene->window_height, "MiniRT");
+	mlx->img_ptr = mlx_new_image(mlx->mlx_ptr,
+					scene->window_width, scene->window_height);
+	mlx->img_data = (int*)mlx_get_data_addr(mlx->img_ptr,
+					&mlx->bpp, &mlx->size_line, &mlx->endian);
 }
 
-t_vec	sub_vec_d(t_vec vec1, double val)
+int		rt_loop(t_mlx mlx)
 {
-	vec1.x -= val;
-	vec1.y -= val;
-	vec1.z -= val;
-	return (vec1);
-}
-
-t_vec	mult_point_d(t_vec vec1, double val)
-{
-	vec1.x *= val;
-	vec1.y *= val;
-	vec1.z *= val;
-	return (vec1);
-}
-
-t_vec	div_vec_d(t_vec vec1, double val)
-{
-	vec1.x /= val;
-	vec1.y /= val;
-	vec1.z /= val;
-	return (vec1);
+	(void)mlx;
+	return (0);
 }

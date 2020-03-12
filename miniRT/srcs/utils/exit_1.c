@@ -1,60 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   exit_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/09 13:04:12 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 14:00:48 by cmeunier         ###   ########.fr       */
+/*   Created: 2020/03/12 16:54:23 by cmeunier          #+#    #+#             */
+/*   Updated: 2020/03/12 16:56:20 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/minirt.h"
-
-void	free_lights(t_lights *lights)
-{
-	t_lights *tmp;
-
-	while (lights)
-	{
-		tmp = lights;
-		lights = lights->next;
-		free(tmp->point_light);
-		free(tmp);
-	}
-}
-
-void	free_objects(t_objects *objects)
-{
-	t_objects *tmp;
-
-	while (objects)
-	{
-		tmp = objects;
-		objects = objects->next;
-		free(tmp->obj);
-		free(tmp);
-	}
-}
-
-void	free_cameras(t_cameras *cameras)
-{
-	t_cameras *tmp;
-	t_cameras *first;
-
-	first = cameras;
-
-	while (cameras)
-	{
-		tmp = cameras;
-		cameras = cameras->next;
-		free(tmp->camera);
-		free(tmp);
-		if (cameras == first)
-			cameras = NULL;
-	}
-}
 
 void	exit_success(t_rt *rt)
 {

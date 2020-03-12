@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:44:50 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 15:03:04 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 16:37:14 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,13 @@ void			ft_init_mlx(t_mlx *mlx, t_scene *scene);
 void			put_image(t_rt *rt);
 void			put_image_and_start(t_rt *rt);
 void			start_window(t_rt *rt);
+void			display_image(t_rt *rt);
 int				ft_key_ambient_light(int key, t_rt *rt);
 int				ft_key_pos(int key, t_rt *rt);
 int				ft_key_rot(int key, t_rt *rt);
 int				ft_key_switch(int key, t_rt *rt);
 int				ft_key_fov(int key, t_rt *rt);
+int				ft_key_invert_colors(int key, t_rt *rt);
+int 			ft_key(int key, t_rt *rt);
 
 #endif

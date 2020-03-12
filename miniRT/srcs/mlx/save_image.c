@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 16:38:57 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 14:00:48 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 16:43:36 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	write_bmp_file_header(t_rt *rt, int fd)
 
 	ft_bzero(&fileheader, sizeof(t_fileheader));
 	fileheader.id = 19778;
-	fileheader.size = 54 + (rt->scene->window_height * rt->scene->window_width * 3);
+	fileheader.size = 54 + (rt->scene->window_height *
+							rt->scene->window_width * 3);
 	fileheader.reserved = 0;
 	fileheader.offset = 54;
 	write(fd, &fileheader.id, 2);
@@ -49,9 +50,9 @@ void	write_bmp_pixeldata(t_rt *rt, int fd)
 {
 	unsigned char	*tab;
 	int				i;
-	int 			x;
-	int 			y;
-	
+	int				x;
+	int				y;
+
 	if (!(tab = malloc(rt->scene->window_height * rt->scene->window_width * 3)))
 		exit_failure(rt);
 	i = 0;
@@ -60,14 +61,17 @@ void	write_bmp_pixeldata(t_rt *rt, int fd)
 	{
 		x = -1;
 		while (++x < rt->scene->window_width)
-		{	
-			tab[i * 3] = rt->mlx->img_data[x + y * (int)rt->scene->window_width] >> 0;
-			tab[(i * 3) + 1] = rt->mlx->img_data[x + y * (int)rt->scene->window_width] >> 8;
-			tab[(i * 3) + 2] = rt->mlx->img_data[x + y * (int)rt->scene->window_width] >> 16;
+		{
+			tab[i * 3] = rt->mlx->img_data[x + y *
+							(int)rt->scene->window_width] >> 0;
+			tab[(i * 3) + 1] = rt->mlx->img_data[x + y *
+							(int)rt->scene->window_width] >> 8;
+			tab[(i * 3) + 2] = rt->mlx->img_data[x + y *
+							(int)rt->scene->window_width] >> 16;
 			i++;
 		}
 	}
-	write(fd, tab, rt->scene->window_width * rt->scene->window_height *3);
+	write(fd, tab, rt->scene->window_width * rt->scene->window_height * 3);
 	free(tab);
 }
 
