@@ -6,11 +6,11 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:42:28 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 17:27:46 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 15:03:30 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/miniRT.h"
+#include "../../incs/minirt.h"
 
 void	ft_init_mlx(t_mlx *mlx, t_scene *scene)
 {
@@ -23,26 +23,38 @@ void	ft_init_mlx(t_mlx *mlx, t_scene *scene)
 int			rt_loop(t_mlx mlx)
 {
 	(void)mlx;
-	return(0);
+	return (0);
+}
+
+void	put_image(t_rt *rt)
+{
+	mlx_put_image_to_window(rt->mlx->mlx_ptr,
+		rt->mlx->win_ptr, rt->mlx->img_ptr, 0, 0);
+}
+
+void	put_image_and_start(t_rt *rt)
+{
+	put_image(rt);
+	start_window(rt);
 }
 
 void	display_image(t_rt *rt)
 {
 	fill_img(rt->scene, rt->mlx);
-	mlx_put_image_to_window(rt->mlx->mlx_ptr, rt->mlx->win_ptr, rt->mlx->img_ptr, 0, 0);
+	put_image(rt);
 }
 
 int		ft_key_switch(int key, t_rt *rt)
 {
-	if(key == 8)
+	if (key == 8)
 	{
 		rt->scene->cameras = rt->scene->cameras->next;
 		rt->scene->active_camera = rt->scene->cameras->camera;
 		display_image(rt);
-		return(0);
+		return (0);
 	}
 	else
-		return(0);
+		return (0);
 }
 
 int		ft_key_fov(int key, t_rt *rt)
@@ -50,35 +62,35 @@ int		ft_key_fov(int key, t_rt *rt)
 	double increment_pos;
 
 	increment_pos = 1;
-	if(key == 87)
+	if (key == 87)
 	{
 		rt->scene->active_camera->fov += increment_pos;
 		display_image(rt);
-		return(0);
+		return (0);
 	}
-	if(key == 91)
+	if (key == 91)
 	{
 		rt->scene->active_camera->fov -= increment_pos;
 		display_image(rt);
-		return(0);
+		return (0);
 	}
 	else
-		return(0);
+		return (0);
 }
 
 int		ft_key_invert_colors(int key, t_rt *rt)
 {
-	if(key == 34)
+	if (key == 34)
 	{
 		if (rt->scene->invert)
 			rt->scene->invert = 0;
 		else
 			rt->scene->invert = 1;
 		display_image(rt);
-		return(0);
+		return (0);
 	}
 	else
-		return(0);
+		return (0);
 }
 
 int		ft_key_pos(int key, t_rt *rt)
@@ -86,32 +98,32 @@ int		ft_key_pos(int key, t_rt *rt)
 	double increment_pos;
 
 	increment_pos = 1;
-	if(key == 126)
+	if (key == 126)
 	{
 		rt->scene->active_camera->pos = add_vec(rt->scene->active_camera->pos, mult_point_d(rt->scene->active_camera->dir_z, increment_pos));
 		display_image(rt);
-		return(0);
+		return (0);
 	}
-	if(key == 125)
+	if (key == 125)
 	{
 		rt->scene->active_camera->pos = sub_vec(rt->scene->active_camera->pos, mult_point_d(rt->scene->active_camera->dir_z, increment_pos));
 		display_image(rt);
-		return(0);
+		return (0);
 	}
-	if(key == 124)
+	if (key == 124)
 	{
 		rt->scene->active_camera->pos = add_vec(rt->scene->active_camera->pos, mult_point_d(rt->scene->active_camera->dir_x, increment_pos));
 		display_image(rt);
-		return(0);
+		return (0);
 	}
-	if(key == 123)
+	if (key == 123)
 	{
 		rt->scene->active_camera->pos = sub_vec(rt->scene->active_camera->pos, mult_point_d(rt->scene->active_camera->dir_x, increment_pos));
 		display_image(rt);
-		return(0);
+		return (0);
 	}
 	else
-		return(0);
+		return (0);
 }
 
 int		ft_key_rot(int key, t_rt *rt)
@@ -119,36 +131,36 @@ int		ft_key_rot(int key, t_rt *rt)
 	double increment_rot;
 
 	increment_rot = 0.1;
-	if(key == 0)
+	if (key == 0)
 	{
 		rt->scene->active_camera->rot.y -= increment_rot;
 		calc_camera_dir(rt->scene->active_camera);
 		display_image(rt);
-		return(0);
+		return (0);
 	}
-	if(key == 2)
+	if (key == 2)
 	{
 		rt->scene->active_camera->rot.y += increment_rot;
 		calc_camera_dir(rt->scene->active_camera);
 		display_image(rt);
-		return(0);
+		return (0);
 	}
-	if(key == 13)
+	if (key == 13)
 	{
 		rt->scene->active_camera->rot.x -= increment_rot;
 		calc_camera_dir(rt->scene->active_camera);
 		display_image(rt);
-		return(0);
+		return (0);
 	}
-	if(key == 1)
+	if (key == 1)
 	{
 		rt->scene->active_camera->rot.x += increment_rot;
 		calc_camera_dir(rt->scene->active_camera);
 		display_image(rt);
-		return(0);
+		return (0);
 	}
 	else
-		return(0);
+		return (0);
 }
 
 int		ft_key_point_light(int key, t_rt *rt)
@@ -158,18 +170,18 @@ int		ft_key_point_light(int key, t_rt *rt)
 
 	lights = rt->scene->lights;
 	increment_light = 0.05;
-	if(key == 92)
+	if (key == 92)
 	{
 		while (lights)
 		{
-			if(lights->point_light->lum > increment_light)
+			if (lights->point_light->lum > increment_light)
 				lights->point_light->lum -= increment_light;
 			lights = lights->next;
 		}
 		display_image(rt);
-		return(0);
+		return (0);
 	}
-	if(key == 88)
+	if (key == 88)
 	{
 		while (lights)
 		{
@@ -177,9 +189,9 @@ int		ft_key_point_light(int key, t_rt *rt)
 			lights = lights->next;
 		}
 		display_image(rt);
-		return(0);
+		return (0);
 	}
-	if(key == 85)
+	if (key == 85)
 	{
 		while (lights)
 		{
@@ -187,9 +199,9 @@ int		ft_key_point_light(int key, t_rt *rt)
 			lights = lights->next;
 		}
 		display_image(rt);
-		return(0);
+		return (0);
 	}
-	return(0);
+	return (0);
 }
 
 int		ft_key_ambient_light(int key, t_rt *rt)
@@ -197,28 +209,28 @@ int		ft_key_ambient_light(int key, t_rt *rt)
 	double increment_light;
 
 	increment_light = 0.05;
-	if(key == 53)
+	if (key == 53)
 		exit_success(rt);
-	if(key == 78)
+	if (key == 78)
 	{
-		if(rt->scene->ambient_light.lum > increment_light)
+		if (rt->scene->ambient_light.lum > increment_light)
 			rt->scene->ambient_light.lum -= increment_light;
 		display_image(rt);
-		return(0);
+		return (0);
 	}
-	if(key == 69)
+	if (key == 69)
 	{
 		rt->scene->ambient_light.lum += increment_light;
 		display_image(rt);
-		return(0);
+		return (0);
 	}
-	if(key == 82)
+	if (key == 82)
 	{
 		rt->scene->ambient_light.lum = 0.5;
 		display_image(rt);;
-		return(0);
+		return (0);
 	}
-	return(0);
+	return (0);
 }
 
 int ft_key(int key, t_rt *rt)
@@ -230,7 +242,7 @@ int ft_key(int key, t_rt *rt)
 	ft_key_switch(key, rt);
 	ft_key_fov(key, rt);
 	ft_key_invert_colors(key, rt);
-	return(1);
+	return (1);
 }
 
 int		quit_window(t_rt *rt, int code)

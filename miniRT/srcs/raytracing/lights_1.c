@@ -6,11 +6,11 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:57:43 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/09 18:39:06 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 14:00:48 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/miniRT.h"
+#include "../../incs/minirt.h"
 
 void	light_calc(t_color *color, double lum, t_color light_color)
 {
@@ -55,7 +55,7 @@ void	point_light(t_scene *scene, t_ray *ray)
 	n_dot_l = 0;
 	new_i = 0;
 	tmp = scene->lights;
-	while(tmp)
+	while (tmp)
 	{
 		light_vec.color = tmp->point_light->color;
 		light_vec.lum = tmp->point_light->lum;
@@ -64,9 +64,9 @@ void	point_light(t_scene *scene, t_ray *ray)
 		new_i = light_vec.lum * n_dot_l / (norm_vec(ray->normal)*norm_vec(light_vec.dir));
 
 		convert_light_ray(ray, &light_ray, &light_vec);
-		if(!shadow_intersection(&light_ray, scene, &light_vec))
+		if (!shadow_intersection(&light_ray, scene, &light_vec))
 		{
-			if(n_dot_l > 0 && prod_scal(ray->dir, ray->normal) < 0)
+			if (n_dot_l > 0 && prod_scal(ray->dir, ray->normal) < 0)
 			{	
 				add_light(&ray->color, new_i, light_vec.color);
 				specular_light_processing(ray, &light_vec);

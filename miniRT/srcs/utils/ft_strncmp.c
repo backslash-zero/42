@@ -6,11 +6,11 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 16:10:24 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/02 16:27:16 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 14:00:48 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/miniRT.h"
+#include "../../incs/minirt.h"
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {

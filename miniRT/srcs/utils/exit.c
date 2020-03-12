@@ -6,17 +6,17 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 13:04:12 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 22:19:54 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 14:00:48 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/miniRT.h"
+#include "../../incs/minirt.h"
 
 void	free_lights(t_lights *lights)
 {
 	t_lights *tmp;
 
-	while(lights)
+	while (lights)
 	{
 		tmp = lights;
 		lights = lights->next;
@@ -29,7 +29,7 @@ void	free_objects(t_objects *objects)
 {
 	t_objects *tmp;
 
-	while(objects)
+	while (objects)
 	{
 		tmp = objects;
 		objects = objects->next;
@@ -45,13 +45,13 @@ void	free_cameras(t_cameras *cameras)
 
 	first = cameras;
 
-	while(cameras)
+	while (cameras)
 	{
 		tmp = cameras;
 		cameras = cameras->next;
 		free(tmp->camera);
 		free(tmp);
-		if(cameras == first)
+		if (cameras == first)
 			cameras = NULL;
 	}
 }
@@ -73,8 +73,8 @@ void	parsing_err(t_rt *rt, char *msg, int n)
 	write(1, msg, ft_strlen(msg));
 	if (n != -1)
 	{	
-		line_n = ft_itoa(n);
-		write(1, "\n at line ", 10);
+		line_n = ft_itoa(++n);
+		write(1, " on line ", 10);
 		write(1, line_n, ft_strlen(line_n));
 	}
 	write(1, "\n\e[0m", 5);

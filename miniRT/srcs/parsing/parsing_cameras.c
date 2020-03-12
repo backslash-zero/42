@@ -6,11 +6,11 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 19:03:20 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 22:17:44 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 14:00:48 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/miniRT.h"
+#include "../../incs/minirt.h"
 
 void	calc_camera_dir(t_camera *camera)
 {
@@ -44,18 +44,18 @@ void	camera_parsing(t_rt *rt, char *line, int n)
 	int			i;
 
 	i = 1;
-	if(!(camera = (malloc(sizeof(t_camera)))))
+	if (!(camera = (malloc(sizeof(t_camera)))))
 		exit_failure(rt);
 	skip_spaces(&i, line);
 	camera->pos = get_vec(&i, line);
 	skip_spaces(&i, line);
 	camera->rot = get_vec(&i, line);
 	skip_spaces(&i, line);
-	if((camera->fov = ft_atoi_double(&line[i])) < 0 ||
+	if ((camera->fov = ft_atoi_double(&line[i])) < 0 ||
 		camera->fov > 180)
 		parsing_err(rt, "FOV cannot be negative.", n);
 	calc_camera_dir(camera);
-	if(add_back_cameras(&rt->scene->cameras, camera) == FAILURE)
+	if (add_back_cameras(&rt->scene->cameras, camera) == FAILURE)
 		exit_failure(rt);
 }
 
@@ -65,18 +65,18 @@ int		add_back_cameras(t_cameras **start, void *camera)
 	t_cameras *new;
 	
 	new = NULL;
-	if(!(new = (malloc(sizeof(t_cameras)))))
-		return(FAILURE);
+	if (!(new = (malloc(sizeof(t_cameras)))))
+		return (FAILURE);
 	new->camera = camera;
 	new->next = NULL;
-	if(!*start)
+	if (!*start)
 	{
 		*start = new;
-		return(SUCCESS);
+		return (SUCCESS);
 	}
 	ptr = *start;
 	while (ptr->next)
 		ptr = ptr->next;
 	ptr->next = new;
-	return(SUCCESS);
+	return (SUCCESS);
 }

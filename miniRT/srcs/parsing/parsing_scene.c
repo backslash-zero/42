@@ -6,11 +6,11 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:31:08 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 20:05:52 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 14:00:48 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/miniRT.h"
+#include "../../incs/minirt.h"
 
 t_vec		get_vec(int *i, char *line)
 {
@@ -18,20 +18,20 @@ t_vec		get_vec(int *i, char *line)
 	
 	vec.x = ft_atoi_double(&line[*i]);
 	skip_numbers(i, line);
-	if(!skip_comma(i, line))
+	if (!skip_comma(i, line))
 		exit(0); // bad formatting : missing comma
 	vec.y = ft_atoi_double(&line[*i]);
 	skip_numbers(i, line);
-	if(!skip_comma(i, line))
+	if (!skip_comma(i, line))
 		exit(0); // bad formatting : missing comma
 	vec.z = ft_atoi_double(&line[*i]);
 	skip_numbers(i, line);
-	return(vec);
+	return (vec);
 }
 
 int		skip_comma(int *i, char *line)
 {
-	if(line[*i] == ',')
+	if (line[*i] == ',')
 		*i += 1;
 	else
 		return (0);
@@ -42,21 +42,21 @@ t_color		get_color(t_rt *rt, int *i, char *line, int n)
 {
 	t_color color;
 	
-	if((color.r = ft_atoi_double(&line[*i])) < 0 || color.r > 255)
+	if ((color.r = ft_atoi_double(&line[*i])) < 0 || color.r > 255)
 		parsing_err(rt, "RGB color value invalid", n);
 	skip_numbers(i, line);
-	if(!skip_comma(i, line))
+	if (!skip_comma(i, line))
 		parsing_err(rt, "Bad formatting, missing comma", n);
-	if((color.g = ft_atoi_double(&line[*i])) < 0 || color.g > 255)
+	if ((color.g = ft_atoi_double(&line[*i])) < 0 || color.g > 255)
 		parsing_err(rt, "RGB color value invalid", n);
 	skip_numbers(i, line);
-	if(!skip_comma(i, line))
+	if (!skip_comma(i, line))
 		parsing_err(rt, "Bad formatting, missing comma.", n);
-	if((color.b = ft_atoi_double(&line[*i])) < 0 || color.b > 255)
+	if ((color.b = ft_atoi_double(&line[*i])) < 0 || color.b > 255)
 		parsing_err(rt, "RGB color value invalid.", n);
 	skip_numbers(i, line);
 	//if color > 255 or < 0 exit
-	return(color);
+	return (color);
 }
 
 int		string_empty(char *line)
@@ -69,12 +69,12 @@ int		string_empty(char *line)
 
 void	skip_numbers(int *i, char *line)
 {
-	while(line[*i] == '.' || is_plusminus(line[*i]) || is_digit(line[*i]))
+	while (line[*i] == '.' || is_plusminus(line[*i]) || is_digit(line[*i]))
 		*i += 1;
 }
 void	skip_spaces(int *i, char *line)
 {
-	while(line[*i] == ' ' || line[*i] == '\t')
+	while (line[*i] == ' ' || line[*i] == '\t')
 		*i += 1;
 }
 
@@ -84,15 +84,15 @@ void	window_parsing(t_rt *rt, char *line, int n)
 	
 	i = 1;
 	skip_spaces(&i, line);
-	if((rt->scene->window_width = ft_atoi_double(&line[i])) < 0)
+	if ((rt->scene->window_width = ft_atoi_double(&line[i])) < 0)
 		parsing_err(rt, "Window width cannot be negative.", n);
 	skip_numbers(&i, line);
 	skip_spaces(&i, line);
-	if((rt->scene->window_height = ft_atoi_double(&line[i])) < 0)
+	if ((rt->scene->window_height = ft_atoi_double(&line[i])) < 0)
 		parsing_err(rt, "Window height cannot be negative.", n);
-	if(rt->scene->window_width >= MAX_WINDOW_WIDTH)
+	if (rt->scene->window_width >= MAX_WINDOW_WIDTH)
 		rt->scene->window_width = MAX_WINDOW_WIDTH;
-	if(rt->scene->window_height >= MAX_WINDOW_HEIGHT)
+	if (rt->scene->window_height >= MAX_WINDOW_HEIGHT)
 		rt->scene->window_height = MAX_WINDOW_HEIGHT;
 }
 

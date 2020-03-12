@@ -6,11 +6,11 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 16:38:57 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 18:30:23 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 14:00:48 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/miniRT.h"
+#include "../../incs/minirt.h"
 
 void	write_bmp_file_header(t_rt *rt, int fd)
 {
@@ -52,14 +52,14 @@ void	write_bmp_pixeldata(t_rt *rt, int fd)
 	int 			x;
 	int 			y;
 	
-	if(!(tab = malloc(rt->scene->window_height * rt->scene->window_width * 3)))
+	if (!(tab = malloc(rt->scene->window_height * rt->scene->window_width * 3)))
 		exit_failure(rt);
 	i = 0;
 	y = rt->scene->window_height;
-	while(--y > 0)
+	while (--y > 0)
 	{
 		x = -1;
-		while(++x < rt->scene->window_width)
+		while (++x < rt->scene->window_width)
 		{	
 			tab[i * 3] = rt->mlx->img_data[x + y * (int)rt->scene->window_width] >> 0;
 			tab[(i * 3) + 1] = rt->mlx->img_data[x + y * (int)rt->scene->window_width] >> 8;

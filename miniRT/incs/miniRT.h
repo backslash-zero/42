@@ -1,62 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 13:46:15 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 14:25:56 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINI_RT_H
-# define MINI_RT_H
+#ifndef MINIRT_H
+# define MINIRT_H
 
-// Standard libraries
 # include <math.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include <errno.h>
-
-// MinilibX
 # include <mlx.h>
 
-#define MAX_WINDOW_WIDTH	2560
-#define MAX_WINDOW_HEIGHT 	1440
-#define WINDOW_WIDTH		400
-#define WINDOW_HEIGHT 		300
-#define VIEWPORT_D			1
-#define FOV					60
+# define MAX_WINDOW_WIDTH	2560
+# define MAX_WINDOW_HEIGHT 	1440
+# define WINDOW_WIDTH		400
+# define WINDOW_HEIGHT 		300
+# define VIEWPORT_D			1
+# define FOV					60
 
-
-typedef	struct	s_color
-{
-	double r;
-	double g;
-	double b;
-}				t_color;
-
-typedef	struct	s_vec
-{
-	double x;
-	double y;
-	double z;
-}				t_vec;
-
-// Self-made headers
-# include "RT_maths.h"
 # include "get_next_line.h"
-# include "RT_scene.h"
-# include "RT_mlx.h"
-# include "RT_utils.h"
-# include "RT_bmp.h"
-# include "RT_colors.h"
-# include "RT_error.h"
-# include "RT_parsing.h"
-# include "RT_raytracing.h"
-# include "RT_lights.h"
+# include "rt_maths.h"
+# include "rt_scene.h"
+# include "rt_mlx.h"
+# include "rt_utils.h"
+# include "rt_bmp.h"
+# include "rt_colors.h"
+# include "rt_error.h"
+# include "rt_parsing.h"
+# include "rt_raytracing.h"
+# include "rt_lights.h"
 
 #endif

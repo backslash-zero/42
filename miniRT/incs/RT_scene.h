@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RT_scene.h                                         :+:      :+:    :+:   */
+/*   rt_scene.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 17:34:23 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/09 16:15:02 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 14:16:02 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 typedef	struct	s_tracker
 {
-	int		window;
-	int		camera;
-	int		ambient_light;
+	int	window;
+	int	camera;
+	int	ambient_light;
 }				t_tracker;
 
 typedef	struct	s_camera
@@ -30,18 +30,18 @@ typedef	struct	s_camera
 	double	fov;
 }				t_camera;
 
-typedef	struct		s_cameras
+typedef	struct	s_cameras
 {
 	t_camera			*camera;
 	struct s_cameras	*next;
-}					t_cameras;
+}				t_cameras;
 
-typedef	struct			s_objects
+typedef	struct	s_objects
 {
 	int					id;
 	void				*obj;
 	struct s_objects	*next;
-}						t_objects;
+}				t_objects;
 
 typedef	struct	s_sphere
 {
@@ -117,13 +117,13 @@ typedef	struct	s_light_vec
 	double	lum;
 }				t_light_vec;
 
-typedef	struct		s_lights
+typedef	struct	s_lights
 {
 	t_point_light	*point_light;
 	struct s_lights	*next;
-}					t_lights;
+}				t_lights;
 
-typedef	struct		s_scene
+typedef	struct	s_scene
 {
 	int				fd;
 	double			window_width;
@@ -138,11 +138,11 @@ typedef	struct		s_scene
 	t_ambient_light	ambient_light;
 	t_tracker		tracker;
 	int				invert;
-}					t_scene;
+}				t_scene;
 
-int		center_x(int x, t_scene *scene);
-int		center_y(int y, t_scene *scene);
-double	get_vp_x(int x, t_scene *scene);
-double	get_vp_y(int y, t_scene *scene);
+int				center_x(int x, t_scene *scene);
+int				center_y(int y, t_scene *scene);
+double			get_vp_x(int x, t_scene *scene);
+double			get_vp_y(int y, t_scene *scene);
 
 #endif

@@ -1,19 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RT_colors.h                                        :+:      :+:    :+:   */
+/*   rt_colors.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 21:48:34 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/09 16:20:22 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 14:02:31 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RT_COLORS_H
 # define RT_COLORS_H
-
-# include "RT_scene.h"
 
 int		min_max_color(int value);
 int		get_color_integer(int r, int g, int b);

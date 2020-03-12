@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RT_error.h                                         :+:      :+:    :+:   */
+/*   rt_error.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:38:55 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 22:00:28 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 14:22:24 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ERROR_H
-# define FT_ERROR_H
+#ifndef RT_ERROR_H
+# define RT_ERROR_H
 
 # define SUCCESS 0
 # define FAILURE -1

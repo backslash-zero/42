@@ -6,11 +6,11 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 12:50:57 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/09 16:19:45 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 14:00:48 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/miniRT.h"
+#include "../../incs/minirt.h"
 
 void	invert_color(t_color *color)
 {
@@ -21,11 +21,11 @@ void	invert_color(t_color *color)
 
 int		min_max_color(int value)
 {
-	if(value < 0)
-		return(0);
-	if(value > 255)
-		return(255);
-	return(value);
+	if (value < 0)
+		return (0);
+	if (value > 255)
+		return (255);
+	return (value);
 }
 
 t_color	assign_colors(int r, int g, int b)
@@ -35,7 +35,7 @@ t_color	assign_colors(int r, int g, int b)
 	color.g = g;
 	color.b = b;
 
-	return(color);
+	return (color);
 }
 
 int		get_color_integer(int r, int g, int b)
@@ -57,30 +57,30 @@ t_color		color_by_type_cast(t_objects *object)
 	t_triangle	*tmp_triangle;
 	t_cylinder	*tmp_cylinder;
 
-	if(object->id == (int)'s')
+	if (object->id == (int)'s')
 	{
 		tmp_sphere = (t_sphere *)object->obj;
-		return(tmp_sphere->color);
+		return (tmp_sphere->color);
 	}
-	if(object->id == (int)'c')
+	if (object->id == (int)'c')
 	{
 		tmp_cylinder = (t_cylinder *)object->obj;
-		return(tmp_cylinder->color);
+		return (tmp_cylinder->color);
 	}
-	if(object->id == (int)'t')
+	if (object->id == (int)'t')
 	{
 		tmp_triangle = (t_triangle *)object->obj;
-		return(tmp_triangle->color);
+		return (tmp_triangle->color);
 	}
-	if(object->id == (int)'p')
+	if (object->id == (int)'p')
 	{
 		tmp_plane = (t_plane *)object->obj;
-		return(tmp_plane->color);
+		return (tmp_plane->color);
 	}
-	if(object->id == (int)'S')
+	if (object->id == (int)'S')
 	{
 		tmp_square = (t_square *)object->obj;
-		return(tmp_square->color);
+		return (tmp_square->color);
 	}
-	return(assign_colors(255, 255, 255));
+	return (assign_colors(255, 255, 255));
 }

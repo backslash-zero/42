@@ -6,11 +6,11 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:48:26 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/11 11:48:34 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/03/12 14:20:57 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/miniRT.h"
+#include "../../incs/minirt.h"
 
 void	ambient_lighting(t_color *color, t_scene *scene)
 {
@@ -35,12 +35,12 @@ void	specular_light(t_ray *ray, double specular, t_light_vec *light_vec )
 	r_dot_v = 0;
 	new_i = 0;
 	v = mult_point_d(ray->dir, -1);
-	if(specular != -1)
+	if (specular != -1)
 	{
 		reflect = sub_vec(mult_point_d(ray->normal, 2 * prod_scal(ray->normal, light_vec->dir)), light_vec->dir);
 		r_dot_v = prod_scal(reflect, v);
 		new_i = light_vec->lum * pow(r_dot_v / (norm_vec(reflect) * norm_vec(v)), specular);
-		if(r_dot_v > 0)
+		if (r_dot_v > 0)
 			add_light(&ray->color, new_i, light_vec->color);
 	}
 }
@@ -52,50 +52,49 @@ void	specular_light_processing(t_ray *ray, t_light_vec *light_vec)
 	t_plane *p_tmp;
 	t_square *sq_tmp;
 	t_triangle *t_tmp;
-	if(ray->closest_object->id == (int)'s')
+	if (ray->closest_object->id == (int)'s')
 	{
 		sp_tmp = (t_sphere *)ray->closest_object->obj;
 		specular_light(ray, sp_tmp->specular, light_vec);
 	}
-	if(ray->closest_object->id == (int)'c')
+	if (ray->closest_object->id == (int)'c')
 	{
 		cy_tmp = (t_cylinder *)ray->closest_object->obj;
 		specular_light(ray, cy_tmp->specular, light_vec);
 	}
-	if(ray->closest_object->id == (int)'p')
+	if (ray->closest_object->id == (int)'p')
 	{
 		p_tmp = (t_plane *)ray->closest_object->obj;
 		specular_light(ray, p_tmp->specular, light_vec);
 	}
-	if(ray->closest_object->id == (int)'t')
+	if (ray->closest_object->id == (int)'t')
 	{
 		t_tmp = (t_triangle *)ray->closest_object->obj;
 		specular_light(ray, t_tmp->specular, light_vec);
 	}
-	if(ray->closest_object->id == (int)'S')
+	if (ray->closest_object->id == (int)'S')
 	{
 		sq_tmp = (t_square *)ray->closest_object->obj;
 		specular_light(ray, sq_tmp->specular, light_vec);
 	}
 }
 
-int		shadow_intersection(t_ray *light_ray, t_scene *scene, t_light_vec *light_vec)
+int		shadow_intersection(t_ray *l_ray, t_scene *scene, t_light_vec *l_vec)
 {
 	t_objects	*tmp;
 	double		max;
 	
-	(void)light_vec;
+	(void)l_vec;
 	tmp = scene->objects;
-	max = norm_vec(light_ray->dir);
-	while(tmp)
+	max = norm_vec(l_ray->dir);
+	while (tmp)
 	{
-		intersect_object(light_ray, tmp);
-		// > 0 or 0.0000001
-		if(light_ray->inter.t1 > 0.000001 && light_ray->inter.t1 < max)
-			return(1);
-		if(light_ray->inter.t2 > 0.000001 && light_ray->inter.t2 < max)
-			return(1);
+		intersect_object(l_ray, tmp);
+		if (l_ray->inter.t1 > 0.000001 && l_ray->inter.t1 < max)
+			return (1);
+		if (l_ray->inter.t2 > 0.000001 && l_ray->inter.t2 < max)
+			return (1);
 		tmp = tmp->next;
 	}
-	return(0);
+	return (0);
 }
