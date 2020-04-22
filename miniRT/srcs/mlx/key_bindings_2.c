@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_bindings_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 15:38:32 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 15:39:22 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/04/22 21:10:23 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_key_switch(int key, t_rt *rt)
 {
-	if (key == 8)
+	if (key == 99)
 	{
 		rt->scene->cameras = rt->scene->cameras->next;
 		rt->scene->active_camera = rt->scene->cameras->camera;
@@ -30,13 +30,13 @@ int		ft_key_fov(int key, t_rt *rt)
 	double increment_pos;
 
 	increment_pos = 1;
-	if (key == 87)
+	if (key == 111)
 	{
 		rt->scene->active_camera->fov += increment_pos;
 		display_image(rt);
 		return (0);
 	}
-	if (key == 91)
+	if (key == 108)
 	{
 		rt->scene->active_camera->fov -= increment_pos;
 		display_image(rt);
@@ -48,7 +48,7 @@ int		ft_key_fov(int key, t_rt *rt)
 
 int		ft_key_invert_colors(int key, t_rt *rt)
 {
-	if (key == 34)
+	if (key == 105)
 	{
 		if (rt->scene->invert)
 			rt->scene->invert = 0;

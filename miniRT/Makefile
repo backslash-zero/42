@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
+#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/03/12 19:29:34 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/04/22 17:23:47 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ FLAGS =			-Wall -Wextra -Werror
 
 LEAK_CHECK =	-fsanitize=address
 
-GRAPHIC_LIBS =	-framework OpenGL -framework AppKit
+#GRAPHIC_LIBS =	-framework OpenGL -framework AppKit
+GRAPHIC_LIBS =	-lm -lbsd -lX11 -lXext
 
 COMPIL =		$(FLAGS) $(LEAK_CHECK)
 
@@ -25,6 +26,8 @@ RM =			@rm -rf
 DIR_HEADERS =	./incs/
 
 DIR_SRCS =		./srcs/
+
+DIR_LIBMLX =	./minilibx/
 
 DIR_OBJS =		./obj/
 
@@ -75,7 +78,9 @@ SRCS =			$(addprefix $(DIR_SRCS), $(SRC))
 
 OBJS =			$(SRCS:%.c=%.o)	
 
-LIBMLX =		/usr/local/lib/libmlx.a				\
+LIBMLX =		$(addprefix $(DIR_LIBMLX), *.o)		 \
+				$(addprefix $(DIR_LIBMLX), libmlx.a) \
+
 
 NAME =			miniRT
 
@@ -84,7 +89,8 @@ all:
 				#$(MAKE) -j $(NAME)
 
 $(NAME): 		$(OBJS)
-				$(CC) $(COMPIL) -I $(DIR_HEADERS) $(LIBMLX) $(GRAPHIC_LIBS) $(OBJS) -o $(NAME)
+				@echo "☑️  Compiled ALL OBJECTS successfully!"
+				$(CC) $(COMPIL) -I $(DIR_HEADERS) $(LIBMLX) $(OBJS) -o $(NAME) $(GRAPHIC_LIBS)
 
 %.o: %.c
 				@gcc $(FLAGS) -I $(DIR_HEADERS) -c $< -o $@
