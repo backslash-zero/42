@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
+#    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/04/22 17:23:47 by user42           ###   ########.fr        #
+#    Updated: 2020/04/28 15:46:38 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,8 @@ SRC =			main.c								\
 				raytracing/object_intersection_1.c	\
 				raytracing/object_intersection_2.c	\
 				raytracing/viewport.c				\
-				utils/colors.c						\
+				utils/colors_1.c					\
+				utils/colors_2.c					\
 				utils/exit_1.c						\
 				utils/exit_2.c						\
 				utils/ft_atoi.c						\

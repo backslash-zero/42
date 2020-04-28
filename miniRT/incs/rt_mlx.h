@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:44:50 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 16:37:14 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/04/28 15:05:40 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ int				ft_key_rot(int key, t_rt *rt);
 int				ft_key_switch(int key, t_rt *rt);
 int				ft_key_fov(int key, t_rt *rt);
 int				ft_key_invert_colors(int key, t_rt *rt);
-int 			ft_key(int key, t_rt *rt);
+int				ft_key(int key, t_rt *rt);
 
 #endif

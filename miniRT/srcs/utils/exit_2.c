@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 16:55:47 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 17:04:01 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/04/28 20:22:13 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	free_cameras(t_cameras *cameras)
 	t_cameras *first;
 
 	first = cameras;
-
 	while (cameras)
 	{
 		tmp = cameras;

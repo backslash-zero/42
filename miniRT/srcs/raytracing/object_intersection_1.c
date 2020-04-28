@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 19:03:05 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 19:03:25 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/04/28 15:16:08 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	intersect_ray_triangle(t_ray *ray, t_triangle *triangle)
 		intersect_ray_triangle_2(ray, triangle);
 }
 
-void	intersect_ray_cylinder_2(t_ray *r, t_cylinder *cy, t_vec d, t_vec a)
+void	intersect_ray_cy_2(t_ray *r, t_cylinder *cy, t_vec d, t_vec a)
 {
 	t_vec	tmp1;
 	t_vec	tmp2;
@@ -98,5 +98,5 @@ void	intersect_ray_cylinder(t_ray *ray, t_cylinder *cylinder)
 		ray->inter.t2 = __DBL_MAX__;
 	}
 	else
-		intersect_ray_cylinder_2(ray, cylinder, delta, abc);
+		intersect_ray_cy_2(ray, cylinder, delta, abc);
 }

@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 16:54:23 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 16:56:20 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/04/28 20:21:47 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	parsing_err(t_rt *rt, char *msg, int n)
 	write(1, "\e[1;31m", 7);
 	write(1, msg, ft_strlen(msg));
 	if (n != -1)
-	{	
+	{
 		line_n = ft_itoa(++n);
 		write(1, " on line ", 10);
 		write(1, line_n, ft_strlen(line_n));
@@ -54,7 +54,6 @@ void	free_all(t_rt *rt)
 	{
 		if (rt->mlx->img_ptr)
 			mlx_destroy_image(rt->mlx->mlx_ptr, rt->mlx->img_ptr);
-		//free(rt->mlx->img_ptr);
 		mlx_destroy_window(rt->mlx->mlx_ptr, rt->mlx->win_ptr);
 	}
 }
