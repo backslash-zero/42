@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 14:25:56 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/04/29 18:32:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,16 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <errno.h>
-# include <mlx.h>
 
 # define MAX_WINDOW_WIDTH	2560
 # define MAX_WINDOW_HEIGHT 	1440
 # define WINDOW_WIDTH		400
 # define WINDOW_HEIGHT 		300
 # define VIEWPORT_D			1
-# define FOV					60
+# define FOV				60
+# define BONUS				0
 
+# include "../minilibx/mlx.h"
 # include "get_next_line.h"
 # include "rt_maths.h"
 # include "rt_scene.h"

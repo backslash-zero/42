@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 15:03:14 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/04/29 16:59:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,14 @@ int		main(int ac, char **av)
 		if ((scene.fd = open(av[1], O_RDONLY)) == -1)
 			exit_failure(&rt);
 		scene_parsing(&rt);
+		if (!check_extension(av[1]))
+			parsing_err(&rt, "Incorrect file title or extension.", -1);
 		ft_init_mlx(&mlx, &scene);
 		fill_img(&scene, &mlx);
+		if (ac == 3 && !ft_strncmp(av[2], "-save", 5))
+			save_image(&rt, "save.bmp");
 		if (ac == 2)
 			put_image_and_start(&rt);
-		else if (ac == 3 && !ft_strncmp(av[2], "-save", 5))
-			save_image(&rt, "save.bmp");
 		else
 			parsing_err(&rt, "Third argument is not valid.", -1);
 	}

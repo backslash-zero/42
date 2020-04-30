@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_mlx_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:42:28 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 17:04:07 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/04/29 16:59:13 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	put_image(t_rt *rt)
 
 void	put_image_and_start(t_rt *rt)
 {
+	rt->mlx->win_ptr = mlx_new_window(rt->mlx->mlx_ptr,
+					rt->scene->window_width, rt->scene->window_height, "MiniRT");
 	put_image(rt);
 	start_window(rt);
 }

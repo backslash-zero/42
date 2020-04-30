@@ -3,23 +3,25 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
+#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/04/28 15:46:38 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/04/28 21:56:09 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC =			gcc
+CC =			clang
 
 FLAGS =			-Wall -Wextra -Werror
 
+DEBUG_INFO =	-g
+
 LEAK_CHECK =	-fsanitize=address
 
-#GRAPHIC_LIBS =	-framework OpenGL -framework AppKit
+# mac : GRAPHIC_LIBS =	-framework OpenGL -framework AppKit
 GRAPHIC_LIBS =	-lm -lbsd -lX11 -lXext
 
-COMPIL =		$(FLAGS) $(LEAK_CHECK)
+COMPIL =		$(FLAGS) $(LEAK_CHECK) $(DEBUG_INFO)
 
 RM =			@rm -rf
 
@@ -87,15 +89,19 @@ NAME =			miniRT
 
 all:			
 				$(MAKE) $(NAME)
-				#$(MAKE) -j $(NAME)
 
 $(NAME): 		$(OBJS)
 				@echo "☑️  Compiled ALL OBJECTS successfully!"
-				$(CC) $(COMPIL) -I $(DIR_HEADERS) $(LIBMLX) $(OBJS) -o $(NAME) $(GRAPHIC_LIBS)
+				@echo "Compiling with libmlx library and graphic libs"
+				@$(CC) $(COMPIL) -I $(DIR_HEADERS) $(LIBMLX) $(OBJS) -o $(NAME) $(GRAPHIC_LIBS)
+				@echo "MiniRT is ready"
 
 %.o: %.c
 				@gcc $(FLAGS) -I $(DIR_HEADERS) -c $< -o $@
 				@echo "☑️  Compiled "$<" successfully!"
+
+bonus:			
+				$(MAKE) $(NAME)
 
 norme:
 				norminette $(DIR_SRCS)
