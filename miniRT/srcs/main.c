@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/04/29 16:59:17 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/30 23:23:11 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		main(int ac, char **av)
 	if (ac == 2 || ac == 3)
 	{
 		if ((scene.fd = open(av[1], O_RDONLY)) == -1)
-			exit_failure(&rt);
+			exit_openfail();
 		scene_parsing(&rt);
 		if (!check_extension(av[1]))
 			parsing_err(&rt, "Incorrect file title or extension.", -1);

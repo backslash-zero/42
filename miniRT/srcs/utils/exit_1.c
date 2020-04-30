@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 16:54:23 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/04/28 20:21:47 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/04/30 23:26:18 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	parsing_err(t_rt *rt, char *msg, int n)
 	char *line_n;
 
 	free_all(rt);
-	write(1, "Error\n", 6);
+	write(1, "Error", 6);
 	write(1, "\e[1;31m", 7);
 	write(1, msg, ft_strlen(msg));
 	if (n != -1)
@@ -40,7 +40,7 @@ void	parsing_err(t_rt *rt, char *msg, int n)
 void	exit_failure(t_rt *rt)
 {
 	free_all(rt);
-	perror("Error\n");
+	perror("Error");
 	write(1, "\e[1;31mExiting, there was an error.\n\e[0m", 40);
 	exit(FAILURE);
 }
