@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:31:08 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/04/30 10:25:22 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/04/30 19:36:35 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	skip_spaces(int *i, char *line)
 void	window_parsing(t_rt *rt, char *line, int n)
 {
 	int i;
-	
+
 	i = 1;
 	skip_spaces(&i, line);
 	if ((rt->scene->window_width = ft_atoi_double(&line[i])) < 0)

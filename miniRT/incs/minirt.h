@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:48 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/04/29 18:32:05 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/30 18:15:09 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@
 # define WINDOW_HEIGHT 		300
 # define VIEWPORT_D			1
 # define FOV				60
-# define BONUS				0
 
-# include "../minilibx/mlx.h"
+# include "mlx.h"
 # include "get_next_line.h"
 # include "rt_maths.h"
 # include "rt_scene.h"

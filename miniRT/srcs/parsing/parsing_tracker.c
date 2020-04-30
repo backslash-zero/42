@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_tracker.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 12:11:22 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/04/29 16:00:22 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/30 19:37:06 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int		check_extension(char *str)
 		i++;
 	if (i < 3)
 		return (0);
-	
 	if ((str[i - 3] == '.') &&
 		(str[i - 2] == 'r') &&
 		(str[i - 1] == 't'))

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
+#    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/04/28 21:56:09 by user42           ###   ########.fr        #
+#    Updated: 2020/04/30 19:33:06 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ DEBUG_INFO =	-g
 
 LEAK_CHECK =	-fsanitize=address
 
-# mac : GRAPHIC_LIBS =	-framework OpenGL -framework AppKit
 GRAPHIC_LIBS =	-lm -lbsd -lX11 -lXext
+# Libs for Mac OS : GRAPHIC_LIBS =	-framework OpenGL -framework AppKit
 
 COMPIL =		$(FLAGS) $(LEAK_CHECK) $(DEBUG_INFO)
 
@@ -39,8 +39,6 @@ SRC =			main.c								\
 				maths/vector_op_1.c					\
 				maths/vector_op_2.c					\
 				maths/vector_op_3.c					\
-				mlx/key_bindings_1.c				\
-				mlx/key_bindings_2.c				\
 				mlx/rt_mlx_1.c						\
 				mlx/rt_mlx_2.c						\
 				mlx/save_image.c					\
@@ -77,9 +75,23 @@ SRC =			main.c								\
 				utils/get_line_break.c				\
 				utils/get_next_line.c				\
 
-SRCS =			$(addprefix $(DIR_SRCS), $(SRC))
+DFLT =			default/key_bindings_1.c			\
+				default/key_bindings_2.c			\
 
-OBJS =			$(SRCS:%.c=%.o)	
+BONUS =			bonus/key_bindings_1_bonus.c		\
+				bonus/key_bindings_2_bonus.c		\
+
+SRCS_MAIN =		$(addprefix $(DIR_SRCS), $(SRC))
+
+SRCS_DFLT =		$(addprefix $(DIR_SRCS), $(DFLT))
+
+SRCS_BONUS =	$(addprefix $(DIR_SRCS), $(BONUS))
+
+OBJS_MAIN =		$(SRCS_MAIN:%.c=%.o)
+
+OBJS_DFLT =		$(SRCS_DFLT:%.c=%.o)
+
+OBJS_BONUS =	$(SRCS_BONUS:%.c=%.o)
 
 LIBMLX =		$(addprefix $(DIR_LIBMLX), *.o)		 \
 				$(addprefix $(DIR_LIBMLX), libmlx.a) \
@@ -87,32 +99,46 @@ LIBMLX =		$(addprefix $(DIR_LIBMLX), *.o)		 \
 
 NAME =			miniRT
 
+NAME_BONUS =	miniRT
+
 all:			
 				$(MAKE) $(NAME)
 
-$(NAME): 		$(OBJS)
-				@echo "☑️  Compiled ALL OBJECTS successfully!"
+$(NAME): 		$(OBJS_MAIN) $(OBJS_DFLT)
+				@echo "☑️  Compiled ALL OBJECTS and defaults successfully!"
 				@echo "Compiling with libmlx library and graphic libs"
-				@$(CC) $(COMPIL) -I $(DIR_HEADERS) $(LIBMLX) $(OBJS) -o $(NAME) $(GRAPHIC_LIBS)
-				@echo "MiniRT is ready"
+				@$(CC) $(COMPIL) -I $(DIR_HEADERS) $(LIBMLX) $(OBJS_MAIN) $(OBJS_DFLT) -o $(NAME) $(GRAPHIC_LIBS)
+				@echo "MiniRT in default mode is ready"
+
+
+$(NAME_BONUS): 	$(OBJS_MAIN) $(OBJS_BONUS)
+				@echo "☑️  Compiled ALL OBJECTS and bonuses successfully!"
+				@echo "Compiling with libmlx library and graphic libs"
+				@$(CC) $(COMPIL) -I $(DIR_HEADERS) $(LIBMLX) $(OBJS_MAIN) $(OBJS_BONUS) -o $(NAME) $(GRAPHIC_LIBS)
+				@echo "MiniRT with bonuses is ready"
 
 %.o: %.c
 				@gcc $(FLAGS) -I $(DIR_HEADERS) -c $< -o $@
 				@echo "☑️  Compiled "$<" successfully!"
 
 bonus:			
-				$(MAKE) $(NAME)
+				$(MAKE) $(NAME_BONUS)
 
 norme:
 				norminette $(DIR_SRCS)
 				norminette $(DIR_HEADERS)
 
 clean:
-				$(RM) $(OBJS)
+				$(RM) $(OBJS_MAIN)
+				$(RM) $(OBJS_DFLT)
+				$(RM) $(OBJS_BONUS)
 				@echo "🗑️  Removed .o files successfully"$<"!"
 
 fclean:			clean
 				$(RM) $(NAME)
+				@echo "Deleted executable"
+				$(RM) save.bmp
+				@echo "Deleted saved images"
 
 re:				fclean all
 
