@@ -6,7 +6,7 @@
 #    By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 17:25:36 by cmeunier          #+#    #+#              #
-#    Updated: 2020/04/30 19:33:06 by cmeunier         ###   ########.fr        #
+#    Updated: 2020/05/01 01:46:42 by cmeunier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,9 +99,9 @@ LIBMLX =		$(addprefix $(DIR_LIBMLX), *.o)		 \
 
 NAME =			miniRT
 
-NAME_BONUS =	miniRT
+NAME_BONUS =	miniRT_Bonus
 
-all:			
+all:
 				$(MAKE) $(NAME)
 
 $(NAME): 		$(OBJS_MAIN) $(OBJS_DFLT)

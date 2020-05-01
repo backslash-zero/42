@@ -6,12 +6,11 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 16:55:47 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/04/30 23:27:54 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/05/01 01:55:29 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/minirt.h"
-
 
 void	exit_openfail(void)
 {
