@@ -6,11 +6,18 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 16:55:47 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/05/01 01:55:29 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/05/01 16:24:50 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/minirt.h"
+
+void	exit_formatfail(void)
+{
+	perror("Error");
+	write(1, "\e[1;31mFile extension is not correct.\n\e[0m", 38);
+	exit(FAILURE);
+}
 
 void	exit_openfail(void)
 {
