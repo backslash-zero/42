@@ -1,5 +1,7 @@
 # MiniRT
 
+![miniRT_Cele](https://github.com/backslash-zero/42/miniRT/save.png)
+
 MiniRT is an introduction to raytracing.
 The goal is too use the raytracing techniauqe to represent a *scene*, seen from a specific angle with a *camera*, *lights* and with simple geometric shapes:
 * plane
@@ -64,84 +66,17 @@ y = (WINDOW_HEIGHT / 2) - y;
 ### Colors
 We are using [bitwise operators](https://www.tutorialspoint.com/cprogramming/c_bitwise_operators.htm) to translate ar RGB colors in an `int` format.
 
---------------
-
-# Development flow
-
-- [ ] Find some similar project and study the code structure.
-- [ ] Structure files & directories according to step 1:
-	* Makefiles
-	* Headers
-	* Libraries:
-		* [Minilibx](https://github.com/pbondoer/MinilibX) + cmd: _man mlx_
-		* [Libft](https://github.com/backslash-zero/42/tree/master/Libft)
-		* [Get Next Line](https://github.com/backslash-zero/42/commit/2950a77a9cbf4cefd31b1b14fec3e820db11b5e5)
-	_This is allows us to get working and starting testing our code right away. It also save times reoganizing_
-- [ ] Setup basic parsing for our scene
-	- [ ] Window 
 
 --------------
-
-# Exit
-`void exit(int status);`
-In the C Programming Language, the exit function calls all functions registered with atexit and terminates the program. File buffers are flushed, streams are closed, and temporary files are deleted.
-
-_0 -> Successful termination_
-
-# MinilibX
-
-## Initialise MinilibX
-`man mlx`
-
-MiniLibX - Simple Graphical Interface Library for students
-```
-#include <mlx.h>
-# mlx_init returns a non-null pointer returned as a connection identifier
-mlx_init ();
-```
-
-## Manage windows
-`man mlx_new_window`
-
-#### mlx_new_window
-*void *mlx_new_window ( void *mlx_ptr, int size_x, int size_y, char *title );*
-Creates a new window
-
-#### mlx_clear_window
-*int mlx_clear_window ( void *mlx_ptr, void *win_ptr )*
-Clear a window
-
-#### mlx_destroy_window
-*int mlx_destroy_window ( void *mlx_ptr, void *win_ptr );*
-Destroys a window
-
-## draw inside window
-`man mlx_pixel_put`
-
-#### mlx_pixel_put
-*int mlx_pixel_put ( void *mlx_ptr, void *win_ptr, int x, int y, int color );*
-Draws a defined pixel in the window win_ptr using the ( x , y );
-
-The color should be written in this format `0xff5d6c` but is given in an RGB format. 
-[This article](https://timseverien.github.io/binary-cheatsheet/) helps with conversion.
-
-## manipulate images
-`man mlx_new_image`
-
-#### mlx_new_image 
-*void *mlx_new_image ( void *mlx_ptr, int width, int height );*
-creates a new image in memory.
-
-#### mlx_put_image_to_window()
-*int mlx_put_image_to_window ( void *mlx_ptr, void *win_ptr, void *img_ptr,  int  x, int y );*
-
-
-## handle keyboard or mouse events
-`man mlx_loop`
 
 ## Compilation 
 
 @42 the MinilibX is already installed and you can run you program with the command below:
+
 ```
 gcc -Wall -Wextra -Werror -fsanitize=address -I ./incs/ /usr/local/lib/libmlx.a  -framework OpenGL -framework AppKit ./srcs/main.o -o miniRT
+```
+On linux machine we cannot use OpenGL and Appkit. The compilation looks like this:
+```
+-lm -lbsd -lX11 -lXext
 ```
