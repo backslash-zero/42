@@ -1,6 +1,6 @@
 # MiniRT
 
-![miniRT_Cele](https://github.com/backslash-zero/42/miniRT/save.png)
+![miniRT_Cele](https://github.com/backslash-zero/42/blob/master/miniRT/save.png)
 
 MiniRT is an introduction to raytracing.
 The goal is too use the raytracing techniauqe to represent a *scene*, seen from a specific angle with a *camera*, *lights* and with simple geometric shapes:
