@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_parsing.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 16:17:44 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 18:08:56 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/04/29 15:16:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int		p_test_camera(t_scene *scene, char *line);
 
 int		check_parsing_tracker(t_scene *scene);
 void	init_parsing_tracker(t_scene *scene);
+int		check_extension(char *str);
 
 void	skip_spaces(int *i, char *line);
 void	skip_numbers(int *i, char *line);

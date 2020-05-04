@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 17:25:41 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 15:03:14 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/05/01 16:23:50 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,17 @@ int		main(int ac, char **av)
 	rt.scene = &scene;
 	if (ac == 2 || ac == 3)
 	{
+		if (!check_extension(av[1]))
+			exit_formatfail();
 		if ((scene.fd = open(av[1], O_RDONLY)) == -1)
-			exit_failure(&rt);
+			exit_openfail();
 		scene_parsing(&rt);
 		ft_init_mlx(&mlx, &scene);
 		fill_img(&scene, &mlx);
+		if (ac == 3 && !ft_strncmp(av[2], "-save", 5))
+			save_image(&rt, "save.bmp");
 		if (ac == 2)
 			put_image_and_start(&rt);
-		else if (ac == 3 && !ft_strncmp(av[2], "-save", 5))
-			save_image(&rt, "save.bmp");
 		else
 			parsing_err(&rt, "Third argument is not valid.", -1);
 	}

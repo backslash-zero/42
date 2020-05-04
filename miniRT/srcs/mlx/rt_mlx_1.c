@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 13:42:28 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/03/12 17:04:07 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/04/30 19:35:27 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	put_image(t_rt *rt)
 
 void	put_image_and_start(t_rt *rt)
 {
+	rt->mlx->win_ptr = mlx_new_window(rt->mlx->mlx_ptr,
+				rt->scene->window_width, rt->scene->window_height, "MiniRT");
 	put_image(rt);
 	start_window(rt);
 }

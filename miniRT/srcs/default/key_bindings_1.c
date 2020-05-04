@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_bindings_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 15:38:35 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/04/22 21:31:08 by user42           ###   ########.fr       */
+/*   Updated: 2020/04/30 18:43:32 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,8 @@ int		ft_key_ambient_light(int key, t_rt *rt)
 	double	increment_light;
 
 	increment_light = 0.05;
-	if ((key == 65307) || (key == 65104) || (key == 65106) || (key == 41))
+	if ((key == 65104) || (key == 65106) || (key == 41))
 	{
-		if (key == 65307)
-			exit_success(rt);
 		if (key == 65104)
 			if (rt->scene->ambient_light.lum > increment_light)
 				rt->scene->ambient_light.lum -= increment_light;
@@ -109,13 +107,7 @@ int		ft_key_ambient_light(int key, t_rt *rt)
 
 int		ft_key(int key, t_rt *rt)
 {
-	ft_key_ambient_light(key, rt);
-	ft_key_point_light(key, rt);
-	ft_key_pos(key, rt);
-	ft_key_rot(key, rt);
+	ft_key_exit(key, rt);
 	ft_key_switch(key, rt);
-	ft_key_fov(key, rt);
-	ft_key_invert_colors(key, rt);
-	printf("key pressed: %d\n", key);
 	return (1);
 }
