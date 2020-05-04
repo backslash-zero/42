@@ -14,15 +14,17 @@ Assembly language library in ASM 64 bits (Intel Syntax). Compilation with nasm
 ## Structure 
 ![image](https://cs.lmu.edu/~ray/images/nasmstructure.png)
 
-## Instructions
+## Used Instructions
 
 _inc_ increments by 1 a register
-_cmp_
-_jmp_ jump 
-_jne_ conditional jump that follows a test. 
+_cmp_ compare to arguments seperated by a comma
+_jmp_ simple jump
+_jne_ jump if not equal: conditional jump that follows a test. 
 
-## Registers
+## Used Registers
 
-_RAX_ contains the return value of the function
-_RSI_ source        address for cmp or mov
-_RDI_ destination   address for cmp or mov
+_rax_ contains the return value of the function
+_rsi_ source        address for cmp or mov
+_rdi_ destination   address for cmp or mov
+_rcx_ loop counter
+_rdx_ loop counter 2

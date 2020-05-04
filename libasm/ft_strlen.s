@@ -1,5 +1,16 @@
+	        section     .text
     	    global      _ft_strlen
 
-	        section     .text
+_ft_strlen:
+			mov			rax, 0
+			jmp			compare
 
-_ft_strlen: 
+increment:
+			inc			rax
+
+compare:
+			cmp			byte [rdi + rax], 0
+			jne			increment
+
+done:
+			ret

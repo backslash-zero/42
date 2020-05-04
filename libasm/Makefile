@@ -2,11 +2,12 @@ NAME		=	libasm.a
 
 NA			=	nasm
 
-NA_flags	=	-f macho64
+NA_FLAGS	=	-f macho64
 
 FLAGS		=	-Wall -Werror -Wextra
 
 SRCS		=	ft_strlen.s			\
+				ft_strcpy.s			\
 
 OBJS		=	$(SRCS:.s=.o)
 
