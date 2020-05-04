@@ -12,7 +12,7 @@ Assembly language library in ASM 64 bits (Intel Syntax). Compilation with nasm
 
 
 ## Structure 
-[image](https://cs.lmu.edu/~ray/images/nasmstructure.png)
+![image](https://cs.lmu.edu/~ray/images/nasmstructure.png)
 
 ## Instructions
 
