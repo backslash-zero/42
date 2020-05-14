@@ -6,7 +6,7 @@
 /*   By: cmeunier <cmeunier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/04 10:55:29 by cmeunier          #+#    #+#             */
-/*   Updated: 2020/05/05 19:19:12 by cmeunier         ###   ########.fr       */
+/*   Updated: 2020/05/07 19:16:46 by cmeunier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@
 int		ft_strlen(char const *str);
 char	*ft_strcpy(char * dst, const char * src);
 int		ft_strcmp(const char *s1, const char *s2);
-char	*strdup(const char *s1);
+char	*ft_strdup(const char *s1);
+
+
+
 
 // main
 int     main(void)
@@ -54,7 +57,20 @@ int     main(void)
 	printf("strcmp:		%d\nft_strcmp:	%d\n__\n",strcmp("",""),ft_strcmp("",""));
 	printf("strcmp:		%d\nft_strcmp:	%d\n__\n",strcmp("hey","ho"),ft_strcmp("hey","ho"));
 	printf("strcmp:		%d\nft_strcmp:	%d\n__\n",strcmp("célestin  le ptit coquin","célestin  le petit coquin"),ft_strcmp("célestin  le ptit coquin","célestin  le petit coquin"));
+	printf("strcmp:		%d\nft_strcmp:	%d\n__\n",ft_strcmp(NULL, NULL),ft_strcmp(NULL, NULL));
 
 	//strdup
-	printf("")
+	printf("strdup:		%s\nft_strdup:	%s\n__\n", strdup(a), ft_strdup(a));
+	printf("strdup:		%s\nft_strdup:	%s\n__\n", strdup(b), ft_strdup(b));
+	//printf("strdup:		%s\n__\nft_strdup:	%s\n", strdup(a), ft_strdup(a));
+	printf("strdup:		%s\nft_strdup:	%s\n__\n", strdup(d), ft_strdup(d));
+	
+	
+	char buffer[100];
+	int i = 0;
+	while(1 < 100)
+		buffer[i++] = 0;
+	int fd = open("Makefile");
+	
+	read(fd, )
 }

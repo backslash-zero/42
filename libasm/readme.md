@@ -33,3 +33,7 @@ _rcx_       loop counter
 _rdx_       loop counter 2
 _dl_        least significant byte of dx, usually used to store the 
 _byte[]_    allows character operands with a single character or strings
+
+## Syscall
+[MacOS](https://opensource.apple.com/source/xnu/xnu-1504.3.12/bsd/kern/syscalls.master)
+[Linux](https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/)

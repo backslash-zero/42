@@ -1,30 +1,39 @@
-	        section     .text
-    	    global      _ft_strdup
-            extern      _malloc
+			section	.text
+			global	_ft_strdup
+			extern	_malloc
 
-_ft_strdup:
-            cmp         rdi, 0
-            jne         error
-            xor         rcx, rcx
+; delete RDX, RCX, RAX and everything that malloc destroy
 
+_ft_strdup:									; rdi = src
+			cmp		rdi, 0
+			jz		error					; src is NULL
+			xor		rcx, rcx
+			jmp		compare
 increment:
-            inc         rcx
+			inc		rcx
+compare:
+			cmp		BYTE [rdi + rcx], 0
+			jne		increment
+dup_malloc:
+			inc		rcx
+			push	rdi
+			mov		rdi, rcx
+			call	_malloc					
+			pop		rdi
+			cmp		rax, 0
+			jz		error
+			xor		rcx, rcx
+			jmp		copy
 
-start:
-            cmp         byte[rdi + rcx], 0
-            jne         increment
-
-malloc_new:
-            inc         rcx                     ;this adds one more char for \0
-
+increment_cpy:
+			inc		rcx
 copy:
-            mov         dl, byte[rsi + rcx]
-            mov         byte[rdi + rcx], dl
-            cmp         dl, 0
-            jne         increment
-
+			mov		dl, byte [rdi + rcx]
+			mov		byte [rax + rcx], dl
+			cmp		dl, 0
+			jnz		increment_cpy
+			jmp		return
 error:
-            xor         rax, rax
-
-done:
-			ret
+			xor		rax, rax
+return:
+            ret

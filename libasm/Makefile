@@ -9,6 +9,9 @@ FLAGS		=	-Wall -Werror -Wextra
 SRCS		=	ft_strlen.s			\
 				ft_strcpy.s			\
 				ft_strcmp.s			\
+				ft_strdup.s			\
+				ft_read.s			\
+				ft_write.s			\
 
 OBJS		=	$(SRCS:.s=.o)
 
@@ -22,6 +25,10 @@ $(NAME):	$(OBJS)
 
 test:		$(NAME)
 			gcc $(FLAGS) -L. -lasm -o $(TEST) main.c
+			./$(TEST) < Makefile
+
+test2:		$(NAME)
+			gcc $(FLAGS) -L. -lasm -o $(TEST) testasm.c
 			./$(TEST) < Makefile
 
 all:		$(NAME)
