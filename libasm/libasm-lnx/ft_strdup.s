@@ -1,10 +1,10 @@
 			section	.text
-			global	_ft_strdup
-			extern	_malloc
+			global	ft_strdup
+			extern	malloc
 
 ; delete RDX, RCX, RAX and everything that malloc destroy
 
-_ft_strdup:									; rdi = src
+ft_strdup:									; rdi = src
 			cmp		rdi, 0
 			jz		error					; src is NULL
 			xor		rcx, rcx

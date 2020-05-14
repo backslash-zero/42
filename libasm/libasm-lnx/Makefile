@@ -2,7 +2,7 @@ NAME		=	libasm.a
 
 NA			=	nasm
 
-NA_FLAGS	=	-f macho64
+NA_FLAGS	=	-f elf64
 
 FLAGS		=	-Wall -Werror -Wextra
 
@@ -24,11 +24,11 @@ $(NAME):	$(OBJS)
 			ar rcs $(NAME) $(OBJS)
 
 test:		$(NAME)
-			gcc $(FLAGS) -L. -lasm -o $(TEST) main.c
+			clang $(FLAGS) -L. -lasm -o $(TEST) main.c
 			./$(TEST) < Makefile
 
 test2:		$(NAME)
-			gcc $(FLAGS) -L. -lasm -o $(TEST) testasm.c
+			clang $(FLAGS) -L. -lasm -o $(TEST) testasm.c
 			./$(TEST) < Makefile
 
 all:		$(NAME)

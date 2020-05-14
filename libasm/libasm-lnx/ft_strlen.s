@@ -1,7 +1,7 @@
 	        section     .text
-    	    global      _ft_strlen
+    	    global      ft_strlen
 
-_ft_strlen:
+ft_strlen:
 			mov			rax, 0
 			jmp			compare
 
