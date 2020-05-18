@@ -1,45 +1,56 @@
 NAME		=	libasm.a
 
+TESTER		=	tester.c
+
+EXEC		=	test
+
 NA			=	nasm
 
 NA_FLAGS	=	-f elf64
 
-FLAGS		=	-Wall -Werror -Wextra
+CC			=	clang
 
-SRCS		=	ft_strlen.s			\
+CC_FLAGS	=	-Wall -Werror -Wextra
+
+LEAK_FLAGS	= 	-fsanitize=address
+
+SRC_NAME	=	ft_strlen.s			\
 				ft_strcpy.s			\
 				ft_strcmp.s			\
 				ft_strdup.s			\
 				ft_read.s			\
 				ft_write.s			\
 
-OBJS		=	$(SRCS:.s=.o)
+OBJ_NAME	=	$(SRC_NAME:.s=.o)
 
-TEST		=	test
+SRC_PATH	=	src/
 
-%.o:		%.s
-			$(NA) $(NA_FLAGS) $<
+OBJ_PATH	=	obj/
 
-$(NAME):	$(OBJS)
-			ar rcs $(NAME) $(OBJS)
+SRC			=	$(addprefix $(SRC_PATH), $(SRC_NAME))
 
-test:		$(NAME)
-			clang $(FLAGS) -L. -lasm -o $(TEST) main.c
-			./$(TEST) < Makefile
+OBJ			=	$(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
-test2:		$(NAME)
-			clang $(FLAGS) -L. -lasm -o $(TEST) testasm.c
-			./$(TEST) < Makefile
+.PHONY:			all re clean fclean
 
-all:		$(NAME)
+all:			$(NAME)
 
+$(NAME):		$(OBJ)
+				ar rcs $(NAME) $(OBJ)
+
+$(OBJ_PATH)%.o:	$(SRC_PATH)%.s
+				mkdir $(OBJ_PATH) 2> /dev/null || true
+				$(NA) $(NA_FLAGS) $< -o $@
 
 clean:
-			rm -rf $(OBJS) $(TEST)
+				rm -rf $(OBJ_PATH)
 
-fclean:		clean
-			rm -rf $(NAME) $(TEST)
+fclean:			clean
+				rm -rf $(NAME)
 
-re:			fclean $(NAME)
+re:				fclean all
 
-.PHONY:		clean fclean re
+run: 			all
+				$(CC) $(CC_FLAGS) $(LEAK_FLAGS) $(TESTER) $(NAME) -o $(EXEC)
+				./$(EXEC)
+
