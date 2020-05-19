@@ -110,6 +110,10 @@ int     test_read(void)
     char ft_buffer[bufferlen + 1];
     buffer[bufferlen] = '\0';
     ft_buffer[bufferlen] = '\0';
+    printf("read - %zd:         %s\n", read(fd_1, buffer, -5), buffer);
+    printf("value of errno: %d\n", errno);
+    printf("ft_read - %zd:      %s\n", ft_read(fd_ft_1, ft_buffer, -5), ft_buffer);
+    printf("value of errno: %d\n", errno);
     printf("read - %zd:         %s\n", read(fd_1, buffer, bufferlen), buffer);
     printf("ft_read - %zd:      %s\n", ft_read(fd_ft_1, ft_buffer, bufferlen), ft_buffer);
     return(0);
@@ -158,6 +162,8 @@ int     test_write(void)
     printf("ft_write d:    ");
     printf("\n");
     ft_write(1, d, strlen(d));
+    printf("\n");
+    write(1, d, strlen(d));
     printf("\n");
     return(0);
 }
