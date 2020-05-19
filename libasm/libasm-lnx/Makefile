@@ -43,10 +43,11 @@ $(OBJ_PATH)%.o:	$(SRC_PATH)%.s
 				$(NA) $(NA_FLAGS) $< -o $@
 
 clean:
-				rm -rf $(OBJ_PATH)
+				@rm -rf $(OBJ_PATH)
 
 fclean:			clean
-				rm -rf $(NAME)
+				@rm -rf $(NAME)
+				@rm -rf $(EXEC)
 
 re:				fclean all
 
