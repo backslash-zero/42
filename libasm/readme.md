@@ -20,8 +20,7 @@ _jne/jnz_   jump if not equal: conditional jump that follows a test.\
 _je/jz_     jump if equal\
 _call_      call external function\
 _push_      writing a value onto the stack\
-_pop_       restoring value\
-
+_pop_       restoring value
 
 ## Used Registers
 _rax_       contains the return value of the function\
@@ -30,8 +29,8 @@ _rsi_       source        address for cmp or mov, usually inpuy string 2\
 _rcx_       loop counter\
 _rdx_       loop counter 2\
 _dl_        least significant byte of dx\
-_byte[]_    allows character operands with a single character or strings\
+_byte[]_    allows character operands with a single character or strings
 
 ## Syscall
 [MacOS](https://opensource.apple.com/source/xnu/xnu-1504.3.12/bsd/kern/syscalls.master)\
-[Linux](https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/)\
+[Linux](https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/)
